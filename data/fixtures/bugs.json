@@ -1,0 +1,522 @@
+[
+  {
+    "id": "mock:bug:001",
+    "title": "Memory forgets user preferences after 24 hours",
+    "body": "Users report that ChatGPT's memory consistently loses stored preferences approximately 24 hours after they are set. For example, a user sets their preferred coding language to Python and response style to concise, but the next day ChatGPT behaves as if no preferences exist. The memory dashboard still shows the stored items, but they are not being applied to new conversations. This affects approximately 15% of memory-enabled users based on our telemetry data. The issue appears correlated with a backend cache invalidation cycle.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["memory", "context", "backend"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-01-20T08:00:00+00:00",
+    "updated_at": "2025-02-15T10:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:002",
+    "title": "Response latency spikes to 30s+ during peak hours",
+    "body": "Between 9 AM and 12 PM EST, first-token latency for GPT-4o regularly exceeds 30 seconds, compared to the normal 1-2 second baseline. Users see the typing indicator for extended periods before any content appears. The issue correlates with peak US business hours and affects approximately 40% of requests during these windows. Load balancer metrics show uneven distribution across inference clusters. Some users are hitting timeout errors after 60 seconds. This is our number one source of user complaints in the past two weeks.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["performance", "latency", "infrastructure"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-01-25T14:30:00+00:00",
+    "updated_at": "2025-03-01T09:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:003",
+    "title": "Code Interpreter fails to install numpy on fresh sessions",
+    "body": "Code Interpreter throws a ModuleNotFoundError when importing numpy in approximately 20% of new sessions. The pip install command within the sandbox returns a timeout error suggesting the package mirror is unreachable. Workaround is to retry the installation 2-3 times, which usually succeeds on subsequent attempts. This appears to be a DNS resolution issue within the sandbox network configuration. Affects all scientific computing workflows that depend on numpy as a foundational package. Users perceive ChatGPT as unreliable for data analysis tasks.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["code-interpreter", "sandbox", "reliability"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-02-05T11:00:00+00:00",
+    "updated_at": "2025-03-10T15:45:00+00:00"
+  },
+  {
+    "id": "mock:bug:004",
+    "title": "DALL-E generates distorted hands in 70% of character images",
+    "body": "Image generation consistently produces anatomically incorrect hands when generating full-body or portrait images of human characters. Common issues include six fingers, merged fingers, impossible joint angles, and disproportionate hand sizes. While this is a known limitation of diffusion models, the current failure rate of approximately 70% is significantly worse than the previous model version. Users generating professional illustrations and marketing materials are especially impacted. Need to investigate whether the latest model checkpoint introduced a regression.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["image-generation", "quality", "dall-e"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-02-12T09:30:00+00:00",
+    "updated_at": "2025-04-01T11:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:005",
+    "title": "iOS app crashes on launch for iPhone 12 users running iOS 17.3",
+    "body": "A critical crash-on-launch bug is affecting iPhone 12 users who recently updated to iOS 17.3. The crash occurs during app initialization when the local database migration runs. Crash logs show an unhandled exception in the CoreData migration step where the schema version check fails. Approximately 8,000 users are affected based on crash reporting data. A forced reinstall resolves the issue temporarily, but the crash returns after the first sync. This needs an emergency hotfix as affected users cannot use the app at all.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["mobile", "ios", "crash", "critical"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-02-18T16:00:00+00:00",
+    "updated_at": "2025-02-20T08:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:006",
+    "title": "SSO login loop for Azure AD users with MFA enabled",
+    "body": "Enterprise users authenticating via Azure AD with multi-factor authentication enabled are stuck in an infinite redirect loop. After completing MFA, the callback URL fails to set the session cookie correctly, redirecting the user back to the login page. This affects all Azure AD tenants with conditional access policies requiring MFA. Approximately 200 enterprise accounts with 5,000+ users are impacted. Workaround is to use a private browser window, which suggests a cookie conflict with existing sessions. This is blocking enterprise onboarding for three key accounts.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["auth", "enterprise", "sso", "critical"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-02-25T10:15:00+00:00",
+    "updated_at": "2025-03-15T14:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:007",
+    "title": "Markdown table rendering breaks with more than 8 columns",
+    "body": "When ChatGPT generates markdown tables with more than 8 columns, the rendering in the web interface breaks. Columns overflow the container, horizontal scrolling doesn't work, and cell content gets truncated without any indication. The raw markdown is correct when copied, but the visual rendering is unusable. This affects data analysis workflows where users ask for comparison tables. Mobile rendering is even worse—tables become completely unreadable above 4 columns. Need to implement responsive table rendering with horizontal scroll support.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["rendering", "ux", "markdown"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-03-05T13:00:00+00:00",
+    "updated_at": "2025-04-20T09:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:008",
+    "title": "Rate limiting returns 429 errors below documented thresholds",
+    "body": "API customers are receiving HTTP 429 rate limit errors well below the documented rate limits for their tier. A Tier 3 customer with a documented limit of 5,000 RPM is being throttled at approximately 3,200 RPM. The rate limit headers in responses show inconsistent values—sometimes the remaining count increases between requests. Investigation suggests the rate limiter is using a sliding window algorithm that doesn't account for request bursts correctly. This is causing SLA violations for several production API customers and generating support escalations.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["api", "rate-limiting", "infrastructure"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-03-12T08:45:00+00:00",
+    "updated_at": "2025-05-01T10:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:009",
+    "title": "Memory stores contradictory facts without conflict resolution",
+    "body": "The memory system stores contradictory information without detecting or resolving conflicts. A user can tell ChatGPT they live in New York in one conversation and San Francisco in another, and both facts are stored. When memory is referenced in future conversations, the model randomly picks one, leading to inconsistent and confusing responses. Need to implement conflict detection that identifies contradictory stored facts and either prompts the user to resolve the conflict or uses the most recent information with a confidence indicator.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["memory", "context", "quality"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-03-20T11:30:00+00:00",
+    "updated_at": "2025-05-15T14:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:010",
+    "title": "Code blocks lose syntax highlighting after page refresh",
+    "body": "When a user refreshes the page or navigates away and returns to a conversation, all code blocks lose their syntax highlighting and appear as plain monospaced text. The language detection metadata is preserved in the conversation data, but the client-side highlighter fails to re-initialize after page load. This affects all programming languages and all browsers. The highlighting returns if the user scrolls the code block out of and back into the viewport, suggesting a lazy-loading intersection observer issue.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["rendering", "ux", "code"],
+      "priority": "low",
+      "url": ""
+    },
+    "created_at": "2025-03-28T15:00:00+00:00",
+    "updated_at": "2025-05-20T11:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:011",
+    "title": "Code Interpreter file upload silently fails for files over 50MB",
+    "body": "Files larger than 50MB uploaded to Code Interpreter appear to upload successfully based on the progress bar and confirmation message, but the file is not actually available in the sandbox. When the user asks to process the file, Code Interpreter reports that it doesn't exist. There is no error message at any point in the flow. The upload size limit should either be enforced with a clear error message before upload begins, or the limit should be increased. Current behavior erodes trust as users waste time on phantom uploads.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["code-interpreter", "file-handling", "ux"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-04-05T10:00:00+00:00",
+    "updated_at": "2025-06-01T09:45:00+00:00"
+  },
+  {
+    "id": "mock:bug:012",
+    "title": "Android app battery drain: 40% consumption in background",
+    "body": "The Android app is consuming approximately 40% of battery while running in the background with no active conversations. Battery usage reports show constant network activity and CPU usage from the app's background sync service. The issue started with version 1.2024.315 and affects Android 13 and 14 devices. Users are uninstalling the app due to battery drain complaints. The background sync interval appears to be set to 30 seconds instead of the intended 30 minutes—likely a unit conversion error in the configuration.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["mobile", "android", "performance"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-04-12T14:30:00+00:00",
+    "updated_at": "2025-05-10T08:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:013",
+    "title": "GPT-4o vision misidentifies text in non-Latin scripts",
+    "body": "GPT-4o's vision capabilities produce significantly lower accuracy when reading text in non-Latin scripts from uploaded images. Chinese, Japanese, Korean, Arabic, and Devanagari text recognition accuracy drops to approximately 40% compared to 95% for Latin scripts. This creates a poor experience for our global user base trying to use image-to-text features. The issue appears to be in the OCR preprocessing pipeline rather than the model itself, as direct text input in these languages works correctly. Need to investigate the vision encoder's training data distribution.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["multimodal", "vision", "i18n"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-04-20T09:00:00+00:00",
+    "updated_at": "2025-06-15T13:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:014",
+    "title": "Conversation history sync fails between web and mobile",
+    "body": "Conversations started on the web app are not appearing on mobile and vice versa for approximately 12% of users. The sync delay can range from hours to never syncing at all. Logging shows that the conversation metadata is synced but the message content fails to download, leaving empty conversation shells on the other device. The issue is more prevalent for users with 500+ conversations, suggesting a pagination bug in the sync API. Force-logging out and back in resolves the issue temporarily.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sync", "mobile", "reliability"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-04-28T11:45:00+00:00",
+    "updated_at": "2025-06-20T10:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:015",
+    "title": "Custom GPT instructions truncated at 4000 characters",
+    "body": "Custom GPT creators report that instructions are silently truncated at 4,000 characters despite the UI allowing input up to 8,000 characters. The text appears fully saved in the editor, but when the GPT is used, behavior indicates only the first 4,000 characters of instructions are applied. This was confirmed by adding a test phrase at the end of long instructions—the GPT is unaware of it. The truncation appears to happen at the API layer when the custom GPT configuration is loaded into the system prompt.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["plugins", "custom-gpts", "backend"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-05-05T10:30:00+00:00",
+    "updated_at": "2025-07-01T14:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:016",
+    "title": "Voice mode cuts off responses after 45 seconds",
+    "body": "In Advanced Voice Mode, responses are abruptly cut off at approximately 45 seconds regardless of content completion. The model appears to still be generating text based on the streaming indicator, but audio output stops mid-sentence. Users report this is especially frustrating during detailed explanations or storytelling. The issue does not occur in text mode for the same prompts. Investigation suggests the audio streaming buffer has a hardcoded timeout that doesn't account for longer responses. Needs an adaptive timeout based on content length.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["voice", "audio", "timeout"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-05-12T13:00:00+00:00",
+    "updated_at": "2025-07-10T09:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:017",
+    "title": "Enterprise billing shows incorrect seat counts after bulk changes",
+    "body": "When enterprise admins add or remove users in bulk via SCIM provisioning, the billing dashboard shows incorrect seat counts for up to 48 hours. In some cases, removed users continue to be billed for the next billing cycle. The discrepancy appears in the billing service's event processing queue, where bulk SCIM events are processed out of order due to missing sequence numbers. Three enterprise customers have filed billing disputes totaling $47,000. Need to implement idempotent event processing with proper ordering guarantees.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["enterprise", "billing", "scim"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-05-20T08:00:00+00:00",
+    "updated_at": "2025-07-15T11:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:018",
+    "title": "LaTeX rendering produces blank output for nested fractions",
+    "body": "Mathematical expressions with nested fractions render as blank space in the web interface. Simple fractions like \\frac{a}{b} work correctly, but nested expressions like \\frac{\\frac{a}{b}}{\\frac{c}{d}} produce an empty rendered block. The raw LaTeX source is correct when copied. This appears to be a KaTeX rendering issue where the nesting depth exceeds the renderer's default maximum. Affects approximately 30% of math-heavy conversations, particularly in calculus and physics topics. STEM education users are heavily impacted.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["rendering", "math", "katex"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-05-28T14:15:00+00:00",
+    "updated_at": "2025-07-20T10:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:019",
+    "title": "Streaming responses freeze mid-output in Safari 17",
+    "body": "On Safari 17 across macOS Sonoma and iOS 17, streaming responses frequently freeze after displaying 200-500 tokens. The connection remains open but no new tokens appear. The issue is specific to Safari and does not reproduce in Chrome or Firefox. Analysis suggests Safari's EventSource implementation has a bug with chunked transfer encoding when the server sends multiple events in rapid succession. A workaround using fetch with ReadableStream instead of EventSource resolves the issue but requires significant refactoring of the streaming client.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["performance", "safari", "streaming"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-06-05T09:30:00+00:00",
+    "updated_at": "2025-08-01T13:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:020",
+    "title": "Image generation ignores aspect ratio parameter in API",
+    "body": "The DALL-E API endpoint accepts an aspect ratio parameter but always generates 1:1 square images regardless of the value passed. The API returns a 200 status with no error, making it appear as if the parameter was accepted. This regression was introduced in API version 2025-03-01. Customers building applications that require landscape or portrait images are generating incorrect outputs. Documentation shows the parameter as supported. Need to either fix the parameter handling or return a validation error until the feature is restored.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["api", "image-generation", "regression"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-06-12T11:00:00+00:00",
+    "updated_at": "2025-08-05T15:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:021",
+    "title": "Memory dashboard shows deleted memories as still active",
+    "body": "When users delete memories through the memory management dashboard, the memories are removed from the list but continue to influence responses. Investigation shows the deletion API call succeeds at the database level, but the in-memory cache used during inference is not invalidated. The cache TTL is set to 6 hours, meaning deleted memories can influence responses for up to 6 hours after deletion. This is a significant privacy concern as users expect immediate effect when they delete personal information from memory.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["memory", "privacy", "cache"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-06-20T10:00:00+00:00",
+    "updated_at": "2025-08-10T08:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:022",
+    "title": "Code Interpreter Python environment missing standard libraries",
+    "body": "The Code Interpreter sandbox is missing several Python standard library modules including sqlite3, tkinter, and multiprocessing. Users attempting to use SQLite for data analysis receive ImportError exceptions. While some standard library exclusions are intentional for security, sqlite3 is safe and commonly needed for data processing workflows. The missing modules are not documented anywhere, leading to user confusion. Need to either include these modules or provide clear documentation and helpful error messages explaining the restrictions.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["code-interpreter", "python", "developer"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-06-28T15:30:00+00:00",
+    "updated_at": "2025-08-15T11:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:023",
+    "title": "Mobile app notification badge shows incorrect unread count",
+    "body": "The iOS and Android app notification badges consistently show incorrect unread counts. Users report badge counts of 99+ when they have no unread notifications. Clearing the badge by opening the app works temporarily, but the count returns to an incorrect number within hours. The issue stems from the push notification service incrementing the badge counter for background sync events that should not generate user-visible notifications. This reduces trust in the notification system and causes users to ignore legitimate notifications.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["mobile", "notifications", "ux"],
+      "priority": "low",
+      "url": ""
+    },
+    "created_at": "2025-07-05T09:00:00+00:00",
+    "updated_at": "2025-09-01T14:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:024",
+    "title": "Shared conversation links expose private follow-up messages",
+    "body": "When a user shares a conversation link, subsequent messages added after sharing are visible to anyone with the link. The expected behavior is that shared links are a snapshot at the time of sharing. Instead, the shared view is a live read-only view of the conversation. Users have inadvertently exposed private information by continuing to use a conversation after sharing an earlier part. This is a privacy vulnerability that needs immediate attention. The sharing system should create an immutable copy of the conversation up to the point of sharing.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["privacy", "sharing", "security"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-07-12T14:00:00+00:00",
+    "updated_at": "2025-07-15T08:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:025",
+    "title": "GPT-4o produces hallucinated URLs that return 404",
+    "body": "GPT-4o frequently generates URLs that look legitimate but lead to 404 pages when browsing is not enabled. The model constructs plausible-looking URLs by combining real domain names with fabricated paths. For example, it might generate a link to a specific Wikipedia article that doesn't exist or a documentation page with an incorrect path. This is especially problematic when users rely on these URLs in research or documentation. Need to improve the model's calibration around URL generation and add post-processing validation when possible.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["quality", "hallucination", "trust"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-07-20T10:30:00+00:00",
+    "updated_at": "2025-09-15T13:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:026",
+    "title": "Enterprise workspace data leaks between tenant conversations",
+    "body": "A critical security issue where information from one enterprise tenant's conversations occasionally appears in another tenant's responses. Investigation traced the issue to a shared inference cache that uses conversation IDs without tenant scoping. When two tenants happen to have conversations with similar prompts, cached intermediate representations can be incorrectly reused. This affects approximately 0.01% of enterprise requests but represents a severe data isolation violation. The cache should be partitioned by tenant ID or disabled for enterprise tiers until fixed.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["enterprise", "security", "privacy", "critical"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-07-28T08:00:00+00:00",
+    "updated_at": "2025-07-29T06:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:027",
+    "title": "Conversation title auto-generation produces gibberish for non-English",
+    "body": "The automatic conversation title generation feature produces garbled or nonsensical titles for conversations conducted in languages other than English. Japanese conversations get titles mixing katakana with random Latin characters. Arabic conversations produce titles with broken Unicode sequences. The title generation prompt appears to only be optimized for English input. When the conversation language is detected as non-English, the title generator should use a language-appropriate prompt or fall back to using the first few words of the user's opening message.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["i18n", "ux", "quality"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-08-05T11:00:00+00:00",
+    "updated_at": "2025-10-01T09:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:028",
+    "title": "File preview crashes browser tab for PDFs over 100 pages",
+    "body": "Uploading PDF files with more than 100 pages causes the browser tab to crash due to excessive memory consumption during the preview rendering. The client-side PDF renderer attempts to render all pages simultaneously instead of virtualizing the page list. Chrome's task manager shows memory usage exceeding 4GB before the tab crashes. This affects users working with long documents like legal contracts, research papers, and technical manuals. The fix should implement lazy page rendering with a virtualized scroll container, only rendering visible pages.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["file-handling", "performance", "rendering"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-08-12T14:30:00+00:00",
+    "updated_at": "2025-10-10T11:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:029",
+    "title": "OAuth token refresh fails silently causing session drops",
+    "body": "Users are experiencing unexpected session terminations when their OAuth access token expires. The token refresh mechanism fails silently without retrying or notifying the user. Instead of refreshing the token in the background, the client makes an API call with the expired token, receives a 401, and redirects to the login page. This happens every 60 minutes during active sessions. The refresh token is valid but the refresh endpoint returns intermittent 503 errors that are not retried. Need to implement retry logic with exponential backoff for token refresh failures.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["auth", "session", "reliability"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-08-20T09:00:00+00:00",
+    "updated_at": "2025-10-15T15:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:030",
+    "title": "Custom GPT knowledge files not indexed after upload",
+    "body": "When uploading knowledge files to a custom GPT, the files show as uploaded in the UI but are not searchable or accessible during conversations. The RAG pipeline's indexing queue has a backlog of 72 hours, meaning newly uploaded files take 3 days to become available. The UI provides no indication of indexing status or estimated completion time. Creators assume their GPT is broken and re-upload files, further increasing the queue. Need to show indexing status, provide estimated completion time, and scale the indexing infrastructure.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["custom-gpts", "rag", "infrastructure"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-08-28T13:00:00+00:00",
+    "updated_at": "2025-10-20T10:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:031",
+    "title": "Response regeneration produces identical output every time",
+    "body": "The regenerate response button is producing identical responses to the original output in approximately 60% of cases. Users expect regeneration to provide an alternative perspective or approach. Investigation shows that the temperature parameter is being overridden to 0 during regeneration calls instead of using the default 0.7. This regression was introduced in a recent API gateway update that incorrectly applies deterministic settings to regeneration requests. The fix is straightforward—remove the temperature override for regeneration calls.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["quality", "backend", "regression"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-09-05T10:00:00+00:00",
+    "updated_at": "2025-11-01T14:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:032",
+    "title": "Paste from clipboard strips formatting and images",
+    "body": "When users paste rich content from the clipboard (such as formatted text from Word or images from screenshot tools), the chat input strips all formatting and discards images. Only plain text is retained. Users expect to paste screenshots directly into the chat for analysis, as competitors support this workflow. The input field uses a basic textarea element instead of a contentEditable div with paste event handling. Need to implement rich paste support that extracts images as file uploads and preserves basic text formatting.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["ux", "clipboard", "file-handling"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-09-12T11:30:00+00:00",
+    "updated_at": "2025-11-10T09:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:033",
+    "title": "API function calling returns malformed JSON for complex schemas",
+    "body": "When using function calling with complex nested JSON schemas containing arrays of objects with optional fields, the API occasionally returns syntactically invalid JSON. The output may have mismatched brackets, trailing commas, or truncated strings. This occurs in approximately 5% of calls with complex schemas and is more frequent with longer responses. The structured output mode that was supposed to fix this still has edge cases. Production applications using function calling need 100% valid JSON to avoid runtime errors. Need to add server-side JSON validation before returning.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["api", "function-calling", "reliability"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-09-20T08:45:00+00:00",
+    "updated_at": "2025-11-15T12:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:034",
+    "title": "Dark mode text contrast insufficient for body text",
+    "body": "After the dark mode release, users with visual impairments report that body text contrast is insufficient. The current implementation uses #A0A0A0 text on #1A1A1A backgrounds, which has a contrast ratio of 4.1:1—below the WCAG AA requirement of 4.5:1 for normal text. Code blocks are even worse at 3.2:1. This negates the accessibility benefits that dark mode should provide. Need to adjust the color palette to ensure all text meets AA standards minimum, with AAA (7:1) for body text. Provide a high-contrast dark mode variant.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["accessibility", "dark-mode", "ux"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-10-01T14:00:00+00:00",
+    "updated_at": "2025-11-20T10:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:035",
+    "title": "Conversation loading spinner infinite loop for deleted conversations",
+    "body": "When a user navigates to a conversation URL that has been deleted, the interface shows an infinite loading spinner instead of a helpful error message. The API returns a 404 for the deleted conversation, but the client-side error handler falls through to the loading state instead of displaying a not-found message. This commonly occurs when users click old bookmarks or shared links to conversations they have since deleted. Need to add proper 404 handling that shows a friendly message and links to the conversation list.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["ux", "error-handling", "frontend"],
+      "priority": "low",
+      "url": ""
+    },
+    "created_at": "2025-10-08T09:30:00+00:00",
+    "updated_at": "2025-12-01T13:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:036",
+    "title": "Memory ignores explicit forget requests in conversation",
+    "body": "When users explicitly ask ChatGPT to forget a specific piece of information using phrases like 'forget that I work at Google' or 'delete my location from memory', the model acknowledges the request but does not actually remove the memory. The conversational interface to memory management is not connected to the actual memory API. Users expect natural language memory management to work. Either connect the conversational commands to the memory API or clearly communicate that memory can only be managed through the settings dashboard.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["memory", "privacy", "ux"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-10-15T11:00:00+00:00",
+    "updated_at": "2025-12-10T08:30:00+00:00"
+  },
+  {
+    "id": "mock:bug:037",
+    "title": "Plus subscription renewal fails silently with expired cards",
+    "body": "When a Plus subscriber's payment card expires, the renewal fails but no notification is sent. The user continues to see the Plus badge in the UI for up to 7 days after the failed payment, during which they are using the free tier limits without knowing. When they eventually discover the issue, they have lost conversation history that was associated with Plus features. The billing system should send immediate email notification of payment failure, show an in-app banner, and provide a grace period with full access while the user updates their payment method.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["billing", "subscription", "ux"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-10-22T13:30:00+00:00",
+    "updated_at": "2025-12-15T10:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:038",
+    "title": "Content policy false positives blocking legitimate medical discussions",
+    "body": "The content safety filter is incorrectly flagging legitimate medical discussions as policy violations. Healthcare professionals and medical students report that questions about symptoms, medications, and treatment protocols are being blocked. Specific examples include discussions about pain management being flagged as drug-related content, and anatomy discussions being flagged as adult content. The false positive rate for medical content is estimated at 15%. Need to refine the safety classifier to better distinguish between medical and harmful content, potentially using domain-specific training data.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["content-policy", "safety", "quality"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-11-01T10:00:00+00:00",
+    "updated_at": "2026-01-05T14:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:039",
+    "title": "o1 model reasoning tokens visible in API response metadata",
+    "body": "The o1 reasoning model's internal chain-of-thought tokens are leaking through the API response metadata in the usage object. While the reasoning tokens are correctly hidden from the response content, the token count in the usage field includes them, and the logprobs endpoint returns probability data for the hidden tokens. This allows API consumers to reverse-engineer portions of the reasoning process that should be proprietary. The token counting should only reflect visible output tokens, and logprobs should be filtered to exclude reasoning tokens.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["api", "o1", "security"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-11-10T15:00:00+00:00",
+    "updated_at": "2026-01-10T09:00:00+00:00"
+  },
+  {
+    "id": "mock:bug:040",
+    "title": "Conversation export missing images and file attachments",
+    "body": "When exporting conversations to JSON or downloading conversation data via GDPR data export, uploaded images and file attachments are not included. Only text content and image generation prompts are preserved—the actual generated images and uploaded files are replaced with placeholder URLs that return 403 errors after 24 hours. Users relying on data export for backup or migration lose all visual content. The export process needs to bundle all referenced media as base64 or provide stable download URLs that remain valid for at least 30 days after export.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["export", "file-handling", "privacy"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-12-01T09:00:00+00:00",
+    "updated_at": "2026-02-01T11:30:00+00:00"
+  }
+]

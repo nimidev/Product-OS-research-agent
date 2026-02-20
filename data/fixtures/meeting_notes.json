@@ -1,0 +1,522 @@
+[
+  {
+    "id": "mock:meeting:001",
+    "title": "Sprint Review: Memory V2 progress and blockers",
+    "body": "Sprint 24-01 review for the Memory V2 team. Key progress: memory dashboard UI is complete with search and filtering. Conflict detection algorithm prototype shows 87% accuracy on test data. Blockers: the cache invalidation issue from BUG-021 needs to be resolved before we can ship—deleted memories still influence responses for up to 6 hours. Action items: backend team to implement event-driven cache invalidation by end of sprint, QA to expand memory regression test suite, PM to finalize data residency requirements with legal team for enterprise memory storage.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "memory", "engineering"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-01-17T15:00:00+00:00",
+    "updated_at": "2025-01-17T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:002",
+    "title": "Customer feedback session: Fortune 500 financial services firm",
+    "body": "Met with CISO and VP of Engineering from a major financial services firm evaluating ChatGPT Enterprise. Key feedback: SSO with SCIM is a hard requirement—they have 12,000 employees and cannot do manual provisioning. Data residency in the US is acceptable but EU subsidiary needs EU processing. DLP integration with their existing Symantec deployment is strongly desired. They need SOC 2 Type II certification before procurement can approve. Willing to commit to a 3-year deal worth $2.4M ARR if these requirements are met. Follow-up meeting scheduled for March.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "enterprise", "security"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-01-24T10:00:00+00:00",
+    "updated_at": "2025-01-24T11:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:003",
+    "title": "Prioritization meeting: Q1 enterprise feature stack rank",
+    "body": "Reviewed and stack-ranked Q1 enterprise features with PM leads, engineering managers, and the CTO. Final priority order: 1) SSO/SCIM (highest revenue impact), 2) DLP content filtering (security deal-blocker), 3) Enterprise admin console MVP, 4) Audit logging foundations. Deferred to Q2: data residency (requires infrastructure investment) and HIPAA certification (12-month timeline). Key debate: should we build admin console in-house or acquire? Decision: build MVP in-house for Q1, evaluate acquisition options in parallel. Engineering headcount request approved for 8 additional hires.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "enterprise", "prioritization"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-02-03T14:00:00+00:00",
+    "updated_at": "2025-02-03T16:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:004",
+    "title": "Competitive analysis: Claude 3 Opus capabilities deep-dive",
+    "body": "Detailed competitive analysis of Anthropic's Claude 3 Opus release. Key observations: Claude matches GPT-4o on most text benchmarks and exceeds on long-context tasks (200K context window vs our 128K). Their extended thinking feature is a direct competitor to our o1 reasoning. Claude's artifact system is well-received and similar to our Canvas vision. Gaps in their offering: no image generation, no voice mode, weaker code interpreter, smaller plugin ecosystem. Recommendation: accelerate Canvas launch, prioritize context window expansion in GPT-5, and differentiate on multimodal breadth. Marketing team to prepare competitive positioning docs.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["competitive", "claude", "strategy"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-02-12T11:00:00+00:00",
+    "updated_at": "2025-02-12T12:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:005",
+    "title": "Sprint Review: Voice Mode improvements and latency targets",
+    "body": "Sprint 24-03 review for the Voice team. Achieved: interruption handling now works with 95% reliability, down from 60% last sprint. Average latency reduced from 800ms to 450ms through inference optimization and audio pipeline parallelization. Still above the 300ms target. Emotion detection model trained on initial dataset showing 72% accuracy across six emotions. Remaining work: multi-language switching implementation, new voice options recording sessions scheduled for next week, and the 45-second cutoff bug needs to be addressed. Demo of improved interruption handling received positive feedback from leadership.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "voice", "engineering"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-02-21T15:00:00+00:00",
+    "updated_at": "2025-02-21T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:006",
+    "title": "Customer feedback roundtable: Plus subscribers power users",
+    "body": "Hosted a virtual roundtable with 15 ChatGPT Plus power users (10+ hours weekly usage). Top themes: 1) Conversation organization is the biggest pain point—everyone wants folders and search. 2) Memory is 'promising but unreliable'—users love the concept but don't trust it. 3) Code Interpreter is a killer feature but file persistence between sessions is badly needed. 4) Dark mode is universally requested. 5) Users want to choose which model to use per-message, not per-conversation. 6) Custom instructions feel limited—they want per-project configurations. Action items distributed to respective PM owners.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "consumer", "power-users"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-03-05T16:00:00+00:00",
+    "updated_at": "2025-03-05T17:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:007",
+    "title": "GPT-4o launch retrospective",
+    "body": "Post-launch retrospective for the GPT-4o release. What went well: model quality exceeded expectations on benchmarks, API migration was smooth with 99.9% uptime, and user reception was overwhelmingly positive (NPS +45). What didn't go well: the audio capabilities delay was poorly communicated, leading to user confusion about what '4o' included. Server capacity underestimated—peak load was 3x projections, causing latency spikes in the first 48 hours. Action items: improve capacity planning models, create clearer feature availability communication templates, and document the phased rollout process for future launches.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "launch", "retrospective"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-03-14T10:00:00+00:00",
+    "updated_at": "2025-03-14T12:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:008",
+    "title": "Competitive analysis: Gemini Ultra and Google AI Studio",
+    "body": "Analysis of Google's Gemini Ultra release and the Google AI Studio developer platform. Key findings: Gemini's multimodal capabilities are strong, with native video understanding giving them a temporary advantage until Sora. AI Studio's free tier is aggressive—1M token context at no cost puts pressure on our API pricing. Gemini's integration with Google Workspace is a significant distribution advantage for enterprise. However, Gemini's reliability and consistency lag behind GPT-4o in production use cases. Recommendations: consider API pricing adjustments for developer tier, accelerate Sora launch, and strengthen Office 365 integration partnership.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["competitive", "gemini", "google", "strategy"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-03-21T14:00:00+00:00",
+    "updated_at": "2025-03-21T15:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:009",
+    "title": "Sprint Review: Canvas beta testing results",
+    "body": "Sprint review for Canvas feature entering beta. Beta group of 5,000 users tested for 2 weeks. Key metrics: 78% of beta users used Canvas at least 3 times, average session duration increased 40% compared to standard chat, and NPS for Canvas was +62. Top feedback: writing mode is highly praised, code mode needs better language support beyond Python and JavaScript. Users want to import existing documents for editing. The side-by-side layout works well on desktop but needs mobile optimization. Bug reports logged for undo/redo inconsistency and cursor position jumping. Targeting general availability in 6 weeks.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "canvas", "beta"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-03-28T15:00:00+00:00",
+    "updated_at": "2025-03-28T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:010",
+    "title": "Quarterly planning: Q2 2025 OKR setting",
+    "body": "Q2 OKR setting session with all product leads. Key objectives agreed: O1) Strengthen enterprise offering—KRs: launch SSO/SCIM, achieve 50 new enterprise deals, reduce enterprise churn by 20%. O2) Improve consumer engagement—KRs: launch Canvas GA, dark mode, conversation folders, achieve 10% increase in DAU. O3) Advance multimodal capabilities—KRs: launch Advanced Voice Mode, complete Sora safety review, ship image generation improvements. O4) Platform scalability—KRs: reduce P99 latency by 30%, achieve 99.95% uptime, launch in 2 new regions. Budget approved for all objectives with quarterly review checkpoint in June.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "okr", "quarterly"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-04-02T09:00:00+00:00",
+    "updated_at": "2025-04-02T12:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:011",
+    "title": "Customer feedback session: Healthcare enterprise pilot results",
+    "body": "Review of 90-day pilot with a major healthcare system (4 hospitals, 15,000 employees). Use cases tested: clinical documentation assistance, medical literature summarization, and patient communication drafting. Results: 35% time savings on documentation, 90% user satisfaction, but significant concerns about HIPAA compliance and content policy false positives blocking legitimate medical discussions. The pilot uncovered that our content safety filter incorrectly blocks 15% of medical terminology discussions. Deal worth $1.8M ARR contingent on HIPAA BAA and medical content filter improvements.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "enterprise", "healthcare"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-04-10T11:00:00+00:00",
+    "updated_at": "2025-04-10T12:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:012",
+    "title": "Sprint Review: Code Interpreter reliability improvements",
+    "body": "Sprint review for Code Interpreter reliability sprint. Key improvements: numpy installation failure rate reduced from 20% to 2% by implementing a local package cache in the sandbox. File upload handling improved—the silent failure for files over 50MB now shows a clear error message with size limits. Added 12 missing Python standard library modules that were previously excluded. Remaining issues: persistent environment across sessions is still in design phase, GPU support requires infrastructure investment of $2M+. Next sprint focus: file persistence MVP and improved error messages for sandbox resource limits.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "code-interpreter", "reliability"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-04-18T15:00:00+00:00",
+    "updated_at": "2025-04-18T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:013",
+    "title": "Data privacy review: Enterprise data handling policies",
+    "body": "Cross-functional review with legal, security, and engineering on enterprise data handling. Decisions made: 1) All enterprise tier data will be excluded from training by default with cryptographic audit trail. 2) Customer-managed encryption keys (CMEK) to be supported by Q3. 3) Data retention policy: 90 days default, configurable by customer. 4) Memory data for enterprise users stored in dedicated partitions with tenant-level encryption. 5) Annual penetration testing by external firm required. 6) SOC 2 Type II audit engagement with Deloitte kicks off next month. Legal to update DPA templates by end of month.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "privacy", "enterprise", "security"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-04-25T10:00:00+00:00",
+    "updated_at": "2025-04-25T12:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:014",
+    "title": "Competitive analysis: Claude's computer use and agentic capabilities",
+    "body": "Deep-dive on Anthropic's computer use feature and their agentic strategy. Claude can now control desktop applications via screenshots and mouse/keyboard actions. While impressive as a demo, reliability in production is reported at roughly 60-70%. Our Operator approach using web APIs is more reliable but less flexible. Key insight: Anthropic is positioning Claude as an agent-first product, while we lead on multimodal breadth. Recommendation: invest in both approaches—web-based agent reliability for Operator and a more flexible computer-use capability for enterprise desktop automation. Design doc due in two weeks.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["competitive", "claude", "agent"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-05-02T14:00:00+00:00",
+    "updated_at": "2025-05-02T15:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:015",
+    "title": "Sprint Review: Enterprise SSO implementation progress",
+    "body": "Sprint review for the Enterprise Identity team. SAML 2.0 integration with Okta is complete and passing all test cases. Azure AD integration at 80%—hitting an edge case with conditional access policies and MFA that's causing redirect loops (BUG-006). SCIM provisioning for user creation and deletion works, but group sync is still in progress. Performance testing shows the SSO flow adds 1.2 seconds to login, within acceptable range. Targeting beta release to 10 enterprise customers next sprint. Need to resolve the Azure AD MFA issue before beta—it affects 60% of our enterprise pipeline.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "enterprise", "sso"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-05-09T15:00:00+00:00",
+    "updated_at": "2025-05-09T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:016",
+    "title": "Customer feedback session: Developer API users roundtable",
+    "body": "Hosted roundtable with 12 API customers ranging from startups to enterprises. Top feedback: 1) Structured output mode is a game-changer—eliminates parsing headaches. 2) Rate limiting is still too rigid—need burst allowances for traffic spikes. 3) Batch API is eagerly awaited for data processing workloads. 4) Function calling JSON reliability needs to be 100%, not 95%. 5) Pricing for o1 reasoning tokens feels opaque—customers want to understand what they're paying for. 6) SDK documentation quality has improved significantly. 7) Request for WebSocket streaming option in addition to SSE. Feedback routed to API product team.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "api", "developer"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-05-16T10:00:00+00:00",
+    "updated_at": "2025-05-16T11:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:017",
+    "title": "Sora safety review findings and launch gating criteria",
+    "body": "Presentation of safety team findings from the Sora red-teaming exercise. 847 testers participated over 4 weeks. Key findings: deepfake generation is partially mitigated by C2PA watermarking but determined testers can strip metadata. CSAM generation is effectively blocked by the content filter. Violence depiction filter has an 8% false negative rate that needs improvement. Misinformation risk through synthetic news footage is the highest concern. Gating criteria agreed: deepfake detection rate must exceed 99%, violence filter false negatives below 1%, and a public incident response plan must be published before launch.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "safety", "sora", "video"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-05-23T09:00:00+00:00",
+    "updated_at": "2025-05-23T11:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:018",
+    "title": "Sprint Review: Dark mode implementation across platforms",
+    "body": "Sprint review for the Design Systems team on dark mode implementation. Web app dark mode is complete and passing accessibility audit—all text meets WCAG AA contrast requirements. iOS dark mode is at 90% completion with remaining work on the Canvas and file preview components. Android dark mode is at 70%—delayed by the custom theme engine needed for Android's fragmented ecosystem. OLED-black variant is implemented for iOS, Android version in next sprint. User testing with 200 participants showed 85% preference for the dark theme during evening hours. System preference detection works on all platforms. GA target: 4 weeks.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "dark-mode", "design"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-05-30T15:00:00+00:00",
+    "updated_at": "2025-05-30T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:019",
+    "title": "Competitive analysis: Gemini in Google Workspace integration",
+    "body": "Analysis of Google's Gemini integration into Workspace (Gmail, Docs, Sheets, Meet). This is a significant competitive threat because of Google's distribution advantage—Gemini becomes the default AI assistant for 3 billion Workspace users. Key concerns: Gmail compose assistance directly competes with our email use case, Docs integration undermines our Canvas value proposition, and Meet summarization is an enterprise feature we don't have. However, early user reviews indicate quality inconsistency and limited customization. Opportunity: position ChatGPT as the premium, cross-platform AI that works with any workspace tool, not just Google's.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["competitive", "gemini", "google", "enterprise"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-06-06T14:00:00+00:00",
+    "updated_at": "2025-06-06T15:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:020",
+    "title": "Customer feedback session: Education sector needs assessment",
+    "body": "Meetings with 8 university administrators and 12 professors across STEM, humanities, and business departments. Key themes: universities want institutional accounts with student and faculty tiers. Academic integrity is a major concern—they want integration with plagiarism detection tools. Accessibility compliance is required for public universities. Math and LaTeX rendering quality is a frequent complaint. Professors want to create assignment-specific GPTs with constrained capabilities. Pricing sensitivity is high—academic discounts of 50%+ are expected. Student usage is already widespread; institutions want to embrace rather than ban. Potential market: 5,000+ US universities.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "education", "enterprise"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-06-13T10:00:00+00:00",
+    "updated_at": "2025-06-13T12:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:021",
+    "title": "Sprint Review: Projects feature design and prototype",
+    "body": "Sprint review for the Projects team showing initial design and interactive prototype. The concept: each project is a persistent workspace with its own conversations, files, instructions, and memory scope. Prototype demonstrates project creation flow, file management sidebar, project-specific custom instructions, and cross-conversation file references. User research with 20 participants showed strong positive reception (4.5/5 usefulness rating). Key design decisions pending: should projects have sub-projects? How do shared projects work with team permissions? What's the free tier project limit? Engineering estimate: 10-12 weeks for MVP.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "projects", "design"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-06-20T15:00:00+00:00",
+    "updated_at": "2025-06-20T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:022",
+    "title": "Quarterly planning: Q3 2025 roadmap finalization",
+    "body": "Q3 roadmap finalization meeting with exec team. Approved initiatives: 1) GPT Store monetization launch—creator payments infrastructure, review system, analytics. 2) Voice Mode GA with emotion detection. 3) Enterprise SSO GA and admin console MVP. 4) Deep Research beta launch. 5) Projects feature development start. Deferred: real-time collaboration (moved to Q4), plugin API v2 (insufficient developer demand signal). Resource allocation: 40% enterprise, 30% consumer features, 20% platform/infrastructure, 10% research integration. Total engineering headcount increasing from 180 to 220 with H2 hiring plan.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "quarterly", "roadmap"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-06-27T09:00:00+00:00",
+    "updated_at": "2025-06-27T12:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:023",
+    "title": "Incident post-mortem: Enterprise data isolation breach",
+    "body": "Post-mortem for the critical incident where enterprise tenant data leaked between conversations (BUG-026). Root cause: shared inference cache used conversation IDs without tenant scoping, allowing cache collisions between tenants with similar prompts. Impact: 23 enterprise conversations potentially exposed across 4 tenants over a 72-hour window. Immediate actions taken: disabled shared cache for enterprise tier, notified affected customers, engaged external security firm for investigation. Long-term fixes: implement tenant-scoped cache with cryptographic isolation, add cross-tenant contamination detection, and establish cache architecture review for all new features. Severity: P0.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["incident", "security", "enterprise", "post-mortem"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-07-05T10:00:00+00:00",
+    "updated_at": "2025-07-05T13:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:024",
+    "title": "Customer feedback session: Japanese enterprise market entry",
+    "body": "Meetings with 6 Japanese enterprises exploring ChatGPT Enterprise adoption. Key requirements: Japanese language quality must improve significantly—current responses are 'unnatural' according to native speakers. Data residency in Japan is legally required for several use cases. On-premises deployment option is desired by financial institutions. Integration with Japanese business tools (Cybozu, Sansan, freee) would accelerate adoption. Cultural consideration: Japanese business communication requires more formal and nuanced language than currently supported. Market opportunity: Japan enterprise AI market projected at $8B by 2026. Recommended: establish Tokyo office and hire local PM.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "enterprise", "japan", "i18n"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-07-11T04:00:00+00:00",
+    "updated_at": "2025-07-11T06:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:025",
+    "title": "Sprint Review: Deep Research alpha testing results",
+    "body": "Sprint review presenting Deep Research alpha results from internal testing. The system successfully executes multi-step research plans, browses 15-30 sources per query, and produces structured reports with inline citations. Quality assessment on 100 test queries: 82% of reports rated 'comprehensive and accurate' by human evaluators. Average execution time: 4-8 minutes per research task. Key issues: occasional circular browsing patterns that waste time, citation accuracy at 91% (target: 98%), and the system sometimes over-indexes on the first few sources found. Next sprint: implement research plan visualization for user transparency and add the ability to redirect research mid-execution.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "deep-research", "alpha"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-07-18T15:00:00+00:00",
+    "updated_at": "2025-07-18T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:026",
+    "title": "Competitive analysis: Meta's Llama 3 open-source impact",
+    "body": "Assessment of Meta's Llama 3 release and its impact on our competitive position. Llama 3 405B approaches GPT-4 quality on several benchmarks and is available for free commercial use. Key impacts: reduces our API pricing power as developers can self-host competitive models, enables competitors to fine-tune on specific domains, and pressures our differentiation story. However: self-hosting costs are significant ($10K+/month for 405B), Llama lacks multimodal capabilities, and the hosted experience gap remains wide. Strategic response: emphasize reliability, multimodal breadth, and ease of use. Consider offering fine-tuned smaller models at aggressive pricing to compete.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["competitive", "meta", "llama", "open-source"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-07-25T14:00:00+00:00",
+    "updated_at": "2025-07-25T15:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:027",
+    "title": "Sprint Review: Operator agent web task execution reliability",
+    "body": "Sprint review for the Operator team. Web task execution reliability improved from 45% to 72% success rate across the benchmark suite of 500 common web tasks. Major improvements in form filling accuracy (90%+) and navigation reliability. Still struggling with: dynamically loaded content (AJAX-heavy sites), CAPTCHA handling, and multi-tab workflows. The human-in-the-loop confirmation flow for sensitive actions (payments, account changes) tested well in user research—93% of participants felt safe using it. New challenge: sites actively blocking AI agents. Need to establish partnerships with high-traffic sites. Launch target: limited beta in 8 weeks.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "operator", "agent"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-08-01T15:00:00+00:00",
+    "updated_at": "2025-08-01T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:028",
+    "title": "Customer feedback session: Enterprise admin console beta testers",
+    "body": "Feedback from 20 enterprise admins testing the admin console MVP. Positive: user management and role-based access works well, usage analytics are useful for cost tracking. Needs improvement: the dashboard loads slowly with >1,000 users, policy management UI is confusing, and audit log search needs filtering by user and action type. Critical missing features: cost allocation by department, model access restrictions per team, and exportable compliance reports. Several admins noted that our console is significantly behind Salesforce and AWS in maturity. Prioritized fix list shared with engineering. Target GA: Q4 2025.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "enterprise", "admin"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-08-08T10:00:00+00:00",
+    "updated_at": "2025-08-08T11:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:029",
+    "title": "Prioritization meeting: Safety vs. feature velocity tradeoffs",
+    "body": "Cross-functional meeting to address tension between feature shipping velocity and safety review timelines. Safety team presents data: average safety review adds 3-4 weeks to launch timelines. Recent incidents (data isolation breach, content policy false positives) argue for more thorough reviews. Product team counters that competitors are shipping faster and we're losing market position. Agreed framework: P0 safety issues (data leaks, bias, CSAM) block launch unconditionally. P1 issues (content policy accuracy, privacy edge cases) require documented mitigation plan. P2 issues can ship with monitoring and post-launch fix timeline. All new features require safety threat modeling during design phase.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "safety", "process"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-08-15T14:00:00+00:00",
+    "updated_at": "2025-08-15T16:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:030",
+    "title": "Sprint Review: Accessibility remediation progress",
+    "body": "Sprint review for the accessibility remediation project. Progress: screen reader compatibility for the main conversation view is complete—tested with NVDA, JAWS, and VoiceOver. Keyboard navigation through the sidebar and settings is implemented. Focus management for new messages now works correctly. Remaining: Canvas accessibility (significant work needed), file upload drag-and-drop alternative, and color contrast fixes for dark mode (BUG-034). Automated a11y testing added to CI pipeline catching 15 new issues per week. External audit with Deque scheduled for December. On track for WCAG 2.1 AA compliance by Q1 2026.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "accessibility", "compliance"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-08-22T15:00:00+00:00",
+    "updated_at": "2025-08-22T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:031",
+    "title": "Quarterly planning: Q4 2025 and 2026 vision",
+    "body": "Q4 planning and 2026 vision discussion with executive team. Q4 priorities: 1) o1 GA launch with full API access, 2) Sora public launch, 3) Enterprise admin console GA, 4) Projects beta launch. 2026 strategic pillars agreed: a) Agent-first product evolution—ChatGPT becomes an AI that acts, not just chats. b) Enterprise dominance—target 50% of Fortune 500 as customers. c) Platform ecosystem—enable third-party developers to build businesses on our platform. d) Global expansion—Japan, Germany, and Brazil offices. Budget request for $500M in infrastructure investment approved for inference capacity scaling ahead of GPT-5 launch.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "quarterly", "strategy", "vision"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-09-05T09:00:00+00:00",
+    "updated_at": "2025-09-05T12:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:032",
+    "title": "Customer feedback session: Legal industry adoption barriers",
+    "body": "Meetings with partners from three AmLaw 100 law firms and two legal tech vendors. Key findings: attorneys want to use ChatGPT for contract review, legal research, and brief drafting but face strict confidentiality requirements. Attorney-client privilege concerns require guaranteed data isolation and no-training commitments with verifiable evidence. Citation accuracy is critical—hallucinated case citations (which ChatGPT produces) are an ethical violation. Integration with legal databases (Westlaw, LexisNexis) is essential. Firms would pay $100+/seat/month for a legal-specific offering. Recommended: partner with a legal tech vendor for domain expertise rather than building in-house.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "legal", "enterprise"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-09-12T10:00:00+00:00",
+    "updated_at": "2025-09-12T11:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:033",
+    "title": "Sprint Review: o1 model evaluation and API preparation",
+    "body": "Sprint review for o1 launch preparation. Model evaluation complete: o1 outperforms GPT-4o on GPQA Diamond (87% vs 53%), MATH benchmark (94% vs 76%), and SWE-bench Verified (41% vs 33%). Latency is 3-5x higher than GPT-4o due to reasoning tokens—average 15 seconds for complex queries. API integration ready with new 'reasoning_effort' parameter (low/medium/high). Pricing model finalized: reasoning tokens billed at 3x input token rate. SDK updates for Python and TypeScript complete. Documentation drafted. Safety evaluation shows no new risk categories beyond GPT-4o. Launch criteria met—scheduling GA for October 1.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "o1", "launch"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-09-19T15:00:00+00:00",
+    "updated_at": "2025-09-19T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:034",
+    "title": "Competitive analysis: Perplexity's search-first AI approach",
+    "body": "Analysis of Perplexity's growth and positioning as a search-first AI product. Perplexity has grown to 15M MAU by positioning as an AI-powered answer engine with real-time web search built in. Their citation-first approach directly addresses the trust problem we struggle with. User surveys show 22% of our users also use Perplexity specifically for factual queries. Our Deep Research feature competes at the high end, but we lack a quick factual search mode. Recommendation: add a 'search mode' toggle that prioritizes real-time web results with citations for factual queries. This can leverage existing browsing infrastructure with a UX redesign.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["competitive", "perplexity", "search"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-09-26T14:00:00+00:00",
+    "updated_at": "2025-09-26T15:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:035",
+    "title": "Sprint Review: GPT Store monetization infrastructure",
+    "body": "Sprint review for the GPT Store monetization launch. Payment infrastructure built on Stripe Connect, supporting creator payouts in 40+ countries. Revenue share: 70% creator, 30% platform. Pricing options for creators: one-time purchase, monthly subscription, and usage-based. Creator analytics dashboard shows revenue, subscribers, conversion rate, and churn. Review system with 5-star ratings and written reviews implemented with spam detection. Content moderation pipeline for paid GPTs includes automated safety checks and human review queue. Beta test with 100 top creators shows average monthly earnings of $450. Targeting public launch in 4 weeks pending legal review of creator terms.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "gpt-store", "monetization"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-10-03T15:00:00+00:00",
+    "updated_at": "2025-10-03T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:036",
+    "title": "Customer feedback session: SMB segment needs analysis",
+    "body": "Interviewed 25 small and medium businesses (10-500 employees) about their ChatGPT usage. Key insights: SMBs primarily use ChatGPT for content creation (80%), customer email drafting (65%), and data analysis (45%). The Team tier pricing at $25/user/month is acceptable for most, but businesses want value-add features like shared prompt libraries, team analytics, and integration with their existing tools (Slack, HubSpot, QuickBooks). Many SMBs are using ChatGPT without formal procurement—employees expensing individual Plus subscriptions. Opportunity: a business tier between Team and Enterprise with essential management features at a lower price point.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["customer-feedback", "smb", "pricing"],
+      "priority": "medium",
+      "url": ""
+    },
+    "created_at": "2025-10-10T10:00:00+00:00",
+    "updated_at": "2025-10-10T11:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:037",
+    "title": "Sprint Review: EU data residency infrastructure deployment",
+    "body": "Sprint review for the EU data residency initiative. Frankfurt deployment is 70% complete. Inference cluster is operational with GPT-4o and o1 models served locally. Data storage layer using AWS eu-central-1 with encryption at rest is configured. Remaining work: conversation sync across regions for traveling users, backup and disaster recovery setup, and compliance testing. Challenge: inference latency is 15% higher than US due to smaller cluster size—need to scale up before launch. Legal team confirmed DPA addendums are ready for customer signature. Beta testing with 5 EU enterprise customers begins in 3 weeks. Full GA target: January 2026.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "infrastructure", "eu", "data-residency"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-10-17T15:00:00+00:00",
+    "updated_at": "2025-10-17T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:038",
+    "title": "Competitive analysis: Industry landscape and positioning review",
+    "body": "Annual competitive landscape review covering all major players. Market position: ChatGPT maintains consumer leadership with 200M+ MAU. Enterprise market share growing but behind Microsoft Copilot's distribution advantage. Key competitive dynamics: Claude excels at long-context and coding, Gemini at multimodal integration with Google ecosystem, Perplexity at search, and open-source models eroding our API pricing power. Our differentiators: broadest multimodal capabilities, strongest brand recognition, largest developer ecosystem. Strategic recommendation: double down on agent capabilities as the next competitive frontier where we can establish a lead before competitors catch up.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["competitive", "strategy", "annual-review"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-11-07T09:00:00+00:00",
+    "updated_at": "2025-11-07T12:00:00+00:00"
+  },
+  {
+    "id": "mock:meeting:039",
+    "title": "Sprint Review: Agentic framework architecture and early prototypes",
+    "body": "Sprint review for the Agent Platform team presenting the agentic framework architecture. The framework enables ChatGPT to plan multi-step tasks, select tools, execute actions, and recover from errors autonomously. Architecture uses a planning layer (based on o3 reasoning), an execution layer with tool orchestration, and a monitoring layer for human oversight. Early prototype demos: 1) Research and write a report with citations (85% quality), 2) Debug a GitHub issue including code changes (60% success rate), 3) Book a flight by comparing prices across sites via Operator (70% success rate). Key decisions needed: agent session timeout limits, cost guardrails, and liability framework for agent actions.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["sprint-review", "agent", "architecture"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-11-21T15:00:00+00:00",
+    "updated_at": "2025-11-21T16:30:00+00:00"
+  },
+  {
+    "id": "mock:meeting:040",
+    "title": "Quarterly planning: Q1 2026 priorities and GPT-5 preparation",
+    "body": "Q1 2026 planning meeting focused on GPT-5 launch preparation and continued enterprise growth. Priorities: 1) GPT-5 safety evaluation and red-teaming (largest ever, 2,000+ testers). 2) Infrastructure scaling for GPT-5 inference costs (3x current capacity). 3) Enterprise: complete SSO GA, admin console v2, and HIPAA certification. 4) Consumer: Projects GA, semantic search launch, and improved mobile experience. 5) Platform: agentic framework beta, plugin API v2 design finalization. GPT-5 launch tentatively scheduled for Q2 2026 pending safety review. Risk: training run may need extension based on early eval results. Budget approved for $200M in additional GPU capacity.",
+    "source": "mock",
+    "metadata": {
+      "tags": ["planning", "quarterly", "gpt-5"],
+      "priority": "high",
+      "url": ""
+    },
+    "created_at": "2025-12-12T09:00:00+00:00",
+    "updated_at": "2025-12-12T12:00:00+00:00"
+  }
+]
