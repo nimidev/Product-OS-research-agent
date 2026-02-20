@@ -1,0 +1,156 @@
+[
+  {
+    "id": "q01",
+    "query": "What pain points do users have with ChatGPT onboarding?",
+    "expected_types": ["feature_request", "support_ticket", "meeting_note"],
+    "expected_keywords": ["onboarding", "setup", "getting started", "new user"],
+    "description": "Should surface onboarding friction across multiple item types"
+  },
+  {
+    "id": "q02",
+    "query": "What are the most requested enterprise features?",
+    "expected_types": ["feature_request", "roadmap_item"],
+    "expected_keywords": ["enterprise", "SSO", "admin", "team", "security", "compliance"],
+    "description": "Enterprise-focused requests and roadmap items"
+  },
+  {
+    "id": "q03",
+    "query": "What bugs have been reported about ChatGPT memory feature?",
+    "expected_types": ["bug", "support_ticket"],
+    "expected_keywords": ["memory", "remember", "forget", "context"],
+    "description": "Memory-related bugs and support issues"
+  },
+  {
+    "id": "q04",
+    "query": "What decisions were made about the GPT-4o launch?",
+    "expected_types": ["meeting_note", "roadmap_item", "prd"],
+    "expected_keywords": ["GPT-4o", "launch", "release", "multimodal"],
+    "description": "GPT-4o launch decisions across meeting notes and roadmap"
+  },
+  {
+    "id": "q05",
+    "query": "What are customers saying about ChatGPT response quality?",
+    "expected_types": ["feature_request", "bug", "support_ticket"],
+    "expected_keywords": ["quality", "accuracy", "hallucination", "response", "wrong"],
+    "description": "Response quality feedback across multiple channels"
+  },
+  {
+    "id": "q06",
+    "query": "What privacy concerns have been raised?",
+    "expected_types": ["feature_request", "support_ticket", "meeting_note"],
+    "expected_keywords": ["privacy", "data", "security", "GDPR", "compliance"],
+    "description": "Privacy and data security concerns"
+  },
+  {
+    "id": "q07",
+    "query": "What is the roadmap for Custom GPTs?",
+    "expected_types": ["roadmap_item", "prd", "meeting_note"],
+    "expected_keywords": ["custom GPT", "GPT Store", "builder", "actions"],
+    "description": "Custom GPTs roadmap and planning"
+  },
+  {
+    "id": "q08",
+    "query": "What performance issues have users reported?",
+    "expected_types": ["bug", "support_ticket"],
+    "expected_keywords": ["slow", "latency", "timeout", "performance", "speed"],
+    "description": "Performance-related bugs and complaints"
+  },
+  {
+    "id": "q09",
+    "query": "What feedback has been received about ChatGPT pricing?",
+    "expected_types": ["feature_request", "support_ticket", "meeting_note"],
+    "expected_keywords": ["pricing", "cost", "subscription", "Plus", "free tier"],
+    "description": "Pricing and subscription feedback"
+  },
+  {
+    "id": "q10",
+    "query": "What API integration issues have developers reported?",
+    "expected_types": ["bug", "support_ticket", "feature_request"],
+    "expected_keywords": ["API", "integration", "developer", "SDK", "endpoint"],
+    "description": "Developer API issues and feature requests"
+  },
+  {
+    "id": "q11",
+    "query": "What improvements have been discussed for the mobile app?",
+    "expected_types": ["feature_request", "meeting_note", "roadmap_item"],
+    "expected_keywords": ["mobile", "app", "iOS", "Android", "phone"],
+    "description": "Mobile experience improvements"
+  },
+  {
+    "id": "q12",
+    "query": "What has been discussed about multi-modal capabilities?",
+    "expected_types": ["roadmap_item", "prd", "meeting_note"],
+    "expected_keywords": ["multimodal", "image", "audio", "voice", "vision"],
+    "description": "Multi-modal feature discussions"
+  },
+  {
+    "id": "q13",
+    "query": "What are the most common support ticket themes?",
+    "expected_types": ["support_ticket"],
+    "expected_keywords": ["account", "login", "error", "not working", "help"],
+    "description": "Common support patterns"
+  },
+  {
+    "id": "q14",
+    "query": "What has been planned for the Canvas feature?",
+    "expected_types": ["roadmap_item", "prd", "meeting_note"],
+    "expected_keywords": ["Canvas", "writing", "editing", "collaboration"],
+    "description": "Canvas feature planning"
+  },
+  {
+    "id": "q15",
+    "query": "What internationalization or localization requests exist?",
+    "expected_types": ["feature_request", "support_ticket"],
+    "expected_keywords": ["language", "translation", "localization", "i18n", "multilingual"],
+    "description": "i18n and language support requests"
+  },
+  {
+    "id": "q16",
+    "query": "What sprint review discussions happened in Q3 2025?",
+    "expected_types": ["meeting_note"],
+    "expected_keywords": ["sprint", "review", "retrospective", "Q3"],
+    "description": "Sprint reviews within a time range"
+  },
+  {
+    "id": "q17",
+    "query": "What accessibility improvements have been requested?",
+    "expected_types": ["feature_request", "bug"],
+    "expected_keywords": ["accessibility", "a11y", "screen reader", "keyboard", "contrast"],
+    "description": "Accessibility-related requests"
+  },
+  {
+    "id": "q18",
+    "query": "What are the open data privacy PRDs?",
+    "expected_types": ["prd"],
+    "expected_keywords": ["privacy", "data", "retention", "compliance"],
+    "description": "Privacy-related product documents"
+  },
+  {
+    "id": "q19",
+    "query": "What has been discussed about ChatGPT's reasoning capabilities?",
+    "expected_types": ["roadmap_item", "prd", "meeting_note", "feature_request"],
+    "expected_keywords": ["reasoning", "o1", "thinking", "chain of thought", "logic"],
+    "description": "Reasoning/o1 model discussions"
+  },
+  {
+    "id": "q20",
+    "query": "What competitor analysis or competitive insights exist?",
+    "expected_types": ["meeting_note", "prd"],
+    "expected_keywords": ["competitor", "Claude", "Gemini", "competitive", "market"],
+    "description": "Competitive landscape discussions"
+  },
+  {
+    "id": "q21",
+    "query": "What file upload and document analysis features have been requested?",
+    "expected_types": ["feature_request", "roadmap_item"],
+    "expected_keywords": ["upload", "file", "document", "PDF", "analysis"],
+    "description": "Document/file handling feature requests"
+  },
+  {
+    "id": "q22",
+    "query": "What customer feedback themes appear across both bugs and feature requests?",
+    "expected_types": ["bug", "feature_request"],
+    "expected_keywords": ["customer", "feedback", "request"],
+    "description": "Cross-type customer feedback patterns"
+  }
+]
