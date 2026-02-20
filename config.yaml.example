@@ -1,0 +1,41 @@
+# Research Agent Configuration
+# Copy to config.yaml and customize. Sensitive values use ${ENV_VAR} syntax.
+
+embedding:
+  provider: openai
+  model: text-embedding-3-small
+  batch_size: 2048
+
+qdrant:
+  host: localhost
+  port: 6333
+  collection: research_items
+
+llm:
+  provider: openai
+  model: gpt-4o-mini
+  temperature: 0.3
+  max_tokens: 1500
+
+logging:
+  level: INFO          # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: json         # json or text
+
+database_path: research_agent.db
+
+# Connectors (Phase 3)
+# connectors:
+#   monday:
+#     enabled: true
+#     extra:
+#       api_key: ${MONDAY_API_KEY}
+#       board_ids: [123456789]
+#       column_mapping:
+#         title: "name"
+#         body: "description"
+#         priority: "priority"
+#   notion:
+#     enabled: true
+#     extra:
+#       api_key: ${NOTION_API_KEY}
+#       database_ids: ["abc123"]
