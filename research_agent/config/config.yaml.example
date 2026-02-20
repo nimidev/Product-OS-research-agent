@@ -1,0 +1,40 @@
+# Research Agent Configuration (Phase 2+)
+# Phase 1 uses .env for all settings. This file is a preview of the full config system.
+
+embedding:
+  provider: openai
+  model: text-embedding-3-small
+  # api_key: from OPENAI_API_KEY env var
+
+llm:
+  provider: openai
+  model: gpt-4o-mini
+  # api_key: from OPENAI_API_KEY env var
+
+qdrant:
+  host: localhost
+  port: 6333
+  collection: research_items
+
+database:
+  path: research_agent.db
+
+logging:
+  level: INFO
+  format: json
+
+# Connectors (Phase 3+)
+# connectors:
+#   monday:
+#     api_key: ${MONDAY_API_KEY}
+#     boards:
+#       - id: "123456"
+#         type: feature_request
+#         column_mapping:
+#           title: name
+#           body: description
+#   notion:
+#     api_key: ${NOTION_API_KEY}
+#     databases:
+#       - id: "abc-def-123"
+#         type: meeting_note
