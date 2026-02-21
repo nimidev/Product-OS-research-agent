@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import uuid
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -20,6 +21,14 @@ from qdrant_client.models import (
 logger = logging.getLogger(__name__)
 
 COLLECTION_NAME = "research_items"
+
+# Namespace for deterministic UUIDs from string IDs (Qdrant accepts only int or UUID)
+_QDRANT_ID_NAMESPACE = uuid.UUID("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+
+
+def _to_point_id(id_str: str) -> uuid.UUID:
+    """Map our string IDs (e.g. mock:bug:012) to a valid Qdrant point ID (UUID)."""
+    return uuid.uuid5(_QDRANT_ID_NAMESPACE, id_str)
 
 
 @dataclass
@@ -52,7 +61,7 @@ class QdrantStore:
     ) -> None:
         await self._client.upsert(
             collection_name=COLLECTION_NAME,
-            points=[PointStruct(id=point_id, vector=vector, payload=payload)],
+            points=[PointStruct(id=_to_point_id(point_id), vector=vector, payload=payload)],
         )
 
     async def upsert_batch(
@@ -62,7 +71,8 @@ class QdrantStore:
         if not points:
             return
         structs = [
-            PointStruct(id=pid, vector=vec, payload=pay) for pid, vec, pay in points
+            PointStruct(id=_to_point_id(pid), vector=vec, payload=pay)
+            for pid, vec, pay in points
         ]
         batch_size = 100
         for i in range(0, len(structs), batch_size):
@@ -138,7 +148,7 @@ class QdrantStore:
 
         await self._client.delete(
             collection_name=COLLECTION_NAME,
-            points_selector=PointIdsList(points=point_ids),
+            points_selector=PointIdsList(points=[_to_point_id(pid) for pid in point_ids]),
         )
 
     async def delete_by_parent(self, parent_id: str) -> None:

@@ -1,392 +1,802 @@
 [
   {
-    "id": "mock:support:001",
-    "title": "Account locked after password reset — cannot access any device",
-    "body": "Customer reports being locked out of their account after attempting a password reset. The reset email was received and a new password was set successfully, but all login attempts return 'Invalid credentials.' The account shows as active in our system, and the email is verified. Customer has tried clearing browser cache, using incognito mode, and attempting login on mobile. This appears to be a session invalidation issue where the old sessions are interfering with the new password. Customer is a Plus subscriber and has important conversation history they need to access urgently for a work deadline.",
+    "id": "mock:support_ticket:000",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Enterprise data residency requirement",
+    "body": "Customer (Healthcare Co) needs guarantee that all data remains in US. Asking for BAA and data residency documentation. Blocking 500-seat deal.",
     "metadata": {
-      "tags": ["account", "auth", "lockout"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Healthcare Co",
+      "customer_tier": "enterprise",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-01-22T08:30:00+00:00",
-    "updated_at": "2025-01-23T10:00:00+00:00"
+    "created_at": "2024-02-02T00:00:00+00:00",
+    "updated_at": "2024-02-05T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:002",
-    "title": "Double charged for Plus subscription two months in a row",
-    "body": "Customer reports being charged twice for their ChatGPT Plus subscription for both December and January. Bank statement shows two charges of $20 on the 5th and 6th of each month. The customer has only one account and one active subscription. Investigation shows the Stripe webhook for subscription renewal is occasionally firing twice due to a retry on timeout. The customer is requesting a refund for the duplicate charges ($40 total) and assurance that this will not recur. They are considering canceling if the billing issues persist. Escalated to billing engineering team.",
+    "id": "mock:support_ticket:001",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Enterprise data residency requirement",
+    "body": "Customer (Healthcare Co) needs guarantee that all data remains in US. Asking for BAA and data residency documentation. Blocking 500-seat deal.",
     "metadata": {
-      "tags": ["billing", "subscription", "refund"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Healthcare Co",
+      "customer_tier": "enterprise",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-02-06T11:00:00+00:00",
-    "updated_at": "2025-02-08T14:30:00+00:00"
+    "created_at": "2024-01-30T00:00:00+00:00",
+    "updated_at": "2024-02-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:003",
-    "title": "Content policy violation warning for legitimate medical research query",
-    "body": "A medical researcher reports receiving a content policy violation warning when asking ChatGPT about drug interaction mechanisms and dosage calculations for their pharmaceutical research paper. The query was entirely academic and referenced published medical literature. The researcher feels the content filter is overly aggressive and prevents them from using ChatGPT for legitimate medical research. They are considering switching to a competitor that handles medical content better. This aligns with the known false positive issue in our medical content classifier. Customer requests a review of the content policy for academic and medical contexts.",
+    "id": "mock:support_ticket:002",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Enterprise data residency requirement",
+    "body": "Customer (Healthcare Co) needs guarantee that all data remains in US. Asking for BAA and data residency documentation. Blocking 500-seat deal.",
     "metadata": {
-      "tags": ["content-policy", "medical", "false-positive"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "Healthcare Co",
+      "customer_tier": "enterprise",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-02-15T09:00:00+00:00",
-    "updated_at": "2025-02-18T11:00:00+00:00"
+    "created_at": "2024-02-26T00:00:00+00:00",
+    "updated_at": "2024-03-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:004",
-    "title": "Plus subscription features not activating after payment",
-    "body": "Customer purchased a ChatGPT Plus subscription 3 days ago and has a confirmation email with receipt, but their account still shows free tier limitations. They cannot access GPT-4o, have message caps consistent with the free tier, and do not see Plus features like DALL-E or browsing. The Stripe payment was processed successfully and the subscription shows as active in the billing dashboard. The issue appears to be a failed provisioning event where the entitlement service did not receive the subscription activation webhook. Manual provisioning was applied as a temporary fix while engineering investigates the root cause.",
+    "id": "mock:support_ticket:003",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Enterprise data residency requirement",
+    "body": "Customer (Healthcare Co) needs guarantee that all data remains in US. Asking for BAA and data residency documentation. Blocking 500-seat deal.",
     "metadata": {
-      "tags": ["billing", "subscription", "provisioning"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Healthcare Co",
+      "customer_tier": "enterprise",
+      "resolution_status": "resolved"
     },
-    "created_at": "2025-03-02T13:30:00+00:00",
-    "updated_at": "2025-03-04T09:00:00+00:00"
+    "created_at": "2024-03-17T00:00:00+00:00",
+    "updated_at": "2024-03-18T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:005",
-    "title": "API rate limit exceeded despite being well within documented limits",
-    "body": "An API customer on Tier 3 reports receiving HTTP 429 rate limit errors at approximately 3,200 RPM despite their documented limit of 5,000 RPM. They provide logs showing the error frequency and their actual request rate. The issue is impacting their production application that serves 50,000 end users. They have reached out three times in the past week without resolution. The rate limit headers in responses show inconsistent remaining counts. This matches the known rate limiter bug where the sliding window algorithm doesn't handle bursts correctly. Customer is requesting immediate resolution or a temporary limit increase as a workaround.",
+    "id": "mock:support_ticket:004",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Enterprise data residency requirement",
+    "body": "Customer (Healthcare Co) needs guarantee that all data remains in US. Asking for BAA and data residency documentation. Blocking 500-seat deal.",
     "metadata": {
-      "tags": ["api", "rate-limiting", "enterprise"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Healthcare Co",
+      "customer_tier": "enterprise",
+      "resolution_status": "open"
     },
-    "created_at": "2025-03-14T10:00:00+00:00",
-    "updated_at": "2025-03-18T15:00:00+00:00"
+    "created_at": "2024-03-30T00:00:00+00:00",
+    "updated_at": "2024-04-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:006",
-    "title": "Cannot cancel subscription — cancel button not responding",
-    "body": "Customer wants to cancel their Plus subscription but the cancellation button in settings does not respond when clicked. They have tried on Chrome, Firefox, and Safari on both macOS and Windows. The button appears clickable but nothing happens when clicked—no loading state, no confirmation dialog, no error message. The customer is frustrated because they are being charged monthly for a service they want to cancel. This appears to be a JavaScript error preventing the cancellation modal from opening. Support agent manually processed the cancellation and initiated a refund for the most recent charge.",
+    "id": "mock:support_ticket:005",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Enterprise data residency requirement",
+    "body": "Customer (Healthcare Co) needs guarantee that all data remains in US. Asking for BAA and data residency documentation. Blocking 500-seat deal.",
     "metadata": {
-      "tags": ["billing", "subscription", "ux-bug"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "Healthcare Co",
+      "customer_tier": "enterprise",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-03-25T16:00:00+00:00",
-    "updated_at": "2025-03-27T10:30:00+00:00"
+    "created_at": "2024-04-12T00:00:00+00:00",
+    "updated_at": "2024-04-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:007",
-    "title": "iOS app crashes immediately on launch after update to 2.8.0",
-    "body": "Customer reports the ChatGPT iOS app crashes immediately upon opening after updating to version 2.8.0 on their iPhone 12 running iOS 17.3. The app shows the splash screen for approximately 1 second before closing. They have tried force-closing, restarting the phone, and reinstalling the app. Reinstalling works temporarily but the crash returns after the first conversation sync. This matches the known crash bug affecting iPhone 12 devices on iOS 17.3 related to the CoreData migration. Customer is unable to use ChatGPT on mobile and relies on it for their daily commute. Advised to use the web app as a temporary workaround while the fix is in progress.",
+    "id": "mock:support_ticket:006",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Enterprise data residency requirement",
+    "body": "Customer (Healthcare Co) needs guarantee that all data remains in US. Asking for BAA and data residency documentation. Blocking 500-seat deal.",
     "metadata": {
-      "tags": ["mobile", "ios", "crash"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Healthcare Co",
+      "customer_tier": "enterprise",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-04-03T08:45:00+00:00",
-    "updated_at": "2025-04-05T11:00:00+00:00"
+    "created_at": "2024-04-26T00:00:00+00:00",
+    "updated_at": "2024-05-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:008",
-    "title": "Enterprise team billing discrepancy after removing 50 users",
-    "body": "Enterprise admin from a 500-seat organization reports that after removing 50 users via SCIM deprovisioning, the billing dashboard still shows 500 active seats. The SCIM sync completed successfully according to their Okta logs, and the removed users can no longer access ChatGPT. However, the invoice generated yesterday charged for the full 500 seats. The admin is requesting a credit for the 50 unused seats ($1,250/month at their contract rate) and needs the billing system to accurately reflect their current seat count. This aligns with the known SCIM billing sync delay issue.",
+    "id": "mock:support_ticket:007",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Memory not working \u2014 refund request",
+    "body": "Plus user reports Memory has never worked for them. Multiple conversations. Requesting refund for 3 months. Escalated to Engineering.",
     "metadata": {
-      "tags": ["enterprise", "billing", "scim"],
-      "priority": "high",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_xxx",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
     },
-    "created_at": "2025-04-15T09:30:00+00:00",
-    "updated_at": "2025-04-18T14:00:00+00:00"
+    "created_at": "2024-05-11T00:00:00+00:00",
+    "updated_at": "2024-05-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:009",
-    "title": "Content policy blocking creative fiction writing project",
-    "body": "A published author reports that ChatGPT is refusing to assist with their thriller novel, blocking requests to write scenes involving conflict, tension, and realistic dialogue between antagonist characters. The author has been using ChatGPT for months for this project and the blocking behavior started after a recent safety update. They provide examples of prompts that were previously accepted but now trigger content policy warnings. The author argues that fiction writing inherently involves depicting challenging situations and that the current policy is too restrictive for creative professionals. Requesting an exemption or content policy adjustment for creative fiction contexts.",
+    "id": "mock:support_ticket:008",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Memory not working \u2014 refund request",
+    "body": "Plus user reports Memory has never worked for them. Multiple conversations. Requesting refund for 3 months. Escalated to Engineering.",
     "metadata": {
-      "tags": ["content-policy", "creative", "false-positive"],
-      "priority": "medium",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_xxx",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-04-22T14:00:00+00:00",
-    "updated_at": "2025-04-25T10:30:00+00:00"
+    "created_at": "2024-05-28T00:00:00+00:00",
+    "updated_at": "2024-06-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:010",
-    "title": "API key compromised — requesting immediate revocation and investigation",
-    "body": "Customer discovered unauthorized usage on their API account showing $4,300 in charges over the past 48 hours from IP addresses they don't recognize. The API key appears to have been leaked via a public GitHub repository (customer confirmed accidental commit). Requesting immediate key revocation, investigation of unauthorized usage, and a billing adjustment for the fraudulent charges. The customer has already rotated their key but wants confirmation that the old key is fully disabled. Also requesting information about what data the unauthorized party may have accessed through the API. Escalated to security team for investigation and finance for billing adjustment.",
+    "id": "mock:support_ticket:009",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Memory not working \u2014 refund request",
+    "body": "Plus user reports Memory has never worked for them. Multiple conversations. Requesting refund for 3 months. Escalated to Engineering.",
     "metadata": {
-      "tags": ["api", "security", "billing"],
-      "priority": "high",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_xxx",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-05-03T07:00:00+00:00",
-    "updated_at": "2025-05-04T09:00:00+00:00"
+    "created_at": "2024-06-15T00:00:00+00:00",
+    "updated_at": "2024-06-18T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:011",
-    "title": "All conversation history disappeared after browser update",
-    "body": "Customer reports that all their conversation history has disappeared after updating Chrome to version 124. They had approximately 400 conversations spanning 6 months of usage. The sidebar shows 'No conversations' and creating a new conversation works but none of the old ones are visible. The customer is logged into the correct account (verified by email). Investigation shows the conversations still exist in the backend database but the client-side conversation list API is timing out due to the large number of conversations. The pagination system is failing to load the first page within the 10-second timeout. Temporary fix: increased timeout for this user while engineering works on pagination performance.",
+    "id": "mock:support_ticket:010",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Memory not working \u2014 refund request",
+    "body": "Plus user reports Memory has never worked for them. Multiple conversations. Requesting refund for 3 months. Escalated to Engineering.",
     "metadata": {
-      "tags": ["account", "data-loss", "performance"],
-      "priority": "high",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_xxx",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
     },
-    "created_at": "2025-05-12T11:30:00+00:00",
-    "updated_at": "2025-05-14T10:00:00+00:00"
+    "created_at": "2024-07-01T00:00:00+00:00",
+    "updated_at": "2024-07-06T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:012",
-    "title": "Unable to upgrade from free tier — payment page shows blank",
-    "body": "Customer attempting to upgrade to ChatGPT Plus encounters a blank payment page when clicking 'Upgrade to Plus.' The page loads with the header and footer but the Stripe payment form does not render. Customer has tried multiple browsers (Chrome, Firefox, Edge), disabled all extensions, and tried on a different computer. The issue persists. Investigation reveals the customer's country (Iran) is on the Stripe restricted countries list due to sanctions, but our UI does not show an appropriate error message—just a blank form. The customer is currently traveling in Europe and asking if there's a way to subscribe while abroad. Advised on regional availability and escalated the UX issue.",
+    "id": "mock:support_ticket:011",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Memory not working \u2014 refund request",
+    "body": "Plus user reports Memory has never worked for them. Multiple conversations. Requesting refund for 3 months. Escalated to Engineering.",
     "metadata": {
-      "tags": ["billing", "subscription", "geo-restriction"],
-      "priority": "medium",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_xxx",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-05-20T08:00:00+00:00",
-    "updated_at": "2025-05-22T13:00:00+00:00"
+    "created_at": "2024-06-28T00:00:00+00:00",
+    "updated_at": "2024-07-03T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:013",
-    "title": "GDPR data export request — need all personal data within 30 days",
-    "body": "EU-based customer submitting a formal GDPR data subject access request for a complete export of all personal data processed by OpenAI in relation to their ChatGPT account. They require: all conversation content and metadata, stored memories, account profile information, payment history, login records, and any data used for model training. The customer cites GDPR Article 15 and requests the data in a machine-readable format within 30 days. Our current data export feature provides conversation text but misses uploaded files, generated images, and system-generated metadata. Legal team engaged for compliance review. Export process initiated with expected delivery in 15 business days.",
+    "id": "mock:support_ticket:012",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Memory not working \u2014 refund request",
+    "body": "Plus user reports Memory has never worked for them. Multiple conversations. Requesting refund for 3 months. Escalated to Engineering.",
     "metadata": {
-      "tags": ["privacy", "gdpr", "compliance"],
-      "priority": "high",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_xxx",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-06-01T10:00:00+00:00",
-    "updated_at": "2025-06-15T14:00:00+00:00"
+    "created_at": "2024-07-26T00:00:00+00:00",
+    "updated_at": "2024-07-29T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:014",
-    "title": "Mobile app using 40% battery in background — Android",
-    "body": "Customer reports extreme battery drain from the ChatGPT Android app even when not actively using it. Battery usage statistics show the app consumed 40% of total battery over 24 hours, primarily from background activity. The customer has not opened the app in the past 8 hours. They have tried restricting background activity in Android settings, but the app continues to consume battery. This matches the known bug where the background sync interval is set to 30 seconds instead of 30 minutes. Customer advised to force-stop the app as a temporary measure. The fix is included in the next app release scheduled for next week.",
+    "id": "mock:support_ticket:013",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Memory not working \u2014 refund request",
+    "body": "Plus user reports Memory has never worked for them. Multiple conversations. Requesting refund for 3 months. Escalated to Engineering.",
     "metadata": {
-      "tags": ["mobile", "android", "performance"],
-      "priority": "medium",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_xxx",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-06-10T15:30:00+00:00",
-    "updated_at": "2025-06-12T09:00:00+00:00"
+    "created_at": "2024-08-02T00:00:00+00:00",
+    "updated_at": "2024-08-04T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:015",
-    "title": "Enterprise SSO login redirect loop — Azure AD with MFA",
-    "body": "Enterprise IT admin reports that all users authenticating via Azure AD with MFA enabled are stuck in an infinite login redirect loop. After entering credentials and completing MFA, users are redirected back to the login page without being authenticated. This affects all 350 users in their organization. The admin has verified the SAML configuration matches our documentation. The issue started after they enabled conditional access policies requiring MFA for all cloud applications. Workaround of using private browsing works but is not acceptable for ongoing use. This matches the known SSO redirect bug. Escalated to the identity engineering team with P1 priority.",
+    "id": "mock:support_ticket:014",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "API rate limit 429 blocking production",
+    "body": "Developer on Team plan hitting 429 with 50 RPM. Documentation says 60 RPM. Need higher limit or committed tier for production app.",
     "metadata": {
-      "tags": ["enterprise", "sso", "auth"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "DevCorp",
+      "customer_tier": "team",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-06-20T09:00:00+00:00",
-    "updated_at": "2025-06-23T11:30:00+00:00"
+    "created_at": "2024-08-24T00:00:00+00:00",
+    "updated_at": "2024-08-25T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:016",
-    "title": "Requesting refund for Team subscription — features not as advertised",
-    "body": "A small business owner who purchased ChatGPT Team for their 10-person company is requesting a full refund for the first month ($250). Their complaint: the marketing page promises 'shared workspaces' and 'team collaboration' features, but actual functionality is limited to a shared billing account and conversation history is not shareable between team members in the way they expected. They specifically wanted real-time collaborative conversations which is not yet available. The customer feels misled by the marketing language. Customer success team engaged to provide guidance on current team features and timeline for collaboration improvements. Partial refund of one month approved as goodwill gesture.",
+    "id": "mock:support_ticket:015",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "API rate limit 429 blocking production",
+    "body": "Developer on Team plan hitting 429 with 50 RPM. Documentation says 60 RPM. Need higher limit or committed tier for production app.",
     "metadata": {
-      "tags": ["billing", "refund", "team"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "DevCorp",
+      "customer_tier": "team",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-07-02T14:00:00+00:00",
-    "updated_at": "2025-07-05T10:00:00+00:00"
+    "created_at": "2024-09-10T00:00:00+00:00",
+    "updated_at": "2024-09-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:017",
-    "title": "API function calling returning invalid JSON in production",
-    "body": "API customer running a production application serving 10,000 users reports that function calling responses intermittently return syntactically invalid JSON. They provide 47 examples collected over the past week showing malformed responses: missing closing brackets, trailing commas, and truncated strings. The failure rate is approximately 5% of all function calling requests with complex schemas. Their application crashes when attempting to parse these responses, causing user-facing errors. The customer has implemented retry logic as a workaround but this doubles their API costs for affected requests. They are demanding either a fix or a billing credit for the excess retries.",
+    "id": "mock:support_ticket:016",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "API rate limit 429 blocking production",
+    "body": "Developer on Team plan hitting 429 with 50 RPM. Documentation says 60 RPM. Need higher limit or committed tier for production app.",
     "metadata": {
-      "tags": ["api", "function-calling", "reliability"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "DevCorp",
+      "customer_tier": "team",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-07-15T10:30:00+00:00",
-    "updated_at": "2025-07-20T14:00:00+00:00"
+    "created_at": "2024-09-23T00:00:00+00:00",
+    "updated_at": "2024-09-26T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:018",
-    "title": "Shared conversation link exposing private follow-up messages",
-    "body": "Customer reports a privacy concern where a conversation they shared via public link continues to show new messages they add after sharing. They shared a technical tutorial conversation with their blog readers and later continued the conversation with personal questions, not realizing the shared link is a live view rather than a snapshot. The personal messages (including financial information discussed with ChatGPT) are now publicly visible. Customer is requesting immediate removal of the shared link and all cached versions. They are extremely concerned about the privacy implications and considering legal action. This is the known sharing privacy vulnerability. Link immediately revoked and customer's follow-up messages removed from the shared view.",
+    "id": "mock:support_ticket:017",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "API rate limit 429 blocking production",
+    "body": "Developer on Team plan hitting 429 with 50 RPM. Documentation says 60 RPM. Need higher limit or committed tier for production app.",
     "metadata": {
-      "tags": ["privacy", "sharing", "security"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "DevCorp",
+      "customer_tier": "team",
+      "resolution_status": "open"
     },
-    "created_at": "2025-07-28T08:00:00+00:00",
-    "updated_at": "2025-07-29T09:00:00+00:00"
+    "created_at": "2024-10-04T00:00:00+00:00",
+    "updated_at": "2024-10-07T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:019",
-    "title": "Cannot delete memories containing personal health information",
-    "body": "Customer reports that memories stored by ChatGPT include sensitive personal health information they discussed in past conversations. They want this information removed but the memory deletion through the dashboard is not working—the items disappear from the UI but reappear after refreshing the page. Additionally, ChatGPT continues to reference the health information in new conversations even after apparent deletion. The customer is anxious about the privacy of their medical data and is requesting written confirmation that the data has been permanently deleted from all systems. This aligns with the known memory cache invalidation bug. Manual cache purge performed for this user. Privacy team engaged for the data deletion confirmation letter.",
+    "id": "mock:support_ticket:018",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "API rate limit 429 blocking production",
+    "body": "Developer on Team plan hitting 429 with 50 RPM. Documentation says 60 RPM. Need higher limit or committed tier for production app.",
     "metadata": {
-      "tags": ["privacy", "memory", "account"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "DevCorp",
+      "customer_tier": "team",
+      "resolution_status": "resolved"
     },
-    "created_at": "2025-08-05T11:00:00+00:00",
-    "updated_at": "2025-08-08T10:30:00+00:00"
+    "created_at": "2024-10-11T00:00:00+00:00",
+    "updated_at": "2024-10-15T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:020",
-    "title": "Enterprise requesting SOC 2 Type II report for procurement",
-    "body": "Enterprise prospect's procurement team is requesting a SOC 2 Type II report as part of their vendor security assessment. They are evaluating ChatGPT Enterprise for 2,000 seats in a financial services organization. The deal is worth $600K ARR but is blocked until we can provide the certification. They also need: penetration test results from the past 12 months, our data processing agreement, a completed CAIQ (Consensus Assessments Initiative Questionnaire), and evidence of our incident response procedures. Our SOC 2 Type II audit is currently in progress with Deloitte with expected completion in Q4. Provided our SOC 2 Type I report and Bridge Letter as interim documentation. Sales team tracking this as a high-priority pipeline item.",
+    "id": "mock:support_ticket:019",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "API rate limit 429 blocking production",
+    "body": "Developer on Team plan hitting 429 with 50 RPM. Documentation says 60 RPM. Need higher limit or committed tier for production app.",
     "metadata": {
-      "tags": ["enterprise", "compliance", "security"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "DevCorp",
+      "customer_tier": "team",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-08-18T09:00:00+00:00",
-    "updated_at": "2025-08-25T14:00:00+00:00"
+    "created_at": "2024-10-27T00:00:00+00:00",
+    "updated_at": "2024-10-28T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:021",
-    "title": "Code Interpreter losing uploaded files mid-conversation",
-    "body": "Customer reports that files uploaded to Code Interpreter disappear mid-conversation during long analysis sessions. They upload a 30MB CSV file, perform several analysis steps successfully, and then after approximately 20 minutes the file becomes inaccessible with a 'File not found' error. They then have to re-upload and repeat previous steps. This happens consistently and makes multi-step data analysis workflows extremely frustrating. The customer is a data analyst who relies on Code Interpreter daily for their work. Investigation suggests the sandbox session is timing out and losing files. Customer advised to download intermediate results as a workaround while engineering addresses the session persistence issue.",
+    "id": "mock:support_ticket:020",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "API rate limit 429 blocking production",
+    "body": "Developer on Team plan hitting 429 with 50 RPM. Documentation says 60 RPM. Need higher limit or committed tier for production app.",
     "metadata": {
-      "tags": ["code-interpreter", "file-handling", "reliability"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "DevCorp",
+      "customer_tier": "team",
+      "resolution_status": "open"
     },
-    "created_at": "2025-08-28T13:00:00+00:00",
-    "updated_at": "2025-09-02T10:00:00+00:00"
+    "created_at": "2024-11-30T00:00:00+00:00",
+    "updated_at": "2024-12-05T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:022",
-    "title": "Account access request after employee departure — enterprise admin",
-    "body": "Enterprise admin is requesting access to conversations from a departed employee's account for business continuity purposes. The former employee was the sole person managing a complex project using ChatGPT and all project context is in their conversation history. The admin has legal authorization and presents an employment agreement clause granting the company ownership of work product created using company tools. Our current system does not support admin access to individual user conversations for privacy reasons. Legal team consulted—we can provide the data with appropriate documentation (legal hold letter, employment agreement, and company authorization). Building a feature request for enterprise admin delegation access.",
+    "id": "mock:support_ticket:021",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Custom GPT not loading for users",
+    "body": "Published GPT returns error for 30% of visitors. Creator losing revenue. Ticket linked to Bug #4521.",
     "metadata": {
-      "tags": ["enterprise", "account", "legal"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "Creator_yyy",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-09-05T10:00:00+00:00",
-    "updated_at": "2025-09-12T14:30:00+00:00"
+    "created_at": "2024-11-26T00:00:00+00:00",
+    "updated_at": "2024-11-27T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:023",
-    "title": "API billing spike — unexpected $8,000 charge from runaway script",
-    "body": "A startup developer reports an unexpected API bill of $8,000 from a script that entered an infinite retry loop over a weekend. The script was designed to process 1,000 documents but a bug caused it to retry failed requests indefinitely, generating 2 million API calls in 48 hours. The developer had no billing alerts configured and only discovered the issue on Monday morning. They are requesting a billing adjustment, arguing that reasonable rate limiting should have caught the anomaly. Their monthly budget is $200. We have usage anomaly detection but the threshold was not triggered because the requests were spread across multiple API keys. Billing team reviewing for a partial credit.",
+    "id": "mock:support_ticket:022",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Custom GPT not loading for users",
+    "body": "Published GPT returns error for 30% of visitors. Creator losing revenue. Ticket linked to Bug #4521.",
     "metadata": {
-      "tags": ["api", "billing", "developer"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Creator_yyy",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-09-15T08:00:00+00:00",
-    "updated_at": "2025-09-20T11:00:00+00:00"
+    "created_at": "2024-12-16T00:00:00+00:00",
+    "updated_at": "2024-12-20T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:024",
-    "title": "Content policy appeal — educational cybersecurity course material",
-    "body": "A university professor teaching cybersecurity reports that ChatGPT is blocking their attempts to discuss common attack vectors, vulnerability analysis, and penetration testing concepts for their graduate-level course. Prompts asking about SQL injection techniques, buffer overflow explanations, and social engineering tactics are being refused with content policy warnings. The professor argues that these are standard curriculum topics taught at every major university and that blocking this content undermines ChatGPT's usefulness in education. They provide their university faculty ID and course syllabus as context. Requesting a review of the content policy for educational security contexts. Escalated to the safety team for policy refinement.",
+    "id": "mock:support_ticket:023",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Custom GPT not loading for users",
+    "body": "Published GPT returns error for 30% of visitors. Creator losing revenue. Ticket linked to Bug #4521.",
     "metadata": {
-      "tags": ["content-policy", "education", "security"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "Creator_yyy",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-09-28T14:00:00+00:00",
-    "updated_at": "2025-10-05T10:00:00+00:00"
+    "created_at": "2024-12-29T00:00:00+00:00",
+    "updated_at": "2024-12-30T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:025",
-    "title": "Plus subscription not recognized on new device — sync issue",
-    "body": "Customer logged into ChatGPT on a new laptop and their Plus subscription is not recognized. The account shows free tier limitations despite having an active Plus subscription on their phone and old laptop. The subscription is visible in the iOS app settings and the billing page shows the subscription as active. However, the web app on the new device treats them as a free user. Logging out and back in does not resolve the issue. Investigation shows a session token mismatch where the new device received a token that doesn't include the subscription entitlement claim. Forced token refresh resolved the issue. Engineering team notified about the entitlement propagation gap.",
+    "id": "mock:support_ticket:024",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Custom GPT not loading for users",
+    "body": "Published GPT returns error for 30% of visitors. Creator losing revenue. Ticket linked to Bug #4521.",
     "metadata": {
-      "tags": ["account", "subscription", "sync"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "Creator_yyy",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
     },
-    "created_at": "2025-10-08T11:30:00+00:00",
-    "updated_at": "2025-10-10T09:00:00+00:00"
+    "created_at": "2025-01-24T00:00:00+00:00",
+    "updated_at": "2025-01-24T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:026",
-    "title": "Data deletion request — full account and all associated data",
-    "body": "Customer requesting complete deletion of their ChatGPT account and all associated data including conversation history, uploaded files, generated images, stored memories, and any data used for model training. The customer cites concerns about AI data usage and wants no trace of their information remaining in OpenAI's systems. They require written confirmation of deletion completion. Our deletion process removes the account and conversation data within 30 days, but the customer wants clarification on whether their data exists in model training datasets and if so, what remediation is available. Legal team providing the standard data deletion confirmation letter with details on our data handling practices.",
+    "id": "mock:support_ticket:025",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Custom GPT not loading for users",
+    "body": "Published GPT returns error for 30% of visitors. Creator losing revenue. Ticket linked to Bug #4521.",
     "metadata": {
-      "tags": ["privacy", "account", "data-deletion"],
-      "priority": "medium",
-      "url": ""
+      "severity": "high",
+      "customer": "Creator_yyy",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-10-20T10:00:00+00:00",
-    "updated_at": "2025-10-28T14:00:00+00:00"
+    "created_at": "2025-02-11T00:00:00+00:00",
+    "updated_at": "2025-02-14T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:027",
-    "title": "Accessibility complaint — screen reader cannot navigate conversations",
-    "body": "A visually impaired user relying on NVDA screen reader reports that the conversation interface is essentially unusable. Specific issues: new messages are not announced by the screen reader, the conversation list in the sidebar has no ARIA labels, code blocks are read as a single long string without structure, and the compose area's placeholder text is read aloud with every keystroke. The user is a software developer who relies on ChatGPT for coding assistance and cannot effectively use the tool. They reference ADA compliance requirements and express frustration that a technology company of OpenAI's caliber has such poor accessibility. Escalated to the accessibility team. Offered $50 credit as goodwill while remediation is in progress.",
+    "id": "mock:support_ticket:026",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Custom GPT not loading for users",
+    "body": "Published GPT returns error for 30% of visitors. Creator losing revenue. Ticket linked to Bug #4521.",
     "metadata": {
-      "tags": ["accessibility", "account", "compliance"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Creator_yyy",
+      "customer_tier": "plus",
+      "resolution_status": "pending"
     },
-    "created_at": "2025-11-05T09:00:00+00:00",
-    "updated_at": "2025-11-10T11:30:00+00:00"
+    "created_at": "2025-02-16T00:00:00+00:00",
+    "updated_at": "2025-02-17T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:028",
-    "title": "Enterprise contract renewal — requesting updated DPA and security questionnaire",
-    "body": "Enterprise customer approaching their annual renewal (400 seats, $120K ARR) is requesting updated security documentation before committing to renewal. Specifically: updated Data Processing Agreement reflecting GDPR and CCPA requirements, completed SIG Lite security questionnaire, evidence of annual penetration testing, updated privacy policy showing data handling changes in the past year, and the latest SOC 2 report. The renewal deadline is in 3 weeks and the customer's legal team needs 2 weeks for review. Their CISO has also requested a 30-minute call to discuss the enterprise data isolation incident from July. Account management team coordinating with legal and security to prepare the documentation package. Risk: customer may not renew if documentation is delayed.",
+    "id": "mock:support_ticket:027",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Custom GPT not loading for users",
+    "body": "Published GPT returns error for 30% of visitors. Creator losing revenue. Ticket linked to Bug #4521.",
     "metadata": {
-      "tags": ["enterprise", "compliance", "renewal"],
-      "priority": "high",
-      "url": ""
+      "severity": "high",
+      "customer": "Creator_yyy",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
     },
-    "created_at": "2025-11-18T10:00:00+00:00",
-    "updated_at": "2025-11-25T14:00:00+00:00"
+    "created_at": "2025-03-14T00:00:00+00:00",
+    "updated_at": "2025-03-19T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:029",
-    "title": "API customer requesting on-premises deployment option",
-    "body": "A defense contractor inquiring about on-premises or air-gapped deployment options for ChatGPT. Their security requirements mandate that no data leaves their classified network and all processing must occur on hardware they physically control. They are currently using a self-hosted open-source model but want access to GPT-4o quality. The contract opportunity is estimated at $5M over 3 years. Current position: we do not offer on-premises deployment. The customer is open to a dedicated cloud instance in a GovCloud environment as an alternative. Connecting them with our enterprise solutions team to discuss Azure OpenAI Service as a potential path. Feature request logged for dedicated deployment options.",
+    "id": "mock:support_ticket:028",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Billing dispute \u2014 duplicate charges",
+    "body": "User charged twice for annual Plus. Billing system bug. Refund issued. Apology and 1 month credit.",
     "metadata": {
-      "tags": ["enterprise", "security", "deployment"],
-      "priority": "medium",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_zzz",
+      "customer_tier": "plus",
+      "resolution_status": "open"
     },
-    "created_at": "2025-12-02T14:30:00+00:00",
-    "updated_at": "2025-12-10T10:00:00+00:00"
+    "created_at": "2025-03-13T00:00:00+00:00",
+    "updated_at": "2025-03-15T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:support:030",
-    "title": "Billing dispute — charged after cancellation confirmation email",
-    "body": "Customer received a cancellation confirmation email on January 5, 2026, but was charged $20 on January 15. They provide screenshots of the cancellation confirmation email and the charge on their credit card statement. Investigation reveals the cancellation was processed in our system but the Stripe subscription cancellation webhook failed, leaving the Stripe subscription active. The charge was processed by Stripe based on the still-active subscription. Full refund of $20 issued immediately. Engineering team notified about the webhook reliability issue. Customer expressed frustration about having to contact support to resolve what should have been a straightforward cancellation. Process improvement: add a reconciliation check between our cancellation records and Stripe subscription status.",
+    "id": "mock:support_ticket:029",
     "source": "mock",
+    "type": "support_ticket",
+    "title": "Billing dispute \u2014 duplicate charges",
+    "body": "User charged twice for annual Plus. Billing system bug. Refund issued. Apology and 1 month credit.",
     "metadata": {
-      "tags": ["billing", "subscription", "refund"],
-      "priority": "high",
-      "url": ""
+      "severity": "medium",
+      "customer": "User_zzz",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
     },
-    "created_at": "2026-01-16T09:00:00+00:00",
-    "updated_at": "2026-01-18T11:00:00+00:00"
+    "created_at": "2025-03-28T00:00:00+00:00",
+    "updated_at": "2025-03-28T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:030",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Billing dispute \u2014 duplicate charges",
+    "body": "User charged twice for annual Plus. Billing system bug. Refund issued. Apology and 1 month credit.",
+    "metadata": {
+      "severity": "medium",
+      "customer": "User_zzz",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2025-04-18T00:00:00+00:00",
+    "updated_at": "2025-04-23T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:031",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Billing dispute \u2014 duplicate charges",
+    "body": "User charged twice for annual Plus. Billing system bug. Refund issued. Apology and 1 month credit.",
+    "metadata": {
+      "severity": "medium",
+      "customer": "User_zzz",
+      "customer_tier": "plus",
+      "resolution_status": "pending"
+    },
+    "created_at": "2025-05-06T00:00:00+00:00",
+    "updated_at": "2025-05-11T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:032",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Billing dispute \u2014 duplicate charges",
+    "body": "User charged twice for annual Plus. Billing system bug. Refund issued. Apology and 1 month credit.",
+    "metadata": {
+      "severity": "medium",
+      "customer": "User_zzz",
+      "customer_tier": "plus",
+      "resolution_status": "open"
+    },
+    "created_at": "2025-05-15T00:00:00+00:00",
+    "updated_at": "2025-05-19T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:033",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Billing dispute \u2014 duplicate charges",
+    "body": "User charged twice for annual Plus. Billing system bug. Refund issued. Apology and 1 month credit.",
+    "metadata": {
+      "severity": "medium",
+      "customer": "User_zzz",
+      "customer_tier": "plus",
+      "resolution_status": "open"
+    },
+    "created_at": "2025-06-13T00:00:00+00:00",
+    "updated_at": "2025-06-13T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:034",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Billing dispute \u2014 duplicate charges",
+    "body": "User charged twice for annual Plus. Billing system bug. Refund issued. Apology and 1 month credit.",
+    "metadata": {
+      "severity": "medium",
+      "customer": "User_zzz",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2025-06-17T00:00:00+00:00",
+    "updated_at": "2025-06-21T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:035",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Content policy appeal \u2014 false positive",
+    "body": "Academic user's prompt about historical figures blocked. Appeal submitted. Policy team to review. Common theme in tickets.",
+    "metadata": {
+      "severity": "low",
+      "customer": "University",
+      "customer_tier": "team",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2025-06-26T00:00:00+00:00",
+    "updated_at": "2025-06-26T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:036",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Content policy appeal \u2014 false positive",
+    "body": "Academic user's prompt about historical figures blocked. Appeal submitted. Policy team to review. Common theme in tickets.",
+    "metadata": {
+      "severity": "low",
+      "customer": "University",
+      "customer_tier": "team",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2025-07-19T00:00:00+00:00",
+    "updated_at": "2025-07-22T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:037",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Content policy appeal \u2014 false positive",
+    "body": "Academic user's prompt about historical figures blocked. Appeal submitted. Policy team to review. Common theme in tickets.",
+    "metadata": {
+      "severity": "low",
+      "customer": "University",
+      "customer_tier": "team",
+      "resolution_status": "open"
+    },
+    "created_at": "2025-08-03T00:00:00+00:00",
+    "updated_at": "2025-08-07T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:038",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Content policy appeal \u2014 false positive",
+    "body": "Academic user's prompt about historical figures blocked. Appeal submitted. Policy team to review. Common theme in tickets.",
+    "metadata": {
+      "severity": "low",
+      "customer": "University",
+      "customer_tier": "team",
+      "resolution_status": "pending"
+    },
+    "created_at": "2025-08-27T00:00:00+00:00",
+    "updated_at": "2025-08-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:039",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Content policy appeal \u2014 false positive",
+    "body": "Academic user's prompt about historical figures blocked. Appeal submitted. Policy team to review. Common theme in tickets.",
+    "metadata": {
+      "severity": "low",
+      "customer": "University",
+      "customer_tier": "team",
+      "resolution_status": "pending"
+    },
+    "created_at": "2025-09-04T00:00:00+00:00",
+    "updated_at": "2025-09-04T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:040",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Content policy appeal \u2014 false positive",
+    "body": "Academic user's prompt about historical figures blocked. Appeal submitted. Policy team to review. Common theme in tickets.",
+    "metadata": {
+      "severity": "low",
+      "customer": "University",
+      "customer_tier": "team",
+      "resolution_status": "pending"
+    },
+    "created_at": "2025-09-19T00:00:00+00:00",
+    "updated_at": "2025-09-24T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:041",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Content policy appeal \u2014 false positive",
+    "body": "Academic user's prompt about historical figures blocked. Appeal submitted. Policy team to review. Common theme in tickets.",
+    "metadata": {
+      "severity": "low",
+      "customer": "University",
+      "customer_tier": "team",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2025-10-05T00:00:00+00:00",
+    "updated_at": "2025-10-06T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:042",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Mobile app crash on Android",
+    "body": "App crashes on Samsung S24 after latest update. Crash logs submitted. Engineering investigating.",
+    "metadata": {
+      "severity": "high",
+      "customer": "User_aaa",
+      "customer_tier": "plus",
+      "resolution_status": "open"
+    },
+    "created_at": "2025-10-19T00:00:00+00:00",
+    "updated_at": "2025-10-24T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:043",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Mobile app crash on Android",
+    "body": "App crashes on Samsung S24 after latest update. Crash logs submitted. Engineering investigating.",
+    "metadata": {
+      "severity": "high",
+      "customer": "User_aaa",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2025-11-06T00:00:00+00:00",
+    "updated_at": "2025-11-08T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:044",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Mobile app crash on Android",
+    "body": "App crashes on Samsung S24 after latest update. Crash logs submitted. Engineering investigating.",
+    "metadata": {
+      "severity": "high",
+      "customer": "User_aaa",
+      "customer_tier": "plus",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2025-11-24T00:00:00+00:00",
+    "updated_at": "2025-11-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:045",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Mobile app crash on Android",
+    "body": "App crashes on Samsung S24 after latest update. Crash logs submitted. Engineering investigating.",
+    "metadata": {
+      "severity": "high",
+      "customer": "User_aaa",
+      "customer_tier": "plus",
+      "resolution_status": "pending"
+    },
+    "created_at": "2025-12-04T00:00:00+00:00",
+    "updated_at": "2025-12-09T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:046",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Mobile app crash on Android",
+    "body": "App crashes on Samsung S24 after latest update. Crash logs submitted. Engineering investigating.",
+    "metadata": {
+      "severity": "high",
+      "customer": "User_aaa",
+      "customer_tier": "plus",
+      "resolution_status": "pending"
+    },
+    "created_at": "2025-12-23T00:00:00+00:00",
+    "updated_at": "2025-12-25T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:047",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Mobile app crash on Android",
+    "body": "App crashes on Samsung S24 after latest update. Crash logs submitted. Engineering investigating.",
+    "metadata": {
+      "severity": "high",
+      "customer": "User_aaa",
+      "customer_tier": "plus",
+      "resolution_status": "open"
+    },
+    "created_at": "2025-12-27T00:00:00+00:00",
+    "updated_at": "2025-12-29T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:048",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Mobile app crash on Android",
+    "body": "App crashes on Samsung S24 after latest update. Crash logs submitted. Engineering investigating.",
+    "metadata": {
+      "severity": "high",
+      "customer": "User_aaa",
+      "customer_tier": "plus",
+      "resolution_status": "open"
+    },
+    "created_at": "2026-01-18T00:00:00+00:00",
+    "updated_at": "2026-01-21T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:support_ticket:049",
+    "source": "mock",
+    "type": "support_ticket",
+    "title": "Request for audit logs",
+    "body": "Enterprise customer needs 90-day audit log export for compliance. Feature not yet available. Workaround: API audit. On roadmap.",
+    "metadata": {
+      "severity": "medium",
+      "customer": "Finance Corp",
+      "customer_tier": "enterprise",
+      "resolution_status": "resolved"
+    },
+    "created_at": "2026-02-06T00:00:00+00:00",
+    "updated_at": "2026-02-11T00:00:00+00:00",
+    "is_deleted": false
   }
 ]

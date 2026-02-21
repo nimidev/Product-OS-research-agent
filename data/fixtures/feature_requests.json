@@ -1,652 +1,2027 @@
 [
   {
-    "id": "mock:feature:001",
-    "title": "Enterprise SSO with SAML 2.0 and SCIM provisioning",
-    "body": "Large enterprise customers require SAML 2.0-based SSO integration with automatic user provisioning via SCIM. Current manual seat management creates significant friction for IT admins managing 500+ seats. We need to support identity providers including Okta, Azure AD, and OneLogin. Auto-deprovisioning on employee offboarding is critical for security compliance. Several Fortune 500 prospects have flagged this as a deal-breaker in procurement reviews. Estimated impact: unblock $12M ARR in pipeline.",
+    "id": "mock:feature_request:000",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Custom instructions per conversation",
+    "body": "Users want to set different custom instructions for different conversation threads. Currently custom instructions apply globally which limits use cases for power users who discuss both work and personal topics.",
     "metadata": {
-      "tags": ["enterprise", "security", "sso"],
+      "tags": [
+        "customization",
+        "ux"
+      ],
+      "votes": 17,
+      "customer_segment": "consumer",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/0"
     },
-    "created_at": "2025-01-15T09:30:00+00:00",
-    "updated_at": "2025-02-10T14:22:00+00:00"
+    "created_at": "2024-02-24T00:00:00+00:00",
+    "updated_at": "2024-02-27T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:002",
-    "title": "System-wide dark mode with OLED-optimized theme",
-    "body": "Users have been requesting dark mode since launch. The current light-only interface causes eye strain during extended sessions, especially for developers and night-time users. We should implement a proper dark theme that respects system preferences on macOS, Windows, iOS, and Android. Include an OLED-black variant for mobile devices to save battery. Consider offering a scheduling option for automatic switching. This is consistently one of our top-voted feature requests on the community forum with over 15,000 upvotes.",
+    "id": "mock:feature_request:001",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Custom instructions per conversation (variant 1)",
+    "body": "Users want to set different custom instructions for different conversation threads. Currently custom instructions apply globally which limits use cases for power users who discuss both work and personal topics.",
     "metadata": {
-      "tags": ["ux", "accessibility", "design"],
+      "tags": [
+        "customization",
+        "ux"
+      ],
+      "votes": 130,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/1"
+    },
+    "created_at": "2024-04-01T00:00:00+00:00",
+    "updated_at": "2024-04-09T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:002",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom instructions per conversation (variant 2)",
+    "body": "Users want to set different custom instructions for different conversation threads. Currently custom instructions apply globally which limits use cases for power users who discuss both work and personal topics.",
+    "metadata": {
+      "tags": [
+        "customization",
+        "ux"
+      ],
+      "votes": 382,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/2"
+    },
+    "created_at": "2024-03-29T00:00:00+00:00",
+    "updated_at": "2024-04-02T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:003",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom instructions per conversation (variant 3)",
+    "body": "Users want to set different custom instructions for different conversation threads. Currently custom instructions apply globally which limits use cases for power users who discuss both work and personal topics.",
+    "metadata": {
+      "tags": [
+        "customization",
+        "ux"
+      ],
+      "votes": 384,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/3"
+    },
+    "created_at": "2024-04-20T00:00:00+00:00",
+    "updated_at": "2024-05-11T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:004",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom instructions per conversation (variant 4)",
+    "body": "Users want to set different custom instructions for different conversation threads. Currently custom instructions apply globally which limits use cases for power users who discuss both work and personal topics.",
+    "metadata": {
+      "tags": [
+        "customization",
+        "ux"
+      ],
+      "votes": 49,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/4"
+    },
+    "created_at": "2024-07-10T00:00:00+00:00",
+    "updated_at": "2024-07-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:005",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation folders and organization",
+    "body": "Ability to organize conversations into folders or tags. With hundreds of conversations it becomes impossible to find past discussions. This is one of the most upvoted requests on the forum.",
+    "metadata": {
+      "tags": [
+        "organization",
+        "search"
+      ],
+      "votes": 21,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/5"
+    },
+    "created_at": "2024-07-20T00:00:00+00:00",
+    "updated_at": "2024-08-02T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:006",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation folders and organization (variant 1)",
+    "body": "Ability to organize conversations into folders or tags. With hundreds of conversations it becomes impossible to find past discussions. This is one of the most upvoted requests on the forum.",
+    "metadata": {
+      "tags": [
+        "organization",
+        "search"
+      ],
+      "votes": 116,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/6"
+    },
+    "created_at": "2024-07-14T00:00:00+00:00",
+    "updated_at": "2024-07-16T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:007",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation folders and organization (variant 2)",
+    "body": "Ability to organize conversations into folders or tags. With hundreds of conversations it becomes impossible to find past discussions. This is one of the most upvoted requests on the forum.",
+    "metadata": {
+      "tags": [
+        "organization",
+        "search"
+      ],
+      "votes": 313,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/7"
+    },
+    "created_at": "2024-08-26T00:00:00+00:00",
+    "updated_at": "2024-09-11T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:008",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation folders and organization (variant 3)",
+    "body": "Ability to organize conversations into folders or tags. With hundreds of conversations it becomes impossible to find past discussions. This is one of the most upvoted requests on the forum.",
+    "metadata": {
+      "tags": [
+        "organization",
+        "search"
+      ],
+      "votes": 106,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/8"
+    },
+    "created_at": "2024-09-12T00:00:00+00:00",
+    "updated_at": "2024-09-29T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:009",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation folders and organization (variant 4)",
+    "body": "Ability to organize conversations into folders or tags. With hundreds of conversations it becomes impossible to find past discussions. This is one of the most upvoted requests on the forum.",
+    "metadata": {
+      "tags": [
+        "organization",
+        "search"
+      ],
+      "votes": 364,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/9"
+    },
+    "created_at": "2024-11-25T00:00:00+00:00",
+    "updated_at": "2024-12-15T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:010",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Search within my conversations",
+    "body": "Full-text search across all my past conversations. Critical for researchers and professionals who need to retrieve specific answers or code snippets from history.",
+    "metadata": {
+      "tags": [
+        "search",
+        "organization"
+      ],
+      "votes": 117,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/10"
+    },
+    "created_at": "2024-12-14T00:00:00+00:00",
+    "updated_at": "2024-12-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:011",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Search within my conversations (variant 1)",
+    "body": "Full-text search across all my past conversations. Critical for researchers and professionals who need to retrieve specific answers or code snippets from history.",
+    "metadata": {
+      "tags": [
+        "search",
+        "organization"
+      ],
+      "votes": 147,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/11"
+    },
+    "created_at": "2025-01-07T00:00:00+00:00",
+    "updated_at": "2025-01-25T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:012",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Search within my conversations (variant 2)",
+    "body": "Full-text search across all my past conversations. Critical for researchers and professionals who need to retrieve specific answers or code snippets from history.",
+    "metadata": {
+      "tags": [
+        "search",
+        "organization"
+      ],
+      "votes": 8,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/12"
+    },
+    "created_at": "2025-03-01T00:00:00+00:00",
+    "updated_at": "2025-03-28T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:013",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Search within my conversations (variant 3)",
+    "body": "Full-text search across all my past conversations. Critical for researchers and professionals who need to retrieve specific answers or code snippets from history.",
+    "metadata": {
+      "tags": [
+        "search",
+        "organization"
+      ],
+      "votes": 86,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/13"
+    },
+    "created_at": "2025-03-28T00:00:00+00:00",
+    "updated_at": "2025-04-22T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:014",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Search within my conversations (variant 4)",
+    "body": "Full-text search across all my past conversations. Critical for researchers and professionals who need to retrieve specific answers or code snippets from history.",
+    "metadata": {
+      "tags": [
+        "search",
+        "organization"
+      ],
+      "votes": 179,
+      "customer_segment": "consumer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/14"
+    },
+    "created_at": "2025-04-23T00:00:00+00:00",
+    "updated_at": "2025-05-06T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:015",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Export conversations to Markdown/PDF",
+    "body": "Better export options including Markdown with code blocks preserved, and PDF for sharing. Current export is limited and loses formatting.",
+    "metadata": {
+      "tags": [
+        "export",
+        "sharing"
+      ],
+      "votes": 115,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/15"
     },
-    "created_at": "2025-01-18T11:00:00+00:00",
-    "updated_at": "2025-03-05T16:45:00+00:00"
+    "created_at": "2025-04-26T00:00:00+00:00",
+    "updated_at": "2025-04-30T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:003",
-    "title": "Screen reader compatibility and WCAG 2.1 AA compliance",
-    "body": "Our web app currently fails multiple WCAG 2.1 AA criteria. Screen readers like NVDA and VoiceOver cannot properly navigate conversation threads. Focus management is broken when new messages appear. We need proper ARIA labels on all interactive elements, keyboard navigation throughout the app, and adequate color contrast ratios. Government and education customers require accessibility compliance for procurement. This is both a legal obligation and the right thing to do for our users with disabilities.",
+    "id": "mock:feature_request:016",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Export conversations to Markdown/PDF (variant 1)",
+    "body": "Better export options including Markdown with code blocks preserved, and PDF for sharing. Current export is limited and loses formatting.",
     "metadata": {
-      "tags": ["ux", "accessibility"],
-      "priority": "high",
-      "url": ""
-    },
-    "created_at": "2025-01-22T08:15:00+00:00",
-    "updated_at": "2025-04-01T10:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:004",
-    "title": "Server-Sent Events streaming for API completions",
-    "body": "The current API polling approach introduces unnecessary latency for developers building real-time applications. We need proper SSE-based streaming that sends tokens as they are generated. Include support for function call streaming, structured output streaming with partial JSON validation, and proper error handling mid-stream. Developers should be able to cancel in-flight requests cleanly. This would bring us to parity with competing APIs and significantly improve perceived latency for end users of applications built on our platform.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["api", "developer", "performance"],
-      "priority": "high",
-      "url": ""
-    },
-    "created_at": "2025-02-03T14:00:00+00:00",
-    "updated_at": "2025-03-18T09:12:00+00:00"
-  },
-  {
-    "id": "mock:feature:005",
-    "title": "Enhanced custom instructions with per-conversation overrides",
-    "body": "Users love custom instructions but need more granularity. Allow per-conversation instruction overrides so a developer can have coding-specific instructions for programming chats while maintaining general preferences elsewhere. Support instruction templates that can be saved and quickly swapped. Add character count indicators and validation. Enterprise admins should be able to set organization-wide base instructions that individual users can extend but not override on sensitive topics like data handling policies.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["personalization", "enterprise", "ux"],
+      "tags": [
+        "export",
+        "sharing"
+      ],
+      "votes": 57,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/16"
     },
-    "created_at": "2025-02-10T10:30:00+00:00",
-    "updated_at": "2025-04-15T11:00:00+00:00"
+    "created_at": "2025-06-26T00:00:00+00:00",
+    "updated_at": "2025-07-06T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:006",
-    "title": "Persistent memory with user-controlled knowledge base",
-    "body": "Memory currently feels unreliable—users report that ChatGPT forgets previously stated preferences and context. We need a transparent memory system where users can view, edit, and delete stored memories. Add explicit 'remember this' and 'forget this' commands. Provide a memory dashboard showing all stored facts with timestamps. Enterprise users need data residency controls for stored memories. Memory should be scoped per workspace for team accounts to prevent cross-project information leakage.",
+    "id": "mock:feature_request:017",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Export conversations to Markdown/PDF (variant 2)",
+    "body": "Better export options including Markdown with code blocks preserved, and PDF for sharing. Current export is limited and loses formatting.",
     "metadata": {
-      "tags": ["memory", "personalization", "enterprise"],
-      "priority": "high",
-      "url": ""
-    },
-    "created_at": "2025-02-14T16:00:00+00:00",
-    "updated_at": "2025-05-20T08:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:007",
-    "title": "iOS widget for quick prompts and conversation continuation",
-    "body": "Mobile users want faster access to ChatGPT without opening the full app. Create iOS home screen and lock screen widgets that allow sending quick prompts and viewing recent conversation snippets. Support a small widget for one-tap predefined prompts, medium for recent conversations, and large for a mini chat interface. Integrate with iOS Shortcuts for automation workflows. This would significantly increase daily active usage and session frequency on mobile platforms.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["mobile", "ios", "engagement"],
+      "tags": [
+        "export",
+        "sharing"
+      ],
+      "votes": 54,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/17"
     },
-    "created_at": "2025-02-20T13:45:00+00:00",
-    "updated_at": "2025-03-28T15:00:00+00:00"
+    "created_at": "2025-06-13T00:00:00+00:00",
+    "updated_at": "2025-06-25T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:008",
-    "title": "Drag-and-drop multi-file upload with folder support",
-    "body": "Current file upload is limited to single files and lacks folder support. Developers and analysts need to upload entire project directories or multiple related documents at once. Implement drag-and-drop for multiple files, support folder upload that preserves directory structure, show upload progress for large files, and allow files to persist across conversation turns. Support common archive formats like ZIP and TAR for batch uploads. Add a file manager sidebar showing all uploaded files in the current conversation.",
+    "id": "mock:feature_request:018",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Export conversations to Markdown/PDF (variant 3)",
+    "body": "Better export options including Markdown with code blocks preserved, and PDF for sharing. Current export is limited and loses formatting.",
     "metadata": {
-      "tags": ["file-handling", "ux", "developer"],
+      "tags": [
+        "export",
+        "sharing"
+      ],
+      "votes": 181,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/18"
     },
-    "created_at": "2025-03-01T09:00:00+00:00",
-    "updated_at": "2025-04-12T11:30:00+00:00"
+    "created_at": "2025-07-30T00:00:00+00:00",
+    "updated_at": "2025-08-26T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:009",
-    "title": "Advanced Voice Mode with interruption handling and emotion detection",
-    "body": "Voice mode needs significant improvements to feel natural. Users should be able to interrupt mid-response without awkward pauses. Add support for detecting speaker emotion and adjusting tone accordingly. Implement ambient noise filtering for use in public spaces. Support multiple languages in a single conversation with automatic language detection and switching. Add voice customization options beyond the current preset voices. Latency must drop below 300ms for the experience to feel conversational rather than turn-based.",
+    "id": "mock:feature_request:019",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Export conversations to Markdown/PDF (variant 4)",
+    "body": "Better export options including Markdown with code blocks preserved, and PDF for sharing. Current export is limited and loses formatting.",
     "metadata": {
-      "tags": ["voice", "multimodal", "ux"],
-      "priority": "high",
-      "url": ""
-    },
-    "created_at": "2025-03-08T11:20:00+00:00",
-    "updated_at": "2025-06-01T14:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:010",
-    "title": "Plugin marketplace with revenue sharing for developers",
-    "body": "The custom GPTs ecosystem needs a proper marketplace with discovery, ratings, reviews, and monetization. Developers should be able to charge for premium GPTs with OpenAI handling payments and taking a platform fee. Add analytics dashboards showing usage metrics, user retention, and revenue. Implement a review process for quality and safety. Support plugin versioning and automatic updates. This creates a flywheel where developer investment improves the platform, attracting more users and more developers.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["plugins", "platform", "monetization"],
+      "tags": [
+        "export",
+        "sharing"
+      ],
+      "votes": 418,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/19"
     },
-    "created_at": "2025-03-15T10:00:00+00:00",
-    "updated_at": "2025-05-10T09:45:00+00:00"
+    "created_at": "2025-09-14T00:00:00+00:00",
+    "updated_at": "2025-09-22T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:011",
-    "title": "Right-to-left language support and improved multilingual handling",
-    "body": "ChatGPT's interface doesn't properly handle RTL languages like Arabic, Hebrew, and Farsi. Text alignment, cursor behavior, and mixed-direction content are broken. Beyond layout fixes, we need better multilingual support: auto-detect input language and adjust UI direction, support mixed LTR/RTL in the same conversation, and improve the quality of responses in non-English languages. Our user base is increasingly global and RTL markets represent significant growth opportunities in the Middle East and North Africa.",
+    "id": "mock:feature_request:020",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Longer context window handling",
+    "body": "Clear indication when context is being truncated and ability to summarize older parts to retain key facts. Users lose context in long debugging sessions.",
     "metadata": {
-      "tags": ["multilingual", "i18n", "accessibility"],
+      "tags": [
+        "context",
+        "memory"
+      ],
+      "votes": 240,
+      "customer_segment": "developer",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/20"
     },
-    "created_at": "2025-03-22T08:00:00+00:00",
-    "updated_at": "2025-05-30T12:00:00+00:00"
+    "created_at": "2025-09-08T00:00:00+00:00",
+    "updated_at": "2025-10-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:012",
-    "title": "Real-time collaborative conversations with shared workspaces",
-    "body": "Teams need the ability to collaborate on conversations in real time, similar to Google Docs. Multiple team members should be able to participate in a single conversation thread, see each other's contributions, and build on shared context. Add @mentions to notify specific team members, threaded replies for side discussions, and role-based permissions for conversation management. This is essential for enterprise adoption where cross-functional teams work together on complex problems using ChatGPT as a shared thinking tool.",
+    "id": "mock:feature_request:021",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Longer context window handling (variant 1)",
+    "body": "Clear indication when context is being truncated and ability to summarize older parts to retain key facts. Users lose context in long debugging sessions.",
     "metadata": {
-      "tags": ["collaboration", "enterprise", "team"],
+      "tags": [
+        "context",
+        "memory"
+      ],
+      "votes": 477,
+      "customer_segment": "developer",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/21"
     },
-    "created_at": "2025-03-28T15:30:00+00:00",
-    "updated_at": "2025-06-15T10:00:00+00:00"
+    "created_at": "2025-11-09T00:00:00+00:00",
+    "updated_at": "2025-11-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:013",
-    "title": "Enterprise data loss prevention and content filtering",
-    "body": "Enterprise security teams need DLP controls to prevent sensitive data from being sent to ChatGPT. Implement configurable content filters that can detect and block PII, credit card numbers, API keys, and custom regex patterns before messages leave the client. Provide audit logs of all blocked content attempts. Integration with existing DLP solutions like Microsoft Purview and Symantec should be supported. Admin dashboards should show DLP event analytics. This is a top-3 blocker for enterprise deals in regulated industries.",
+    "id": "mock:feature_request:022",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Longer context window handling (variant 2)",
+    "body": "Clear indication when context is being truncated and ability to summarize older parts to retain key facts. Users lose context in long debugging sessions.",
     "metadata": {
-      "tags": ["enterprise", "security", "compliance"],
+      "tags": [
+        "context",
+        "memory"
+      ],
+      "votes": 287,
+      "customer_segment": "developer",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/22"
     },
-    "created_at": "2025-04-02T09:15:00+00:00",
-    "updated_at": "2025-06-20T11:45:00+00:00"
+    "created_at": "2025-11-29T00:00:00+00:00",
+    "updated_at": "2025-12-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:014",
-    "title": "Conversation branching and version history",
-    "body": "Users frequently want to explore alternative approaches in a conversation without losing their current thread. Implement conversation branching that lets users fork at any message to explore a different direction. Show a visual tree of branches with the ability to compare outcomes side by side. Add version history for edited messages so users can see how rephrasing a prompt changes the response. This is especially valuable for creative writing, coding, and brainstorming workflows where iteration is key.",
+    "id": "mock:feature_request:023",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Longer context window handling (variant 3)",
+    "body": "Clear indication when context is being truncated and ability to summarize older parts to retain key facts. Users lose context in long debugging sessions.",
     "metadata": {
-      "tags": ["ux", "productivity", "conversation"],
+      "tags": [
+        "context",
+        "memory"
+      ],
+      "votes": 326,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/23"
+    },
+    "created_at": "2025-12-23T00:00:00+00:00",
+    "updated_at": "2026-01-18T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:024",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Longer context window handling (variant 4)",
+    "body": "Clear indication when context is being truncated and ability to summarize older parts to retain key facts. Users lose context in long debugging sessions.",
+    "metadata": {
+      "tags": [
+        "context",
+        "memory"
+      ],
+      "votes": 446,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/24"
+    },
+    "created_at": "2026-02-12T00:00:00+00:00",
+    "updated_at": "2026-03-12T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:025",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better code execution and debugging",
+    "body": "Improve code interpreter: support for pip install, longer runtimes, better error messages, ability to re-run only failed cells. Heavily requested by dev users.",
+    "metadata": {
+      "tags": [
+        "code",
+        "developer"
+      ],
+      "votes": 103,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/25"
+    },
+    "created_at": "2026-02-26T00:00:00+00:00",
+    "updated_at": "2026-03-16T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:026",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better code execution and debugging (variant 1)",
+    "body": "Improve code interpreter: support for pip install, longer runtimes, better error messages, ability to re-run only failed cells. Heavily requested by dev users.",
+    "metadata": {
+      "tags": [
+        "code",
+        "developer"
+      ],
+      "votes": 28,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/26"
+    },
+    "created_at": "2026-04-19T00:00:00+00:00",
+    "updated_at": "2026-04-21T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:027",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better code execution and debugging (variant 2)",
+    "body": "Improve code interpreter: support for pip install, longer runtimes, better error messages, ability to re-run only failed cells. Heavily requested by dev users.",
+    "metadata": {
+      "tags": [
+        "code",
+        "developer"
+      ],
+      "votes": 400,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/27"
+    },
+    "created_at": "2026-05-16T00:00:00+00:00",
+    "updated_at": "2026-05-23T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:028",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better code execution and debugging (variant 3)",
+    "body": "Improve code interpreter: support for pip install, longer runtimes, better error messages, ability to re-run only failed cells. Heavily requested by dev users.",
+    "metadata": {
+      "tags": [
+        "code",
+        "developer"
+      ],
+      "votes": 442,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/28"
+    },
+    "created_at": "2026-05-22T00:00:00+00:00",
+    "updated_at": "2026-05-24T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:029",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better code execution and debugging (variant 4)",
+    "body": "Improve code interpreter: support for pip install, longer runtimes, better error messages, ability to re-run only failed cells. Heavily requested by dev users.",
+    "metadata": {
+      "tags": [
+        "code",
+        "developer"
+      ],
+      "votes": 56,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/29"
+    },
+    "created_at": "2026-06-17T00:00:00+00:00",
+    "updated_at": "2026-07-14T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:030",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Enterprise data privacy and residency",
+    "body": "Enterprise customers need guarantees that data stays in their region and is not used for model training. SOC2 and GDPR compliance documentation. Many enterprises are blocking ChatGPT until this is clear.",
+    "metadata": {
+      "tags": [
+        "enterprise",
+        "privacy",
+        "compliance"
+      ],
+      "votes": 237,
+      "customer_segment": "enterprise",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/30"
+    },
+    "created_at": "2026-07-27T00:00:00+00:00",
+    "updated_at": "2026-08-04T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:031",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Enterprise data privacy and residency (variant 1)",
+    "body": "Enterprise customers need guarantees that data stays in their region and is not used for model training. SOC2 and GDPR compliance documentation. Many enterprises are blocking ChatGPT until this is clear.",
+    "metadata": {
+      "tags": [
+        "enterprise",
+        "privacy",
+        "compliance"
+      ],
+      "votes": 191,
+      "customer_segment": "enterprise",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/31"
+    },
+    "created_at": "2026-09-11T00:00:00+00:00",
+    "updated_at": "2026-10-07T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:032",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Enterprise data privacy and residency (variant 2)",
+    "body": "Enterprise customers need guarantees that data stays in their region and is not used for model training. SOC2 and GDPR compliance documentation. Many enterprises are blocking ChatGPT until this is clear.",
+    "metadata": {
+      "tags": [
+        "enterprise",
+        "privacy",
+        "compliance"
+      ],
+      "votes": 186,
+      "customer_segment": "enterprise",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/32"
+    },
+    "created_at": "2026-09-11T00:00:00+00:00",
+    "updated_at": "2026-09-22T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:033",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Enterprise data privacy and residency (variant 3)",
+    "body": "Enterprise customers need guarantees that data stays in their region and is not used for model training. SOC2 and GDPR compliance documentation. Many enterprises are blocking ChatGPT until this is clear.",
+    "metadata": {
+      "tags": [
+        "enterprise",
+        "privacy",
+        "compliance"
+      ],
+      "votes": 141,
+      "customer_segment": "enterprise",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/33"
+    },
+    "created_at": "2026-10-14T00:00:00+00:00",
+    "updated_at": "2026-11-04T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:034",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Enterprise data privacy and residency (variant 4)",
+    "body": "Enterprise customers need guarantees that data stays in their region and is not used for model training. SOC2 and GDPR compliance documentation. Many enterprises are blocking ChatGPT until this is clear.",
+    "metadata": {
+      "tags": [
+        "enterprise",
+        "privacy",
+        "compliance"
+      ],
+      "votes": 354,
+      "customer_segment": "enterprise",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/34"
+    },
+    "created_at": "2026-12-14T00:00:00+00:00",
+    "updated_at": "2027-01-12T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:035",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Team workspaces and shared conversations",
+    "body": "Teams want a shared workspace where they can collaborate on conversations, share custom GPTs internally, and have centralized billing. Competitors already offer this.",
+    "metadata": {
+      "tags": [
+        "team",
+        "collaboration",
+        "enterprise"
+      ],
+      "votes": 316,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/35"
+    },
+    "created_at": "2027-01-10T00:00:00+00:00",
+    "updated_at": "2027-01-12T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:036",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Team workspaces and shared conversations (variant 1)",
+    "body": "Teams want a shared workspace where they can collaborate on conversations, share custom GPTs internally, and have centralized billing. Competitors already offer this.",
+    "metadata": {
+      "tags": [
+        "team",
+        "collaboration",
+        "enterprise"
+      ],
+      "votes": 278,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/36"
+    },
+    "created_at": "2027-02-08T00:00:00+00:00",
+    "updated_at": "2027-02-13T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:037",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Team workspaces and shared conversations (variant 2)",
+    "body": "Teams want a shared workspace where they can collaborate on conversations, share custom GPTs internally, and have centralized billing. Competitors already offer this.",
+    "metadata": {
+      "tags": [
+        "team",
+        "collaboration",
+        "enterprise"
+      ],
+      "votes": 88,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/37"
+    },
+    "created_at": "2027-03-16T00:00:00+00:00",
+    "updated_at": "2027-03-23T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:038",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Team workspaces and shared conversations (variant 3)",
+    "body": "Teams want a shared workspace where they can collaborate on conversations, share custom GPTs internally, and have centralized billing. Competitors already offer this.",
+    "metadata": {
+      "tags": [
+        "team",
+        "collaboration",
+        "enterprise"
+      ],
+      "votes": 143,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/38"
+    },
+    "created_at": "2027-03-29T00:00:00+00:00",
+    "updated_at": "2027-04-10T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:039",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Team workspaces and shared conversations (variant 4)",
+    "body": "Teams want a shared workspace where they can collaborate on conversations, share custom GPTs internally, and have centralized billing. Competitors already offer this.",
+    "metadata": {
+      "tags": [
+        "team",
+        "collaboration",
+        "enterprise"
+      ],
+      "votes": 357,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/39"
+    },
+    "created_at": "2027-05-28T00:00:00+00:00",
+    "updated_at": "2027-06-17T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:040",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Memory that actually persists",
+    "body": "ChatGPT Memory frequently forgets or contradicts what was stored. Users need reliable memory with ability to view and edit stored facts. Major pain point in feedback.",
+    "metadata": {
+      "tags": [
+        "memory",
+        "reliability"
+      ],
+      "votes": 355,
+      "customer_segment": "consumer",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/40"
+    },
+    "created_at": "2027-06-03T00:00:00+00:00",
+    "updated_at": "2027-06-10T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:041",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Memory that actually persists (variant 1)",
+    "body": "ChatGPT Memory frequently forgets or contradicts what was stored. Users need reliable memory with ability to view and edit stored facts. Major pain point in feedback.",
+    "metadata": {
+      "tags": [
+        "memory",
+        "reliability"
+      ],
+      "votes": 398,
+      "customer_segment": "consumer",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/41"
+    },
+    "created_at": "2027-06-18T00:00:00+00:00",
+    "updated_at": "2027-07-14T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:042",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Memory that actually persists (variant 2)",
+    "body": "ChatGPT Memory frequently forgets or contradicts what was stored. Users need reliable memory with ability to view and edit stored facts. Major pain point in feedback.",
+    "metadata": {
+      "tags": [
+        "memory",
+        "reliability"
+      ],
+      "votes": 122,
+      "customer_segment": "consumer",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/42"
+    },
+    "created_at": "2027-08-16T00:00:00+00:00",
+    "updated_at": "2027-08-17T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:043",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Memory that actually persists (variant 3)",
+    "body": "ChatGPT Memory frequently forgets or contradicts what was stored. Users need reliable memory with ability to view and edit stored facts. Major pain point in feedback.",
+    "metadata": {
+      "tags": [
+        "memory",
+        "reliability"
+      ],
+      "votes": 417,
+      "customer_segment": "consumer",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/43"
+    },
+    "created_at": "2027-09-18T00:00:00+00:00",
+    "updated_at": "2027-09-19T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:044",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Memory that actually persists (variant 4)",
+    "body": "ChatGPT Memory frequently forgets or contradicts what was stored. Users need reliable memory with ability to view and edit stored facts. Major pain point in feedback.",
+    "metadata": {
+      "tags": [
+        "memory",
+        "reliability"
+      ],
+      "votes": 142,
+      "customer_segment": "consumer",
+      "priority": "critical",
+      "url": "https://community.openai.com/t/44"
+    },
+    "created_at": "2027-09-16T00:00:00+00:00",
+    "updated_at": "2027-09-28T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:045",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Voice mode improvements",
+    "body": "Lower latency, better interruption handling, support for multiple languages in same session. Voice is a differentiator but still has quality issues.",
+    "metadata": {
+      "tags": [
+        "voice",
+        "multimodal"
+      ],
+      "votes": 472,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/45"
     },
-    "created_at": "2025-04-08T14:00:00+00:00",
-    "updated_at": "2025-05-25T16:30:00+00:00"
+    "created_at": "2027-09-30T00:00:00+00:00",
+    "updated_at": "2027-10-06T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:015",
-    "title": "API batch processing endpoint for high-volume workloads",
-    "body": "Enterprise API customers processing millions of requests need a dedicated batch endpoint. Allow submitting up to 50,000 requests in a single batch with callback webhooks for completion notification. Provide batch-level rate limits separate from real-time limits. Support priority queuing where customers can pay more for faster batch processing. Include detailed batch analytics showing processing time distribution, token usage, and error rates. This would unlock significant revenue from data processing and analytics use cases.",
+    "id": "mock:feature_request:046",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Voice mode improvements (variant 1)",
+    "body": "Lower latency, better interruption handling, support for multiple languages in same session. Voice is a differentiator but still has quality issues.",
     "metadata": {
-      "tags": ["api", "enterprise", "developer"],
-      "priority": "high",
-      "url": ""
-    },
-    "created_at": "2025-04-12T10:30:00+00:00",
-    "updated_at": "2025-07-01T08:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:016",
-    "title": "Android tablet optimized layout",
-    "body": "The Android app on tablets uses a phone layout stretched to a larger screen, wasting significant screen real estate. Design a proper tablet layout with a persistent sidebar for conversation history, split-view for comparing conversations, and optimized touch targets for the larger display. Support Samsung DeX desktop mode and Chromebook compatibility. The tablet market is growing and competitors like Claude already offer better tablet experiences. Include landscape orientation improvements and keyboard shortcut support for physical keyboards.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["mobile", "android", "ux"],
+      "tags": [
+        "voice",
+        "multimodal"
+      ],
+      "votes": 453,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/46"
     },
-    "created_at": "2025-04-18T11:00:00+00:00",
-    "updated_at": "2025-06-05T13:20:00+00:00"
+    "created_at": "2027-12-25T00:00:00+00:00",
+    "updated_at": "2028-01-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:017",
-    "title": "Code execution sandbox with persistent environments",
-    "body": "Code Interpreter resets between sessions, forcing users to re-upload files and reinstall packages. Implement persistent execution environments that maintain state across conversations. Let users choose their runtime (Python, Node.js, R) and pre-install custom packages. Add support for GPU-accelerated computation for ML workloads. Show resource usage metrics (CPU, memory, disk). Enterprise customers need private sandboxes with network isolation. This transforms ChatGPT from a conversation tool into a development environment.",
+    "id": "mock:feature_request:047",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Voice mode improvements (variant 2)",
+    "body": "Lower latency, better interruption handling, support for multiple languages in same session. Voice is a differentiator but still has quality issues.",
     "metadata": {
-      "tags": ["developer", "code-interpreter", "enterprise"],
-      "priority": "high",
-      "url": ""
-    },
-    "created_at": "2025-04-25T09:00:00+00:00",
-    "updated_at": "2025-07-10T15:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:018",
-    "title": "Scheduled and recurring prompts with automation",
-    "body": "Power users want ChatGPT to run prompts on a schedule—daily news summaries, weekly report generation, periodic data analysis. Implement a scheduler that can trigger saved prompts at specified intervals, process the results, and deliver them via email, Slack, or webhook. Support templates with dynamic variables like date ranges. This creates ongoing engagement and moves ChatGPT from a reactive tool to a proactive assistant. Include a simple visual workflow builder for chaining multiple prompts together.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["automation", "productivity", "enterprise"],
+      "tags": [
+        "voice",
+        "multimodal"
+      ],
+      "votes": 113,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/47"
     },
-    "created_at": "2025-05-02T13:30:00+00:00",
-    "updated_at": "2025-07-15T10:00:00+00:00"
+    "created_at": "2028-01-09T00:00:00+00:00",
+    "updated_at": "2028-01-19T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:019",
-    "title": "Enhanced image generation with style presets and consistency controls",
-    "body": "DALL-E integration needs better controls for professional creative work. Add style presets for common use cases like product photography, UI mockups, illustrations, and social media graphics. Implement character consistency across multiple generations so users can create a character once and use it in different scenes. Support image inpainting and outpainting directly in the chat interface. Add aspect ratio presets for standard formats. Creative professionals need these controls to use ChatGPT as a serious design tool rather than a novelty.",
+    "id": "mock:feature_request:048",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Voice mode improvements (variant 3)",
+    "body": "Lower latency, better interruption handling, support for multiple languages in same session. Voice is a differentiator but still has quality issues.",
     "metadata": {
-      "tags": ["image-generation", "creative", "multimodal"],
+      "tags": [
+        "voice",
+        "multimodal"
+      ],
+      "votes": 207,
+      "customer_segment": "consumer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/48"
     },
-    "created_at": "2025-05-10T10:00:00+00:00",
-    "updated_at": "2025-08-01T09:30:00+00:00"
+    "created_at": "2028-02-04T00:00:00+00:00",
+    "updated_at": "2028-02-19T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:020",
-    "title": "Enterprise admin console with usage analytics and policy management",
-    "body": "Enterprise admins need a centralized console to manage their organization's ChatGPT usage. Include user management with role-based access controls, usage analytics with per-user and per-team token consumption, cost allocation by department, and policy management for content restrictions. Support custom model deployment options and data residency configurations. Provide exportable compliance reports and integration with SIEM tools for security monitoring. This is table stakes for enterprise SaaS and multiple RFPs have specifically called this out.",
+    "id": "mock:feature_request:049",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Voice mode improvements (variant 4)",
+    "body": "Lower latency, better interruption handling, support for multiple languages in same session. Voice is a differentiator but still has quality issues.",
     "metadata": {
-      "tags": ["enterprise", "admin", "analytics"],
+      "tags": [
+        "voice",
+        "multimodal"
+      ],
+      "votes": 334,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/49"
+    },
+    "created_at": "2028-03-20T00:00:00+00:00",
+    "updated_at": "2028-04-18T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:050",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom GPT discoverability",
+    "body": "GPT Store is hard to discover and search. Creators want categories, trending, and better search. Revenue share concerns for top creators.",
+    "metadata": {
+      "tags": [
+        "custom-gpt",
+        "store"
+      ],
+      "votes": 140,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/50"
+    },
+    "created_at": "2028-03-23T00:00:00+00:00",
+    "updated_at": "2028-03-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:051",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom GPT discoverability (variant 1)",
+    "body": "GPT Store is hard to discover and search. Creators want categories, trending, and better search. Revenue share concerns for top creators.",
+    "metadata": {
+      "tags": [
+        "custom-gpt",
+        "store"
+      ],
+      "votes": 386,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/51"
+    },
+    "created_at": "2028-04-01T00:00:00+00:00",
+    "updated_at": "2028-04-08T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:052",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom GPT discoverability (variant 2)",
+    "body": "GPT Store is hard to discover and search. Creators want categories, trending, and better search. Revenue share concerns for top creators.",
+    "metadata": {
+      "tags": [
+        "custom-gpt",
+        "store"
+      ],
+      "votes": 139,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/52"
+    },
+    "created_at": "2028-05-28T00:00:00+00:00",
+    "updated_at": "2028-06-14T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:053",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom GPT discoverability (variant 3)",
+    "body": "GPT Store is hard to discover and search. Creators want categories, trending, and better search. Revenue share concerns for top creators.",
+    "metadata": {
+      "tags": [
+        "custom-gpt",
+        "store"
+      ],
+      "votes": 224,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/53"
+    },
+    "created_at": "2028-07-09T00:00:00+00:00",
+    "updated_at": "2028-07-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:054",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Custom GPT discoverability (variant 4)",
+    "body": "GPT Store is hard to discover and search. Creators want categories, trending, and better search. Revenue share concerns for top creators.",
+    "metadata": {
+      "tags": [
+        "custom-gpt",
+        "store"
+      ],
+      "votes": 209,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/54"
+    },
+    "created_at": "2028-08-18T00:00:00+00:00",
+    "updated_at": "2028-09-05T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:055",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "API rate limits and pricing",
+    "body": "Developers need higher rate limits for production use and more predictable pricing. Pay-per-token with committed tiers would help. Current limits block serious applications.",
+    "metadata": {
+      "tags": [
+        "api",
+        "developer",
+        "pricing"
+      ],
+      "votes": 75,
+      "customer_segment": "developer",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/55"
     },
-    "created_at": "2025-05-15T14:00:00+00:00",
-    "updated_at": "2025-08-10T11:15:00+00:00"
+    "created_at": "2028-08-14T00:00:00+00:00",
+    "updated_at": "2028-08-21T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:021",
-    "title": "Conversation export to multiple formats",
-    "body": "Users need to export conversations beyond simple text copy. Support export to PDF with proper formatting, Markdown for documentation workflows, HTML for web publishing, and structured JSON for developer integrations. Include options to export with or without code blocks, images, and file attachments. Enterprise users need bulk export capabilities for compliance and archival purposes. Add integration with cloud storage services like Google Drive, Dropbox, and OneDrive for direct save functionality.",
+    "id": "mock:feature_request:056",
     "source": "mock",
+    "type": "feature_request",
+    "title": "API rate limits and pricing (variant 1)",
+    "body": "Developers need higher rate limits for production use and more predictable pricing. Pay-per-token with committed tiers would help. Current limits block serious applications.",
     "metadata": {
-      "tags": ["ux", "productivity", "enterprise"],
+      "tags": [
+        "api",
+        "developer",
+        "pricing"
+      ],
+      "votes": 51,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/56"
+    },
+    "created_at": "2028-09-22T00:00:00+00:00",
+    "updated_at": "2028-10-07T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:057",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "API rate limits and pricing (variant 2)",
+    "body": "Developers need higher rate limits for production use and more predictable pricing. Pay-per-token with committed tiers would help. Current limits block serious applications.",
+    "metadata": {
+      "tags": [
+        "api",
+        "developer",
+        "pricing"
+      ],
+      "votes": 445,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/57"
+    },
+    "created_at": "2028-11-07T00:00:00+00:00",
+    "updated_at": "2028-11-08T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:058",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "API rate limits and pricing (variant 3)",
+    "body": "Developers need higher rate limits for production use and more predictable pricing. Pay-per-token with committed tiers would help. Current limits block serious applications.",
+    "metadata": {
+      "tags": [
+        "api",
+        "developer",
+        "pricing"
+      ],
+      "votes": 326,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/58"
+    },
+    "created_at": "2028-10-27T00:00:00+00:00",
+    "updated_at": "2028-10-31T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:059",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "API rate limits and pricing (variant 4)",
+    "body": "Developers need higher rate limits for production use and more predictable pricing. Pay-per-token with committed tiers would help. Current limits block serious applications.",
+    "metadata": {
+      "tags": [
+        "api",
+        "developer",
+        "pricing"
+      ],
+      "votes": 353,
+      "customer_segment": "developer",
+      "priority": "high",
+      "url": "https://community.openai.com/t/59"
+    },
+    "created_at": "2028-11-29T00:00:00+00:00",
+    "updated_at": "2028-12-24T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:060",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation branching",
+    "body": "Ability to branch from any message and try alternative responses. Essential for exploring different solutions without losing the main thread. Notion AI has this.",
+    "metadata": {
+      "tags": [
+        "conversation",
+        "ux"
+      ],
+      "votes": 37,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/60"
+    },
+    "created_at": "2029-01-15T00:00:00+00:00",
+    "updated_at": "2029-02-03T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:061",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation branching (variant 1)",
+    "body": "Ability to branch from any message and try alternative responses. Essential for exploring different solutions without losing the main thread. Notion AI has this.",
+    "metadata": {
+      "tags": [
+        "conversation",
+        "ux"
+      ],
+      "votes": 310,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/61"
+    },
+    "created_at": "2029-02-11T00:00:00+00:00",
+    "updated_at": "2029-02-23T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:062",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation branching (variant 2)",
+    "body": "Ability to branch from any message and try alternative responses. Essential for exploring different solutions without losing the main thread. Notion AI has this.",
+    "metadata": {
+      "tags": [
+        "conversation",
+        "ux"
+      ],
+      "votes": 133,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/62"
+    },
+    "created_at": "2029-03-18T00:00:00+00:00",
+    "updated_at": "2029-04-03T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:063",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation branching (variant 3)",
+    "body": "Ability to branch from any message and try alternative responses. Essential for exploring different solutions without losing the main thread. Notion AI has this.",
+    "metadata": {
+      "tags": [
+        "conversation",
+        "ux"
+      ],
+      "votes": 487,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/63"
+    },
+    "created_at": "2029-04-23T00:00:00+00:00",
+    "updated_at": "2029-05-20T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:064",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Conversation branching (variant 4)",
+    "body": "Ability to branch from any message and try alternative responses. Essential for exploring different solutions without losing the main thread. Notion AI has this.",
+    "metadata": {
+      "tags": [
+        "conversation",
+        "ux"
+      ],
+      "votes": 374,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/64"
+    },
+    "created_at": "2029-04-18T00:00:00+00:00",
+    "updated_at": "2029-05-09T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:065",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Mobile app parity",
+    "body": "Mobile app lacks features from web: code interpreter, file uploads in some flows, plugins. Offline draft support requested.",
+    "metadata": {
+      "tags": [
+        "mobile",
+        "parity"
+      ],
+      "votes": 458,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/65"
+    },
+    "created_at": "2029-05-25T00:00:00+00:00",
+    "updated_at": "2029-06-15T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:066",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Mobile app parity (variant 1)",
+    "body": "Mobile app lacks features from web: code interpreter, file uploads in some flows, plugins. Offline draft support requested.",
+    "metadata": {
+      "tags": [
+        "mobile",
+        "parity"
+      ],
+      "votes": 141,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/66"
+    },
+    "created_at": "2029-07-21T00:00:00+00:00",
+    "updated_at": "2029-08-14T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:067",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Mobile app parity (variant 2)",
+    "body": "Mobile app lacks features from web: code interpreter, file uploads in some flows, plugins. Offline draft support requested.",
+    "metadata": {
+      "tags": [
+        "mobile",
+        "parity"
+      ],
+      "votes": 179,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/67"
+    },
+    "created_at": "2029-09-04T00:00:00+00:00",
+    "updated_at": "2029-09-24T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:068",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Mobile app parity (variant 3)",
+    "body": "Mobile app lacks features from web: code interpreter, file uploads in some flows, plugins. Offline draft support requested.",
+    "metadata": {
+      "tags": [
+        "mobile",
+        "parity"
+      ],
+      "votes": 227,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/68"
+    },
+    "created_at": "2029-08-23T00:00:00+00:00",
+    "updated_at": "2029-09-01T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:069",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Mobile app parity (variant 4)",
+    "body": "Mobile app lacks features from web: code interpreter, file uploads in some flows, plugins. Offline draft support requested.",
+    "metadata": {
+      "tags": [
+        "mobile",
+        "parity"
+      ],
+      "votes": 6,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/69"
+    },
+    "created_at": "2029-09-25T00:00:00+00:00",
+    "updated_at": "2029-10-09T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:070",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Image generation quality and control",
+    "body": "DALL-E in ChatGPT needs style consistency across images, better prompt following, and aspect ratio controls. Content policy too strict for legitimate use cases.",
+    "metadata": {
+      "tags": [
+        "image",
+        "multimodal",
+        "content-policy"
+      ],
+      "votes": 373,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/70"
+    },
+    "created_at": "2029-11-30T00:00:00+00:00",
+    "updated_at": "2029-12-28T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:071",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Image generation quality and control (variant 1)",
+    "body": "DALL-E in ChatGPT needs style consistency across images, better prompt following, and aspect ratio controls. Content policy too strict for legitimate use cases.",
+    "metadata": {
+      "tags": [
+        "image",
+        "multimodal",
+        "content-policy"
+      ],
+      "votes": 395,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/71"
+    },
+    "created_at": "2029-11-30T00:00:00+00:00",
+    "updated_at": "2029-12-16T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:072",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Image generation quality and control (variant 2)",
+    "body": "DALL-E in ChatGPT needs style consistency across images, better prompt following, and aspect ratio controls. Content policy too strict for legitimate use cases.",
+    "metadata": {
+      "tags": [
+        "image",
+        "multimodal",
+        "content-policy"
+      ],
+      "votes": 472,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/72"
+    },
+    "created_at": "2029-12-25T00:00:00+00:00",
+    "updated_at": "2030-01-10T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:073",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Image generation quality and control (variant 3)",
+    "body": "DALL-E in ChatGPT needs style consistency across images, better prompt following, and aspect ratio controls. Content policy too strict for legitimate use cases.",
+    "metadata": {
+      "tags": [
+        "image",
+        "multimodal",
+        "content-policy"
+      ],
+      "votes": 325,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/73"
+    },
+    "created_at": "2030-01-19T00:00:00+00:00",
+    "updated_at": "2030-02-15T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:074",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Image generation quality and control (variant 4)",
+    "body": "DALL-E in ChatGPT needs style consistency across images, better prompt following, and aspect ratio controls. Content policy too strict for legitimate use cases.",
+    "metadata": {
+      "tags": [
+        "image",
+        "multimodal",
+        "content-policy"
+      ],
+      "votes": 332,
+      "customer_segment": "consumer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/74"
+    },
+    "created_at": "2030-03-03T00:00:00+00:00",
+    "updated_at": "2030-03-29T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:075",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Scheduled and recurring tasks",
+    "body": "Ability to schedule a task (e.g. daily digest) or have ChatGPT remind and run something on a schedule. Power user feature.",
+    "metadata": {
+      "tags": [
+        "productivity",
+        "scheduling"
+      ],
+      "votes": 106,
+      "customer_segment": "consumer",
       "priority": "low",
-      "url": ""
+      "url": "https://community.openai.com/t/75"
     },
-    "created_at": "2025-05-20T08:45:00+00:00",
-    "updated_at": "2025-07-22T14:00:00+00:00"
+    "created_at": "2030-04-15T00:00:00+00:00",
+    "updated_at": "2030-05-04T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:022",
-    "title": "Keyboard shortcuts and power user navigation",
-    "body": "Power users need keyboard-driven navigation to work efficiently. Implement a comprehensive shortcut system: Cmd+K for command palette, Cmd+N for new conversation, Cmd+/ for shortcut reference, arrow keys for conversation history navigation, and Vim-style bindings as an option. Add quick switcher for jumping between recent conversations by title search. Support customizable shortcut mappings. This significantly improves productivity for users who spend hours daily in ChatGPT and reduces reliance on mouse interaction.",
+    "id": "mock:feature_request:076",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Scheduled and recurring tasks (variant 1)",
+    "body": "Ability to schedule a task (e.g. daily digest) or have ChatGPT remind and run something on a schedule. Power user feature.",
     "metadata": {
-      "tags": ["ux", "productivity", "developer"],
+      "tags": [
+        "productivity",
+        "scheduling"
+      ],
+      "votes": 395,
+      "customer_segment": "consumer",
       "priority": "low",
-      "url": ""
+      "url": "https://community.openai.com/t/76"
     },
-    "created_at": "2025-05-28T11:30:00+00:00",
-    "updated_at": "2025-07-18T09:00:00+00:00"
+    "created_at": "2030-04-22T00:00:00+00:00",
+    "updated_at": "2030-05-03T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:023",
-    "title": "Data privacy controls with regional data residency",
-    "body": "Enterprise customers in the EU, Japan, and Australia require data residency guarantees. Conversations and associated data must be stored and processed within their geographic region. Implement region-selectable deployments, transparent data flow documentation, and contractual commitments via DPA addendums. Support data deletion requests with verifiable confirmation. Provide a privacy dashboard showing what data is stored, where it's processed, and retention periods. GDPR, APPI, and Australian Privacy Act compliance is non-negotiable for these markets.",
+    "id": "mock:feature_request:077",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Scheduled and recurring tasks (variant 2)",
+    "body": "Ability to schedule a task (e.g. daily digest) or have ChatGPT remind and run something on a schedule. Power user feature.",
     "metadata": {
-      "tags": ["enterprise", "privacy", "compliance"],
+      "tags": [
+        "productivity",
+        "scheduling"
+      ],
+      "votes": 493,
+      "customer_segment": "consumer",
+      "priority": "low",
+      "url": "https://community.openai.com/t/77"
+    },
+    "created_at": "2030-05-23T00:00:00+00:00",
+    "updated_at": "2030-06-09T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:078",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Scheduled and recurring tasks (variant 3)",
+    "body": "Ability to schedule a task (e.g. daily digest) or have ChatGPT remind and run something on a schedule. Power user feature.",
+    "metadata": {
+      "tags": [
+        "productivity",
+        "scheduling"
+      ],
+      "votes": 276,
+      "customer_segment": "consumer",
+      "priority": "low",
+      "url": "https://community.openai.com/t/78"
+    },
+    "created_at": "2030-07-31T00:00:00+00:00",
+    "updated_at": "2030-08-29T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:079",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Scheduled and recurring tasks (variant 4)",
+    "body": "Ability to schedule a task (e.g. daily digest) or have ChatGPT remind and run something on a schedule. Power user feature.",
+    "metadata": {
+      "tags": [
+        "productivity",
+        "scheduling"
+      ],
+      "votes": 311,
+      "customer_segment": "consumer",
+      "priority": "low",
+      "url": "https://community.openai.com/t/79"
+    },
+    "created_at": "2030-09-08T00:00:00+00:00",
+    "updated_at": "2030-09-08T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:080",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better error messages",
+    "body": "When something fails (upload, code run, API), error messages are vague. Users need actionable errors and retry guidance.",
+    "metadata": {
+      "tags": [
+        "reliability",
+        "developer"
+      ],
+      "votes": 14,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/80"
+    },
+    "created_at": "2030-08-31T00:00:00+00:00",
+    "updated_at": "2030-09-15T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:081",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better error messages (variant 1)",
+    "body": "When something fails (upload, code run, API), error messages are vague. Users need actionable errors and retry guidance.",
+    "metadata": {
+      "tags": [
+        "reliability",
+        "developer"
+      ],
+      "votes": 190,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/81"
+    },
+    "created_at": "2030-09-17T00:00:00+00:00",
+    "updated_at": "2030-10-16T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:082",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better error messages (variant 2)",
+    "body": "When something fails (upload, code run, API), error messages are vague. Users need actionable errors and retry guidance.",
+    "metadata": {
+      "tags": [
+        "reliability",
+        "developer"
+      ],
+      "votes": 418,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/82"
+    },
+    "created_at": "2030-12-05T00:00:00+00:00",
+    "updated_at": "2030-12-31T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:083",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better error messages (variant 3)",
+    "body": "When something fails (upload, code run, API), error messages are vague. Users need actionable errors and retry guidance.",
+    "metadata": {
+      "tags": [
+        "reliability",
+        "developer"
+      ],
+      "votes": 34,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/83"
+    },
+    "created_at": "2030-11-28T00:00:00+00:00",
+    "updated_at": "2030-12-05T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:084",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Better error messages (variant 4)",
+    "body": "When something fails (upload, code run, API), error messages are vague. Users need actionable errors and retry guidance.",
+    "metadata": {
+      "tags": [
+        "reliability",
+        "developer"
+      ],
+      "votes": 295,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/84"
+    },
+    "created_at": "2030-12-24T00:00:00+00:00",
+    "updated_at": "2031-01-21T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:085",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Collaborative editing on Canvas",
+    "body": "Multiple users editing the same Canvas document in real time. Critical for team use of Canvas.",
+    "metadata": {
+      "tags": [
+        "canvas",
+        "collaboration",
+        "team"
+      ],
+      "votes": 48,
+      "customer_segment": "enterprise",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/85"
     },
-    "created_at": "2025-06-03T09:00:00+00:00",
-    "updated_at": "2025-08-20T10:30:00+00:00"
+    "created_at": "2031-03-09T00:00:00+00:00",
+    "updated_at": "2031-03-11T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:024",
-    "title": "Custom GPT analytics for creators",
-    "body": "GPT creators have no visibility into how their creations are being used. Provide an analytics dashboard showing total conversations, unique users, average session length, user satisfaction ratings, and common query patterns. Include geographic distribution of users and usage trends over time. Add A/B testing capabilities so creators can experiment with different system prompts and measure performance. Revenue analytics for monetized GPTs should show earnings, conversion rates, and churn. This data is essential to improve GPT quality.",
+    "id": "mock:feature_request:086",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Collaborative editing on Canvas (variant 1)",
+    "body": "Multiple users editing the same Canvas document in real time. Critical for team use of Canvas.",
     "metadata": {
-      "tags": ["plugins", "analytics", "platform"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-06-10T13:00:00+00:00",
-    "updated_at": "2025-08-15T15:45:00+00:00"
-  },
-  {
-    "id": "mock:feature:025",
-    "title": "Inline citation and source linking for factual claims",
-    "body": "Users need to verify ChatGPT's factual claims quickly. Implement inline citations that link to source URLs when browsing is enabled. Show confidence indicators for factual statements. When sources conflict, present multiple perspectives with links to each. Add a 'verify this' button that triggers a web search to fact-check the current response. For enterprise knowledge base integrations, link citations back to the original internal documents. This directly addresses trust concerns and makes ChatGPT viable for research and journalism.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["trust", "ux", "browsing"],
+      "tags": [
+        "canvas",
+        "collaboration",
+        "team"
+      ],
+      "votes": 422,
+      "customer_segment": "enterprise",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/86"
     },
-    "created_at": "2025-06-18T10:15:00+00:00",
-    "updated_at": "2025-09-01T08:00:00+00:00"
+    "created_at": "2031-03-25T00:00:00+00:00",
+    "updated_at": "2031-04-09T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:026",
-    "title": "Multi-model selection within a single conversation",
-    "body": "Users want the ability to switch between models mid-conversation. Let users choose GPT-4o for creative tasks, o1 for reasoning-heavy problems, and GPT-4o mini for quick factual lookups—all within the same chat thread. Show which model generated each response. Provide intelligent model suggestions based on query complexity. Enterprise admins should be able to restrict available models by team or cost center. This maximizes value by matching model capabilities to task requirements rather than forcing one model for all needs.",
+    "id": "mock:feature_request:087",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Collaborative editing on Canvas (variant 2)",
+    "body": "Multiple users editing the same Canvas document in real time. Critical for team use of Canvas.",
     "metadata": {
-      "tags": ["ux", "model-selection", "enterprise"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-06-25T14:30:00+00:00",
-    "updated_at": "2025-09-10T11:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:027",
-    "title": "Offline mode for mobile with smart caching",
-    "body": "Mobile users lose access to ChatGPT entirely when offline, which is common during flights, commutes, and travel. Implement an offline mode that caches recent conversations for viewing, queues new messages for sending when connectivity returns, and provides a lightweight on-device model for basic queries. Pre-cache commonly used custom GPTs and their instructions. Show clear online/offline status indicators. Even partial offline functionality would significantly improve the mobile experience and daily engagement metrics.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["mobile", "offline", "engagement"],
-      "priority": "low",
-      "url": ""
-    },
-    "created_at": "2025-07-02T09:00:00+00:00",
-    "updated_at": "2025-09-15T13:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:028",
-    "title": "Structured output mode for API with JSON schema validation",
-    "body": "API developers building production applications need guaranteed structured output. Implement a mode where the API accepts a JSON schema and ensures the response conforms to it. Support nested objects, arrays, enums, and optional fields. Validate output server-side before returning to the client. Provide streaming of partial valid JSON for long responses. Include TypeScript and Python SDK helpers for schema definition. This eliminates brittle prompt engineering for output formatting and makes ChatGPT reliable for production data pipelines.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["api", "developer", "structured-output"],
+      "tags": [
+        "canvas",
+        "collaboration",
+        "team"
+      ],
+      "votes": 277,
+      "customer_segment": "enterprise",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/87"
     },
-    "created_at": "2025-07-10T11:00:00+00:00",
-    "updated_at": "2025-09-20T10:00:00+00:00"
+    "created_at": "2031-03-13T00:00:00+00:00",
+    "updated_at": "2031-04-06T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:029",
-    "title": "Conversation search with semantic understanding",
-    "body": "Finding past conversations is painful with the current title-only search. Implement full-text search across all conversation content with semantic understanding so users can search by concept rather than exact keywords. Support filters by date range, model used, files uploaded, and conversation length. Show relevant snippets in search results with highlighted matches. Add saved searches and search history. For enterprise users, support organization-wide search across team conversations with appropriate access controls.",
+    "id": "mock:feature_request:088",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Collaborative editing on Canvas (variant 3)",
+    "body": "Multiple users editing the same Canvas document in real time. Critical for team use of Canvas.",
     "metadata": {
-      "tags": ["search", "ux", "productivity"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-07-18T08:30:00+00:00",
-    "updated_at": "2025-10-01T14:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:030",
-    "title": "Plugin API v2 with OAuth 2.0 and webhook support",
-    "body": "The current plugin/action system needs a major overhaul. Implement a v2 API with proper OAuth 2.0 flows for secure third-party authentication, webhook support for event-driven architectures, and improved rate limiting per plugin. Add a plugin SDK with testing tools and a sandbox environment. Support long-running plugin operations with progress callbacks. Improve the plugin manifest format to support richer UI rendering. The developer experience must improve significantly to attract and retain third-party developers building on our platform.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["api", "plugins", "developer"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-07-25T15:00:00+00:00",
-    "updated_at": "2025-10-10T09:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:031",
-    "title": "Shared conversation libraries for teams",
-    "body": "Enterprise teams need shared conversation libraries where useful interactions can be bookmarked, tagged, and shared with colleagues. Implement team-level folders and collections for organizing saved conversations. Add the ability to create conversation templates that capture effective prompting patterns. Support commenting on shared conversations for async collaboration. Include access analytics so team admins can see which shared resources are most valuable. This captures organizational knowledge and prevents teams from solving the same problems independently.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["collaboration", "enterprise", "knowledge-management"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-08-01T10:00:00+00:00",
-    "updated_at": "2025-10-20T11:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:032",
-    "title": "Voice mode language learning features",
-    "body": "Voice mode has enormous potential for language learning but lacks dedicated features. Add pronunciation feedback with phonetic scoring, vocabulary tracking, grammar correction with explanations, and adaptive difficulty levels. Support role-play scenarios like ordering food or job interviews in the target language. Show transcriptions with corrections highlighted. Track progress over time with spaced repetition for vocabulary review. This could make ChatGPT the most powerful language learning tool available and drive significant Plus subscription growth.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["voice", "education", "multilingual"],
-      "priority": "low",
-      "url": ""
-    },
-    "created_at": "2025-08-08T14:30:00+00:00",
-    "updated_at": "2025-10-25T16:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:033",
-    "title": "Enterprise data privacy controls for training opt-out",
-    "body": "Enterprise customers require contractual guarantees that their data will not be used for model training. While we offer this via ChatGPT Enterprise, the controls need to be more transparent and verifiable. Implement a real-time dashboard showing data processing status, provide cryptographic audit logs proving data isolation, and support customer-managed encryption keys. Allow granular opt-out at the conversation level for mixed-sensitivity workloads. SOC 2 Type II and ISO 27001 compliance evidence should be available on demand within the admin console.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["enterprise", "privacy", "security"],
+      "tags": [
+        "canvas",
+        "collaboration",
+        "team"
+      ],
+      "votes": 70,
+      "customer_segment": "enterprise",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/88"
     },
-    "created_at": "2025-08-15T09:00:00+00:00",
-    "updated_at": "2025-11-01T10:00:00+00:00"
+    "created_at": "2031-05-27T00:00:00+00:00",
+    "updated_at": "2031-05-31T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:034",
-    "title": "Interactive canvas for visual brainstorming",
-    "body": "Text-based conversations limit creative and strategic thinking. Add an interactive canvas where users and ChatGPT can collaboratively create mind maps, flowcharts, wireframes, and diagrams. ChatGPT should be able to generate and modify visual elements based on conversation context. Support Mermaid and PlantUML syntax with live rendering. Allow users to sketch rough ideas and have ChatGPT refine them. Export to common formats like SVG and PNG. This expands ChatGPT from a text tool into a visual thinking partner.",
+    "id": "mock:feature_request:089",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Collaborative editing on Canvas (variant 4)",
+    "body": "Multiple users editing the same Canvas document in real time. Critical for team use of Canvas.",
     "metadata": {
-      "tags": ["canvas", "creative", "ux"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-08-22T11:30:00+00:00",
-    "updated_at": "2025-11-10T14:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:035",
-    "title": "API fine-tuning UI with experiment tracking",
-    "body": "Fine-tuning through the API is cumbersome. Build a web-based fine-tuning interface with data upload and validation, hyperparameter configuration, training progress monitoring, and evaluation metrics visualization. Support comparison between fine-tuned model versions. Add dataset management tools for cleaning, deduplication, and augmentation. Integration with experiment tracking systems like Weights & Biases. Provide cost estimation before training begins. This lowers the barrier for teams without ML engineering resources to customize models for their specific domains.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["api", "developer", "ml-ops"],
-      "priority": "low",
-      "url": ""
-    },
-    "created_at": "2025-09-01T10:00:00+00:00",
-    "updated_at": "2025-11-15T09:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:036",
-    "title": "Real-time web browsing with live page interaction",
-    "body": "Current browsing capability fetches static content and can feel stale. Implement live web browsing where ChatGPT can interact with dynamic web pages, fill forms, extract data from JavaScript-rendered content, and navigate multi-page workflows. Show users a preview of the page being browsed. Support authenticated browsing with user-provided credentials stored securely. This enables use cases like price comparison, real-time sports scores, and interactive research that the current static fetch approach cannot handle.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["browsing", "multimodal", "agent"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-09-08T13:00:00+00:00",
-    "updated_at": "2025-11-20T12:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:037",
-    "title": "Conversation folders and tagging system",
-    "body": "With hundreds of conversations, organization is a major pain point. Implement a folder and tagging system for conversations. Allow nested folders, color-coded tags, pinned conversations, and smart folders that auto-sort based on rules like topic detection, model used, or date range. Add bulk operations for moving, tagging, and deleting conversations. Sync organization structure across devices. Enterprise users need shared folder structures. This is a basic productivity feature that competitors already offer and users expect.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["ux", "productivity", "organization"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-09-15T08:00:00+00:00",
-    "updated_at": "2025-12-01T10:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:038",
-    "title": "Math rendering and LaTeX support in conversations",
-    "body": "ChatGPT produces LaTeX output for mathematical content but the web interface doesn't render it properly. Implement KaTeX or MathJax rendering for inline and block math expressions. Support equation numbering and cross-references. Add a math input palette for users who don't know LaTeX syntax. Ensure proper rendering in exported conversations. This is critical for STEM education users, researchers, and students who are a significant portion of our user base. Competitors handle math rendering seamlessly.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["ux", "education", "rendering"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-09-22T11:15:00+00:00",
-    "updated_at": "2025-12-05T14:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:039",
-    "title": "Cross-platform clipboard and handoff between devices",
-    "body": "Users frequently start conversations on one device and want to continue on another. Implement seamless handoff like Apple's Universal Clipboard: copy a response on desktop and paste it on mobile, or tap a notification to continue a conversation started on another device. Support real-time sync of conversation state including scroll position and draft messages. Add QR code sharing for quick device transfers. This creates a more cohesive multi-device experience and increases engagement across platforms.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["mobile", "ux", "cross-platform"],
-      "priority": "low",
-      "url": ""
-    },
-    "created_at": "2025-10-01T09:30:00+00:00",
-    "updated_at": "2025-12-10T11:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:040",
-    "title": "Granular API rate limiting with burst allowances",
-    "body": "Current API rate limits are too rigid for production workloads with variable traffic patterns. Implement token bucket rate limiting with configurable burst allowances. Allow customers to set per-endpoint limits and allocate their total quota across different use cases. Provide real-time rate limit status via response headers and a dashboard. Support automatic scaling during traffic spikes with pay-per-use overflow pricing. Add rate limit alerts via webhook to help teams monitor usage proactively. This reduces integration friction for production API users.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["api", "developer", "enterprise"],
-      "priority": "medium",
-      "url": ""
-    },
-    "created_at": "2025-10-08T14:00:00+00:00",
-    "updated_at": "2025-12-15T08:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:041",
-    "title": "Memory-aware context window management",
-    "body": "Long conversations hit context window limits abruptly, causing a degraded experience. Implement intelligent context management that summarizes older parts of the conversation, preserves key facts in memory, and provides a clear indicator of remaining context. Let users pin important messages to always include in context. Show a context usage meter and warn before limits are reached. Automatically archive and summarize conversation history that falls out of the window. This makes long technical and creative sessions viable without unexpected context loss.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["memory", "context", "ux"],
+      "tags": [
+        "canvas",
+        "collaboration",
+        "team"
+      ],
+      "votes": 489,
+      "customer_segment": "enterprise",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/89"
     },
-    "created_at": "2025-10-15T10:30:00+00:00",
-    "updated_at": "2026-01-05T09:00:00+00:00"
+    "created_at": "2031-06-19T00:00:00+00:00",
+    "updated_at": "2031-07-04T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:042",
-    "title": "Zapier and Make.com native integrations",
-    "body": "Many non-technical users rely on no-code automation platforms to connect their tools. Build native Zapier and Make.com integrations that expose ChatGPT actions as triggers and steps. Support sending prompts, receiving responses, managing conversations, and uploading files through automation workflows. Include pre-built templates for common use cases like email summarization, CRM enrichment, and social media content generation. This opens ChatGPT to millions of automation users without requiring API knowledge.",
+    "id": "mock:feature_request:090",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Plugins and tools reliability",
+    "body": "Plugins often fail or timeout. Need better observability for developers and fallback behavior when a plugin is down.",
     "metadata": {
-      "tags": ["integration", "automation", "no-code"],
-      "priority": "low",
-      "url": ""
-    },
-    "created_at": "2025-10-22T13:00:00+00:00",
-    "updated_at": "2026-01-10T15:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:043",
-    "title": "Enterprise audit logging with SIEM integration",
-    "body": "Regulated enterprises need comprehensive audit logs for compliance. Log all user actions including login, conversation creation, file uploads, model selections, and admin changes. Support real-time log streaming to SIEM tools like Splunk, Datadog, and Elastic. Include tamper-evident log storage with cryptographic verification. Provide pre-built compliance reports for SOC 2, HIPAA, and GDPR audits. Allow configurable log retention periods and automated archival to customer-owned S3 buckets. This is a hard requirement for financial services and healthcare customers.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["enterprise", "security", "compliance"],
-      "priority": "high",
-      "url": ""
-    },
-    "created_at": "2025-11-01T09:00:00+00:00",
-    "updated_at": "2026-01-15T10:30:00+00:00"
-  },
-  {
-    "id": "mock:feature:044",
-    "title": "Custom model behavior profiles for enterprise",
-    "body": "Enterprise customers need to customize model behavior beyond system prompts. Allow admin-defined behavior profiles that control response style, content boundaries, citation requirements, and domain-specific terminology. Support different profiles for different teams within the same organization. Include A/B testing for profiles to measure impact on user satisfaction. Profiles should be version-controlled with rollback capability. This lets enterprises tailor ChatGPT to their brand voice and compliance requirements without fine-tuning.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["enterprise", "personalization", "admin"],
+      "tags": [
+        "plugins",
+        "reliability"
+      ],
+      "votes": 140,
+      "customer_segment": "developer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/90"
     },
-    "created_at": "2025-11-10T11:30:00+00:00",
-    "updated_at": "2026-01-20T14:00:00+00:00"
+    "created_at": "2031-07-12T00:00:00+00:00",
+    "updated_at": "2031-07-17T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:045",
-    "title": "Conversation templates and prompt library",
-    "body": "Users repeatedly set up similar conversations for recurring tasks. Implement a template system where users can save conversation starters with predefined system instructions, initial messages, and file attachments. Include a curated library of community templates for common use cases like code review, writing feedback, and data analysis. Support template variables for customization. Enterprise teams should be able to create and distribute team-specific templates. Track template usage analytics to surface the most effective patterns.",
+    "id": "mock:feature_request:091",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Plugins and tools reliability (variant 1)",
+    "body": "Plugins often fail or timeout. Need better observability for developers and fallback behavior when a plugin is down.",
     "metadata": {
-      "tags": ["productivity", "ux", "templates"],
+      "tags": [
+        "plugins",
+        "reliability"
+      ],
+      "votes": 315,
+      "customer_segment": "developer",
       "priority": "medium",
-      "url": ""
+      "url": "https://community.openai.com/t/91"
     },
-    "created_at": "2025-11-18T08:45:00+00:00",
-    "updated_at": "2026-01-25T09:15:00+00:00"
+    "created_at": "2031-08-09T00:00:00+00:00",
+    "updated_at": "2031-09-05T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:046",
-    "title": "Video input analysis and screen recording comprehension",
-    "body": "Extend multimodal capabilities to video input. Users should be able to upload short video clips or screen recordings for analysis. Use cases include debugging UI issues from screen recordings, analyzing lecture content, getting feedback on presentations, and processing surveillance footage. Support common formats like MP4, MOV, and WebM. Extract keyframes for efficient processing. Provide timestamp-linked annotations in responses. Start with short clips under 5 minutes and expand based on demand and cost optimization.",
+    "id": "mock:feature_request:092",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Plugins and tools reliability (variant 2)",
+    "body": "Plugins often fail or timeout. Need better observability for developers and fallback behavior when a plugin is down.",
     "metadata": {
-      "tags": ["multimodal", "video", "enterprise"],
-      "priority": "low",
-      "url": ""
+      "tags": [
+        "plugins",
+        "reliability"
+      ],
+      "votes": 113,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/92"
     },
-    "created_at": "2025-12-01T10:00:00+00:00",
-    "updated_at": "2026-01-28T13:00:00+00:00"
+    "created_at": "2031-09-02T00:00:00+00:00",
+    "updated_at": "2031-10-02T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:047",
-    "title": "Notification center with smart digests",
-    "body": "Users have no way to receive notifications about shared conversations, GPT updates, or completed long-running tasks. Implement a notification center with in-app alerts, push notifications on mobile, and email digests. Support notification preferences per category. Generate smart daily digests summarizing team activity for enterprise users. Notify GPT creators when their GPTs receive significant usage changes or new reviews. Include do-not-disturb scheduling. This infrastructure enables many future collaborative and async features.",
+    "id": "mock:feature_request:093",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Plugins and tools reliability (variant 3)",
+    "body": "Plugins often fail or timeout. Need better observability for developers and fallback behavior when a plugin is down.",
     "metadata": {
-      "tags": ["ux", "collaboration", "engagement"],
-      "priority": "low",
-      "url": ""
+      "tags": [
+        "plugins",
+        "reliability"
+      ],
+      "votes": 391,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/93"
     },
-    "created_at": "2025-12-10T14:30:00+00:00",
-    "updated_at": "2026-02-01T08:00:00+00:00"
+    "created_at": "2031-11-03T00:00:00+00:00",
+    "updated_at": "2031-11-20T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:048",
-    "title": "Deep research mode with multi-source synthesis",
-    "body": "Power users need a research mode that goes beyond single-query browsing. Implement a deep research flow where ChatGPT autonomously plans a research strategy, executes multiple searches, cross-references sources, identifies conflicting information, and synthesizes findings into a comprehensive report with citations. Show the research process in real time so users can steer it. Support saving research sessions for later continuation. Include source reliability assessment. This transforms ChatGPT into a genuine research assistant for journalists, analysts, and academics.",
+    "id": "mock:feature_request:094",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Plugins and tools reliability (variant 4)",
+    "body": "Plugins often fail or timeout. Need better observability for developers and fallback behavior when a plugin is down.",
     "metadata": {
-      "tags": ["research", "browsing", "agent"],
+      "tags": [
+        "plugins",
+        "reliability"
+      ],
+      "votes": 107,
+      "customer_segment": "developer",
+      "priority": "medium",
+      "url": "https://community.openai.com/t/94"
+    },
+    "created_at": "2031-11-20T00:00:00+00:00",
+    "updated_at": "2031-12-12T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:095",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Accessibility improvements",
+    "body": "Screen reader support, keyboard navigation, reduced motion option. Required for enterprise and education adoption.",
+    "metadata": {
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "votes": 209,
+      "customer_segment": "enterprise",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/95"
     },
-    "created_at": "2025-12-18T09:00:00+00:00",
-    "updated_at": "2026-02-05T11:30:00+00:00"
+    "created_at": "2031-12-19T00:00:00+00:00",
+    "updated_at": "2031-12-28T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:feature:049",
-    "title": "Apple Watch companion app for voice interactions",
-    "body": "Apple Watch users should be able to start quick voice interactions without reaching for their phone. Build a watchOS companion app with raise-to-speak activation, Siri Shortcuts integration, and complication support showing recent conversation summaries. Optimize for sub-30-second interactions like quick questions, reminders, and translations. Use haptic feedback to indicate processing states. Support dictation with automatic send. The watch app should hand off longer conversations to the iPhone app seamlessly. This expands our presence in the wearable ecosystem.",
+    "id": "mock:feature_request:096",
     "source": "mock",
+    "type": "feature_request",
+    "title": "Accessibility improvements (variant 1)",
+    "body": "Screen reader support, keyboard navigation, reduced motion option. Required for enterprise and education adoption.",
     "metadata": {
-      "tags": ["mobile", "voice", "wearable"],
-      "priority": "low",
-      "url": ""
-    },
-    "created_at": "2026-01-05T11:00:00+00:00",
-    "updated_at": "2026-02-10T10:00:00+00:00"
-  },
-  {
-    "id": "mock:feature:050",
-    "title": "Agentic task execution with multi-step tool use",
-    "body": "Users want ChatGPT to execute complex multi-step tasks autonomously: research a topic, write a report, create visualizations, and email the results. Implement an agentic framework where ChatGPT plans tasks, selects appropriate tools, executes steps sequentially with error recovery, and reports progress. Support human-in-the-loop checkpoints for high-stakes actions. Include a task queue for managing multiple concurrent agent tasks. Provide detailed execution logs for debugging and audit. This is the evolution from chatbot to AI agent that users are demanding.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["agent", "automation", "enterprise"],
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "votes": 196,
+      "customer_segment": "enterprise",
       "priority": "high",
-      "url": ""
+      "url": "https://community.openai.com/t/96"
     },
-    "created_at": "2026-01-15T14:00:00+00:00",
-    "updated_at": "2026-02-18T09:30:00+00:00"
+    "created_at": "2032-01-15T00:00:00+00:00",
+    "updated_at": "2032-02-04T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:097",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Accessibility improvements (variant 2)",
+    "body": "Screen reader support, keyboard navigation, reduced motion option. Required for enterprise and education adoption.",
+    "metadata": {
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "votes": 269,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/97"
+    },
+    "created_at": "2032-01-31T00:00:00+00:00",
+    "updated_at": "2032-02-28T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:098",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Accessibility improvements (variant 3)",
+    "body": "Screen reader support, keyboard navigation, reduced motion option. Required for enterprise and education adoption.",
+    "metadata": {
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "votes": 131,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/98"
+    },
+    "created_at": "2032-03-01T00:00:00+00:00",
+    "updated_at": "2032-03-04T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:feature_request:099",
+    "source": "mock",
+    "type": "feature_request",
+    "title": "Accessibility improvements (variant 4)",
+    "body": "Screen reader support, keyboard navigation, reduced motion option. Required for enterprise and education adoption.",
+    "metadata": {
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "votes": 178,
+      "customer_segment": "enterprise",
+      "priority": "high",
+      "url": "https://community.openai.com/t/99"
+    },
+    "created_at": "2032-03-17T00:00:00+00:00",
+    "updated_at": "2032-03-19T00:00:00+00:00",
+    "is_deleted": false
   }
 ]

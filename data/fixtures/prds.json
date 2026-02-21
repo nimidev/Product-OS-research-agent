@@ -1,262 +1,557 @@
 [
   {
-    "id": "mock:prd:001",
-    "title": "PRD: Memory V2 — Transparent, User-Controlled Persistent Memory",
-    "body": "This PRD defines the next generation of ChatGPT's memory system. The current memory feature suffers from unreliability, lack of transparency, and privacy concerns. Memory V2 introduces a searchable memory dashboard where users can view, edit, and delete all stored facts. The system will detect and surface contradictory memories for user resolution. Natural language commands like 'remember this' and 'forget that' will connect directly to the memory API. Enterprise features include admin-controlled memory policies, workspace-scoped memory isolation, and data residency compliance. Success metrics: 80% user awareness of stored memories, 50% reduction in memory-related complaints, and 90% accuracy in memory recall during conversations.",
+    "id": "mock:prd:000",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Memory",
+    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
     "metadata": {
-      "tags": ["prd", "memory", "personalization"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Legal",
+        "Trust"
+      ]
     },
-    "created_at": "2025-01-20T10:00:00+00:00",
-    "updated_at": "2025-04-15T14:00:00+00:00"
+    "created_at": "2024-02-01T00:00:00+00:00",
+    "updated_at": "2024-02-15T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:001",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Memory",
+    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
+    "metadata": {
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Legal",
+        "Trust"
+      ]
+    },
+    "created_at": "2024-02-26T00:00:00+00:00",
+    "updated_at": "2024-03-11T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:002",
-    "title": "PRD: Custom GPTs Platform — Creation, Discovery, and Monetization",
-    "body": "Product requirements for the Custom GPTs ecosystem encompassing creation tools, the GPT Store marketplace, and creator monetization. The creation flow should enable non-technical users to build custom GPTs through conversation-driven configuration. The GPT Store provides curated discovery with categories, search, ratings, and reviews. Monetization supports one-time purchase, subscription, and usage-based pricing with a 70/30 revenue share. Key requirements: knowledge file upload with RAG indexing under 1 hour, action API integration with OAuth, analytics dashboard showing usage and revenue. Quality controls include automated safety review and IP violation detection. Target: 100,000 published GPTs within 6 months of store launch.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Memory",
+    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
     "metadata": {
-      "tags": ["prd", "custom-gpts", "platform"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Legal",
+        "Trust"
+      ]
     },
-    "created_at": "2025-02-05T09:00:00+00:00",
-    "updated_at": "2025-05-20T11:30:00+00:00"
+    "created_at": "2024-04-08T00:00:00+00:00",
+    "updated_at": "2024-04-22T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:003",
-    "title": "PRD: Canvas — Interactive Writing and Coding Workspace",
-    "body": "Canvas introduces a side-panel workspace for focused writing and coding tasks within ChatGPT. For writing: users can edit text directly while ChatGPT suggests improvements, adjusts length, changes reading level, and restructures content. For coding: syntax-highlighted editor with ChatGPT providing bug fixes, comments, language translation, and performance optimization. Key UX requirements: the canvas should open contextually when writing or coding tasks are detected, support undo/redo with full version history, and allow users to accept or reject individual suggestions. Document import from common formats (DOCX, MD, TXT) and export to PDF, MD, and HTML. Mobile experience should default to a stacked view with swipe between conversation and canvas.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Memory",
+    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
     "metadata": {
-      "tags": ["prd", "canvas", "writing", "coding"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Legal",
+        "Trust"
+      ]
     },
-    "created_at": "2025-02-18T14:00:00+00:00",
-    "updated_at": "2025-06-10T09:00:00+00:00"
+    "created_at": "2024-05-18T00:00:00+00:00",
+    "updated_at": "2024-06-01T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:004",
-    "title": "PRD: Advanced Voice Mode — Natural Conversational AI",
-    "body": "Requirements for the next generation of voice interaction in ChatGPT. Core capabilities: sub-300ms response latency for conversational feel, natural interruption handling so users can interject mid-response, emotion detection to adapt tone and content, and multi-language support with automatic language switching within a single conversation. Technical requirements: WebRTC-based audio streaming, server-side voice activity detection, noise cancellation pipeline, and on-device wake word detection. New voice options with improved prosody and expressiveness—5 new voices at launch. Safety requirements: voice impersonation protection, content safety filtering for audio input, and consent flow for voice data processing. Accessibility: visual transcript synchronized with audio output.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Memory",
+    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
     "metadata": {
-      "tags": ["prd", "voice", "multimodal"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Legal",
+        "Trust"
+      ]
     },
-    "created_at": "2025-03-01T11:00:00+00:00",
-    "updated_at": "2025-07-15T10:30:00+00:00"
+    "created_at": "2024-06-30T00:00:00+00:00",
+    "updated_at": "2024-07-14T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:005",
-    "title": "PRD: File Upload and Management System",
-    "body": "Comprehensive PRD for ChatGPT's file handling capabilities across all platforms. Upload requirements: drag-and-drop support for multiple files, folder upload preserving directory structure, support for 50+ file formats including PDF, DOCX, XLSX, CSV, images, and code files. Maximum file size: 512MB per file, 2GB per conversation. File management: persistent file sidebar showing all uploaded files, file preview with in-app rendering, and cross-conversation file references within Projects. Processing pipeline: automatic text extraction for documents, OCR for scanned PDFs, and metadata extraction. Code files should be indexed for semantic search. Enterprise requirements: virus scanning, DLP integration, and file retention policies configurable by admin.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Custom GPTs",
+    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
     "metadata": {
-      "tags": ["prd", "file-handling", "infrastructure"],
-      "priority": "medium",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Policy",
+        "Platform"
+      ]
     },
-    "created_at": "2025-03-15T09:30:00+00:00",
-    "updated_at": "2025-06-28T14:00:00+00:00"
+    "created_at": "2024-08-14T00:00:00+00:00",
+    "updated_at": "2024-08-28T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:006",
-    "title": "PRD: Code Interpreter V2 — Persistent Environments and GPU Support",
-    "body": "Product requirements for the next generation Code Interpreter. Persistent environments maintain state across conversations: installed packages, files, variables, and environment configurations are preserved. Users can choose from Python 3.12, Node.js 20, and R 4.3 runtimes. Pre-installed package sets for common workflows: data science (numpy, pandas, scikit-learn), visualization (matplotlib, plotly, seaborn), and web development (flask, express). GPU support for ML workloads with NVIDIA T4 instances. Resource limits: 4 vCPU, 16GB RAM, 50GB disk per environment. Enterprise features: private sandboxes with network isolation, custom package allowlists, and execution audit logs. Pricing: persistent environments as a Plus/Team feature, GPU as a metered add-on.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Custom GPTs",
+    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
     "metadata": {
-      "tags": ["prd", "code-interpreter", "developer"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Policy",
+        "Platform"
+      ]
     },
-    "created_at": "2025-04-02T10:00:00+00:00",
-    "updated_at": "2025-08-05T11:30:00+00:00"
+    "created_at": "2024-10-03T00:00:00+00:00",
+    "updated_at": "2024-10-17T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:007",
-    "title": "PRD: Image Generation V2 — Professional Controls and Consistency",
-    "body": "Requirements for the next major image generation upgrade. Character consistency: users can define characters that maintain visual identity across multiple generations. Style presets: curated collection of 30+ styles (photographic, illustration, watercolor, flat vector, etc.) with custom style creation from reference images. Editing tools: inpainting to modify specific regions, outpainting to extend image boundaries, and style transfer between images. Batch generation: create multiple variations simultaneously with a comparison view. Text rendering: reliable text placement within images with font selection. Professional controls: precise aspect ratios, resolution up to 4K, and color palette constraints. Integration with Canvas for iterative visual workflow. API access for all features with structured output for image metadata.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Custom GPTs",
+    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
     "metadata": {
-      "tags": ["prd", "image-generation", "creative"],
-      "priority": "medium",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Policy",
+        "Platform"
+      ]
     },
-    "created_at": "2025-04-20T14:00:00+00:00",
-    "updated_at": "2025-09-10T09:00:00+00:00"
+    "created_at": "2024-10-25T00:00:00+00:00",
+    "updated_at": "2024-11-08T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:008",
-    "title": "PRD: Enterprise Admin Console — Management and Analytics Platform",
-    "body": "Product requirements for the ChatGPT Enterprise admin console. User management: bulk user provisioning via CSV and SCIM, role-based access controls (admin, manager, member), and team/department organization. Analytics dashboard: real-time usage metrics, per-user and per-team token consumption, model usage distribution, cost allocation by department with budget alerts. Policy management: content restrictions, approved model lists, file type restrictions, and custom content filtering rules. Compliance: exportable audit logs with SIEM integration (Splunk, Datadog), data retention configuration, and compliance report generation for SOC 2 and HIPAA. Billing: consolidated invoicing, department-level cost centers, and usage-based billing with committed volume discounts.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Custom GPTs",
+    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
     "metadata": {
-      "tags": ["prd", "enterprise", "admin"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Policy",
+        "Platform"
+      ]
     },
-    "created_at": "2025-05-05T09:00:00+00:00",
-    "updated_at": "2025-10-15T14:00:00+00:00"
+    "created_at": "2024-12-22T00:00:00+00:00",
+    "updated_at": "2025-01-05T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:009",
-    "title": "PRD: API Improvements — Batch Processing, Structured Output, and Rate Limiting",
-    "body": "Comprehensive API improvements PRD covering three major workstreams. Batch processing: asynchronous endpoint accepting up to 50,000 requests per batch via JSONL file upload, webhook notifications for completion, and 50% cost discount vs real-time. Structured output: JSON schema parameter in chat completions that guarantees conformant output using constrained decoding, with streaming support for partial valid JSON. Rate limiting: token bucket algorithm with configurable burst allowances, per-endpoint limit allocation, real-time usage headers, and auto-scaling overflow at premium pricing. Additional improvements: request cancellation, idempotency keys for retry safety, and usage webhooks for real-time cost monitoring. SDK updates for Python, TypeScript, Go, and Java.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Custom GPTs",
+    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
     "metadata": {
-      "tags": ["prd", "api", "developer"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Product",
+      "stakeholders": [
+        "Policy",
+        "Platform"
+      ]
     },
-    "created_at": "2025-05-20T11:00:00+00:00",
-    "updated_at": "2025-09-25T10:00:00+00:00"
+    "created_at": "2025-01-15T00:00:00+00:00",
+    "updated_at": "2025-01-29T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:010",
-    "title": "PRD: Deep Research — Autonomous Multi-Source Investigation",
-    "body": "Product requirements for the Deep Research feature enabling autonomous, multi-step research tasks. The system plans a research strategy based on the user's query, executes parallel web searches across diverse sources, extracts and cross-references key information, identifies conflicting claims, and synthesizes findings into a structured report with inline citations. User interface: real-time research progress visualization showing browsing activity, source list, and emerging findings. Users can redirect research by highlighting areas of interest or providing additional context. Output format: structured report with executive summary, detailed findings, source citations with reliability assessment, and suggested follow-up questions. Configurable depth: quick (2-5 minutes, 5-10 sources) vs comprehensive (10-30 minutes, 20-50 sources).",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Team workspaces",
+    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
     "metadata": {
-      "tags": ["prd", "deep-research", "agent"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Enterprise",
+      "stakeholders": [
+        "Security",
+        "Sales"
+      ]
     },
-    "created_at": "2025-06-01T10:00:00+00:00",
-    "updated_at": "2025-11-01T14:30:00+00:00"
+    "created_at": "2025-02-20T00:00:00+00:00",
+    "updated_at": "2025-03-06T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:011",
-    "title": "PRD: Projects — Persistent Workspaces for Complex Tasks",
-    "body": "Product requirements for the Projects feature that transforms ChatGPT into a persistent workspace. Each project encapsulates conversations, files, custom instructions, and memory scope around a specific goal or topic. Project creation: name, description, custom instructions, and initial file uploads. Conversation management: multiple conversations within a project sharing context and files. File management: persistent file storage with version tracking, cross-conversation references, and a file browser sidebar. Project-scoped memory: facts and preferences stored at the project level, isolated from other projects. Sharing: team members can join projects with role-based permissions (owner, editor, viewer). Templates: save project configurations as reusable templates. Free tier: 3 projects, Plus: 50, Team/Enterprise: unlimited.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Team workspaces",
+    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
     "metadata": {
-      "tags": ["prd", "projects", "workspace"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Enterprise",
+      "stakeholders": [
+        "Security",
+        "Sales"
+      ]
     },
-    "created_at": "2025-06-15T14:00:00+00:00",
-    "updated_at": "2025-11-20T10:00:00+00:00"
+    "created_at": "2025-04-12T00:00:00+00:00",
+    "updated_at": "2025-04-26T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:012",
-    "title": "PRD: Enterprise SSO and SCIM Provisioning",
-    "body": "Product requirements for enterprise identity management. SSO: SAML 2.0 support for all major identity providers (Okta, Azure AD, OneLogin, Ping Identity, Google Workspace). Support SP-initiated and IdP-initiated flows. Just-in-time user provisioning on first SSO login. Enforce SSO as the only authentication method per organization. SCIM 2.0: automated user creation, update, deactivation, and deletion. Group synchronization for team mapping. Support for 10,000+ users per organization with bulk operations completing within 5 minutes. Admin configuration: self-service SSO setup wizard with metadata upload, test connection functionality, and fallback authentication for admin accounts. Monitoring: SSO login success/failure analytics and SCIM sync status dashboard.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Team workspaces",
+    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
     "metadata": {
-      "tags": ["prd", "enterprise", "sso", "security"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Enterprise",
+      "stakeholders": [
+        "Security",
+        "Sales"
+      ]
     },
-    "created_at": "2025-07-01T09:00:00+00:00",
-    "updated_at": "2025-12-05T11:00:00+00:00"
+    "created_at": "2025-05-22T00:00:00+00:00",
+    "updated_at": "2025-06-05T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:013",
-    "title": "PRD: Operator — AI Agent for Web Task Execution",
-    "body": "Product requirements for Operator, an AI agent that executes web-based tasks on behalf of users. Core capabilities: navigate websites, fill forms, extract data, make selections, and complete multi-step workflows. Supported task types: shopping and price comparison, travel booking, form submission, account management, and data extraction. Human-in-the-loop: confirmation required before payments, account changes, and submissions of personal information. Error recovery: automatic retry with alternative approaches, graceful degradation with explanation when tasks cannot be completed. Security: sandboxed browsing environment, credential management with encryption, no credential persistence without explicit consent. Site partnerships: pre-certified integrations with top 100 e-commerce, travel, and productivity sites for reliability. Pricing: included in Plus (limited tasks/month), metered for Team/Enterprise.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Team workspaces",
+    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
     "metadata": {
-      "tags": ["prd", "operator", "agent"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Enterprise",
+      "stakeholders": [
+        "Security",
+        "Sales"
+      ]
     },
-    "created_at": "2025-07-15T14:00:00+00:00",
-    "updated_at": "2025-12-20T09:30:00+00:00"
+    "created_at": "2025-06-28T00:00:00+00:00",
+    "updated_at": "2025-07-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:014",
-    "title": "PRD: Conversation Search with Semantic Understanding",
-    "body": "Product requirements for replacing the current title-only search with full semantic search across all conversation content. Search capabilities: natural language queries matched by meaning rather than exact keywords, fuzzy matching for typos, and support for Boolean operators. Filters: date range, model used, conversation type (text, voice, canvas), shared status, and project membership. Results: ranked by relevance with snippet previews showing context around matches with highlighted keywords. Enterprise search: organization-wide search across all team conversations with access control enforcement. Infrastructure: embedding-based semantic index updated in near-real-time, supporting billions of messages. Performance targets: results in under 500ms for 99th percentile. Saved searches: bookmark frequent queries with notification on new matching conversations.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Team workspaces",
+    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
     "metadata": {
-      "tags": ["prd", "search", "infrastructure"],
-      "priority": "medium",
-      "url": ""
+      "author": "Product",
+      "status": "Shipped",
+      "team": "Enterprise",
+      "stakeholders": [
+        "Security",
+        "Sales"
+      ]
     },
-    "created_at": "2025-08-01T10:00:00+00:00",
-    "updated_at": "2026-01-10T14:00:00+00:00"
+    "created_at": "2025-08-14T00:00:00+00:00",
+    "updated_at": "2025-08-28T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:015",
-    "title": "PRD: Accessibility Overhaul — WCAG 2.1 AA Compliance",
-    "body": "Product requirements for achieving WCAG 2.1 AA compliance across all ChatGPT platforms. Screen readers: full compatibility with NVDA, JAWS, and VoiceOver for conversation navigation, message reading, and interactive elements. Keyboard navigation: complete keyboard accessibility for all features with visible focus indicators and logical tab order. Focus management: proper focus handling for dynamic content updates including new messages, notifications, and modal dialogs. Color contrast: minimum 4.5:1 for normal text, 3:1 for large text, meeting AA standards in both light and dark themes. Motion: respect prefers-reduced-motion setting, no flashing content above 3 Hz. Forms: proper labels, error descriptions, and input assistance. Testing: automated a11y checks in CI/CD, manual testing with assistive technologies quarterly, and annual third-party audit.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Search",
+    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
     "metadata": {
-      "tags": ["prd", "accessibility", "compliance"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "In progress",
+      "team": "Product",
+      "stakeholders": [
+        "Search team"
+      ]
     },
-    "created_at": "2025-08-15T09:00:00+00:00",
-    "updated_at": "2026-01-15T11:00:00+00:00"
+    "created_at": "2025-09-20T00:00:00+00:00",
+    "updated_at": "2025-10-04T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:016",
-    "title": "PRD: Dark Mode — Cross-Platform Theming System",
-    "body": "Product requirements for implementing dark mode across all ChatGPT platforms. Theme options: light, dark, and auto (follows system preference) with manual override. Color system: design token-based architecture supporting unlimited themes. Dark theme uses dark gray backgrounds (not pure black) with high-contrast text. OLED variant: true black backgrounds for mobile devices to reduce battery consumption. Components: all UI components must support theming including conversation bubbles, code blocks, file previews, canvas, settings, and admin console. Animations: smooth 200ms transition when switching themes. Persistence: theme preference synced across devices via user settings. Scheduling: optional time-based automatic switching. Accessibility: all theme variants must meet WCAG AA contrast requirements. Third-party embeds: provide theme context to embedded content where possible.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Search",
+    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
     "metadata": {
-      "tags": ["prd", "dark-mode", "design-system"],
-      "priority": "medium",
-      "url": ""
+      "author": "Product",
+      "status": "In progress",
+      "team": "Product",
+      "stakeholders": [
+        "Search team"
+      ]
     },
-    "created_at": "2025-09-01T14:00:00+00:00",
-    "updated_at": "2025-11-25T10:30:00+00:00"
+    "created_at": "2025-10-29T00:00:00+00:00",
+    "updated_at": "2025-11-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:017",
-    "title": "PRD: Agentic Task Framework — Multi-Step Autonomous Execution",
-    "body": "Product requirements for the agentic task execution framework. The system enables ChatGPT to plan and execute complex multi-step tasks using available tools (browsing, code execution, file management, API calls). Planning: o3-powered task decomposition into discrete steps with dependency tracking. Execution: parallel step execution where possible, sequential for dependencies, with automatic error recovery and alternative strategy selection. Human oversight: configurable checkpoint system—users set which action types require approval (default: all external actions). Progress: real-time task progress visualization with step status, tool usage, and estimated time remaining. Concurrency: support multiple agent tasks per user with a priority queue. Guardrails: cost limits, time limits, action type restrictions, and rate limits on external interactions. Enterprise: admin-defined agent policies controlling permitted actions, spending limits, and approved domains.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Search",
+    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
     "metadata": {
-      "tags": ["prd", "agent", "automation"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "In progress",
+      "team": "Product",
+      "stakeholders": [
+        "Search team"
+      ]
     },
-    "created_at": "2025-09-15T10:00:00+00:00",
-    "updated_at": "2026-02-01T14:00:00+00:00"
+    "created_at": "2025-11-26T00:00:00+00:00",
+    "updated_at": "2025-12-10T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:018",
-    "title": "PRD: Enterprise Data Residency — Regional Infrastructure",
-    "body": "Product requirements for enterprise data residency across multiple geographic regions. Phase 1 regions: EU (Frankfurt), Japan (Tokyo), Australia (Sydney). Phase 2 regions: UK (London), Canada (Montreal), Singapore. Requirements per region: all customer data (conversations, files, memory, logs) stored and processed within the region. Model inference served from regional GPU clusters. No cross-region data transfer except for global model updates. Compliance: DPA addendums per jurisdiction, alignment with GDPR (EU), APPI (Japan), and Australian Privacy Act. Technical: region selection at organization creation time, data migration tooling for existing customers moving to regional deployment, cross-region disaster recovery with encryption in transit. Performance: latency within 20% of US baseline for all regions.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Search",
+    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
     "metadata": {
-      "tags": ["prd", "enterprise", "data-residency", "compliance"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "In progress",
+      "team": "Product",
+      "stakeholders": [
+        "Search team"
+      ]
     },
-    "created_at": "2025-10-01T09:00:00+00:00",
-    "updated_at": "2026-01-20T11:30:00+00:00"
+    "created_at": "2026-01-10T00:00:00+00:00",
+    "updated_at": "2026-01-24T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:019",
-    "title": "PRD: Real-Time Collaboration — Multiplayer Conversations",
-    "body": "Product requirements for enabling real-time collaborative conversations in ChatGPT Team and Enterprise. Core capabilities: multiple users participate in a single conversation simultaneously with real-time message visibility. Presence indicators show who is active in a conversation. Message attribution clearly identifies each participant. Threaded replies enable side discussions without cluttering the main thread. @mentions with push notifications for async participation. Permissions: conversation owner sets access level (can chat, can view, can manage). Maximum participants: 20 per conversation. Technical: WebSocket-based real-time sync with conflict resolution for simultaneous inputs. Offline support: messages queued and synced on reconnection. Mobile: full collaboration feature parity with responsive design. Analytics: team usage patterns and collaboration metrics for enterprise admins.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: ChatGPT Search",
+    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
     "metadata": {
-      "tags": ["prd", "collaboration", "enterprise"],
-      "priority": "medium",
-      "url": ""
+      "author": "Product",
+      "status": "In progress",
+      "team": "Product",
+      "stakeholders": [
+        "Search team"
+      ]
     },
-    "created_at": "2025-10-20T14:00:00+00:00",
-    "updated_at": "2026-02-05T10:00:00+00:00"
+    "created_at": "2026-03-11T00:00:00+00:00",
+    "updated_at": "2026-03-25T00:00:00+00:00",
+    "is_deleted": false
   },
   {
     "id": "mock:prd:020",
-    "title": "PRD: GPT-5 Launch — Next Generation Foundation Model",
-    "body": "Product requirements and launch plan for GPT-5. Model capabilities: substantial improvements over GPT-4o in reasoning depth, factual accuracy, instruction following, creative output, and multilingual quality. New capabilities: extended context window (512K tokens effective utilization), native tool use planning, improved calibration with honest uncertainty expression, and enhanced multimodal generation (text, image, audio). Launch phases: Phase 1 (API preview for trusted partners), Phase 2 (API GA with rate limits), Phase 3 (ChatGPT Plus), Phase 4 (Enterprise with custom deployment options), Phase 5 (Free tier with usage limits). Safety: 2,000+ person red team over 3 months, external safety board review, and staged capability unlock based on monitoring. Pricing: 2x GPT-4o for API, included in existing ChatGPT subscriptions. Infrastructure: requires 3x current GPU capacity.",
     "source": "mock",
+    "type": "prd",
+    "title": "PRD: Advanced Voice Mode",
+    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
     "metadata": {
-      "tags": ["prd", "gpt-5", "model-launch"],
-      "priority": "high",
-      "url": ""
+      "author": "Product",
+      "status": "In progress",
+      "team": "Multimodal",
+      "stakeholders": [
+        "Research"
+      ]
     },
-    "created_at": "2025-11-15T09:00:00+00:00",
-    "updated_at": "2026-02-15T14:00:00+00:00"
+    "created_at": "2026-04-07T00:00:00+00:00",
+    "updated_at": "2026-04-21T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:021",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Advanced Voice Mode",
+    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
+    "metadata": {
+      "author": "Product",
+      "status": "In progress",
+      "team": "Multimodal",
+      "stakeholders": [
+        "Research"
+      ]
+    },
+    "created_at": "2026-05-16T00:00:00+00:00",
+    "updated_at": "2026-05-30T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:022",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Advanced Voice Mode",
+    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
+    "metadata": {
+      "author": "Product",
+      "status": "In progress",
+      "team": "Multimodal",
+      "stakeholders": [
+        "Research"
+      ]
+    },
+    "created_at": "2026-07-11T00:00:00+00:00",
+    "updated_at": "2026-07-25T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:023",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Advanced Voice Mode",
+    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
+    "metadata": {
+      "author": "Product",
+      "status": "In progress",
+      "team": "Multimodal",
+      "stakeholders": [
+        "Research"
+      ]
+    },
+    "created_at": "2026-08-16T00:00:00+00:00",
+    "updated_at": "2026-08-30T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:024",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Advanced Voice Mode",
+    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
+    "metadata": {
+      "author": "Product",
+      "status": "In progress",
+      "team": "Multimodal",
+      "stakeholders": [
+        "Research"
+      ]
+    },
+    "created_at": "2026-09-19T00:00:00+00:00",
+    "updated_at": "2026-10-03T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:025",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Conversation branching",
+    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
+    "metadata": {
+      "author": "Product",
+      "status": "Backlog",
+      "team": "Product",
+      "stakeholders": [
+        "Design"
+      ]
+    },
+    "created_at": "2026-11-10T00:00:00+00:00",
+    "updated_at": "2026-11-24T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:026",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Conversation branching",
+    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
+    "metadata": {
+      "author": "Product",
+      "status": "Backlog",
+      "team": "Product",
+      "stakeholders": [
+        "Design"
+      ]
+    },
+    "created_at": "2026-12-12T00:00:00+00:00",
+    "updated_at": "2026-12-26T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:027",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Conversation branching",
+    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
+    "metadata": {
+      "author": "Product",
+      "status": "Backlog",
+      "team": "Product",
+      "stakeholders": [
+        "Design"
+      ]
+    },
+    "created_at": "2026-12-30T00:00:00+00:00",
+    "updated_at": "2027-01-13T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:028",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Conversation branching",
+    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
+    "metadata": {
+      "author": "Product",
+      "status": "Backlog",
+      "team": "Product",
+      "stakeholders": [
+        "Design"
+      ]
+    },
+    "created_at": "2027-03-07T00:00:00+00:00",
+    "updated_at": "2027-03-21T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:prd:029",
+    "source": "mock",
+    "type": "prd",
+    "title": "PRD: Conversation branching",
+    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
+    "metadata": {
+      "author": "Product",
+      "status": "Backlog",
+      "team": "Product",
+      "stakeholders": [
+        "Design"
+      ]
+    },
+    "created_at": "2027-04-17T00:00:00+00:00",
+    "updated_at": "2027-05-01T00:00:00+00:00",
+    "is_deleted": false
   }
 ]

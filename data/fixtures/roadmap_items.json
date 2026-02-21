@@ -1,352 +1,602 @@
 [
   {
-    "id": "mock:roadmap:001",
-    "title": "GPT-4o: Omni-modal model with text, vision, and audio",
-    "body": "Launch GPT-4o as the flagship multimodal model combining text, vision, and audio capabilities in a single architecture. The model achieves GPT-4 Turbo-level performance on text benchmarks while adding native image and audio understanding at 2x the speed and 50% lower cost. Key differentiator is the unified model architecture rather than separate pipelines stitched together. Rollout plan: API access first, then ChatGPT Plus, then Free tier. Audio capabilities phased in post-launch due to safety review requirements for voice cloning risks.",
+    "id": "mock:roadmap_item:000",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "GPT-4o launch",
+    "body": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
     "metadata": {
-      "tags": ["multimodal", "model-launch", "flagship"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "core"
     },
-    "created_at": "2025-01-10T09:00:00+00:00",
-    "updated_at": "2025-05-15T10:00:00+00:00"
+    "created_at": "2024-01-30T00:00:00+00:00",
+    "updated_at": "2024-02-06T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:002",
-    "title": "o1 reasoning model with chain-of-thought capabilities",
-    "body": "Ship the o1 model family optimized for complex reasoning tasks including math, science, and coding. The model uses an internal chain-of-thought process that significantly improves accuracy on hard problems at the cost of higher latency. Launch includes o1-preview for broad access and o1-mini for cost-sensitive applications. Enterprise pricing model needs to account for reasoning tokens that are generated but not shown to users. Competitive positioning against Claude's extended thinking and Gemini's reasoning capabilities is a key consideration.",
+    "id": "mock:roadmap_item:001",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "GPT-4o launch",
+    "body": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
     "metadata": {
-      "tags": ["reasoning", "model-launch", "enterprise"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "core"
     },
-    "created_at": "2025-01-15T14:00:00+00:00",
-    "updated_at": "2025-09-20T11:30:00+00:00"
+    "created_at": "2024-03-10T00:00:00+00:00",
+    "updated_at": "2024-03-17T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:003",
-    "title": "Sora: Video generation and editing model",
-    "body": "Launch Sora as a video generation model capable of creating realistic and imaginative scenes from text descriptions. Initial release supports up to 60-second video clips at 1080p resolution. Key technical challenges include temporal consistency across frames, physics simulation accuracy, and text rendering within videos. Safety considerations are paramount—need robust content filtering, provenance metadata, and C2PA watermarking. Phased rollout starting with a limited research preview, then ChatGPT Plus, then API access. Pricing model based on compute seconds consumed.",
+    "id": "mock:roadmap_item:002",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "GPT-4o launch",
+    "body": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
     "metadata": {
-      "tags": ["multimodal", "video", "model-launch"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "core"
     },
-    "created_at": "2025-02-01T10:00:00+00:00",
-    "updated_at": "2025-12-10T09:00:00+00:00"
+    "created_at": "2024-04-12T00:00:00+00:00",
+    "updated_at": "2024-04-19T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:004",
-    "title": "Canvas: Collaborative writing and coding workspace",
-    "body": "Build Canvas as an interactive workspace within ChatGPT for writing and coding tasks that go beyond simple conversation. Users can see their document or code alongside ChatGPT's suggestions, make targeted edits, and iterate on specific sections. The canvas opens as a side panel with full editor capabilities including syntax highlighting, undo/redo, and version history. Writing mode supports suggestions for length adjustment, reading level changes, and structural editing. Code mode supports language translation, bug detection, and documentation generation.",
+    "id": "mock:roadmap_item:003",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "o1 and o1 mini",
+    "body": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
     "metadata": {
-      "tags": ["canvas", "writing", "coding", "ux"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
+      "quarter": "2024-Q3",
+      "status": "shipped",
+      "team": "research"
     },
-    "created_at": "2025-02-15T11:30:00+00:00",
-    "updated_at": "2025-10-05T14:00:00+00:00"
+    "created_at": "2024-05-14T00:00:00+00:00",
+    "updated_at": "2024-05-21T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:005",
-    "title": "Advanced Voice Mode with emotional intelligence",
-    "body": "Upgrade voice mode to support natural conversational patterns including interruption, emotional tone detection, and multi-speaker awareness. The system should handle overlapping speech gracefully, detect frustration or confusion in the user's tone, and adapt response style accordingly. Latency target is sub-300ms for response initiation. Launch includes five new voice options with more natural prosody. Safety review required for voice impersonation risks. Initial rollout to Plus subscribers with eventual expansion to free tier with usage limits.",
+    "id": "mock:roadmap_item:004",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "o1 and o1 mini",
+    "body": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
     "metadata": {
-      "tags": ["voice", "multimodal", "consumer"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
+      "quarter": "2024-Q3",
+      "status": "shipped",
+      "team": "research"
     },
-    "created_at": "2025-03-01T09:00:00+00:00",
-    "updated_at": "2025-11-01T10:30:00+00:00"
+    "created_at": "2024-06-08T00:00:00+00:00",
+    "updated_at": "2024-06-15T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:006",
-    "title": "GPT Store: Marketplace for custom GPTs",
-    "body": "Launch a curated marketplace for discovering and using custom GPTs created by the community and partners. Include search, categories, featured collections, ratings, and reviews. Phase 2 introduces monetization where creators can charge for premium GPTs with OpenAI handling payments. Revenue share model: 70% creator, 30% platform. Need robust quality review process to prevent spam, harmful content, and IP violations. Analytics dashboard for creators showing usage, retention, and revenue metrics. Partnership deals with enterprise software vendors for official GPTs.",
+    "id": "mock:roadmap_item:005",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "o1 and o1 mini",
+    "body": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
     "metadata": {
-      "tags": ["platform", "marketplace", "monetization"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
+      "quarter": "2024-Q3",
+      "status": "shipped",
+      "team": "research"
     },
-    "created_at": "2025-03-10T14:00:00+00:00",
-    "updated_at": "2025-06-20T11:00:00+00:00"
+    "created_at": "2024-07-06T00:00:00+00:00",
+    "updated_at": "2024-07-13T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:007",
-    "title": "Projects: Persistent workspaces with file management",
-    "body": "Introduce Projects as persistent workspaces where users can organize conversations, files, and custom instructions around a specific goal. Each project maintains its own context, uploaded files, and conversation history. Users can set project-specific instructions that apply to all conversations within the project. Enterprise teams can share projects with role-based permissions. File management includes version tracking and cross-conversation file references. This transforms ChatGPT from a conversation tool into a persistent workspace for complex, multi-session tasks.",
+    "id": "mock:roadmap_item:006",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Memory",
+    "body": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
     "metadata": {
-      "tags": ["productivity", "workspace", "enterprise"],
-      "priority": "high",
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2024-07-18T00:00:00+00:00",
+    "updated_at": "2024-07-25T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:007",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Memory",
+    "body": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
+    "metadata": {
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2024-09-02T00:00:00+00:00",
+    "updated_at": "2024-09-09T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:008",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Memory",
+    "body": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
+    "metadata": {
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2024-09-13T00:00:00+00:00",
+    "updated_at": "2024-09-20T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:009",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Custom GPTs and GPT Store",
+    "body": "Users can create and share custom GPTs. Store launched Jan 2024.",
+    "metadata": {
+      "quarter": "2024-Q1",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2024-10-20T00:00:00+00:00",
+    "updated_at": "2024-10-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:010",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Custom GPTs and GPT Store",
+    "body": "Users can create and share custom GPTs. Store launched Jan 2024.",
+    "metadata": {
+      "quarter": "2024-Q1",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2024-11-26T00:00:00+00:00",
+    "updated_at": "2024-12-03T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:011",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Custom GPTs and GPT Store",
+    "body": "Users can create and share custom GPTs. Store launched Jan 2024.",
+    "metadata": {
+      "quarter": "2024-Q1",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2024-12-31T00:00:00+00:00",
+    "updated_at": "2025-01-07T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:012",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Enterprise",
+    "body": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
+    "metadata": {
+      "quarter": "2024-Q3",
+      "status": "shipped",
+      "team": "enterprise"
+    },
+    "created_at": "2025-01-29T00:00:00+00:00",
+    "updated_at": "2025-02-05T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:013",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Enterprise",
+    "body": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
+    "metadata": {
+      "quarter": "2024-Q3",
+      "status": "shipped",
+      "team": "enterprise"
+    },
+    "created_at": "2025-02-27T00:00:00+00:00",
+    "updated_at": "2025-03-06T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:014",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Enterprise",
+    "body": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
+    "metadata": {
+      "quarter": "2024-Q3",
+      "status": "shipped",
+      "team": "enterprise"
+    },
+    "created_at": "2025-03-20T00:00:00+00:00",
+    "updated_at": "2025-03-27T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:015",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Canvas",
+    "body": "Native document editing and generation in ChatGPT. Launched 2024.",
+    "metadata": {
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2025-04-11T00:00:00+00:00",
+    "updated_at": "2025-04-18T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:016",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Canvas",
+    "body": "Native document editing and generation in ChatGPT. Launched 2024.",
+    "metadata": {
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2025-06-04T00:00:00+00:00",
+    "updated_at": "2025-06-11T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:017",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Canvas",
+    "body": "Native document editing and generation in ChatGPT. Launched 2024.",
+    "metadata": {
+      "quarter": "2024-Q2",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2025-07-08T00:00:00+00:00",
+    "updated_at": "2025-07-15T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:018",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Projects",
+    "body": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
+    "metadata": {
+      "quarter": "2024-Q4",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2025-08-01T00:00:00+00:00",
+    "updated_at": "2025-08-08T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:019",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Projects",
+    "body": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
+    "metadata": {
+      "quarter": "2024-Q4",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2025-08-14T00:00:00+00:00",
+    "updated_at": "2025-08-21T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:020",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Projects",
+    "body": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
+    "metadata": {
+      "quarter": "2024-Q4",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2025-09-27T00:00:00+00:00",
+    "updated_at": "2025-10-04T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:021",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Advanced Voice Mode",
+    "body": "Real-time voice with low latency and interruption. Rolling out 2025.",
+    "metadata": {
+      "quarter": "2025-Q1",
       "status": "in_progress",
-      "url": ""
+      "team": "multimodal"
     },
-    "created_at": "2025-04-01T10:00:00+00:00",
-    "updated_at": "2026-01-15T09:30:00+00:00"
+    "created_at": "2025-10-15T00:00:00+00:00",
+    "updated_at": "2025-10-22T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:008",
-    "title": "Deep Research: Autonomous multi-source investigation",
-    "body": "Build a deep research capability where ChatGPT autonomously plans and executes multi-step research tasks. The system browses multiple sources, cross-references information, identifies conflicting claims, and synthesizes findings into a structured report with citations. Users can watch the research process in real time and intervene to redirect focus. Target use cases include market research, competitive analysis, academic literature reviews, and due diligence. Differentiate from basic browsing by providing comprehensive coverage rather than surface-level answers.",
+    "id": "mock:roadmap_item:022",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Advanced Voice Mode",
+    "body": "Real-time voice with low latency and interruption. Rolling out 2025.",
     "metadata": {
-      "tags": ["research", "agent", "browsing"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
-    },
-    "created_at": "2025-04-15T11:00:00+00:00",
-    "updated_at": "2026-01-20T14:00:00+00:00"
-  },
-  {
-    "id": "mock:roadmap:009",
-    "title": "Operator: AI agent for web-based task execution",
-    "body": "Launch Operator as an AI agent that can perform tasks on the web on behalf of users. The agent can navigate websites, fill forms, make purchases, and complete multi-step workflows while maintaining user oversight. Key technical challenges include reliable web element identification, handling CAPTCHAs, managing authentication flows, and recovering from errors. Safety requirements include human-in-the-loop confirmation for high-stakes actions like payments. Initial supported sites curated based on reliability. Enterprise version with custom site configurations planned for Q3.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["agent", "automation", "consumer"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
-    },
-    "created_at": "2025-05-01T09:30:00+00:00",
-    "updated_at": "2026-01-25T10:00:00+00:00"
-  },
-  {
-    "id": "mock:roadmap:010",
-    "title": "Enterprise SSO and SCIM provisioning",
-    "body": "Implement SAML 2.0 SSO and SCIM 2.0 user provisioning for ChatGPT Enterprise and Team tiers. Support all major identity providers including Okta, Azure AD, OneLogin, and Ping Identity. Auto-provisioning and de-provisioning via SCIM reduces IT overhead and ensures security compliance. Include just-in-time provisioning for new users and automatic license reclamation for deactivated accounts. This is the most requested enterprise feature and is blocking several Fortune 500 deals worth a combined $15M in ARR.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["enterprise", "security", "sso"],
-      "priority": "high",
+      "quarter": "2025-Q1",
       "status": "in_progress",
-      "url": ""
+      "team": "multimodal"
     },
-    "created_at": "2025-05-15T14:00:00+00:00",
-    "updated_at": "2026-02-01T09:00:00+00:00"
+    "created_at": "2025-11-12T00:00:00+00:00",
+    "updated_at": "2025-11-19T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:011",
-    "title": "Memory V2: Transparent, user-controlled persistent memory",
-    "body": "Redesign the memory system to be fully transparent and user-controlled. V2 includes a searchable memory dashboard, conflict resolution for contradictory facts, explicit memory scoping per workspace, and natural language memory management commands that actually work. Enterprise features include admin controls for memory policies, data residency compliance, and memory export capabilities. The system should proactively suggest relevant memories during conversations and allow users to confirm or reject each memory before it is stored.",
+    "id": "mock:roadmap_item:023",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Advanced Voice Mode",
+    "body": "Real-time voice with low latency and interruption. Rolling out 2025.",
     "metadata": {
-      "tags": ["memory", "personalization", "privacy"],
-      "priority": "high",
+      "quarter": "2025-Q1",
       "status": "in_progress",
-      "url": ""
+      "team": "multimodal"
     },
-    "created_at": "2025-06-01T10:00:00+00:00",
-    "updated_at": "2026-02-05T11:00:00+00:00"
+    "created_at": "2025-12-30T00:00:00+00:00",
+    "updated_at": "2026-01-06T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:012",
-    "title": "Enterprise data residency: EU and APAC regions",
-    "body": "Deploy dedicated infrastructure in EU (Frankfurt) and APAC (Tokyo, Sydney) regions to meet data residency requirements. All conversation data, memory, file uploads, and model inference for customers in these regions will be processed and stored locally. Requires significant infrastructure investment including regional inference clusters, data replication architectures, and compliance certification for each region. Legal team working on DPA addendums for each jurisdiction. Target: EU launch Q3, APAC Q4. Revenue impact: unlocks $20M+ in blocked enterprise pipeline.",
+    "id": "mock:roadmap_item:024",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Search",
+    "body": "Web search and citation from within ChatGPT. Competing with Perplexity.",
     "metadata": {
-      "tags": ["enterprise", "compliance", "infrastructure"],
-      "priority": "high",
+      "quarter": "2025-Q1",
       "status": "in_progress",
-      "url": ""
+      "team": "product"
     },
-    "created_at": "2025-06-15T09:00:00+00:00",
-    "updated_at": "2026-02-10T13:00:00+00:00"
+    "created_at": "2026-01-10T00:00:00+00:00",
+    "updated_at": "2026-01-17T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:013",
-    "title": "Structured Outputs: Guaranteed JSON schema conformance",
-    "body": "Launch structured output mode in the API that guarantees response conformance to user-provided JSON schemas. Uses constrained decoding to ensure syntactically valid JSON that matches the specified schema including types, required fields, and enum values. Eliminates the need for output parsing and retry logic in production applications. Support streaming of partial valid JSON for real-time applications. Include SDK helpers for TypeScript and Python. This is the most requested API feature and directly competes with Anthropic's tool use reliability claims.",
+    "id": "mock:roadmap_item:025",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Search",
+    "body": "Web search and citation from within ChatGPT. Competing with Perplexity.",
     "metadata": {
-      "tags": ["api", "developer", "structured-output"],
-      "priority": "high",
-      "status": "launched",
-      "url": ""
-    },
-    "created_at": "2025-07-01T11:30:00+00:00",
-    "updated_at": "2025-08-15T10:00:00+00:00"
-  },
-  {
-    "id": "mock:roadmap:014",
-    "title": "Dark mode across all platforms",
-    "body": "Implement a comprehensive dark mode theme across web, iOS, and Android applications. Include three options: light, dark, and system-preference-following. The dark theme should use proper contrast ratios meeting WCAG AA standards, support OLED-black variant for mobile battery savings, and include smooth transition animations when switching. Ensure all components, including code blocks, file previews, and canvas, are properly themed. Schedule: design finalization in 4 weeks, implementation in 6 weeks, accessibility audit in 2 weeks, rollout in 2 weeks.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["ux", "design", "accessibility"],
-      "priority": "medium",
-      "status": "launched",
-      "url": ""
-    },
-    "created_at": "2025-07-15T14:00:00+00:00",
-    "updated_at": "2025-11-20T09:30:00+00:00"
-  },
-  {
-    "id": "mock:roadmap:015",
-    "title": "API batch processing for enterprise workloads",
-    "body": "Build a batch processing API that allows enterprise customers to submit large volumes of requests asynchronously. Accept up to 50,000 requests per batch via file upload or streaming. Provide webhook callbacks for batch completion and per-request status. Offer discounted pricing at 50% of real-time rates to incentivize off-peak usage and smooth demand curves. Include priority queue options for time-sensitive batches. Dashboard showing batch progress, estimated completion time, and cost tracking. Target customers: data enrichment companies, content platforms, and analytics firms.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["api", "enterprise", "batch"],
-      "priority": "medium",
+      "quarter": "2025-Q1",
       "status": "in_progress",
-      "url": ""
+      "team": "product"
     },
-    "created_at": "2025-08-01T10:00:00+00:00",
-    "updated_at": "2026-01-10T14:00:00+00:00"
+    "created_at": "2026-02-07T00:00:00+00:00",
+    "updated_at": "2026-02-14T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:016",
-    "title": "Real-time collaboration for ChatGPT Teams",
-    "body": "Enable real-time multiplayer conversations for ChatGPT Team and Enterprise tiers. Multiple users can participate in the same conversation, see each other's messages in real time, and build on shared context. Include presence indicators, @mentions, and threaded replies. Role-based permissions control who can send messages, edit shared instructions, and manage conversation settings. This transforms ChatGPT from a single-player tool into a collaborative workspace and is a key differentiator for our enterprise offering against competitors.",
+    "id": "mock:roadmap_item:026",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "ChatGPT Search",
+    "body": "Web search and citation from within ChatGPT. Competing with Perplexity.",
     "metadata": {
-      "tags": ["collaboration", "enterprise", "team"],
-      "priority": "medium",
+      "quarter": "2025-Q1",
+      "status": "in_progress",
+      "team": "product"
+    },
+    "created_at": "2026-03-05T00:00:00+00:00",
+    "updated_at": "2026-03-12T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:027",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Sora video model",
+    "body": "Text-to-video generation. Limited release. Safety and quality bar for public.",
+    "metadata": {
+      "quarter": "2025",
       "status": "planned",
-      "url": ""
+      "team": "research"
     },
-    "created_at": "2025-08-15T11:00:00+00:00",
-    "updated_at": "2026-01-20T10:00:00+00:00"
+    "created_at": "2026-04-05T00:00:00+00:00",
+    "updated_at": "2026-04-12T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:017",
-    "title": "o3 reasoning model: Next-gen complex problem solving",
-    "body": "Develop and launch the o3 model as the successor to o1, with significantly improved reasoning capabilities on math, science, and coding benchmarks. Target a 30% improvement on GPQA Diamond and a 50% improvement on SWE-bench Verified. Reduce latency by 40% compared to o1 through architectural optimizations to the reasoning process. Include a new 'reasoning effort' parameter that lets users and developers trade off between thoroughness and speed. Enterprise focus on complex document analysis, legal reasoning, and financial modeling use cases.",
+    "id": "mock:roadmap_item:028",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Sora video model",
+    "body": "Text-to-video generation. Limited release. Safety and quality bar for public.",
     "metadata": {
-      "tags": ["reasoning", "model-launch", "research"],
-      "priority": "high",
-      "status": "in_progress",
-      "url": ""
-    },
-    "created_at": "2025-09-01T09:00:00+00:00",
-    "updated_at": "2026-02-15T11:30:00+00:00"
-  },
-  {
-    "id": "mock:roadmap:018",
-    "title": "Plugin API v2 with enhanced developer tools",
-    "body": "Redesign the plugin and actions API with proper OAuth 2.0 flows, webhook support, improved rate limiting, and a comprehensive SDK. Include a plugin sandbox for testing, automated compatibility verification, and analytics for plugin developers. Support long-running operations with progress callbacks and cancellation. Improve the plugin manifest to enable richer UI rendering within conversations. Target: attract 10,000 active plugin developers within 6 months of launch through improved DX, documentation, and a $10M developer fund for the ecosystem.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["api", "platform", "developer"],
-      "priority": "medium",
+      "quarter": "2025",
       "status": "planned",
-      "url": ""
+      "team": "research"
     },
-    "created_at": "2025-09-15T14:00:00+00:00",
-    "updated_at": "2026-01-15T09:00:00+00:00"
+    "created_at": "2026-05-11T00:00:00+00:00",
+    "updated_at": "2026-05-18T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:019",
-    "title": "Enterprise admin console with analytics dashboard",
-    "body": "Build a comprehensive admin console for enterprise customers with user and team management, usage analytics, cost allocation, policy configuration, and compliance reporting. Real-time dashboards showing organization-wide usage patterns, per-team token consumption, and model selection distribution. Support custom content policies, approved model lists, and usage quotas by team. Integration with existing enterprise tools: SIEM for security logs, SSO for identity, and finance systems for cost tracking. This is table-stakes for enterprise SaaS competition.",
+    "id": "mock:roadmap_item:029",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Sora video model",
+    "body": "Text-to-video generation. Limited release. Safety and quality bar for public.",
     "metadata": {
-      "tags": ["enterprise", "admin", "analytics"],
-      "priority": "high",
-      "status": "in_progress",
-      "url": ""
-    },
-    "created_at": "2025-10-01T10:00:00+00:00",
-    "updated_at": "2026-02-10T14:00:00+00:00"
-  },
-  {
-    "id": "mock:roadmap:020",
-    "title": "Image generation V2: Consistency and professional controls",
-    "body": "Major upgrade to image generation capabilities with character consistency across scenes, professional style presets, inpainting and outpainting tools, and multi-image batch generation. Support brand asset consistency for marketing teams. Improved quality on text rendering, hands, and faces. Integration with Canvas for iterative image editing workflows. Competitive response to Midjourney's consistency features and Adobe Firefly's professional tools. Pricing: included in Plus for limited generations, usage-based for API access.",
-    "source": "mock",
-    "metadata": {
-      "tags": ["image-generation", "creative", "multimodal"],
-      "priority": "medium",
+      "quarter": "2025",
       "status": "planned",
-      "url": ""
+      "team": "research"
     },
-    "created_at": "2025-10-15T11:30:00+00:00",
-    "updated_at": "2026-01-25T13:00:00+00:00"
+    "created_at": "2026-06-18T00:00:00+00:00",
+    "updated_at": "2026-06-25T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:021",
-    "title": "Agentic framework for multi-step task automation",
-    "body": "Build a general-purpose agentic framework that enables ChatGPT to plan and execute complex multi-step tasks using tools, browsing, code execution, and file management. Include human-in-the-loop checkpoints for high-stakes actions, detailed execution logs, and error recovery strategies. Support concurrent agent tasks with a task queue and priority system. Enterprise features include policy controls on agent capabilities and audit logs. This is the strategic evolution from chatbot to AI agent and our answer to competing agent products from Anthropic, Google, and startups.",
+    "id": "mock:roadmap_item:030",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Team plan",
+    "body": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
     "metadata": {
-      "tags": ["agent", "automation", "platform"],
-      "priority": "high",
-      "status": "in_progress",
-      "url": ""
+      "quarter": "2024-Q4",
+      "status": "shipped",
+      "team": "product"
     },
-    "created_at": "2025-11-01T09:00:00+00:00",
-    "updated_at": "2026-02-15T10:00:00+00:00"
+    "created_at": "2026-07-22T00:00:00+00:00",
+    "updated_at": "2026-07-29T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:022",
-    "title": "Accessibility overhaul: WCAG 2.1 AA compliance",
-    "body": "Comprehensive accessibility remediation to achieve WCAG 2.1 AA compliance across all platforms. Scope includes screen reader compatibility for conversation threads, keyboard navigation throughout the app, proper focus management for dynamic content, adequate color contrast ratios, reduced motion support, and alternative text for all visual content. Automated accessibility testing integrated into CI/CD pipeline. Third-party audit from Deque Systems scheduled for post-remediation verification. Required for government and education sector procurement.",
+    "id": "mock:roadmap_item:031",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Team plan",
+    "body": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
     "metadata": {
-      "tags": ["accessibility", "compliance", "ux"],
-      "priority": "high",
-      "status": "in_progress",
-      "url": ""
+      "quarter": "2024-Q4",
+      "status": "shipped",
+      "team": "product"
     },
-    "created_at": "2025-11-15T14:00:00+00:00",
-    "updated_at": "2026-02-01T11:00:00+00:00"
+    "created_at": "2026-08-29T00:00:00+00:00",
+    "updated_at": "2026-09-05T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:023",
-    "title": "Conversation search with semantic understanding",
-    "body": "Replace the current title-only search with full-text semantic search across all conversation content. Users can search by concept rather than exact keywords, with results ranked by relevance. Support filters for date range, model used, conversation type, and shared status. Show relevant snippets with highlighted matches. Leverage our embedding models for semantic indexing. Enterprise search includes organization-wide search with access controls. Infrastructure requires building a search index service that scales to billions of messages across millions of users.",
+    "id": "mock:roadmap_item:032",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Team plan",
+    "body": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
     "metadata": {
-      "tags": ["search", "infrastructure", "ux"],
-      "priority": "medium",
+      "quarter": "2024-Q4",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2026-09-25T00:00:00+00:00",
+    "updated_at": "2026-10-02T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:033",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Scheduled tasks",
+    "body": "Run a task on a schedule (e.g. daily digest). In backlog.",
+    "metadata": {
+      "quarter": "2025",
       "status": "planned",
-      "url": ""
+      "team": "product"
     },
-    "created_at": "2025-12-01T10:00:00+00:00",
-    "updated_at": "2026-02-05T09:30:00+00:00"
+    "created_at": "2026-10-03T00:00:00+00:00",
+    "updated_at": "2026-10-10T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:024",
-    "title": "GPT-5: Next frontier model with breakthrough capabilities",
-    "body": "Develop and prepare for the launch of GPT-5, the next major model generation. Targeting substantial improvements in reasoning depth, factual accuracy, instruction following, and creative output compared to GPT-4o. New capabilities include longer effective context utilization, improved multilingual performance, and native multimodal generation. The training run is in progress with estimated completion in Q2. Safety evaluation and red-teaming timeline is 3 months post-training. Launch strategy: staged rollout starting with API, then ChatGPT Plus, enterprise preview, and finally free tier.",
+    "id": "mock:roadmap_item:034",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Scheduled tasks",
+    "body": "Run a task on a schedule (e.g. daily digest). In backlog.",
     "metadata": {
-      "tags": ["model-launch", "research", "flagship"],
-      "priority": "high",
-      "status": "in_progress",
-      "url": ""
+      "quarter": "2025",
+      "status": "planned",
+      "team": "product"
     },
-    "created_at": "2025-12-15T09:00:00+00:00",
-    "updated_at": "2026-02-18T10:00:00+00:00"
+    "created_at": "2026-11-14T00:00:00+00:00",
+    "updated_at": "2026-11-21T00:00:00+00:00",
+    "is_deleted": false
   },
   {
-    "id": "mock:roadmap:025",
-    "title": "Enterprise data privacy: SOC 2 Type II and HIPAA certification",
-    "body": "Achieve SOC 2 Type II and HIPAA BAA compliance certifications for ChatGPT Enterprise. This requires implementing comprehensive security controls, audit logging, data encryption at rest and in transit, access controls, and incident response procedures. Engage Deloitte as the audit firm for SOC 2 assessment. HIPAA compliance enables healthcare sector adoption for clinical documentation, medical research, and patient communication assistance. The certification process takes 12 months minimum. Legal and security teams are staffing up to support the continuous compliance requirements.",
+    "id": "mock:roadmap_item:035",
     "source": "mock",
+    "type": "roadmap_item",
+    "title": "Scheduled tasks",
+    "body": "Run a task on a schedule (e.g. daily digest). In backlog.",
     "metadata": {
-      "tags": ["enterprise", "compliance", "security", "privacy"],
-      "priority": "high",
-      "status": "in_progress",
-      "url": ""
+      "quarter": "2025",
+      "status": "planned",
+      "team": "product"
     },
-    "created_at": "2026-01-05T10:00:00+00:00",
-    "updated_at": "2026-02-15T14:00:00+00:00"
+    "created_at": "2026-12-13T00:00:00+00:00",
+    "updated_at": "2026-12-20T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:036",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "o3 and reasoning scale",
+    "body": "Next-gen reasoning model. Announced for 2025.",
+    "metadata": {
+      "quarter": "2025",
+      "status": "planned",
+      "team": "research"
+    },
+    "created_at": "2027-01-27T00:00:00+00:00",
+    "updated_at": "2027-02-03T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:037",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "o3 and reasoning scale",
+    "body": "Next-gen reasoning model. Announced for 2025.",
+    "metadata": {
+      "quarter": "2025",
+      "status": "planned",
+      "team": "research"
+    },
+    "created_at": "2027-02-18T00:00:00+00:00",
+    "updated_at": "2027-02-25T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:038",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "o3 and reasoning scale",
+    "body": "Next-gen reasoning model. Announced for 2025.",
+    "metadata": {
+      "quarter": "2025",
+      "status": "planned",
+      "team": "research"
+    },
+    "created_at": "2027-03-18T00:00:00+00:00",
+    "updated_at": "2027-03-25T00:00:00+00:00",
+    "is_deleted": false
+  },
+  {
+    "id": "mock:roadmap_item:039",
+    "source": "mock",
+    "type": "roadmap_item",
+    "title": "Deep Research",
+    "body": "Multi-step research with sources. Launched 2024. Improving citation quality.",
+    "metadata": {
+      "quarter": "2024-Q3",
+      "status": "shipped",
+      "team": "product"
+    },
+    "created_at": "2027-04-05T00:00:00+00:00",
+    "updated_at": "2027-04-12T00:00:00+00:00",
+    "is_deleted": false
   }
 ]

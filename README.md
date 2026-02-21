@@ -2,6 +2,12 @@
 
 AI-powered organizational knowledge search. Syncs data from Monday.com, Notion, and other sources into a vector database, then exposes semantic search via MCP for Cursor and a REST API.
 
+## Prerequisites
+
+- Python 3.11+
+- **Docker** (for Qdrant) — start Docker Desktop before `docker-compose up`
+- OpenAI API key (for embeddings and synthesis)
+
 ## Quick Start
 
 ```bash
@@ -15,7 +21,7 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env — set OPENAI_API_KEY at minimum
 
-# 3. Start Qdrant
+# 3. Start Qdrant (requires Docker Desktop or Docker daemon to be running)
 docker-compose up qdrant -d
 
 # 4. Seed with mock data (after fixtures are generated)
