@@ -9,7 +9,7 @@ import pytest
 
 from research_agent.memory.memory_service import MemoryService, MemorySearchResult
 from research_agent.vector.qdrant_client import SearchResult
-from tests.conftest import MockEmbeddingProvider, make_item
+from tests.conftest import MockEmbeddingProvider, make_entity
 
 
 @pytest.fixture
@@ -68,7 +68,8 @@ class TestMemoryServiceSearch:
                         "title": "Feature A",
                         "body": "Details about feature A",
                         "source": "mock",
-                        "type": "feature_request",
+                        "entity_type": "feature_request",
+                        "field_name": "description",
                         "metadata": {"tags": ["ui"]},
                         "created_at": "2025-06-15T00:00:00+00:00",
                     },
@@ -93,8 +94,8 @@ class TestMemoryServiceSearch:
                     id="item1",
                     parent_id="item1",
                     score=0.9,
-                    payload={"title": "X", "body": "Y", "source": "mock", "type": "bug",
-                             "metadata": {}, "created_at": ""},
+                    payload={"title": "X", "body": "Y", "source": "mock", "entity_type": "bug",
+                             "field_name": "description", "metadata": {}, "created_at": ""},
                 )
             ]
         )
@@ -108,35 +109,35 @@ class TestMemoryServiceSearch:
     @pytest.mark.asyncio
     async def test_search_with_filters(self, memory_service, mock_vector_store):
         await memory_service.search_memories(
-            "bugs", source="mock", item_type="bug", top_k=5
+            "bugs", source="mock", entity_types=["bug"], top_k=5
         )
         mock_vector_store.search.assert_called_once()
         call_kwargs = mock_vector_store.search.call_args[1]
         assert call_kwargs["source"] == "mock"
-        assert call_kwargs["item_type"] == "bug"
+        assert call_kwargs["entity_types"] == ["bug"]
         assert call_kwargs["top_k"] == 5
 
 
 class TestMemoryServiceAddUpdate:
     @pytest.mark.asyncio
-    async def test_add_item(self, memory_service, mock_vector_store):
-        item = make_item()
-        changed = await memory_service.add_or_update_item(item)
+    async def test_add_entity(self, memory_service, mock_vector_store):
+        entity = make_entity()
+        changed = await memory_service.add_or_update_entity(entity)
         assert changed is True
 
     @pytest.mark.asyncio
-    async def test_add_same_item_no_change(self, memory_service, mock_vector_store):
-        item = make_item()
-        await memory_service.add_or_update_item(item)
-        changed = await memory_service.add_or_update_item(item)
+    async def test_add_same_entity_no_change(self, memory_service, mock_vector_store):
+        entity = make_entity()
+        await memory_service.add_or_update_entity(entity)
+        changed = await memory_service.add_or_update_entity(entity)
         assert changed is False
 
     @pytest.mark.asyncio
-    async def test_deleted_item_removes_vectors(self, memory_service, mock_vector_store):
-        item = make_item()
-        await memory_service.add_or_update_item(item)
+    async def test_deleted_entity_removes_vectors(self, memory_service, mock_vector_store):
+        entity = make_entity()
+        await memory_service.add_or_update_entity(entity)
 
-        deleted_item = make_item(is_deleted=True)
-        changed = await memory_service.add_or_update_item(deleted_item)
+        deleted_entity = make_entity(is_deleted=True)
+        changed = await memory_service.add_or_update_entity(deleted_entity)
         assert changed is True
         mock_vector_store.delete_by_parent.assert_called()

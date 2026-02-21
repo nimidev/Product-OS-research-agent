@@ -2,601 +2,601 @@
   {
     "id": "mock:roadmap_item:000",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "000",
     "title": "GPT-4o launch",
-    "body": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "core"
     },
     "created_at": "2024-01-30T00:00:00+00:00",
-    "updated_at": "2024-02-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-02-06T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:001",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "001",
     "title": "GPT-4o launch",
-    "body": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "core"
     },
     "created_at": "2024-03-10T00:00:00+00:00",
-    "updated_at": "2024-03-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-03-17T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:002",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "002",
     "title": "GPT-4o launch",
-    "body": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Multimodal model with vision and voice. Faster and cheaper. May 2024.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "core"
     },
     "created_at": "2024-04-12T00:00:00+00:00",
-    "updated_at": "2024-04-19T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-04-19T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:003",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "003",
     "title": "o1 and o1 mini",
-    "body": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
-    "metadata": {
-      "quarter": "2024-Q3",
+    "fields": {
+      "description": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
+      "target_start": "2024-Q3",
       "status": "shipped",
       "team": "research"
     },
     "created_at": "2024-05-14T00:00:00+00:00",
-    "updated_at": "2024-05-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-05-21T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:004",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "004",
     "title": "o1 and o1 mini",
-    "body": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
-    "metadata": {
-      "quarter": "2024-Q3",
+    "fields": {
+      "description": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
+      "target_start": "2024-Q3",
       "status": "shipped",
       "team": "research"
     },
     "created_at": "2024-06-08T00:00:00+00:00",
-    "updated_at": "2024-06-15T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-15T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:005",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "005",
     "title": "o1 and o1 mini",
-    "body": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
-    "metadata": {
-      "quarter": "2024-Q3",
+    "fields": {
+      "description": "Reasoning models for complex problem-solving. Rolled out Sep 2024.",
+      "target_start": "2024-Q3",
       "status": "shipped",
       "team": "research"
     },
     "created_at": "2024-07-06T00:00:00+00:00",
-    "updated_at": "2024-07-13T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-13T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:006",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "006",
     "title": "ChatGPT Memory",
-    "body": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2024-07-18T00:00:00+00:00",
-    "updated_at": "2024-07-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-25T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:007",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "007",
     "title": "ChatGPT Memory",
-    "body": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2024-09-02T00:00:00+00:00",
-    "updated_at": "2024-09-09T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-09-09T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:008",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "008",
     "title": "ChatGPT Memory",
-    "body": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Model can remember facts across conversations. Launched April 2024. Iterating on reliability.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2024-09-13T00:00:00+00:00",
-    "updated_at": "2024-09-20T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-09-20T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:009",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "009",
     "title": "Custom GPTs and GPT Store",
-    "body": "Users can create and share custom GPTs. Store launched Jan 2024.",
-    "metadata": {
-      "quarter": "2024-Q1",
+    "fields": {
+      "description": "Users can create and share custom GPTs. Store launched Jan 2024.",
+      "target_start": "2024-Q1",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2024-10-20T00:00:00+00:00",
-    "updated_at": "2024-10-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-10-27T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:010",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "010",
     "title": "Custom GPTs and GPT Store",
-    "body": "Users can create and share custom GPTs. Store launched Jan 2024.",
-    "metadata": {
-      "quarter": "2024-Q1",
+    "fields": {
+      "description": "Users can create and share custom GPTs. Store launched Jan 2024.",
+      "target_start": "2024-Q1",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2024-11-26T00:00:00+00:00",
-    "updated_at": "2024-12-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-12-03T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:011",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "011",
     "title": "Custom GPTs and GPT Store",
-    "body": "Users can create and share custom GPTs. Store launched Jan 2024.",
-    "metadata": {
-      "quarter": "2024-Q1",
+    "fields": {
+      "description": "Users can create and share custom GPTs. Store launched Jan 2024.",
+      "target_start": "2024-Q1",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2024-12-31T00:00:00+00:00",
-    "updated_at": "2025-01-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-01-07T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:012",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "012",
     "title": "ChatGPT Enterprise",
-    "body": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
-    "metadata": {
-      "quarter": "2024-Q3",
+    "fields": {
+      "description": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
+      "target_start": "2024-Q3",
       "status": "shipped",
       "team": "enterprise"
     },
     "created_at": "2025-01-29T00:00:00+00:00",
-    "updated_at": "2025-02-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-02-05T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:013",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "013",
     "title": "ChatGPT Enterprise",
-    "body": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
-    "metadata": {
-      "quarter": "2024-Q3",
+    "fields": {
+      "description": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
+      "target_start": "2024-Q3",
       "status": "shipped",
       "team": "enterprise"
     },
     "created_at": "2025-02-27T00:00:00+00:00",
-    "updated_at": "2025-03-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-03-06T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:014",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "014",
     "title": "ChatGPT Enterprise",
-    "body": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
-    "metadata": {
-      "quarter": "2024-Q3",
+    "fields": {
+      "description": "Dedicated instance, SSO, admin controls, data residency. Launched Aug 2024.",
+      "target_start": "2024-Q3",
       "status": "shipped",
       "team": "enterprise"
     },
     "created_at": "2025-03-20T00:00:00+00:00",
-    "updated_at": "2025-03-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-03-27T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:015",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "015",
     "title": "Canvas",
-    "body": "Native document editing and generation in ChatGPT. Launched 2024.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Native document editing and generation in ChatGPT. Launched 2024.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2025-04-11T00:00:00+00:00",
-    "updated_at": "2025-04-18T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-04-18T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:016",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "016",
     "title": "Canvas",
-    "body": "Native document editing and generation in ChatGPT. Launched 2024.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Native document editing and generation in ChatGPT. Launched 2024.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2025-06-04T00:00:00+00:00",
-    "updated_at": "2025-06-11T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-11T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:017",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "017",
     "title": "Canvas",
-    "body": "Native document editing and generation in ChatGPT. Launched 2024.",
-    "metadata": {
-      "quarter": "2024-Q2",
+    "fields": {
+      "description": "Native document editing and generation in ChatGPT. Launched 2024.",
+      "target_start": "2024-Q2",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2025-07-08T00:00:00+00:00",
-    "updated_at": "2025-07-15T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-07-15T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:018",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "018",
     "title": "Projects",
-    "body": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
-    "metadata": {
-      "quarter": "2024-Q4",
+    "fields": {
+      "description": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
+      "target_start": "2024-Q4",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2025-08-01T00:00:00+00:00",
-    "updated_at": "2025-08-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-08-08T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:019",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "019",
     "title": "Projects",
-    "body": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
-    "metadata": {
-      "quarter": "2024-Q4",
+    "fields": {
+      "description": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
+      "target_start": "2024-Q4",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2025-08-14T00:00:00+00:00",
-    "updated_at": "2025-08-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-08-21T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:020",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "020",
     "title": "Projects",
-    "body": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
-    "metadata": {
-      "quarter": "2024-Q4",
+    "fields": {
+      "description": "Persistent project context and files. Replaces ad-hoc file uploads for power users.",
+      "target_start": "2024-Q4",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2025-09-27T00:00:00+00:00",
-    "updated_at": "2025-10-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-04T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:021",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "021",
     "title": "Advanced Voice Mode",
-    "body": "Real-time voice with low latency and interruption. Rolling out 2025.",
-    "metadata": {
-      "quarter": "2025-Q1",
+    "fields": {
+      "description": "Real-time voice with low latency and interruption. Rolling out 2025.",
+      "target_start": "2025-Q1",
       "status": "in_progress",
       "team": "multimodal"
     },
     "created_at": "2025-10-15T00:00:00+00:00",
-    "updated_at": "2025-10-22T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-22T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:022",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "022",
     "title": "Advanced Voice Mode",
-    "body": "Real-time voice with low latency and interruption. Rolling out 2025.",
-    "metadata": {
-      "quarter": "2025-Q1",
+    "fields": {
+      "description": "Real-time voice with low latency and interruption. Rolling out 2025.",
+      "target_start": "2025-Q1",
       "status": "in_progress",
       "team": "multimodal"
     },
     "created_at": "2025-11-12T00:00:00+00:00",
-    "updated_at": "2025-11-19T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-11-19T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:023",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "023",
     "title": "Advanced Voice Mode",
-    "body": "Real-time voice with low latency and interruption. Rolling out 2025.",
-    "metadata": {
-      "quarter": "2025-Q1",
+    "fields": {
+      "description": "Real-time voice with low latency and interruption. Rolling out 2025.",
+      "target_start": "2025-Q1",
       "status": "in_progress",
       "team": "multimodal"
     },
     "created_at": "2025-12-30T00:00:00+00:00",
-    "updated_at": "2026-01-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-06T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:024",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "024",
     "title": "ChatGPT Search",
-    "body": "Web search and citation from within ChatGPT. Competing with Perplexity.",
-    "metadata": {
-      "quarter": "2025-Q1",
+    "fields": {
+      "description": "Web search and citation from within ChatGPT. Competing with Perplexity.",
+      "target_start": "2025-Q1",
       "status": "in_progress",
       "team": "product"
     },
     "created_at": "2026-01-10T00:00:00+00:00",
-    "updated_at": "2026-01-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-17T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:025",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "025",
     "title": "ChatGPT Search",
-    "body": "Web search and citation from within ChatGPT. Competing with Perplexity.",
-    "metadata": {
-      "quarter": "2025-Q1",
+    "fields": {
+      "description": "Web search and citation from within ChatGPT. Competing with Perplexity.",
+      "target_start": "2025-Q1",
       "status": "in_progress",
       "team": "product"
     },
     "created_at": "2026-02-07T00:00:00+00:00",
-    "updated_at": "2026-02-14T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-02-14T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:026",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "026",
     "title": "ChatGPT Search",
-    "body": "Web search and citation from within ChatGPT. Competing with Perplexity.",
-    "metadata": {
-      "quarter": "2025-Q1",
+    "fields": {
+      "description": "Web search and citation from within ChatGPT. Competing with Perplexity.",
+      "target_start": "2025-Q1",
       "status": "in_progress",
       "team": "product"
     },
     "created_at": "2026-03-05T00:00:00+00:00",
-    "updated_at": "2026-03-12T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-03-12T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:027",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "027",
     "title": "Sora video model",
-    "body": "Text-to-video generation. Limited release. Safety and quality bar for public.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Text-to-video generation. Limited release. Safety and quality bar for public.",
+      "target_start": "2025",
       "status": "planned",
       "team": "research"
     },
     "created_at": "2026-04-05T00:00:00+00:00",
-    "updated_at": "2026-04-12T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-04-12T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:028",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "028",
     "title": "Sora video model",
-    "body": "Text-to-video generation. Limited release. Safety and quality bar for public.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Text-to-video generation. Limited release. Safety and quality bar for public.",
+      "target_start": "2025",
       "status": "planned",
       "team": "research"
     },
     "created_at": "2026-05-11T00:00:00+00:00",
-    "updated_at": "2026-05-18T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-05-18T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:029",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "029",
     "title": "Sora video model",
-    "body": "Text-to-video generation. Limited release. Safety and quality bar for public.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Text-to-video generation. Limited release. Safety and quality bar for public.",
+      "target_start": "2025",
       "status": "planned",
       "team": "research"
     },
     "created_at": "2026-06-18T00:00:00+00:00",
-    "updated_at": "2026-06-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-06-25T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:030",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "030",
     "title": "Team plan",
-    "body": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
-    "metadata": {
-      "quarter": "2024-Q4",
+    "fields": {
+      "description": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
+      "target_start": "2024-Q4",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2026-07-22T00:00:00+00:00",
-    "updated_at": "2026-07-29T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-07-29T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:031",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "031",
     "title": "Team plan",
-    "body": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
-    "metadata": {
-      "quarter": "2024-Q4",
+    "fields": {
+      "description": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
+      "target_start": "2024-Q4",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2026-08-29T00:00:00+00:00",
-    "updated_at": "2026-09-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-09-05T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:032",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "032",
     "title": "Team plan",
-    "body": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
-    "metadata": {
-      "quarter": "2024-Q4",
+    "fields": {
+      "description": "Small team subscription with shared workspace and billing. Between Plus and Enterprise.",
+      "target_start": "2024-Q4",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2026-09-25T00:00:00+00:00",
-    "updated_at": "2026-10-02T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-10-02T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:033",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "033",
     "title": "Scheduled tasks",
-    "body": "Run a task on a schedule (e.g. daily digest). In backlog.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Run a task on a schedule (e.g. daily digest). In backlog.",
+      "target_start": "2025",
       "status": "planned",
       "team": "product"
     },
     "created_at": "2026-10-03T00:00:00+00:00",
-    "updated_at": "2026-10-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-10-10T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:034",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "034",
     "title": "Scheduled tasks",
-    "body": "Run a task on a schedule (e.g. daily digest). In backlog.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Run a task on a schedule (e.g. daily digest). In backlog.",
+      "target_start": "2025",
       "status": "planned",
       "team": "product"
     },
     "created_at": "2026-11-14T00:00:00+00:00",
-    "updated_at": "2026-11-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-11-21T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:035",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "035",
     "title": "Scheduled tasks",
-    "body": "Run a task on a schedule (e.g. daily digest). In backlog.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Run a task on a schedule (e.g. daily digest). In backlog.",
+      "target_start": "2025",
       "status": "planned",
       "team": "product"
     },
     "created_at": "2026-12-13T00:00:00+00:00",
-    "updated_at": "2026-12-20T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-12-20T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:036",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "036",
     "title": "o3 and reasoning scale",
-    "body": "Next-gen reasoning model. Announced for 2025.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Next-gen reasoning model. Announced for 2025.",
+      "target_start": "2025",
       "status": "planned",
       "team": "research"
     },
     "created_at": "2027-01-27T00:00:00+00:00",
-    "updated_at": "2027-02-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-02-03T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:037",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "037",
     "title": "o3 and reasoning scale",
-    "body": "Next-gen reasoning model. Announced for 2025.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Next-gen reasoning model. Announced for 2025.",
+      "target_start": "2025",
       "status": "planned",
       "team": "research"
     },
     "created_at": "2027-02-18T00:00:00+00:00",
-    "updated_at": "2027-02-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-02-25T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:038",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "038",
     "title": "o3 and reasoning scale",
-    "body": "Next-gen reasoning model. Announced for 2025.",
-    "metadata": {
-      "quarter": "2025",
+    "fields": {
+      "description": "Next-gen reasoning model. Announced for 2025.",
+      "target_start": "2025",
       "status": "planned",
       "team": "research"
     },
     "created_at": "2027-03-18T00:00:00+00:00",
-    "updated_at": "2027-03-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-03-25T00:00:00+00:00"
   },
   {
     "id": "mock:roadmap_item:039",
     "source": "mock",
-    "type": "roadmap_item",
+    "entity_type": "roadmap_item",
+    "source_id": "039",
     "title": "Deep Research",
-    "body": "Multi-step research with sources. Launched 2024. Improving citation quality.",
-    "metadata": {
-      "quarter": "2024-Q3",
+    "fields": {
+      "description": "Multi-step research with sources. Launched 2024. Improving citation quality.",
+      "target_start": "2024-Q3",
       "status": "shipped",
       "team": "product"
     },
     "created_at": "2027-04-05T00:00:00+00:00",
-    "updated_at": "2027-04-12T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-04-12T00:00:00+00:00"
   }
 ]

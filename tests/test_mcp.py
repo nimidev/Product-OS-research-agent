@@ -36,7 +36,7 @@ class TestToolCalls:
         assert len(results) == 1
         data = json.loads(results[0].text)
         assert "mock" in data["sources"]
-        assert "feature_request" in data["item_types"]
+        assert "feature_request" in data["entity_types"]
 
     @pytest.mark.asyncio
     async def test_unknown_tool(self):

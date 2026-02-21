@@ -2,556 +2,481 @@
   {
     "id": "mock:prd:000",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "000",
     "title": "PRD: ChatGPT Memory",
-    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Legal",
-        "Trust"
-      ]
+      "stakeholders": "[\"Legal\", \"Trust\"]"
     },
     "created_at": "2024-02-01T00:00:00+00:00",
-    "updated_at": "2024-02-15T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-02-15T00:00:00+00:00"
   },
   {
     "id": "mock:prd:001",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "001",
     "title": "PRD: ChatGPT Memory",
-    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Legal",
-        "Trust"
-      ]
+      "stakeholders": "[\"Legal\", \"Trust\"]"
     },
     "created_at": "2024-02-26T00:00:00+00:00",
-    "updated_at": "2024-03-11T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-03-11T00:00:00+00:00"
   },
   {
     "id": "mock:prd:002",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "002",
     "title": "PRD: ChatGPT Memory",
-    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Legal",
-        "Trust"
-      ]
+      "stakeholders": "[\"Legal\", \"Trust\"]"
     },
     "created_at": "2024-04-08T00:00:00+00:00",
-    "updated_at": "2024-04-22T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-04-22T00:00:00+00:00"
   },
   {
     "id": "mock:prd:003",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "003",
     "title": "PRD: ChatGPT Memory",
-    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Legal",
-        "Trust"
-      ]
+      "stakeholders": "[\"Legal\", \"Trust\"]"
     },
     "created_at": "2024-05-18T00:00:00+00:00",
-    "updated_at": "2024-06-01T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-01T00:00:00+00:00"
   },
   {
     "id": "mock:prd:004",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "004",
     "title": "PRD: ChatGPT Memory",
-    "body": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Enable ChatGPT to remember key facts about the user across conversations to reduce repetition and personalize experience. Problem: Users re-teach context every conversation. Solution: Optional memory layer with user control (view, edit, delete). Success: 30% of Plus users enable memory within 3 months; NPS +5 for memory users. Risks: Privacy perception; reliability (forgetting).",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Legal",
-        "Trust"
-      ]
+      "stakeholders": "[\"Legal\", \"Trust\"]"
     },
     "created_at": "2024-06-30T00:00:00+00:00",
-    "updated_at": "2024-07-14T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-14T00:00:00+00:00"
   },
   {
     "id": "mock:prd:005",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "005",
     "title": "PRD: Custom GPTs",
-    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Policy",
-        "Platform"
-      ]
+      "stakeholders": "[\"Policy\", \"Platform\"]"
     },
     "created_at": "2024-08-14T00:00:00+00:00",
-    "updated_at": "2024-08-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-08-28T00:00:00+00:00"
   },
   {
     "id": "mock:prd:006",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "006",
     "title": "PRD: Custom GPTs",
-    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Policy",
-        "Platform"
-      ]
+      "stakeholders": "[\"Policy\", \"Platform\"]"
     },
     "created_at": "2024-10-03T00:00:00+00:00",
-    "updated_at": "2024-10-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-10-17T00:00:00+00:00"
   },
   {
     "id": "mock:prd:007",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "007",
     "title": "PRD: Custom GPTs",
-    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Policy",
-        "Platform"
-      ]
+      "stakeholders": "[\"Policy\", \"Platform\"]"
     },
     "created_at": "2024-10-25T00:00:00+00:00",
-    "updated_at": "2024-11-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-11-08T00:00:00+00:00"
   },
   {
     "id": "mock:prd:008",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "008",
     "title": "PRD: Custom GPTs",
-    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Policy",
-        "Platform"
-      ]
+      "stakeholders": "[\"Policy\", \"Platform\"]"
     },
     "created_at": "2024-12-22T00:00:00+00:00",
-    "updated_at": "2025-01-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-01-05T00:00:00+00:00"
   },
   {
     "id": "mock:prd:009",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "009",
     "title": "PRD: Custom GPTs",
-    "body": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Let users create and share custom GPTs with instructions, knowledge, and tools. Problem: Users want tailored assistants without coding. Solution: No-code builder, GPT Store, revenue share for creators. Success: 1M+ public GPTs in 6 months; creator satisfaction. Risks: Quality and safety of public GPTs; discoverability.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Policy",
-        "Platform"
-      ]
+      "stakeholders": "[\"Policy\", \"Platform\"]"
     },
     "created_at": "2025-01-15T00:00:00+00:00",
-    "updated_at": "2025-01-29T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-01-29T00:00:00+00:00"
   },
   {
     "id": "mock:prd:010",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "010",
     "title": "PRD: Team workspaces",
-    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Enterprise",
-      "stakeholders": [
-        "Security",
-        "Sales"
-      ]
+      "stakeholders": "[\"Security\", \"Sales\"]"
     },
     "created_at": "2025-02-20T00:00:00+00:00",
-    "updated_at": "2025-03-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-03-06T00:00:00+00:00"
   },
   {
     "id": "mock:prd:011",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "011",
     "title": "PRD: Team workspaces",
-    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Enterprise",
-      "stakeholders": [
-        "Security",
-        "Sales"
-      ]
+      "stakeholders": "[\"Security\", \"Sales\"]"
     },
     "created_at": "2025-04-12T00:00:00+00:00",
-    "updated_at": "2025-04-26T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-04-26T00:00:00+00:00"
   },
   {
     "id": "mock:prd:012",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "012",
     "title": "PRD: Team workspaces",
-    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Enterprise",
-      "stakeholders": [
-        "Security",
-        "Sales"
-      ]
+      "stakeholders": "[\"Security\", \"Sales\"]"
     },
     "created_at": "2025-05-22T00:00:00+00:00",
-    "updated_at": "2025-06-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-05T00:00:00+00:00"
   },
   {
     "id": "mock:prd:013",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "013",
     "title": "PRD: Team workspaces",
-    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Enterprise",
-      "stakeholders": [
-        "Security",
-        "Sales"
-      ]
+      "stakeholders": "[\"Security\", \"Sales\"]"
     },
     "created_at": "2025-06-28T00:00:00+00:00",
-    "updated_at": "2025-07-12T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-07-12T00:00:00+00:00"
   },
   {
     "id": "mock:prd:014",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "014",
     "title": "PRD: Team workspaces",
-    "body": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Shared workspace for teams with shared conversations, custom GPTs, and billing. Problem: Teams use individual accounts; no collaboration. Solution: Team plan with admin, shared context, and SSO option. Success: 10K teams in first quarter. Enterprise data privacy requirements apply.",
       "status": "Shipped",
+      "author": "Product",
       "team": "Enterprise",
-      "stakeholders": [
-        "Security",
-        "Sales"
-      ]
+      "stakeholders": "[\"Security\", \"Sales\"]"
     },
     "created_at": "2025-08-14T00:00:00+00:00",
-    "updated_at": "2025-08-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-08-28T00:00:00+00:00"
   },
   {
     "id": "mock:prd:015",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "015",
     "title": "PRD: ChatGPT Search",
-    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
       "status": "In progress",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Search team"
-      ]
+      "stakeholders": "[\"Search team\"]"
     },
     "created_at": "2025-09-20T00:00:00+00:00",
-    "updated_at": "2025-10-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-04T00:00:00+00:00"
   },
   {
     "id": "mock:prd:016",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "016",
     "title": "PRD: ChatGPT Search",
-    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
       "status": "In progress",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Search team"
-      ]
+      "stakeholders": "[\"Search team\"]"
     },
     "created_at": "2025-10-29T00:00:00+00:00",
-    "updated_at": "2025-11-12T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-11-12T00:00:00+00:00"
   },
   {
     "id": "mock:prd:017",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "017",
     "title": "PRD: ChatGPT Search",
-    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
       "status": "In progress",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Search team"
-      ]
+      "stakeholders": "[\"Search team\"]"
     },
     "created_at": "2025-11-26T00:00:00+00:00",
-    "updated_at": "2025-12-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-12-10T00:00:00+00:00"
   },
   {
     "id": "mock:prd:018",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "018",
     "title": "PRD: ChatGPT Search",
-    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
       "status": "In progress",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Search team"
-      ]
+      "stakeholders": "[\"Search team\"]"
     },
     "created_at": "2026-01-10T00:00:00+00:00",
-    "updated_at": "2026-01-24T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-24T00:00:00+00:00"
   },
   {
     "id": "mock:prd:019",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "019",
     "title": "PRD: ChatGPT Search",
-    "body": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Answer questions with web search and citations. Problem: Users leave for Perplexity for real-time info. Solution: Integrated search with source links and optional search-only mode. Success: Reduce churn to search competitors; citation accuracy >90%.",
       "status": "In progress",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Search team"
-      ]
+      "stakeholders": "[\"Search team\"]"
     },
     "created_at": "2026-03-11T00:00:00+00:00",
-    "updated_at": "2026-03-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-03-25T00:00:00+00:00"
   },
   {
     "id": "mock:prd:020",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "020",
     "title": "PRD: Advanced Voice Mode",
-    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
       "status": "In progress",
+      "author": "Product",
       "team": "Multimodal",
-      "stakeholders": [
-        "Research"
-      ]
+      "stakeholders": "[\"Research\"]"
     },
     "created_at": "2026-04-07T00:00:00+00:00",
-    "updated_at": "2026-04-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-04-21T00:00:00+00:00"
   },
   {
     "id": "mock:prd:021",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "021",
     "title": "PRD: Advanced Voice Mode",
-    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
       "status": "In progress",
+      "author": "Product",
       "team": "Multimodal",
-      "stakeholders": [
-        "Research"
-      ]
+      "stakeholders": "[\"Research\"]"
     },
     "created_at": "2026-05-16T00:00:00+00:00",
-    "updated_at": "2026-05-30T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-05-30T00:00:00+00:00"
   },
   {
     "id": "mock:prd:022",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "022",
     "title": "PRD: Advanced Voice Mode",
-    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
       "status": "In progress",
+      "author": "Product",
       "team": "Multimodal",
-      "stakeholders": [
-        "Research"
-      ]
+      "stakeholders": "[\"Research\"]"
     },
     "created_at": "2026-07-11T00:00:00+00:00",
-    "updated_at": "2026-07-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-07-25T00:00:00+00:00"
   },
   {
     "id": "mock:prd:023",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "023",
     "title": "PRD: Advanced Voice Mode",
-    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
       "status": "In progress",
+      "author": "Product",
       "team": "Multimodal",
-      "stakeholders": [
-        "Research"
-      ]
+      "stakeholders": "[\"Research\"]"
     },
     "created_at": "2026-08-16T00:00:00+00:00",
-    "updated_at": "2026-08-30T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-08-30T00:00:00+00:00"
   },
   {
     "id": "mock:prd:024",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "024",
     "title": "PRD: Advanced Voice Mode",
-    "body": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Real-time, low-latency voice with natural turn-taking. Problem: Current voice feels slow and robotic. Solution: New voice stack, interruption handling, emotion. Success: Voice NPS >50; usage 2x.",
       "status": "In progress",
+      "author": "Product",
       "team": "Multimodal",
-      "stakeholders": [
-        "Research"
-      ]
+      "stakeholders": "[\"Research\"]"
     },
     "created_at": "2026-09-19T00:00:00+00:00",
-    "updated_at": "2026-10-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-10-03T00:00:00+00:00"
   },
   {
     "id": "mock:prd:025",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "025",
     "title": "PRD: Conversation branching",
-    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
       "status": "Backlog",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Design"
-      ]
+      "stakeholders": "[\"Design\"]"
     },
     "created_at": "2026-11-10T00:00:00+00:00",
-    "updated_at": "2026-11-24T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-11-24T00:00:00+00:00"
   },
   {
     "id": "mock:prd:026",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "026",
     "title": "PRD: Conversation branching",
-    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
       "status": "Backlog",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Design"
-      ]
+      "stakeholders": "[\"Design\"]"
     },
     "created_at": "2026-12-12T00:00:00+00:00",
-    "updated_at": "2026-12-26T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-12-26T00:00:00+00:00"
   },
   {
     "id": "mock:prd:027",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "027",
     "title": "PRD: Conversation branching",
-    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
       "status": "Backlog",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Design"
-      ]
+      "stakeholders": "[\"Design\"]"
     },
     "created_at": "2026-12-30T00:00:00+00:00",
-    "updated_at": "2027-01-13T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-01-13T00:00:00+00:00"
   },
   {
     "id": "mock:prd:028",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "028",
     "title": "PRD: Conversation branching",
-    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
       "status": "Backlog",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Design"
-      ]
+      "stakeholders": "[\"Design\"]"
     },
     "created_at": "2027-03-07T00:00:00+00:00",
-    "updated_at": "2027-03-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-03-21T00:00:00+00:00"
   },
   {
     "id": "mock:prd:029",
     "source": "mock",
-    "type": "prd",
+    "entity_type": "prd",
+    "source_id": "029",
     "title": "PRD: Conversation branching",
-    "body": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
-    "metadata": {
-      "author": "Product",
+    "fields": {
+      "overview": "Goal: Branch from any message to try alternative responses. Problem: Users want to explore without losing thread. Solution: Branch UI, merge not in scope for v1. Success: Adoption by 20% of power users.",
       "status": "Backlog",
+      "author": "Product",
       "team": "Product",
-      "stakeholders": [
-        "Design"
-      ]
+      "stakeholders": "[\"Design\"]"
     },
     "created_at": "2027-04-17T00:00:00+00:00",
-    "updated_at": "2027-05-01T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-05-01T00:00:00+00:00"
   }
 ]

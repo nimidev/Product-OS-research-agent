@@ -1,48 +1,66 @@
-"""Seed command — load JSON fixtures into SQLite + embed and upsert to Qdrant."""
+"""Seed command — load canonical JSON fixtures into entities + entity_fields + chunks, embed and upsert to Qdrant."""
 
 from __future__ import annotations
 
 import asyncio
 import json
 import logging
-import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 from research_agent.config.loader import get_settings
+from research_agent.embedding.chunker import chunk_text as chunk_text_embedding
 from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
-from research_agent.memory.memory_service import MemoryService
 from research_agent.storage.db import Database
-from research_agent.storage.models import Item, ItemSource, ItemType
-from research_agent.synthesis.summarizer import Summarizer
+from research_agent.storage.models import (
+    Chunk as StorageChunk,
+    Entity,
+    EntityField,
+    EntityType,
+    SourceSystem,
+)
 from research_agent.vector.qdrant_client import QdrantStore
 
 logger = logging.getLogger(__name__)
 
 FIXTURES_DIR = Path(__file__).resolve().parent.parent / "data" / "fixtures"
 
-TYPE_MAP: dict[str, ItemType] = {
-    "feature_requests": ItemType.FEATURE_REQUEST,
-    "bugs": ItemType.BUG,
-    "roadmap_items": ItemType.ROADMAP_ITEM,
-    "meeting_notes": ItemType.MEETING_NOTE,
-    "prds": ItemType.PRD,
-    "support_tickets": ItemType.SUPPORT_TICKET,
+# Fixture file stem -> entity type
+ENTITY_TYPE_MAP: dict[str, EntityType] = {
+    "feature_requests": EntityType.FEATURE_REQUEST,
+    "bugs": EntityType.BUG,
+    "roadmap_items": EntityType.ROADMAP_ITEM,
+    "meeting_notes": EntityType.MEETING_NOTE,
+    "prds": EntityType.PRD,
+    "support_tickets": EntityType.SUPPORT_TICKET,
 }
 
+# Fields we chunk and embed (long text); others only in entity_fields
+SEARCHABLE_FIELDS = {"description", "transcript", "overview", "summary", "requirements", "success_metrics"}
 
-def _load_fixtures() -> list[Item]:
-    """Load all JSON fixture files from data/fixtures/."""
-    items: list[Item] = []
+
+def _parse_datetime(s: str | None) -> datetime:
+    if not s:
+        return datetime.now(timezone.utc)
+    try:
+        return datetime.fromisoformat(s.replace("Z", "+00:00"))
+    except (ValueError, TypeError):
+        return datetime.now(timezone.utc)
+
+
+def _load_canonical_fixtures() -> list[Entity]:
+    """Load canonical JSON fixtures into Entity objects with fields and chunks."""
+    entities: list[Entity] = []
 
     if not FIXTURES_DIR.exists():
         logger.warning("Fixtures directory not found: %s", FIXTURES_DIR)
-        return items
+        return entities
 
     for file_path in sorted(FIXTURES_DIR.glob("*.json")):
         stem = file_path.stem
-        item_type = TYPE_MAP.get(stem)
-        if item_type is None:
+        entity_type = ENTITY_TYPE_MAP.get(stem)
+        if entity_type is None:
             logger.warning("Unknown fixture type: %s, skipping", stem)
             continue
 
@@ -55,21 +73,55 @@ def _load_fixtures() -> list[Item]:
 
         for raw in data:
             try:
-                item = Item(
-                    id=raw["id"],
-                    source=ItemSource(raw.get("source", "mock")),
-                    type=item_type,
-                    title=raw["title"],
-                    body=raw.get("body", ""),
-                    metadata=raw.get("metadata", {}),
-                    created_at=raw.get("created_at", None),
-                    updated_at=raw.get("updated_at", None),
-                )
-                items.append(item)
-            except Exception:
-                logger.exception("Failed to parse item from %s: %s", file_path.name, raw.get("id"))
+                entity_id = raw["id"]
+                source_id = raw.get("source_id", entity_id.split(":")[-1] if ":" in entity_id else entity_id)
+                title = raw.get("title", "")
+                fields_dict = raw.get("fields", {})
 
-    return items
+                fields_list = [
+                    EntityField(field_name=k, field_type="text", field_value=str(v))
+                    for k, v in fields_dict.items()
+                ]
+                # Include title in fields for content_hash
+                if not any(f.field_name == "title" for f in fields_list):
+                    fields_list.insert(0, EntityField(field_name="title", field_type="text", field_value=title))
+
+                created = _parse_datetime(raw.get("created_at"))
+                updated = _parse_datetime(raw.get("updated_at"))
+
+                chunks: list[StorageChunk] = []
+                for fn, fv in fields_dict.items():
+                    if fn not in SEARCHABLE_FIELDS or not fv or not str(fv).strip():
+                        continue
+                    text = str(fv)
+                    embedding_chunks = chunk_text_embedding(text, parent_id=entity_id)
+                    for c in embedding_chunks:
+                        chunks.append(
+                            StorageChunk(
+                                id=f"{entity_id}:{fn}:{c.index}",
+                                field_name=fn,
+                                chunk_index=c.index,
+                                text=c.text,
+                            )
+                        )
+
+                entity = Entity(
+                    id=entity_id,
+                    entity_type=entity_type,
+                    source_system=SourceSystem(raw.get("source", "mock")),
+                    source_id=source_id,
+                    title=title,
+                    fields=fields_list,
+                    chunks=chunks,
+                    created_at=created,
+                    updated_at=updated,
+                    is_deleted=False,
+                )
+                entities.append(entity)
+            except Exception:
+                logger.exception("Failed to parse fixture from %s: %s", file_path.name, raw.get("id"))
+
+    return entities
 
 
 async def run_seed() -> None:
@@ -80,7 +132,7 @@ async def run_seed() -> None:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
 
-    logger.info("Starting seed process...")
+    logger.info("Starting seed process (canonical entity model)...")
     start = time.time()
 
     db = Database(db_path=settings.database_path)
@@ -88,46 +140,58 @@ async def run_seed() -> None:
 
     vector_store = QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)
     embedding = OpenAIEmbeddingProvider(
-        api_key=settings.openai_api_key, model=settings.embedding_model
+        api_key=settings.openai_api_key, model=settings.embedding_model,
     )
     await vector_store.ensure_collection(embedding.dimension())
 
-    summarizer = (
-        Summarizer(api_key=settings.openai_api_key, model=settings.llm_model)
-        if settings.openai_api_key
-        else None
-    )
-
-    memory = MemoryService(
-        db=db,
-        vector_store=vector_store,
-        embedding_provider=embedding,
-        summarizer=summarizer,
-    )
-
-    items = _load_fixtures()
-    if not items:
-        logger.error("No fixture items found. Check data/fixtures/ directory.")
+    entities = _load_canonical_fixtures()
+    if not entities:
+        logger.error("No fixture entities found. Check data/fixtures/ directory.")
         await vector_store.close()
         await db.close()
         return
 
-    logger.info("Loaded %d items from fixtures", len(items))
+    logger.info("Loaded %d entities from fixtures", len(entities))
     seeded = 0
     skipped = 0
 
-    for i, item in enumerate(items, 1):
+    for i, entity in enumerate(entities, 1):
         try:
-            changed = await memory.add_or_update_item(item)
+            changed = await db.upsert_entity(entity)
             if changed:
+                await vector_store.delete_by_parent(entity.id)
+                if entity.chunks:
+                    texts = [c.text for c in entity.chunks]
+                    vectors = await embedding.embed_batch(texts)
+                    points = [
+                        (
+                            c.id,
+                            vec,
+                            {
+                                "parent_id": entity.id,
+                                "entity_type": entity.entity_type.value,
+                                "field_name": c.field_name,
+                                "title": entity.title,
+                                "source": entity.source_system.value,
+                                "body": c.text[:2000],
+                                "chunk_index": c.chunk_index,
+                                "created_at": entity.created_at.isoformat() if entity.created_at else "",
+                                "updated_at": entity.updated_at.isoformat() if entity.updated_at else "",
+                            },
+                        )
+                        for c, vec in zip(entity.chunks, vectors, strict=True)
+                    ]
+                    await vector_store.upsert_batch(points)
                 seeded += 1
             else:
                 skipped += 1
-            if i % 50 == 0 or i == len(items):
-                logger.info("Progress: %d/%d items processed (%d new/changed, %d unchanged)",
-                            i, len(items), seeded, skipped)
+            if i % 50 == 0 or i == len(entities):
+                logger.info(
+                    "Progress: %d/%d entities (%d new/changed, %d unchanged)",
+                    i, len(entities), seeded, skipped,
+                )
         except Exception:
-            logger.exception("Failed to seed item %s", item.id)
+            logger.exception("Failed to seed entity %s", entity.id)
 
     elapsed = time.time() - start
     logger.info(

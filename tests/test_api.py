@@ -27,7 +27,8 @@ def mock_memory_service():
                     "title": "Item A",
                     "body": "Details",
                     "source": "mock",
-                    "type": "bug",
+                    "entity_type": "bug",
+                    "field_name": "description",
                     "metadata": {},
                     "created_at": "2025-06-15T00:00:00+00:00",
                 }
@@ -85,7 +86,7 @@ class TestSearchEndpoint:
             "/search_memories",
             json={
                 "query": "performance",
-                "filters": {"source": "mock", "type": "bug"},
+                "filters": {"source": "mock", "entity_types": ["bug"]},
                 "top_k": 5,
             },
         )

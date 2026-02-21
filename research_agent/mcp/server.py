@@ -15,7 +15,7 @@ from research_agent.config.loader import get_settings
 from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
 from research_agent.memory.memory_service import MemoryService
 from research_agent.storage.db import Database
-from research_agent.storage.models import ItemSource, ItemType
+from research_agent.storage.models import EntityType, SourceSystem
 from research_agent.synthesis.summarizer import Summarizer
 from research_agent.vector.qdrant_client import QdrantStore
 
@@ -79,22 +79,21 @@ async def list_tools() -> list[Tool]:
                         "properties": {
                             "source": {
                                 "type": "string",
-                                "enum": [s.value for s in ItemSource],
+                                "enum": [s.value for s in SourceSystem],
                                 "description": "Filter by data source",
                             },
-                            "type": {
-                                "type": "string",
-                                "enum": [t.value for t in ItemType],
-                                "description": "Filter by item type",
+                            "entity_types": {
+                                "type": "array",
+                                "items": {"type": "string", "enum": [t.value for t in EntityType]},
+                                "description": "Filter by entity type(s). Omit for flexible search (inferred from query).",
                             },
-                            "date_from": {
-                                "type": "string",
-                                "description": "ISO date string for start of range",
+                            "field_names": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "description": "Filter by field name(s), e.g. transcript, description.",
                             },
-                            "date_to": {
-                                "type": "string",
-                                "description": "ISO date string for end of range",
-                            },
+                            "date_from": {"type": "string", "description": "ISO date string for start of range"},
+                            "date_to": {"type": "string", "description": "ISO date string for end of range"},
                             "tags": {
                                 "type": "array",
                                 "items": {"type": "string"},
@@ -145,6 +144,8 @@ async def _handle_search(arguments: dict[str, Any]) -> list[TextContent]:
         return [TextContent(type="text", text="Error: query is required")]
 
     filters = arguments.get("filters", {})
+    entity_types = arguments.get("entity_types") or filters.get("entity_types")
+    field_names = arguments.get("field_names") or filters.get("field_names")
     top_k = min(arguments.get("top_k", 10), 50)
     context = arguments.get("context")
 
@@ -152,8 +153,9 @@ async def _handle_search(arguments: dict[str, Any]) -> list[TextContent]:
     result = await svc.search_memories(
         query=query,
         top_k=top_k,
+        entity_types=entity_types,
+        field_names=field_names,
         source=filters.get("source"),
-        item_type=filters.get("type"),
         date_from=filters.get("date_from"),
         date_to=filters.get("date_to"),
         tags=filters.get("tags"),
@@ -170,9 +172,10 @@ async def _handle_search(arguments: dict[str, Any]) -> list[TextContent]:
 
 
 async def _handle_list_sources() -> list[TextContent]:
-    sources = [s.value for s in ItemSource]
-    types = [t.value for t in ItemType]
-    response = {"sources": sources, "item_types": types}
+    response = {
+        "sources": [s.value for s in SourceSystem],
+        "entity_types": [t.value for t in EntityType],
+    }
     return [TextContent(type="text", text=json.dumps(response, indent=2))]
 
 

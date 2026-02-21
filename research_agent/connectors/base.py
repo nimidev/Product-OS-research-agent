@@ -3,50 +3,40 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 
-
-@dataclass
-class NormalizedItem:
-    """Connector-agnostic representation of a source item."""
-
-    id: str
-    source: str
-    type: str
-    title: str
-    body: str = ""
-    metadata: dict[str, Any] = field(default_factory=dict)
-    created_at: datetime | None = None
-    updated_at: datetime | None = None
-    is_deleted: bool = False
+from research_agent.storage.models import Entity
 
 
 class BaseConnector(ABC):
     """Contract for data source connectors.
 
-    Implementing a new connector requires only:
-    1. Subclass BaseConnector
-    2. Implement list_updated_items and normalize_item
-    3. Add config entry
+    Connectors fetch raw items and normalize to Entity (with entity_fields)
+    using config-driven field_mappings. Each connector instance typically
+    represents one source + entity_type (e.g. one Monday board for feature_request).
     """
 
     @property
     @abstractmethod
     def source_name(self) -> str:
-        """Unique identifier for this data source (e.g., 'monday', 'notion')."""
+        """Unique identifier for this data source (e.g. 'monday', 'notion')."""
+
+    @property
+    @abstractmethod
+    def entity_type(self) -> str:
+        """Canonical entity type this connector produces (e.g. 'feature_request')."""
 
     @abstractmethod
-    async def list_updated_items(self, since: datetime | None = None) -> list[NormalizedItem]:
-        """Fetch items updated since the given timestamp.
+    async def list_updated_items(self, since: datetime | None = None) -> list[Entity]:
+        """Fetch items updated since the given timestamp, normalized to Entity.
 
         If since is None, fetch all items (initial sync).
         """
 
     @abstractmethod
-    def normalize_item(self, raw: Any) -> NormalizedItem:
-        """Transform a raw API response item into a NormalizedItem."""
+    def normalize_item(self, raw: Any) -> Entity:
+        """Transform a raw API response item into an Entity with fields."""
 
     async def health_check(self) -> bool:
         """Verify connectivity to the data source. Override for real connectors."""

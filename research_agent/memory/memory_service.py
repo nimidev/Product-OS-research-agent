@@ -1,19 +1,26 @@
-"""Core memory service — search and add/update items via SQLite + Qdrant."""
+"""Core memory service — search (with field-aware + flexible scope) and add/update entities."""
 
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from research_agent.embedding.base import EmbeddingProvider
-from research_agent.embedding.chunker import Chunk, chunk_text
+from research_agent.embedding.chunker import chunk_text
 from research_agent.storage.db import Database
-from research_agent.storage.models import Item
+from research_agent.storage.models import Entity
 from research_agent.synthesis.summarizer import Summarizer, SynthesisResult
 from research_agent.vector.qdrant_client import QdrantStore, SearchResult
 
+from research_agent.memory.query_understanding import infer_entity_scope
+
 logger = logging.getLogger(__name__)
+
+SEARCHABLE_FIELDS = {
+    "description", "transcript", "overview", "summary",
+    "requirements", "success_metrics",
+}
 
 
 @dataclass
@@ -32,7 +39,9 @@ def _search_result_to_dict(sr: SearchResult) -> dict[str, Any]:
         "title": payload.get("title", ""),
         "body": payload.get("body", ""),
         "source": payload.get("source", ""),
-        "type": payload.get("type", ""),
+        "type": payload.get("entity_type", payload.get("type", "")),
+        "entity_type": payload.get("entity_type", ""),
+        "field_name": payload.get("field_name", ""),
         "metadata": payload.get("metadata", {}),
         "created_at": payload.get("created_at", ""),
     }
@@ -53,11 +62,6 @@ class MemoryService:
 
     @staticmethod
     def _build_context_aware_query(query: str, context: str | None) -> str:
-        """Combine current query with conversation context for better vector search.
-
-        Places context first so the embedding captures the ongoing research topic,
-        then the current question refines focus.
-        """
         if not context:
             return query
         return f"Previous research context:\n{context}\n\nCurrent question: {query}"
@@ -66,21 +70,33 @@ class MemoryService:
         self,
         query: str,
         top_k: int = 10,
+        entity_types: list[str] | None = None,
+        field_names: list[str] | None = None,
         source: str | None = None,
-        item_type: str | None = None,
         date_from: str | None = None,
         date_to: str | None = None,
         tags: list[str] | None = None,
         context: str | None = None,
+        use_query_understanding: bool = True,
     ) -> MemorySearchResult:
+        """Search with optional entity/field scope. When entity_types/field_names are
+        omitted or empty, infers scope from query + context if use_query_understanding
+        is True; otherwise searches all.
+        """
         search_query = self._build_context_aware_query(query, context)
         query_vector = await self._embedder.embed(search_query)
+
+        if use_query_understanding and entity_types is None and field_names is None:
+            inferred_types, inferred_fields = infer_entity_scope(query, context)
+            entity_types = inferred_types if inferred_types else None
+            field_names = inferred_fields if inferred_fields else None
 
         results = await self._vector.search(
             query_vector=query_vector,
             top_k=top_k,
             source=source,
-            item_type=item_type,
+            entity_types=entity_types,
+            field_names=field_names,
             date_from=date_from,
             date_to=date_to,
             tags=tags,
@@ -93,7 +109,12 @@ class MemoryService:
             return MemorySearchResult(
                 summary=synthesis.summary,
                 references=[
-                    {"title": ref.title, "url": ref.url, "source": ref.source, "type": ref.type}
+                    {
+                        "title": ref.title,
+                        "url": ref.url,
+                        "source": ref.source,
+                        "type": ref.type,
+                    }
                     for ref in synthesis.references
                 ],
                 raw_results=raw_results,
@@ -107,51 +128,54 @@ class MemoryService:
             degraded=True,
         )
 
-    async def add_or_update_item(self, item: Item) -> bool:
-        """Upsert item to SQLite and embed + upsert to Qdrant. Returns True if changed."""
-        changed = await self._db.upsert_item(item)
+    async def add_or_update_entity(self, entity: Entity) -> bool:
+        """Upsert entity to SQLite and embed + upsert chunks to Qdrant. Returns True if changed."""
+        from research_agent.storage.models import Chunk as StorageChunk
+
+        changed = await self._db.upsert_entity(entity)
         if not changed:
             return False
 
-        if item.is_deleted:
-            await self._vector.delete_by_parent(item.id)
+        await self._vector.delete_by_parent(entity.id)
+
+        if entity.is_deleted:
             return True
 
-        await self._embed_and_upsert(item)
-        return True
+        chunks_list: list[StorageChunk] = []
+        for f in entity.fields:
+            if f.field_name not in SEARCHABLE_FIELDS or not f.field_value or not f.field_value.strip():
+                continue
+            for c in chunk_text(f.field_value, parent_id=entity.id):
+                chunks_list.append(
+                    StorageChunk(
+                        id=f"{entity.id}:{f.field_name}:{c.index}",
+                        field_name=f.field_name,
+                        chunk_index=c.index,
+                        text=c.text,
+                    )
+                )
 
-    async def _embed_and_upsert(self, item: Item) -> None:
-        embed_text = f"{item.title}\n\n{item.body}"
-        chunks = chunk_text(embed_text, parent_id=item.id)
-
-        await self._vector.delete_by_parent(item.id)
-
-        if len(chunks) == 1:
-            vector = await self._embedder.embed(chunks[0].text)
-            await self._vector.upsert(
-                point_id=item.id,
-                vector=vector,
-                payload=self._build_payload(item, chunks[0]),
-            )
-        else:
-            texts = [c.text for c in chunks]
+        if chunks_list:
+            texts = [c.text for c in chunks_list]
             vectors = await self._embedder.embed_batch(texts)
-            points: list[tuple[str, list[float], dict[str, Any]]] = []
-            for chunk, vector in zip(chunks, vectors):
-                chunk_id = f"{item.id}:chunk:{chunk.index}"
-                points.append((chunk_id, vector, self._build_payload(item, chunk)))
+            points = [
+                (
+                    c.id,
+                    vec,
+                    {
+                        "parent_id": entity.id,
+                        "entity_type": entity.entity_type.value,
+                        "field_name": c.field_name,
+                        "title": entity.title,
+                        "source": entity.source_system.value,
+                        "body": c.text[:2000],
+                        "chunk_index": c.chunk_index,
+                        "created_at": entity.created_at.isoformat() if entity.created_at else "",
+                        "updated_at": entity.updated_at.isoformat() if entity.updated_at else "",
+                    },
+                )
+                for c, vec in zip(chunks_list, vectors, strict=True)
+            ]
             await self._vector.upsert_batch(points)
 
-    def _build_payload(self, item: Item, chunk: Chunk) -> dict[str, Any]:
-        return {
-            "parent_id": item.id,
-            "chunk_index": chunk.index,
-            "title": item.title,
-            "body": item.body[:2000],
-            "source": item.source.value,
-            "type": item.type.value,
-            "metadata": item.metadata,
-            "tags": item.metadata.get("tags", []),
-            "created_at": item.created_at.isoformat(),
-            "updated_at": item.updated_at.isoformat(),
-        }
+        return True
