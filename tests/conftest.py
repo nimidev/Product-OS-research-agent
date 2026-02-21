@@ -10,7 +10,12 @@ import pytest
 
 from research_agent.embedding.base import EmbeddingProvider
 from research_agent.storage.db import Database
-from research_agent.storage.models import Item, ItemSource, ItemType
+from research_agent.storage.models import (
+    Entity,
+    EntityField,
+    EntityType,
+    SourceSystem,
+)
 
 
 class MockEmbeddingProvider(EmbeddingProvider):
@@ -47,18 +52,31 @@ async def db(tmp_path):  # type: ignore[no-untyped-def]
     await database.close()
 
 
-def make_item(
+def make_entity(
     id: str = "mock:feature_request:001",
     title: str = "Add dark mode",
-    body: str = "Users want a dark mode option for the app.",
-    source: ItemSource = ItemSource.MOCK,
-    item_type: ItemType = ItemType.FEATURE_REQUEST,
+    entity_type: EntityType = EntityType.FEATURE_REQUEST,
+    source: SourceSystem = SourceSystem.MOCK,
+    fields: list[EntityField] | None = None,
     **kwargs: Any,
-) -> Item:
+) -> Entity:
+    if fields is None:
+        fields = [
+            EntityField(field_name="title", field_type="text", field_value=title),
+            EntityField(field_name="description", field_type="text", field_value="Users want a dark mode option."),
+        ]
     defaults: dict[str, Any] = {
-        "metadata": {"tags": ["ui", "theme"], "priority": "high"},
+        "source_id": id.split(":")[-1] if ":" in id else id,
         "created_at": datetime(2025, 6, 15, tzinfo=timezone.utc),
         "updated_at": datetime(2025, 6, 15, tzinfo=timezone.utc),
     }
     defaults.update(kwargs)
-    return Item(id=id, source=source, type=item_type, title=title, body=body, **defaults)
+    return Entity(
+        id=id,
+        entity_type=entity_type,
+        source_system=source,
+        title=title,
+        fields=fields,
+        chunks=[],
+        **defaults,
+    )

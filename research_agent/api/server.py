@@ -16,7 +16,7 @@ from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
 from research_agent.logging_config import configure_logging
 from research_agent.memory.memory_service import MemoryService, MemorySearchResult
 from research_agent.storage.db import Database
-from research_agent.storage.models import ItemSource
+from research_agent.storage.models import SourceSystem
 from research_agent.synthesis.summarizer import Summarizer
 from research_agent.vector.qdrant_client import QdrantStore
 
@@ -75,6 +75,8 @@ app = FastAPI(
 class SearchRequest(BaseModel):
     query: str
     filters: dict[str, Any] = Field(default_factory=dict)
+    entity_types: list[str] | None = Field(default=None, description="Filter by entity type(s)")
+    field_names: list[str] | None = Field(default=None, description="Filter by field name(s)")
     top_k: int = Field(default=10, ge=1, le=50)
     context: str | None = None
 
@@ -100,7 +102,12 @@ async def health() -> dict[str, str]:
 
 @app.get("/sources")
 async def list_sources() -> dict[str, list[str]]:
-    return {"sources": [s.value for s in ItemSource]}
+    from research_agent.storage.models import EntityType
+
+    return {
+        "sources": [s.value for s in SourceSystem],
+        "entity_types": [t.value for t in EntityType],
+    }
 
 
 @app.exception_handler(Exception)
@@ -127,8 +134,9 @@ async def search_memories(request: SearchRequest) -> SearchResponse:
         result = await _memory_service.search_memories(
             query=request.query,
             top_k=request.top_k,
+            entity_types=request.entity_types or filters.get("entity_types"),
+            field_names=request.field_names or filters.get("field_names"),
             source=filters.get("source"),
-            item_type=filters.get("type"),
             date_from=filters.get("date_from"),
             date_to=filters.get("date_to"),
             tags=filters.get("tags"),

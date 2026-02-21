@@ -1,19 +1,21 @@
-"""Async SQLite database — CRUD for items and sync state."""
+"""Async SQLite database — CRUD for entities, fields, chunks, and sync state."""
 
 from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from research_agent.storage.models import (
     Base,
-    Item,
-    ItemRow,
+    ChunkRow,
+    Entity,
+    EntityFieldRow,
+    EntityRow,
     SyncStateRow,
-    item_to_row,
-    row_to_item,
+    entity_to_rows,
+    rows_to_entity,
 )
 
 
@@ -33,50 +35,99 @@ class Database:
         return self._session_factory()
 
     # ------------------------------------------------------------------
-    # Item CRUD
+    # Entity CRUD
     # ------------------------------------------------------------------
 
-    async def upsert_item(self, item: Item) -> bool:
-        """Insert or update an item. Returns True if the item was new or changed."""
+    async def upsert_entity(self, entity: Entity) -> bool:
+        """Insert or update an entity with its fields and chunks.
+
+        Returns True if the entity was new or changed.
+        """
+        e_row, f_rows, c_rows = entity_to_rows(entity)
+
         async with self.session() as session:
-            existing = await session.get(ItemRow, item.id)
+            existing = await session.get(EntityRow, entity.id)
+
             if existing is None:
-                session.add(item_to_row(item))
+                session.add(e_row)
+                session.add_all(f_rows)
+                session.add_all(c_rows)
                 await session.commit()
                 return True
 
-            if existing.content_hash == item.content_hash and existing.is_deleted == item.is_deleted:
+            if (
+                existing.content_hash == entity.content_hash
+                and existing.is_deleted == entity.is_deleted
+            ):
                 return False
 
-            existing.source = item.source.value
-            existing.type = item.type.value
-            existing.title = item.title
-            existing.body = item.body
-            existing.metadata_json = item.metadata
-            existing.created_at = item.created_at
+            existing.entity_type = entity.entity_type.value
+            existing.source_system = entity.source_system.value
+            existing.source_id = entity.source_id
+            existing.title = entity.title
             existing.updated_at = datetime.now(timezone.utc)
-            existing.content_hash = item.content_hash
-            existing.is_deleted = item.is_deleted
+            existing.content_hash = entity.content_hash
+            existing.is_deleted = entity.is_deleted
+
+            await session.execute(
+                delete(EntityFieldRow).where(EntityFieldRow.entity_id == entity.id)
+            )
+            await session.execute(
+                delete(ChunkRow).where(ChunkRow.entity_id == entity.id)
+            )
+            session.add_all(f_rows)
+            session.add_all(c_rows)
             await session.commit()
             return True
 
-    async def get_item(self, item_id: str) -> Item | None:
+    async def get_entity(self, entity_id: str) -> Entity | None:
         async with self.session() as session:
-            row = await session.get(ItemRow, item_id)
-            return row_to_item(row) if row else None
+            row = await session.get(EntityRow, entity_id)
+            if row is None:
+                return None
+            f_rows = (
+                await session.execute(
+                    select(EntityFieldRow).where(EntityFieldRow.entity_id == entity_id)
+                )
+            ).scalars().all()
+            c_rows = (
+                await session.execute(
+                    select(ChunkRow).where(ChunkRow.entity_id == entity_id)
+                )
+            ).scalars().all()
+            return rows_to_entity(row, list(f_rows), list(c_rows))
 
-    async def get_all_items(self, include_deleted: bool = False) -> list[Item]:
+    async def get_all_entities(
+        self,
+        include_deleted: bool = False,
+        entity_type: str | None = None,
+    ) -> list[Entity]:
         async with self.session() as session:
-            stmt = select(ItemRow)
+            stmt = select(EntityRow)
             if not include_deleted:
-                stmt = stmt.where(ItemRow.is_deleted == False)  # noqa: E712
+                stmt = stmt.where(EntityRow.is_deleted == False)  # noqa: E712
+            if entity_type:
+                stmt = stmt.where(EntityRow.entity_type == entity_type)
             result = await session.execute(stmt)
-            return [row_to_item(row) for row in result.scalars().all()]
+            entities: list[Entity] = []
+            for row in result.scalars().all():
+                f_rows = (
+                    await session.execute(
+                        select(EntityFieldRow).where(EntityFieldRow.entity_id == row.id)
+                    )
+                ).scalars().all()
+                c_rows = (
+                    await session.execute(
+                        select(ChunkRow).where(ChunkRow.entity_id == row.id)
+                    )
+                ).scalars().all()
+                entities.append(rows_to_entity(row, list(f_rows), list(c_rows)))
+            return entities
 
-    async def delete_item(self, item_id: str) -> bool:
-        """Soft-delete an item. Returns True if the item existed."""
+    async def delete_entity(self, entity_id: str) -> bool:
+        """Soft-delete an entity. Returns True if the entity existed."""
         async with self.session() as session:
-            row = await session.get(ItemRow, item_id)
+            row = await session.get(EntityRow, entity_id)
             if row is None:
                 return False
             row.is_deleted = True
@@ -84,18 +135,18 @@ class Database:
             await session.commit()
             return True
 
-    async def count_items(self, include_deleted: bool = False) -> int:
+    async def count_entities(self, include_deleted: bool = False) -> int:
         async with self.session() as session:
             from sqlalchemy import func
 
-            stmt = select(func.count()).select_from(ItemRow)
+            stmt = select(func.count()).select_from(EntityRow)
             if not include_deleted:
-                stmt = stmt.where(ItemRow.is_deleted == False)  # noqa: E712
+                stmt = stmt.where(EntityRow.is_deleted == False)  # noqa: E712
             result = await session.execute(stmt)
             return result.scalar_one()
 
     # ------------------------------------------------------------------
-    # Sync state (Phase 3, but table created now)
+    # Sync state
     # ------------------------------------------------------------------
 
     async def get_sync_state(self, source: str) -> datetime | None:

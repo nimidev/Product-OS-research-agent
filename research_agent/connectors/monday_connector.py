@@ -1,4 +1,4 @@
-"""Monday.com connector — fetches items via GraphQL API."""
+"""Monday.com connector — fetches items via GraphQL API, normalizes to Entity using field_mappings."""
 
 from __future__ import annotations
 
@@ -9,7 +9,8 @@ from typing import Any
 
 import httpx
 
-from research_agent.connectors.base import BaseConnector, NormalizedItem
+from research_agent.connectors.base import BaseConnector
+from research_agent.storage.models import Entity, EntityField, EntityType, SourceSystem
 
 logger = logging.getLogger(__name__)
 
@@ -22,16 +23,16 @@ class MondayConnector(BaseConnector):
     def __init__(
         self,
         api_key: str,
-        board_ids: list[int],
-        column_mapping: dict[str, str] | None = None,
+        board_id: int | str,
+        entity_type: str | EntityType,
+        field_mappings: dict[str, str],
     ) -> None:
         self._api_key = api_key
-        self._board_ids = board_ids
-        self._column_mapping = column_mapping or {
-            "title": "name",
-            "body": "description",
-            "priority": "priority",
-        }
+        self._board_id = int(board_id) if isinstance(board_id, str) else board_id
+        self._entity_type = (
+            entity_type.value if isinstance(entity_type, EntityType) else entity_type
+        )
+        self._field_mappings = field_mappings or {"name": "title"}
         self._client = httpx.AsyncClient(
             headers={
                 "Authorization": self._api_key,
@@ -45,23 +46,22 @@ class MondayConnector(BaseConnector):
     def source_name(self) -> str:
         return "monday"
 
-    async def list_updated_items(self, since: datetime | None = None) -> list[NormalizedItem]:
-        all_items: list[NormalizedItem] = []
-        for board_id in self._board_ids:
-            items = await self._fetch_board_items(board_id, since)
-            all_items.extend(items)
-        return all_items
+    @property
+    def entity_type(self) -> str:
+        return self._entity_type
 
-    async def _fetch_board_items(
-        self, board_id: int, since: datetime | None = None
-    ) -> list[NormalizedItem]:
-        items: list[NormalizedItem] = []
+    async def list_updated_items(self, since: datetime | None = None) -> list[Entity]:
+        items = await self._fetch_board_items(since)
+        return items
+
+    async def _fetch_board_items(self, since: datetime | None = None) -> list[Entity]:
+        entities: list[Entity] = []
         cursor: str | None = None
         page = 0
 
         while True:
             page += 1
-            query = self._build_query(board_id, cursor)
+            query = self._build_query(cursor)
             data = await self._execute_query(query)
 
             if not data:
@@ -73,10 +73,10 @@ class MondayConnector(BaseConnector):
 
             for raw in raw_items:
                 try:
-                    normalized = self.normalize_item(raw)
-                    if since and normalized.updated_at and normalized.updated_at < since:
+                    entity = self.normalize_item(raw)
+                    if since and entity.updated_at and entity.updated_at < since:
                         continue
-                    items.append(normalized)
+                    entities.append(entity)
                 except Exception:
                     logger.exception(
                         "Failed to normalize Monday item",
@@ -87,15 +87,20 @@ class MondayConnector(BaseConnector):
             if not cursor or len(raw_items) < PAGE_SIZE:
                 break
 
-            logger.info("Monday board %d: fetched page %d (%d items)", board_id, page, len(items))
+            logger.info(
+                "Monday board %d: fetched page %d (%d items)",
+                self._board_id,
+                page,
+                len(entities),
+            )
 
-        return items
+        return entities
 
-    def _build_query(self, board_id: int, cursor: str | None = None) -> str:
+    def _build_query(self, cursor: str | None = None) -> str:
         cursor_arg = f', cursor: "{cursor}"' if cursor else ""
         return f"""
         query {{
-            boards(ids: [{board_id}]) {{
+            boards(ids: [{self._board_id}]) {{
                 items_page(limit: {PAGE_SIZE}{cursor_arg}) {{
                     cursor
                     items {{
@@ -129,7 +134,8 @@ class MondayConnector(BaseConnector):
                     continue
                 if response.status_code in (401, 403):
                     logger.error(
-                        "Monday auth error (%d): check API key", response.status_code,
+                        "Monday auth error (%d): check API key",
+                        response.status_code,
                         extra={"source": "monday", "error_type": "auth"},
                     )
                     return None
@@ -143,62 +149,61 @@ class MondayConnector(BaseConnector):
         logger.error("Monday API: all retry attempts exhausted")
         return None
 
-    def normalize_item(self, raw: Any) -> NormalizedItem:
-        columns = {col["id"]: col.get("text", "") for col in raw.get("column_values", [])}
-
-        body_col = self._column_mapping.get("body", "description")
-        body = columns.get(body_col, "")
-
-        tags: list[str] = []
-        group = raw.get("group", {})
-        if group and group.get("title"):
-            tags.append(group["title"])
-
-        priority_col = self._column_mapping.get("priority", "priority")
-        priority = columns.get(priority_col, "")
-
-        metadata: dict[str, Any] = {
-            "tags": tags,
-            "url": f"https://monday.com/boards/{raw.get('board_id', '')}",
-            "columns": columns,
+    def normalize_item(self, raw: Any) -> Entity:
+        columns = {
+            col["id"]: col.get("text", "") or ""
+            for col in raw.get("column_values", [])
         }
-        if priority:
-            metadata["priority"] = priority
+        # Monday also exposes "name" on the item
+        columns["name"] = raw.get("name", "")
+
+        title = ""
+        fields: list[EntityField] = []
+        for source_col, canonical_name in self._field_mappings.items():
+            value = columns.get(source_col, "")
+            if canonical_name == "title":
+                title = value or title
+            else:
+                fields.append(
+                    EntityField(field_name=canonical_name, field_type="text", field_value=str(value))
+                )
+        if not title:
+            title = raw.get("name", "Untitled")
+
+        # Ensure title is in fields for content_hash
+        if not any(f.field_name == "title" for f in fields):
+            fields.insert(0, EntityField(field_name="title", field_type="text", field_value=title))
 
         updated_at = None
         if raw.get("updated_at"):
             try:
-                updated_at = datetime.fromisoformat(raw["updated_at"].replace("Z", "+00:00"))
+                updated_at = datetime.fromisoformat(
+                    raw["updated_at"].replace("Z", "+00:00")
+                )
             except (ValueError, TypeError):
                 pass
-
         created_at = None
         if raw.get("created_at"):
             try:
-                created_at = datetime.fromisoformat(raw["created_at"].replace("Z", "+00:00"))
+                created_at = datetime.fromisoformat(
+                    raw["created_at"].replace("Z", "+00:00")
+                )
             except (ValueError, TypeError):
                 pass
 
-        return NormalizedItem(
-            id=f"monday:{raw['id']}",
-            source="monday",
-            type=self._infer_type(raw, columns),
-            title=raw.get("name", "Untitled"),
-            body=body,
-            metadata=metadata,
+        entity_id = f"monday:{raw['id']}"
+        return Entity(
+            id=entity_id,
+            entity_type=EntityType(self._entity_type),
+            source_system=SourceSystem.MONDAY,
+            source_id=str(raw["id"]),
+            title=title,
+            fields=fields,
+            chunks=[],  # Sync engine will chunk searchable fields
             created_at=created_at or datetime.now(timezone.utc),
             updated_at=updated_at or datetime.now(timezone.utc),
+            is_deleted=False,
         )
-
-    def _infer_type(self, raw: Any, columns: dict[str, str]) -> str:
-        group_title = (raw.get("group", {}) or {}).get("title", "").lower()
-        if "bug" in group_title or "issue" in group_title:
-            return "bug"
-        if "feature" in group_title or "request" in group_title:
-            return "feature_request"
-        if "roadmap" in group_title:
-            return "roadmap_item"
-        return "feature_request"
 
     async def health_check(self) -> bool:
         try:

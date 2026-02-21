@@ -2,2033 +2,1361 @@
   {
     "id": "mock:meeting_note:000",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "000",
+    "title": "Sprint 42 Review — Memory & Search",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-01-26T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-01-26T00:00:00+00:00",
-    "updated_at": "2024-01-26T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-01-26T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:001",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 1",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "001",
+    "title": "Sprint 42 Review — Memory & Search — session 1",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-02-05T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-02-05T00:00:00+00:00",
-    "updated_at": "2024-02-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-02-05T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:002",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 2",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "002",
+    "title": "Sprint 42 Review — Memory & Search — session 2",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-02-10T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-02-10T00:00:00+00:00",
-    "updated_at": "2024-02-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-02-10T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:003",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 3",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "003",
+    "title": "Sprint 42 Review — Memory & Search — session 3",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-02-21T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-02-21T00:00:00+00:00",
-    "updated_at": "2024-02-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-02-21T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:004",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 4",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "004",
+    "title": "Sprint 42 Review — Memory & Search — session 4",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-03-01T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-03-01T00:00:00+00:00",
-    "updated_at": "2024-03-01T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-03-01T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:005",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 5",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "005",
+    "title": "Sprint 42 Review — Memory & Search — session 5",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-03-08T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-03-08T00:00:00+00:00",
-    "updated_at": "2024-03-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-03-08T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:006",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 6",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "006",
+    "title": "Sprint 42 Review — Memory & Search — session 6",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-03-17T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-03-17T00:00:00+00:00",
-    "updated_at": "2024-03-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-03-17T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:007",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 7",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "007",
+    "title": "Sprint 42 Review — Memory & Search — session 7",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-04-04T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-04-04T00:00:00+00:00",
-    "updated_at": "2024-04-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-04-04T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:008",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 8",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "008",
+    "title": "Sprint 42 Review — Memory & Search — session 8",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-04-15T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-04-15T00:00:00+00:00",
-    "updated_at": "2024-04-15T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-04-15T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:009",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 9",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "009",
+    "title": "Sprint 42 Review — Memory & Search — session 9",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-04-14T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-04-14T00:00:00+00:00",
-    "updated_at": "2024-04-14T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-04-14T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:010",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 10",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "010",
+    "title": "Sprint 42 Review — Memory & Search — session 10",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-05-08T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-05-08T00:00:00+00:00",
-    "updated_at": "2024-05-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-05-08T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:011",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 11",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "011",
+    "title": "Sprint 42 Review — Memory & Search — session 11",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-05-16T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-05-16T00:00:00+00:00",
-    "updated_at": "2024-05-16T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-05-16T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:012",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 12",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "012",
+    "title": "Sprint 42 Review — Memory & Search — session 12",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-05-27T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-05-27T00:00:00+00:00",
-    "updated_at": "2024-05-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-05-27T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:013",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 13",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "013",
+    "title": "Sprint 42 Review — Memory & Search — session 13",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-06-05T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-06-05T00:00:00+00:00",
-    "updated_at": "2024-06-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-05T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:014",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 14",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "014",
+    "title": "Sprint 42 Review — Memory & Search — session 14",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-06-17T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-06-17T00:00:00+00:00",
-    "updated_at": "2024-06-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-17T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:015",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Sprint 42 Review \u2014 Memory & Search \u2014 session 15",
-    "body": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
-    "metadata": {
-      "meeting_type": "sprint_review",
-      "attendees": [
-        "Sarah",
-        "Mike",
-        "Jen",
-        "David"
-      ],
-      "action_items": [
-        "Ship Memory blog post",
-        "Continue Search ranking work"
-      ],
-      "decisions": [
-        "Extend Search sprint"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "015",
+    "title": "Sprint 42 Review — Memory & Search — session 15",
+    "fields": {
+      "transcript": "Sprint 42 focused on Memory reliability and Search quality. Memory: fixed 3 bugs in retrieval, added user-facing 'What I remember' page. Search: improved ranking for code snippets, still seeing 15% of queries with zero results. Decision: extend Search sprint by 1 sprint. Action: Sarah to draft blog post on Memory improvements. Next sprint: Voice latency and Enterprise SSO.",
+      "attendees": "[\"Sarah\", \"Mike\", \"Jen\", \"David\"]",
+      "date": "2024-06-14T00:00:00+00:00",
+      "tags": "[\"sprint_review\"]",
+      "action_items": "[\"Ship Memory blog post\", \"Continue Search ranking work\"]",
+      "decisions": "[\"Extend Search sprint\"]"
     },
     "created_at": "2024-06-14T00:00:00+00:00",
-    "updated_at": "2024-06-14T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-14T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:016",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "016",
+    "title": "Enterprise customer call — Acme Corp",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-07-05T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-07-05T00:00:00+00:00",
-    "updated_at": "2024-07-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-05T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:017",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 1",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "017",
+    "title": "Enterprise customer call — Acme Corp — session 1",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-07-09T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-07-09T00:00:00+00:00",
-    "updated_at": "2024-07-09T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-09T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:018",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 2",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "018",
+    "title": "Enterprise customer call — Acme Corp — session 2",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-07-16T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-07-16T00:00:00+00:00",
-    "updated_at": "2024-07-16T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-16T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:019",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 3",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "019",
+    "title": "Enterprise customer call — Acme Corp — session 3",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-07-25T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-07-25T00:00:00+00:00",
-    "updated_at": "2024-07-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-25T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:020",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 4",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "020",
+    "title": "Enterprise customer call — Acme Corp — session 4",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-08-14T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-08-14T00:00:00+00:00",
-    "updated_at": "2024-08-14T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-08-14T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:021",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 5",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "021",
+    "title": "Enterprise customer call — Acme Corp — session 5",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-08-23T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-08-23T00:00:00+00:00",
-    "updated_at": "2024-08-23T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-08-23T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:022",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 6",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "022",
+    "title": "Enterprise customer call — Acme Corp — session 6",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-08-30T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-08-30T00:00:00+00:00",
-    "updated_at": "2024-08-30T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-08-30T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:023",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 7",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "023",
+    "title": "Enterprise customer call — Acme Corp — session 7",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-09-08T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-09-08T00:00:00+00:00",
-    "updated_at": "2024-09-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-09-08T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:024",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 8",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "024",
+    "title": "Enterprise customer call — Acme Corp — session 8",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-09-11T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-09-11T00:00:00+00:00",
-    "updated_at": "2024-09-11T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-09-11T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:025",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 9",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "025",
+    "title": "Enterprise customer call — Acme Corp — session 9",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-09-29T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-09-29T00:00:00+00:00",
-    "updated_at": "2024-09-29T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-09-29T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:026",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 10",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "026",
+    "title": "Enterprise customer call — Acme Corp — session 10",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-10-04T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-10-04T00:00:00+00:00",
-    "updated_at": "2024-10-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-10-04T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:027",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 11",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "027",
+    "title": "Enterprise customer call — Acme Corp — session 11",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-10-25T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-10-25T00:00:00+00:00",
-    "updated_at": "2024-10-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-10-25T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:028",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 12",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "028",
+    "title": "Enterprise customer call — Acme Corp — session 12",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-11-03T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-11-03T00:00:00+00:00",
-    "updated_at": "2024-11-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-11-03T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:029",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 13",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "029",
+    "title": "Enterprise customer call — Acme Corp — session 13",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-11-01T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-11-01T00:00:00+00:00",
-    "updated_at": "2024-11-01T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-11-01T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:030",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 14",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "030",
+    "title": "Enterprise customer call — Acme Corp — session 14",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-11-17T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-11-17T00:00:00+00:00",
-    "updated_at": "2024-11-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-11-17T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:031",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Enterprise customer call \u2014 Acme Corp \u2014 session 15",
-    "body": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
-    "metadata": {
-      "meeting_type": "customer_call",
-      "attendees": [
-        "Alex",
-        "Jordan",
-        "Acme CTO",
-        "Acme Security"
-      ],
-      "action_items": [
-        "Send data residency doc",
-        "Schedule security review"
-      ],
-      "decisions": [
-        "Prioritize EU region for Enterprise"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "031",
+    "title": "Enterprise customer call — Acme Corp — session 15",
+    "fields": {
+      "transcript": "Acme Corp (Fortune 500) evaluating ChatGPT Enterprise. Key concerns: data residency in EU, SSO with Okta, audit logs for compliance. They need SOC2 Type II and GDPR documentation. Competitor (Microsoft Copilot) already in their stack. We demonstrated Projects and Team plan. Action: Send data residency one-pager and schedule security review. Follow-up in 2 weeks.",
+      "attendees": "[\"Alex\", \"Jordan\", \"Acme CTO\", \"Acme Security\"]",
+      "date": "2024-11-22T00:00:00+00:00",
+      "tags": "[\"customer_call\"]",
+      "action_items": "[\"Send data residency doc\", \"Schedule security review\"]",
+      "decisions": "[\"Prioritize EU region for Enterprise\"]"
     },
     "created_at": "2024-11-22T00:00:00+00:00",
-    "updated_at": "2024-11-22T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-11-22T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:032",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "032",
+    "title": "Q1 prioritization — Voice vs Search",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2024-12-12T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2024-12-12T00:00:00+00:00",
-    "updated_at": "2024-12-12T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-12-12T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:033",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 1",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "033",
+    "title": "Q1 prioritization — Voice vs Search — session 1",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2024-12-17T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2024-12-17T00:00:00+00:00",
-    "updated_at": "2024-12-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-12-17T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:034",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 2",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "034",
+    "title": "Q1 prioritization — Voice vs Search — session 2",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2024-12-30T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2024-12-30T00:00:00+00:00",
-    "updated_at": "2024-12-30T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-12-30T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:035",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 3",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "035",
+    "title": "Q1 prioritization — Voice vs Search — session 3",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-01-07T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-01-07T00:00:00+00:00",
-    "updated_at": "2025-01-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-01-07T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:036",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 4",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "036",
+    "title": "Q1 prioritization — Voice vs Search — session 4",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-01-17T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-01-17T00:00:00+00:00",
-    "updated_at": "2025-01-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-01-17T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:037",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 5",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "037",
+    "title": "Q1 prioritization — Voice vs Search — session 5",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-01-28T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-01-28T00:00:00+00:00",
-    "updated_at": "2025-01-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-01-28T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:038",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 6",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "038",
+    "title": "Q1 prioritization — Voice vs Search — session 6",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-02-03T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-02-03T00:00:00+00:00",
-    "updated_at": "2025-02-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-02-03T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:039",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 7",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "039",
+    "title": "Q1 prioritization — Voice vs Search — session 7",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-02-20T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-02-20T00:00:00+00:00",
-    "updated_at": "2025-02-20T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-02-20T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:040",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 8",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "040",
+    "title": "Q1 prioritization — Voice vs Search — session 8",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-03-04T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-03-04T00:00:00+00:00",
-    "updated_at": "2025-03-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-03-04T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:041",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 9",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "041",
+    "title": "Q1 prioritization — Voice vs Search — session 9",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-03-07T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-03-07T00:00:00+00:00",
-    "updated_at": "2025-03-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-03-07T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:042",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 10",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "042",
+    "title": "Q1 prioritization — Voice vs Search — session 10",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-03-19T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-03-19T00:00:00+00:00",
-    "updated_at": "2025-03-19T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-03-19T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:043",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 11",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "043",
+    "title": "Q1 prioritization — Voice vs Search — session 11",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-04-02T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-04-02T00:00:00+00:00",
-    "updated_at": "2025-04-02T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-04-02T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:044",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 12",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "044",
+    "title": "Q1 prioritization — Voice vs Search — session 12",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-04-10T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-04-10T00:00:00+00:00",
-    "updated_at": "2025-04-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-04-10T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:045",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 13",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "045",
+    "title": "Q1 prioritization — Voice vs Search — session 13",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-04-23T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-04-23T00:00:00+00:00",
-    "updated_at": "2025-04-23T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-04-23T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:046",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 14",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "046",
+    "title": "Q1 prioritization — Voice vs Search — session 14",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-04-27T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-04-27T00:00:00+00:00",
-    "updated_at": "2025-04-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-04-27T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:047",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Q1 prioritization \u2014 Voice vs Search \u2014 session 15",
-    "body": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again \u2014 Legal to confirm training opt-out language.",
-    "metadata": {
-      "meeting_type": "prioritization",
-      "attendees": [
-        "CPO",
-        "VP Eng",
-        "PM Voice",
-        "PM Search"
-      ],
-      "action_items": [
-        "Legal review opt-out language"
-      ],
-      "decisions": [
-        "70/30 Voice vs Search"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "047",
+    "title": "Q1 prioritization — Voice vs Search — session 15",
+    "fields": {
+      "transcript": "Discussion on Q1 capacity: Engineering can fully staff either Advanced Voice Mode or ChatGPT Search, not both at same pace. Product presented user demand: Voice has higher NPS impact, Search has more competitive pressure (Perplexity). Decision: 70% Voice, 30% Search for Q1. Revisit when Voice ships. Enterprise data privacy came up again — Legal to confirm training opt-out language.",
+      "attendees": "[\"CPO\", \"VP Eng\", \"PM Voice\", \"PM Search\"]",
+      "date": "2025-05-05T00:00:00+00:00",
+      "tags": "[\"prioritization\"]",
+      "action_items": "[\"Legal review opt-out language\"]",
+      "decisions": "[\"70/30 Voice vs Search\"]"
     },
     "created_at": "2025-05-05T00:00:00+00:00",
-    "updated_at": "2025-05-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-05-05T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:048",
     "source": "mock",
-    "type": "meeting_note",
+    "entity_type": "meeting_note",
+    "source_id": "048",
     "title": "Incident post-mortem: Outage Jan 12",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-05-22T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-05-22T00:00:00+00:00",
-    "updated_at": "2025-05-22T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-05-22T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:049",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 1",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "049",
+    "title": "Incident post-mortem: Outage Jan 12 — session 1",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-06-02T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-06-02T00:00:00+00:00",
-    "updated_at": "2025-06-02T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-02T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:050",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 2",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "050",
+    "title": "Incident post-mortem: Outage Jan 12 — session 2",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-06-06T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-06-06T00:00:00+00:00",
-    "updated_at": "2025-06-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-06T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:051",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 3",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "051",
+    "title": "Incident post-mortem: Outage Jan 12 — session 3",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-06-15T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-06-15T00:00:00+00:00",
-    "updated_at": "2025-06-15T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-15T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:052",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 4",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "052",
+    "title": "Incident post-mortem: Outage Jan 12 — session 4",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-07-02T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-07-02T00:00:00+00:00",
-    "updated_at": "2025-07-02T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-07-02T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:053",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 5",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "053",
+    "title": "Incident post-mortem: Outage Jan 12 — session 5",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-06-30T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-06-30T00:00:00+00:00",
-    "updated_at": "2025-06-30T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-30T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:054",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 6",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "054",
+    "title": "Incident post-mortem: Outage Jan 12 — session 6",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-07-19T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-07-19T00:00:00+00:00",
-    "updated_at": "2025-07-19T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-07-19T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:055",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 7",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "055",
+    "title": "Incident post-mortem: Outage Jan 12 — session 7",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-07-31T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-07-31T00:00:00+00:00",
-    "updated_at": "2025-07-31T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-07-31T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:056",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 8",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "056",
+    "title": "Incident post-mortem: Outage Jan 12 — session 8",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-08-04T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-08-04T00:00:00+00:00",
-    "updated_at": "2025-08-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-08-04T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:057",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 9",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "057",
+    "title": "Incident post-mortem: Outage Jan 12 — session 9",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-08-14T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-08-14T00:00:00+00:00",
-    "updated_at": "2025-08-14T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-08-14T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:058",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 10",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "058",
+    "title": "Incident post-mortem: Outage Jan 12 — session 10",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-08-21T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-08-21T00:00:00+00:00",
-    "updated_at": "2025-08-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-08-21T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:059",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 11",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "059",
+    "title": "Incident post-mortem: Outage Jan 12 — session 11",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-09-08T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-09-08T00:00:00+00:00",
-    "updated_at": "2025-09-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-09-08T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:060",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 12",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "060",
+    "title": "Incident post-mortem: Outage Jan 12 — session 12",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-09-09T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-09-09T00:00:00+00:00",
-    "updated_at": "2025-09-09T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-09-09T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:061",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 13",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "061",
+    "title": "Incident post-mortem: Outage Jan 12 — session 13",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-09-29T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-09-29T00:00:00+00:00",
-    "updated_at": "2025-09-29T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-09-29T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:062",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 14",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "062",
+    "title": "Incident post-mortem: Outage Jan 12 — session 14",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-10-06T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-10-06T00:00:00+00:00",
-    "updated_at": "2025-10-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-06T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:063",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "Incident post-mortem: Outage Jan 12 \u2014 session 15",
-    "body": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
-    "metadata": {
-      "meeting_type": "post_mortem",
-      "attendees": [
-        "Incident lead",
-        "SRE",
-        "Comms"
-      ],
-      "action_items": [
-        "Canary deployment",
-        "Rollback runbook"
-      ],
-      "decisions": [
-        "None"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "063",
+    "title": "Incident post-mortem: Outage Jan 12 — session 15",
+    "fields": {
+      "transcript": "30-min partial outage. Root cause: bad deploy to conversation service, rollback took 15 min. Impact: ~5% of requests failed, no data loss. Actions: add canary deployment, improve rollback automation. No customer data affected. Comms sent within 20 min.",
+      "attendees": "[\"Incident lead\", \"SRE\", \"Comms\"]",
+      "date": "2025-10-10T00:00:00+00:00",
+      "tags": "[\"post_mortem\"]",
+      "action_items": "[\"Canary deployment\", \"Rollback runbook\"]",
+      "decisions": "[\"None\"]"
     },
     "created_at": "2025-10-10T00:00:00+00:00",
-    "updated_at": "2025-10-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-10T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:064",
     "source": "mock",
-    "type": "meeting_note",
+    "entity_type": "meeting_note",
+    "source_id": "064",
     "title": "User research readout: Power users",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2025-10-28T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2025-10-28T00:00:00+00:00",
-    "updated_at": "2025-10-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-28T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:065",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 1",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "065",
+    "title": "User research readout: Power users — session 1",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2025-11-07T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2025-11-07T00:00:00+00:00",
-    "updated_at": "2025-11-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-11-07T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:066",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 2",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "066",
+    "title": "User research readout: Power users — session 2",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2025-11-13T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2025-11-13T00:00:00+00:00",
-    "updated_at": "2025-11-13T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-11-13T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:067",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 3",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "067",
+    "title": "User research readout: Power users — session 3",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2025-11-22T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2025-11-22T00:00:00+00:00",
-    "updated_at": "2025-11-22T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-11-22T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:068",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 4",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "068",
+    "title": "User research readout: Power users — session 4",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2025-12-05T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2025-12-05T00:00:00+00:00",
-    "updated_at": "2025-12-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-12-05T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:069",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 5",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "069",
+    "title": "User research readout: Power users — session 5",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2025-12-08T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2025-12-08T00:00:00+00:00",
-    "updated_at": "2025-12-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-12-08T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:070",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 6",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "070",
+    "title": "User research readout: Power users — session 6",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2025-12-19T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2025-12-19T00:00:00+00:00",
-    "updated_at": "2025-12-19T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-12-19T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:071",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 7",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "071",
+    "title": "User research readout: Power users — session 7",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-01-01T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-01-01T00:00:00+00:00",
-    "updated_at": "2026-01-01T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-01T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:072",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 8",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "072",
+    "title": "User research readout: Power users — session 8",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-01-05T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-01-05T00:00:00+00:00",
-    "updated_at": "2026-01-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-05T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:073",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 9",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "073",
+    "title": "User research readout: Power users — session 9",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-01-25T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-01-25T00:00:00+00:00",
-    "updated_at": "2026-01-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-25T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:074",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 10",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "074",
+    "title": "User research readout: Power users — session 10",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-01-28T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-01-28T00:00:00+00:00",
-    "updated_at": "2026-01-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-28T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:075",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 11",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "075",
+    "title": "User research readout: Power users — session 11",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-02-06T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-02-06T00:00:00+00:00",
-    "updated_at": "2026-02-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-02-06T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:076",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 12",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "076",
+    "title": "User research readout: Power users — session 12",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-02-17T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-02-17T00:00:00+00:00",
-    "updated_at": "2026-02-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-02-17T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:077",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 13",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "077",
+    "title": "User research readout: Power users — session 13",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-02-28T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-02-28T00:00:00+00:00",
-    "updated_at": "2026-02-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-02-28T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:078",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 14",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "078",
+    "title": "User research readout: Power users — session 14",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-03-10T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-03-10T00:00:00+00:00",
-    "updated_at": "2026-03-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-03-10T00:00:00+00:00"
   },
   {
     "id": "mock:meeting_note:079",
     "source": "mock",
-    "type": "meeting_note",
-    "title": "User research readout: Power users \u2014 session 15",
-    "body": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain \u2014 folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
-    "metadata": {
-      "meeting_type": "user_research",
-      "attendees": [
-        "Research",
-        "PM",
-        "Design"
-      ],
-      "action_items": [
-        "Share full report",
-        "Update roadmap inputs"
-      ],
-      "decisions": [
-        "Align roadmap with research"
-      ]
+    "entity_type": "meeting_note",
+    "source_id": "079",
+    "title": "User research readout: Power users — session 15",
+    "fields": {
+      "transcript": "12 interviews with heavy users (5+ hrs/week). Themes: (1) Conversation organization is #1 pain — folders and search. (2) Memory is loved when it works, frustrating when it forgets. (3) Code interpreter is critical for devs; timeouts are blocking. (4) Team/workspace requested by 8/12. Recommend: prioritize search and memory reliability.",
+      "attendees": "[\"Research\", \"PM\", \"Design\"]",
+      "date": "2026-03-29T00:00:00+00:00",
+      "tags": "[\"user_research\"]",
+      "action_items": "[\"Share full report\", \"Update roadmap inputs\"]",
+      "decisions": "[\"Align roadmap with research\"]"
     },
     "created_at": "2026-03-29T00:00:00+00:00",
-    "updated_at": "2026-03-29T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-03-29T00:00:00+00:00"
   }
 ]

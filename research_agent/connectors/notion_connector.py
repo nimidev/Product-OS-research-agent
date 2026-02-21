@@ -1,4 +1,4 @@
-"""Notion connector — fetches pages from configured databases via Notion API."""
+"""Notion connector — fetches pages from configured databases, normalizes to Entity using field_mappings."""
 
 from __future__ import annotations
 
@@ -9,7 +9,8 @@ from typing import Any
 
 import httpx
 
-from research_agent.connectors.base import BaseConnector, NormalizedItem
+from research_agent.connectors.base import BaseConnector
+from research_agent.storage.models import Entity, EntityField, EntityType, SourceSystem
 
 logger = logging.getLogger(__name__)
 
@@ -20,9 +21,19 @@ PAGE_SIZE = 100
 
 
 class NotionConnector(BaseConnector):
-    def __init__(self, api_key: str, database_ids: list[str]) -> None:
+    def __init__(
+        self,
+        api_key: str,
+        database_id: str,
+        entity_type: str | EntityType,
+        field_mappings: dict[str, str],
+    ) -> None:
         self._api_key = api_key
-        self._database_ids = database_ids
+        self._database_id = database_id.strip()
+        self._entity_type = (
+            entity_type.value if isinstance(entity_type, EntityType) else entity_type
+        )
+        self._field_mappings = field_mappings or {"Title": "title", "content": "transcript"}
         self._client = httpx.AsyncClient(
             headers={
                 "Authorization": f"Bearer {self._api_key}",
@@ -36,17 +47,17 @@ class NotionConnector(BaseConnector):
     def source_name(self) -> str:
         return "notion"
 
-    async def list_updated_items(self, since: datetime | None = None) -> list[NormalizedItem]:
-        all_items: list[NormalizedItem] = []
-        for db_id in self._database_ids:
-            items = await self._fetch_database_pages(db_id, since)
-            all_items.extend(items)
-        return all_items
+    @property
+    def entity_type(self) -> str:
+        return self._entity_type
+
+    async def list_updated_items(self, since: datetime | None = None) -> list[Entity]:
+        return await self._fetch_database_pages(since)
 
     async def _fetch_database_pages(
-        self, database_id: str, since: datetime | None = None
-    ) -> list[NormalizedItem]:
-        items: list[NormalizedItem] = []
+        self, since: datetime | None = None
+    ) -> list[Entity]:
+        entities: list[Entity] = []
         has_more = True
         start_cursor: str | None = None
 
@@ -62,7 +73,7 @@ class NotionConnector(BaseConnector):
                 body["start_cursor"] = start_cursor
 
             data = await self._api_request(
-                "POST", f"/databases/{database_id}/query", json_body=body
+                "POST", f"/databases/{self._database_id}/query", json_body=body
             )
             if not data:
                 break
@@ -70,8 +81,8 @@ class NotionConnector(BaseConnector):
             for page in data.get("results", []):
                 try:
                     content = await self._get_page_content(page["id"])
-                    normalized = self.normalize_item({"page": page, "content": content})
-                    items.append(normalized)
+                    entity = self.normalize_item({"page": page, "content": content})
+                    entities.append(entity)
                 except Exception:
                     logger.exception(
                         "Failed to normalize Notion page",
@@ -81,24 +92,17 @@ class NotionConnector(BaseConnector):
             has_more = data.get("has_more", False)
             start_cursor = data.get("next_cursor")
 
-        return items
+        return entities
 
     async def _get_page_content(self, page_id: str) -> str:
-        """Extract full page content by fetching all blocks."""
         blocks_text: list[str] = []
         has_more = True
         start_cursor: str | None = None
 
         while has_more:
-            params: dict[str, Any] = {"page_size": 100}
+            url = f"/blocks/{page_id}/children?page_size=100"
             if start_cursor:
-                params["start_cursor"] = start_cursor
-
-            url = f"/blocks/{page_id}/children"
-            if start_cursor:
-                url += f"?start_cursor={start_cursor}&page_size=100"
-            else:
-                url += "?page_size=100"
+                url += f"&start_cursor={start_cursor}"
 
             data = await self._api_request("GET", url)
             if not data:
@@ -115,10 +119,8 @@ class NotionConnector(BaseConnector):
         return "\n\n".join(blocks_text)
 
     def _extract_block_text(self, block: dict[str, Any]) -> str:
-        """Extract plaintext from a Notion block."""
         block_type = block.get("type", "")
         type_data = block.get(block_type, {})
-
         if "rich_text" in type_data:
             return "".join(
                 rt.get("plain_text", "") for rt in type_data["rich_text"]
@@ -162,19 +164,36 @@ class NotionConnector(BaseConnector):
         logger.error("Notion API: all retry attempts exhausted")
         return None
 
-    def normalize_item(self, raw: Any) -> NormalizedItem:
+    def normalize_item(self, raw: Any) -> Entity:
         page = raw["page"]
         content = raw.get("content", "")
 
         properties = page.get("properties", {})
         title = self._extract_title(properties)
 
-        tags: list[str] = []
-        for prop_name, prop_data in properties.items():
-            if prop_data.get("type") == "multi_select":
-                tags.extend(opt.get("name", "") for opt in prop_data.get("multi_select", []))
-            elif prop_data.get("type") == "select" and prop_data.get("select"):
-                tags.append(prop_data["select"].get("name", ""))
+        # Build a simple "content" key for mapping (blocks text)
+        source_values: dict[str, str] = {"content": content, "Title": title}
+
+        fields: list[EntityField] = []
+        for source_key, canonical_name in self._field_mappings.items():
+            value = source_values.get(source_key, "")
+            if canonical_name == "title":
+                title = value or title
+            else:
+                fields.append(
+                    EntityField(
+                        field_name=canonical_name,
+                        field_type="text",
+                        field_value=str(value),
+                    )
+                )
+        if not title:
+            title = "Untitled"
+        if not any(f.field_name == "title" for f in fields):
+            fields.insert(
+                0,
+                EntityField(field_name="title", field_type="text", field_value=title),
+            )
 
         last_edited = page.get("last_edited_time", "")
         created = page.get("created_time", "")
@@ -190,19 +209,18 @@ class NotionConnector(BaseConnector):
             else datetime.now(timezone.utc)
         )
 
-        return NormalizedItem(
-            id=f"notion:{page['id']}",
-            source="notion",
-            type=self._infer_type(properties, tags),
+        entity_id = f"notion:{page['id']}"
+        return Entity(
+            id=entity_id,
+            entity_type=EntityType(self._entity_type),
+            source_system=SourceSystem.NOTION,
+            source_id=page["id"],
             title=title,
-            body=content,
-            metadata={
-                "tags": tags,
-                "url": page.get("url", ""),
-                "notion_id": page["id"],
-            },
+            fields=fields,
+            chunks=[],
             created_at=created_at,
             updated_at=updated_at,
+            is_deleted=False,
         )
 
     def _extract_title(self, properties: dict[str, Any]) -> str:
@@ -211,20 +229,6 @@ class NotionConnector(BaseConnector):
                 title_parts = prop_data.get("title", [])
                 return "".join(t.get("plain_text", "") for t in title_parts)
         return "Untitled"
-
-    def _infer_type(self, properties: dict[str, Any], tags: list[str]) -> str:
-        tags_lower = [t.lower() for t in tags]
-        if any("bug" in t for t in tags_lower):
-            return "bug"
-        if any("feature" in t or "request" in t for t in tags_lower):
-            return "feature_request"
-        if any("roadmap" in t for t in tags_lower):
-            return "roadmap_item"
-        if any("meeting" in t or "note" in t for t in tags_lower):
-            return "meeting_note"
-        if any("prd" in t or "spec" in t for t in tags_lower):
-            return "prd"
-        return "feature_request"
 
     async def health_check(self) -> bool:
         try:

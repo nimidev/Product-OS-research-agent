@@ -1,4 +1,4 @@
-"""Tests for canonical data model and SQLite CRUD."""
+"""Tests for canonical entity model and SQLite CRUD."""
 
 from __future__ import annotations
 
@@ -7,7 +7,14 @@ from datetime import datetime, timezone
 import pytest
 
 from research_agent.storage.db import Database
-from research_agent.storage.models import Item, ItemSource, ItemType, compute_content_hash
+from research_agent.storage.models import (
+    Entity,
+    EntityField,
+    EntityType,
+    SourceSystem,
+    compute_content_hash,
+)
+from tests.conftest import make_entity
 
 
 @pytest.fixture
@@ -18,156 +25,142 @@ async def db(tmp_path):
     await database.close()
 
 
-def _make_item(
-    id: str = "mock:feature_request:001",
-    title: str = "Add dark mode",
-    body: str = "Users want a dark mode option for the app.",
-    **kwargs,
-) -> Item:
-    defaults = {
-        "source": ItemSource.MOCK,
-        "type": ItemType.FEATURE_REQUEST,
-        "metadata": {"tags": ["ui", "theme"], "priority": "high"},
-        "created_at": datetime(2025, 6, 15, tzinfo=timezone.utc),
-        "updated_at": datetime(2025, 6, 15, tzinfo=timezone.utc),
-    }
-    defaults.update(kwargs)
-    return Item(id=id, title=title, body=body, **defaults)
-
-
 class TestContentHash:
     def test_deterministic(self):
-        h1 = compute_content_hash("title", "body")
-        h2 = compute_content_hash("title", "body")
+        h1 = compute_content_hash({"title": "t", "a": "b"})
+        h2 = compute_content_hash({"title": "t", "a": "b"})
         assert h1 == h2
 
     def test_changes_with_content(self):
-        h1 = compute_content_hash("title", "body")
-        h2 = compute_content_hash("title", "different body")
+        h1 = compute_content_hash({"title": "t", "body": "x"})
+        h2 = compute_content_hash({"title": "t", "body": "y"})
         assert h1 != h2
 
-    def test_item_computed_hash(self):
-        item = _make_item()
-        assert item.content_hash == compute_content_hash(item.title, item.body)
+    def test_entity_content_hash(self):
+        entity = make_entity()
+        assert len(entity.content_hash) == 64
 
 
-class TestItemModel:
+class TestEntityModel:
     def test_all_fields_present(self):
-        item = _make_item()
-        assert item.id == "mock:feature_request:001"
-        assert item.source == ItemSource.MOCK
-        assert item.type == ItemType.FEATURE_REQUEST
-        assert item.title == "Add dark mode"
-        assert item.body == "Users want a dark mode option for the app."
-        assert item.metadata["tags"] == ["ui", "theme"]
-        assert item.is_deleted is False
-        assert len(item.content_hash) == 64
+        entity = make_entity()
+        assert entity.id == "mock:feature_request:001"
+        assert entity.source_system == SourceSystem.MOCK
+        assert entity.entity_type == EntityType.FEATURE_REQUEST
+        assert entity.title == "Add dark mode"
+        assert entity.get_field("description") == "Users want a dark mode option."
+        assert entity.is_deleted is False
+        assert len(entity.content_hash) == 64
 
     def test_source_enum_values(self):
-        assert ItemSource.MOCK == "mock"
-        assert ItemSource.MONDAY == "monday"
-        assert ItemSource.NOTION == "notion"
+        assert SourceSystem.MOCK == "mock"
+        assert SourceSystem.MONDAY == "monday"
+        assert SourceSystem.NOTION == "notion"
 
-    def test_type_enum_values(self):
-        assert ItemType.FEATURE_REQUEST == "feature_request"
-        assert ItemType.BUG == "bug"
-        assert ItemType.MEETING_NOTE == "meeting_note"
-        assert ItemType.PRD == "prd"
-        assert ItemType.ROADMAP_ITEM == "roadmap_item"
-        assert ItemType.SUPPORT_TICKET == "support_ticket"
+    def test_entity_type_enum_values(self):
+        assert EntityType.FEATURE_REQUEST == "feature_request"
+        assert EntityType.BUG == "bug"
+        assert EntityType.MEETING_NOTE == "meeting_note"
+        assert EntityType.PRD == "prd"
+        assert EntityType.ROADMAP_ITEM == "roadmap_item"
+        assert EntityType.SUPPORT_TICKET == "support_ticket"
 
 
 class TestDatabaseCRUD:
     @pytest.mark.asyncio
     async def test_insert_and_get(self, db):
-        item = _make_item()
-        changed = await db.upsert_item(item)
+        entity = make_entity()
+        changed = await db.upsert_entity(entity)
         assert changed is True
 
-        retrieved = await db.get_item(item.id)
+        retrieved = await db.get_entity(entity.id)
         assert retrieved is not None
-        assert retrieved.id == item.id
-        assert retrieved.title == item.title
-        assert retrieved.body == item.body
-        assert retrieved.source == item.source
-        assert retrieved.type == item.type
-        assert retrieved.content_hash == item.content_hash
+        assert retrieved.id == entity.id
+        assert retrieved.title == entity.title
+        assert retrieved.source_system == entity.source_system
+        assert retrieved.entity_type == entity.entity_type
+        assert retrieved.content_hash == entity.content_hash
 
     @pytest.mark.asyncio
     async def test_upsert_no_change(self, db):
-        item = _make_item()
-        await db.upsert_item(item)
+        entity = make_entity()
+        await db.upsert_entity(entity)
 
-        changed = await db.upsert_item(item)
+        changed = await db.upsert_entity(entity)
         assert changed is False
 
     @pytest.mark.asyncio
     async def test_upsert_with_change(self, db):
-        item = _make_item()
-        await db.upsert_item(item)
+        entity = make_entity()
+        await db.upsert_entity(entity)
 
-        updated = _make_item(body="Updated: users really want dark mode with OLED support.")
-        changed = await db.upsert_item(updated)
+        updated = make_entity()
+        updated.fields = [
+            EntityField(field_name="title", field_type="text", field_value=entity.title),
+            EntityField(field_name="description", field_type="text", field_value="Updated: users really want dark mode with OLED support."),
+        ]
+        changed = await db.upsert_entity(updated)
         assert changed is True
 
-        retrieved = await db.get_item(item.id)
+        retrieved = await db.get_entity(entity.id)
         assert retrieved is not None
-        assert retrieved.body == updated.body
+        assert retrieved.get_field("description") == updated.get_field("description")
         assert retrieved.content_hash == updated.content_hash
 
     @pytest.mark.asyncio
     async def test_get_nonexistent(self, db):
-        result = await db.get_item("nonexistent")
+        result = await db.get_entity("nonexistent")
         assert result is None
 
     @pytest.mark.asyncio
     async def test_soft_delete(self, db):
-        item = _make_item()
-        await db.upsert_item(item)
+        entity = make_entity()
+        await db.upsert_entity(entity)
 
-        deleted = await db.delete_item(item.id)
+        deleted = await db.delete_entity(entity.id)
         assert deleted is True
 
-        active_items = await db.get_all_items(include_deleted=False)
-        assert len(active_items) == 0
+        active = await db.get_all_entities(include_deleted=False)
+        assert len(active) == 0
 
-        all_items = await db.get_all_items(include_deleted=True)
-        assert len(all_items) == 1
-        assert all_items[0].is_deleted is True
+        all_entities = await db.get_all_entities(include_deleted=True)
+        assert len(all_entities) == 1
+        assert all_entities[0].is_deleted is True
 
     @pytest.mark.asyncio
     async def test_delete_nonexistent(self, db):
-        result = await db.delete_item("nonexistent")
+        result = await db.delete_entity("nonexistent")
         assert result is False
 
     @pytest.mark.asyncio
-    async def test_get_all_items(self, db):
+    async def test_get_all_entities(self, db):
         for i in range(5):
-            await db.upsert_item(_make_item(id=f"mock:feature_request:{i:03d}", title=f"FR {i}"))
+            await db.upsert_entity(make_entity(id=f"mock:feature_request:{i:03d}", title=f"FR {i}"))
 
-        items = await db.get_all_items()
-        assert len(items) == 5
+        entities = await db.get_all_entities()
+        assert len(entities) == 5
 
     @pytest.mark.asyncio
-    async def test_count_items(self, db):
+    async def test_count_entities(self, db):
         for i in range(3):
-            await db.upsert_item(_make_item(id=f"mock:bug:{i:03d}", title=f"Bug {i}"))
+            await db.upsert_entity(make_entity(id=f"mock:bug:{i:03d}", title=f"Bug {i}"))
 
-        assert await db.count_items() == 3
-        await db.delete_item("mock:bug:001")
-        assert await db.count_items() == 2
-        assert await db.count_items(include_deleted=True) == 3
+        assert await db.count_entities() == 3
+        await db.delete_entity("mock:bug:001")
+        assert await db.count_entities() == 2
+        assert await db.count_entities(include_deleted=True) == 3
 
     @pytest.mark.asyncio
-    async def test_metadata_persists(self, db):
-        item = _make_item(metadata={"customer": "Acme Corp", "votes": 42, "tags": ["urgent"]})
-        await db.upsert_item(item)
+    async def test_fields_persist(self, db):
+        entity = make_entity()
+        entity.fields.append(EntityField(field_name="customer", field_type="text", field_value="Acme Corp"))
+        entity.fields.append(EntityField(field_name="votes", field_type="text", field_value="42"))
+        await db.upsert_entity(entity)
 
-        retrieved = await db.get_item(item.id)
+        retrieved = await db.get_entity(entity.id)
         assert retrieved is not None
-        assert retrieved.metadata["customer"] == "Acme Corp"
-        assert retrieved.metadata["votes"] == 42
-        assert retrieved.metadata["tags"] == ["urgent"]
+        assert retrieved.get_field("customer") == "Acme Corp"
+        assert retrieved.get_field("votes") == "42"
 
 
 class TestSyncState:

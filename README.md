@@ -24,7 +24,7 @@ cp .env.example .env
 # 3. Start Qdrant (requires Docker Desktop or Docker daemon to be running)
 docker-compose up qdrant -d
 
-# 4. Seed with mock data (after fixtures are generated)
+# 4. Seed with canonical mock data (run once; re-run to re-ingest and replace existing data)
 python -m research_agent seed
 
 # 5. Start the API
@@ -49,7 +49,7 @@ Cursor IDE → MCP (stdio) → Research Agent → Qdrant (vectors) + SQLite (can
 
 | Component | Path | Purpose |
 |-----------|------|---------|
-| Storage | `research_agent/storage/` | SQLite canonical data model (Item + SyncState) |
+| Storage | `research_agent/storage/` | SQLite canonical data model (Entity, EntityField, Chunk + SyncState) |
 | Embedding | `research_agent/embedding/` | EmbeddingProvider interface + OpenAI impl + chunker |
 | Vector | `research_agent/vector/` | Qdrant client wrapper with parent-dedup search |
 | Memory | `research_agent/memory/` | Core search/add service orchestrating all layers |
@@ -75,15 +75,17 @@ python -m research_agent sync    # Run sync with configured connectors
 Returns `{"status": "ok"}`.
 
 ### `GET /sources`
-Lists available data sources and item types.
+Returns available data sources and entity types (e.g. `feature_request`, `bug`, `meeting_note`, `prd`, `roadmap_item`, `support_ticket`).
 
 ### `POST /search_memories`
 ```json
 {
   "query": "What pain points do users have with onboarding?",
+  "entity_types": ["feature_request", "support_ticket"],
+  "field_names": ["description", "transcript"],
   "filters": {
     "source": "mock",
-    "type": "feature_request",
+    "entity_types": ["feature_request"],
     "date_from": "2025-01-01",
     "date_to": "2025-12-31",
     "tags": ["enterprise"]
@@ -98,7 +100,7 @@ Response:
 {
   "summary": "AI-synthesized answer with [1] inline citations...",
   "references": [{"title": "...", "url": "...", "source": "mock", "type": "feature_request"}],
-  "raw_results": [...],
+  "raw_results": [{"id": "...", "title": "...", "body": "...", "entity_type": "feature_request", "field_name": "description", ...}],
   "degraded": false
 }
 ```
@@ -125,15 +127,15 @@ Add to your Cursor MCP settings:
 ### MCP Tools
 
 - **`search_memories`** — Search the knowledge base with optional filters and conversation context. Returns AI-synthesized summary with source citations.
-- **`list_sources`** — List available data sources and item types.
+- **`list_sources`** — List available data sources and entity types.
 
 ## Connectors
 
 ### Adding a New Connector
 
 1. Subclass `BaseConnector` from `research_agent/connectors/base.py`
-2. Implement `list_updated_items(since)` and `normalize_item(raw)`
-3. Add config entry in `config.yaml`
+2. Implement `list_updated_entities(since)` and `normalize_item(raw) -> Entity`
+3. Add mapping in `config/mappings.yaml` (see `config/mappings.example.yaml`)
 
 ### Built-in Connectors
 
@@ -153,8 +155,8 @@ DATABASE_PATH=research_agent.db
 LOG_LEVEL=INFO
 ```
 
-### Phase 2+ (`config.yaml`)
-See `config.yaml.example` for full options.
+### Connector mappings (`config/mappings.yaml`)
+Copy `config/mappings.example.yaml` to `config/mappings.yaml` and set your Monday board IDs and Notion database IDs. Field mappings define how source columns map to canonical entity fields (e.g. `name` → `title`, `text0` → `description`). Used by `python -m research_agent sync`.
 
 ## Development
 
@@ -177,8 +179,14 @@ python -m tests.evaluation.evaluate
 ## Docker
 
 ```bash
-docker-compose up          # Qdrant + API
-docker-compose up qdrant   # Just Qdrant for local dev
+docker-compose up -d       # Qdrant + API
+docker-compose up qdrant -d   # Just Qdrant for local dev
+```
+
+After first deploy, run seed once to load canonical fixtures into SQLite + Qdrant:
+
+```bash
+docker-compose run --rm api python -m research_agent seed
 ```
 
 ## Testing

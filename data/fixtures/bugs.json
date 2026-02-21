@@ -2,1361 +2,1361 @@
   {
     "id": "mock:bug:000",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "000",
     "title": "Memory not retaining information",
-    "body": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
-    "metadata": {
+    "fields": {
+      "description": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
       "severity": "high",
-      "affected_users": 38655,
-      "component": "memory",
       "status": "open",
-      "url": "https://openai.com/issue/0"
+      "priority": "high",
+      "component": "memory",
+      "affected_users": "38655"
     },
     "created_at": "2024-01-16T00:00:00+00:00",
-    "updated_at": "2024-02-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-02-04T00:00:00+00:00"
   },
   {
     "id": "mock:bug:001",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "001",
     "title": "Memory not retaining information",
-    "body": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
-    "metadata": {
+    "fields": {
+      "description": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
       "severity": "high",
-      "affected_users": 571,
-      "component": "memory",
       "status": "open",
-      "url": "https://openai.com/issue/1"
+      "priority": "high",
+      "component": "memory",
+      "affected_users": "571"
     },
     "created_at": "2024-02-18T00:00:00+00:00",
-    "updated_at": "2024-02-20T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-02-20T00:00:00+00:00"
   },
   {
     "id": "mock:bug:002",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "002",
     "title": "Memory not retaining information",
-    "body": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
-    "metadata": {
+    "fields": {
+      "description": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
       "severity": "high",
-      "affected_users": 4517,
-      "component": "memory",
       "status": "open",
-      "url": "https://openai.com/issue/2"
+      "priority": "high",
+      "component": "memory",
+      "affected_users": "4517"
     },
     "created_at": "2024-03-09T00:00:00+00:00",
-    "updated_at": "2024-03-20T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-03-20T00:00:00+00:00"
   },
   {
     "id": "mock:bug:003",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "003",
     "title": "Memory not retaining information",
-    "body": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
-    "metadata": {
+    "fields": {
+      "description": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
       "severity": "high",
-      "affected_users": 33795,
-      "component": "memory",
       "status": "open",
-      "url": "https://openai.com/issue/3"
+      "priority": "high",
+      "component": "memory",
+      "affected_users": "33795"
     },
     "created_at": "2024-03-19T00:00:00+00:00",
-    "updated_at": "2024-03-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-03-28T00:00:00+00:00"
   },
   {
     "id": "mock:bug:004",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "004",
     "title": "Memory not retaining information",
-    "body": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
-    "metadata": {
+    "fields": {
+      "description": "ChatGPT Memory fails to recall facts that were explicitly saved. Users report having to re-teach the same information. Affects both plus and free users. Engineering investigating embedding and retrieval path.",
       "severity": "high",
-      "affected_users": 31912,
-      "component": "memory",
       "status": "open",
-      "url": "https://openai.com/issue/4"
+      "priority": "high",
+      "component": "memory",
+      "affected_users": "31912"
     },
     "created_at": "2024-05-16T00:00:00+00:00",
-    "updated_at": "2024-06-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-03T00:00:00+00:00"
   },
   {
     "id": "mock:bug:005",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "005",
     "title": "Code interpreter timeout with no output",
-    "body": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
-    "metadata": {
+    "fields": {
+      "description": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
       "severity": "high",
-      "affected_users": 47505,
-      "component": "code_interpreter",
       "status": "resolved",
-      "url": "https://openai.com/issue/5"
+      "priority": "high",
+      "component": "code_interpreter",
+      "affected_users": "47505"
     },
     "created_at": "2024-05-02T00:00:00+00:00",
-    "updated_at": "2024-05-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-05-10T00:00:00+00:00"
   },
   {
     "id": "mock:bug:006",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "006",
     "title": "Code interpreter timeout with no output",
-    "body": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
-    "metadata": {
+    "fields": {
+      "description": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
       "severity": "high",
-      "affected_users": 26777,
-      "component": "code_interpreter",
       "status": "open",
-      "url": "https://openai.com/issue/6"
+      "priority": "high",
+      "component": "code_interpreter",
+      "affected_users": "26777"
     },
     "created_at": "2024-06-13T00:00:00+00:00",
-    "updated_at": "2024-06-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-17T00:00:00+00:00"
   },
   {
     "id": "mock:bug:007",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "007",
     "title": "Code interpreter timeout with no output",
-    "body": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
-    "metadata": {
+    "fields": {
+      "description": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
       "severity": "high",
-      "affected_users": 43287,
-      "component": "code_interpreter",
       "status": "resolved",
-      "url": "https://openai.com/issue/7"
+      "priority": "high",
+      "component": "code_interpreter",
+      "affected_users": "43287"
     },
     "created_at": "2024-06-09T00:00:00+00:00",
-    "updated_at": "2024-06-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-06-21T00:00:00+00:00"
   },
   {
     "id": "mock:bug:008",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "008",
     "title": "Code interpreter timeout with no output",
-    "body": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
-    "metadata": {
+    "fields": {
+      "description": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
       "severity": "high",
-      "affected_users": 27041,
-      "component": "code_interpreter",
       "status": "resolved",
-      "url": "https://openai.com/issue/8"
+      "priority": "high",
+      "component": "code_interpreter",
+      "affected_users": "27041"
     },
     "created_at": "2024-07-20T00:00:00+00:00",
-    "updated_at": "2024-07-22T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-07-22T00:00:00+00:00"
   },
   {
     "id": "mock:bug:009",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "009",
     "title": "Code interpreter timeout with no output",
-    "body": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
-    "metadata": {
+    "fields": {
+      "description": "Long-running code interpreter jobs timeout and return no partial output. Users lose work. Need checkpointing or streaming of stdout.",
       "severity": "high",
-      "affected_users": 42924,
-      "component": "code_interpreter",
       "status": "open",
-      "url": "https://openai.com/issue/9"
+      "priority": "high",
+      "component": "code_interpreter",
+      "affected_users": "42924"
     },
     "created_at": "2024-08-25T00:00:00+00:00",
-    "updated_at": "2024-08-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-08-27T00:00:00+00:00"
   },
   {
     "id": "mock:bug:010",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "010",
     "title": "GPT-4 'lazy' responses and refusal",
-    "body": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
-    "metadata": {
+    "fields": {
+      "description": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
       "severity": "medium",
-      "affected_users": 47824,
-      "component": "model",
       "status": "investigating",
-      "url": "https://openai.com/issue/10"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "47824"
     },
     "created_at": "2024-08-27T00:00:00+00:00",
-    "updated_at": "2024-08-31T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-08-31T00:00:00+00:00"
   },
   {
     "id": "mock:bug:011",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "011",
     "title": "GPT-4 'lazy' responses and refusal",
-    "body": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
-    "metadata": {
+    "fields": {
+      "description": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
       "severity": "medium",
-      "affected_users": 12656,
-      "component": "model",
       "status": "open",
-      "url": "https://openai.com/issue/11"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "12656"
     },
     "created_at": "2024-09-06T00:00:00+00:00",
-    "updated_at": "2024-09-24T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-09-24T00:00:00+00:00"
   },
   {
     "id": "mock:bug:012",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "012",
     "title": "GPT-4 'lazy' responses and refusal",
-    "body": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
-    "metadata": {
+    "fields": {
+      "description": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
       "severity": "medium",
-      "affected_users": 9286,
-      "component": "model",
       "status": "resolved",
-      "url": "https://openai.com/issue/12"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "9286"
     },
     "created_at": "2024-10-09T00:00:00+00:00",
-    "updated_at": "2024-10-15T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-10-15T00:00:00+00:00"
   },
   {
     "id": "mock:bug:013",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "013",
     "title": "GPT-4 'lazy' responses and refusal",
-    "body": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
-    "metadata": {
+    "fields": {
+      "description": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
       "severity": "medium",
-      "affected_users": 30418,
-      "component": "model",
       "status": "open",
-      "url": "https://openai.com/issue/13"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "30418"
     },
     "created_at": "2024-10-18T00:00:00+00:00",
-    "updated_at": "2024-10-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-10-21T00:00:00+00:00"
   },
   {
     "id": "mock:bug:014",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "014",
     "title": "GPT-4 'lazy' responses and refusal",
-    "body": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
-    "metadata": {
+    "fields": {
+      "description": "Model sometimes refuses to do simple tasks or gives truncated code. Temperature and system prompt tuning ongoing. Correlates with peak load.",
       "severity": "medium",
-      "affected_users": 36166,
-      "component": "model",
       "status": "open",
-      "url": "https://openai.com/issue/14"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "36166"
     },
     "created_at": "2024-11-18T00:00:00+00:00",
-    "updated_at": "2024-11-20T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-11-20T00:00:00+00:00"
   },
   {
     "id": "mock:bug:015",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "015",
     "title": "Conversation history disappearing",
-    "body": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
-    "metadata": {
+    "fields": {
+      "description": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
       "severity": "critical",
-      "affected_users": 35527,
-      "component": "storage",
       "status": "open",
-      "url": "https://openai.com/issue/15"
+      "priority": "critical",
+      "component": "storage",
+      "affected_users": "35527"
     },
     "created_at": "2024-12-21T00:00:00+00:00",
-    "updated_at": "2024-12-24T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-12-24T00:00:00+00:00"
   },
   {
     "id": "mock:bug:016",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "016",
     "title": "Conversation history disappearing",
-    "body": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
-    "metadata": {
+    "fields": {
+      "description": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
       "severity": "critical",
-      "affected_users": 10999,
-      "component": "storage",
       "status": "resolved",
-      "url": "https://openai.com/issue/16"
+      "priority": "critical",
+      "component": "storage",
+      "affected_users": "10999"
     },
     "created_at": "2024-12-15T00:00:00+00:00",
-    "updated_at": "2024-12-31T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2024-12-31T00:00:00+00:00"
   },
   {
     "id": "mock:bug:017",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "017",
     "title": "Conversation history disappearing",
-    "body": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
-    "metadata": {
+    "fields": {
+      "description": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
       "severity": "critical",
-      "affected_users": 14108,
-      "component": "storage",
       "status": "resolved",
-      "url": "https://openai.com/issue/17"
+      "priority": "critical",
+      "component": "storage",
+      "affected_users": "14108"
     },
     "created_at": "2025-01-19T00:00:00+00:00",
-    "updated_at": "2025-01-21T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-01-21T00:00:00+00:00"
   },
   {
     "id": "mock:bug:018",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "018",
     "title": "Conversation history disappearing",
-    "body": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
-    "metadata": {
+    "fields": {
+      "description": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
       "severity": "critical",
-      "affected_users": 24936,
-      "component": "storage",
       "status": "open",
-      "url": "https://openai.com/issue/18"
+      "priority": "critical",
+      "component": "storage",
+      "affected_users": "24936"
     },
     "created_at": "2025-01-19T00:00:00+00:00",
-    "updated_at": "2025-02-01T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-02-01T00:00:00+00:00"
   },
   {
     "id": "mock:bug:019",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "019",
     "title": "Conversation history disappearing",
-    "body": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
-    "metadata": {
+    "fields": {
+      "description": "Users report conversations or entire history vanishing. May be related to account sync or mobile vs web. Support tickets spiking.",
       "severity": "critical",
-      "affected_users": 29919,
-      "component": "storage",
       "status": "investigating",
-      "url": "https://openai.com/issue/19"
+      "priority": "critical",
+      "component": "storage",
+      "affected_users": "29919"
     },
     "created_at": "2025-02-14T00:00:00+00:00",
-    "updated_at": "2025-02-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-02-28T00:00:00+00:00"
   },
   {
     "id": "mock:bug:020",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "020",
     "title": "Rate limiting too aggressive",
-    "body": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
-    "metadata": {
+    "fields": {
+      "description": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
       "severity": "high",
-      "affected_users": 47974,
-      "component": "api",
       "status": "resolved",
-      "url": "https://openai.com/issue/20"
+      "priority": "high",
+      "component": "api",
+      "affected_users": "47974"
     },
     "created_at": "2025-04-03T00:00:00+00:00",
-    "updated_at": "2025-04-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-04-08T00:00:00+00:00"
   },
   {
     "id": "mock:bug:021",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "021",
     "title": "Rate limiting too aggressive",
-    "body": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
-    "metadata": {
+    "fields": {
+      "description": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
       "severity": "high",
-      "affected_users": 19545,
-      "component": "api",
       "status": "open",
-      "url": "https://openai.com/issue/21"
+      "priority": "high",
+      "component": "api",
+      "affected_users": "19545"
     },
     "created_at": "2025-03-22T00:00:00+00:00",
-    "updated_at": "2025-03-24T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-03-24T00:00:00+00:00"
   },
   {
     "id": "mock:bug:022",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "022",
     "title": "Rate limiting too aggressive",
-    "body": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
-    "metadata": {
+    "fields": {
+      "description": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
       "severity": "high",
-      "affected_users": 48317,
-      "component": "api",
       "status": "open",
-      "url": "https://openai.com/issue/22"
+      "priority": "high",
+      "component": "api",
+      "affected_users": "48317"
     },
     "created_at": "2025-05-06T00:00:00+00:00",
-    "updated_at": "2025-05-17T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-05-17T00:00:00+00:00"
   },
   {
     "id": "mock:bug:023",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "023",
     "title": "Rate limiting too aggressive",
-    "body": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
-    "metadata": {
+    "fields": {
+      "description": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
       "severity": "high",
-      "affected_users": 3386,
-      "component": "api",
       "status": "resolved",
-      "url": "https://openai.com/issue/23"
+      "priority": "high",
+      "component": "api",
+      "affected_users": "3386"
     },
     "created_at": "2025-04-22T00:00:00+00:00",
-    "updated_at": "2025-05-09T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-05-09T00:00:00+00:00"
   },
   {
     "id": "mock:bug:024",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "024",
     "title": "Rate limiting too aggressive",
-    "body": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
-    "metadata": {
+    "fields": {
+      "description": "Legitimate heavy users hit rate limits during normal use. Enterprise and Team need higher limits. Documented limits don't match actual behavior.",
       "severity": "high",
-      "affected_users": 10417,
-      "component": "api",
       "status": "open",
-      "url": "https://openai.com/issue/24"
+      "priority": "high",
+      "component": "api",
+      "affected_users": "10417"
     },
     "created_at": "2025-06-11T00:00:00+00:00",
-    "updated_at": "2025-06-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-28T00:00:00+00:00"
   },
   {
     "id": "mock:bug:025",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "025",
     "title": "Custom GPTs fail to load",
-    "body": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
-    "metadata": {
+    "fields": {
+      "description": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
       "severity": "high",
-      "affected_users": 12278,
-      "component": "custom_gpt",
       "status": "open",
-      "url": "https://openai.com/issue/25"
+      "priority": "high",
+      "component": "custom_gpt",
+      "affected_users": "12278"
     },
     "created_at": "2025-06-03T00:00:00+00:00",
-    "updated_at": "2025-06-23T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-06-23T00:00:00+00:00"
   },
   {
     "id": "mock:bug:026",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "026",
     "title": "Custom GPTs fail to load",
-    "body": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
-    "metadata": {
+    "fields": {
+      "description": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
       "severity": "high",
-      "affected_users": 44350,
-      "component": "custom_gpt",
       "status": "open",
-      "url": "https://openai.com/issue/26"
+      "priority": "high",
+      "component": "custom_gpt",
+      "affected_users": "44350"
     },
     "created_at": "2025-06-22T00:00:00+00:00",
-    "updated_at": "2025-07-05T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-07-05T00:00:00+00:00"
   },
   {
     "id": "mock:bug:027",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "027",
     "title": "Custom GPTs fail to load",
-    "body": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
-    "metadata": {
+    "fields": {
+      "description": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
       "severity": "high",
-      "affected_users": 37434,
-      "component": "custom_gpt",
       "status": "open",
-      "url": "https://openai.com/issue/27"
+      "priority": "high",
+      "component": "custom_gpt",
+      "affected_users": "37434"
     },
     "created_at": "2025-07-15T00:00:00+00:00",
-    "updated_at": "2025-08-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-08-03T00:00:00+00:00"
   },
   {
     "id": "mock:bug:028",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "028",
     "title": "Custom GPTs fail to load",
-    "body": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
-    "metadata": {
+    "fields": {
+      "description": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
       "severity": "high",
-      "affected_users": 2704,
-      "component": "custom_gpt",
       "status": "open",
-      "url": "https://openai.com/issue/28"
+      "priority": "high",
+      "component": "custom_gpt",
+      "affected_users": "2704"
     },
     "created_at": "2025-09-04T00:00:00+00:00",
-    "updated_at": "2025-09-18T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-09-18T00:00:00+00:00"
   },
   {
     "id": "mock:bug:029",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "029",
     "title": "Custom GPTs fail to load",
-    "body": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
-    "metadata": {
+    "fields": {
+      "description": "Custom GPTs sometimes show loading error or stale version. Cache invalidation and CDN issues suspected. Affects GPT Store credibility.",
       "severity": "high",
-      "affected_users": 38351,
-      "component": "custom_gpt",
       "status": "investigating",
-      "url": "https://openai.com/issue/29"
+      "priority": "high",
+      "component": "custom_gpt",
+      "affected_users": "38351"
     },
     "created_at": "2025-09-28T00:00:00+00:00",
-    "updated_at": "2025-10-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-07T00:00:00+00:00"
   },
   {
     "id": "mock:bug:030",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "030",
     "title": "Voice mode disconnects mid-call",
-    "body": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
-    "metadata": {
+    "fields": {
+      "description": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
       "severity": "medium",
-      "affected_users": 43991,
-      "component": "voice",
       "status": "investigating",
-      "url": "https://openai.com/issue/30"
+      "priority": "medium",
+      "component": "voice",
+      "affected_users": "43991"
     },
     "created_at": "2025-09-19T00:00:00+00:00",
-    "updated_at": "2025-09-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-09-27T00:00:00+00:00"
   },
   {
     "id": "mock:bug:031",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "031",
     "title": "Voice mode disconnects mid-call",
-    "body": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
-    "metadata": {
+    "fields": {
+      "description": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
       "severity": "medium",
-      "affected_users": 26038,
-      "component": "voice",
       "status": "open",
-      "url": "https://openai.com/issue/31"
+      "priority": "medium",
+      "component": "voice",
+      "affected_users": "26038"
     },
     "created_at": "2025-10-12T00:00:00+00:00",
-    "updated_at": "2025-10-22T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-10-22T00:00:00+00:00"
   },
   {
     "id": "mock:bug:032",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "032",
     "title": "Voice mode disconnects mid-call",
-    "body": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
-    "metadata": {
+    "fields": {
+      "description": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
       "severity": "medium",
-      "affected_users": 20820,
-      "component": "voice",
       "status": "open",
-      "url": "https://openai.com/issue/32"
+      "priority": "medium",
+      "component": "voice",
+      "affected_users": "20820"
     },
     "created_at": "2025-11-14T00:00:00+00:00",
-    "updated_at": "2025-11-15T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-11-15T00:00:00+00:00"
   },
   {
     "id": "mock:bug:033",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "033",
     "title": "Voice mode disconnects mid-call",
-    "body": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
-    "metadata": {
+    "fields": {
+      "description": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
       "severity": "medium",
-      "affected_users": 40808,
-      "component": "voice",
       "status": "open",
-      "url": "https://openai.com/issue/33"
+      "priority": "medium",
+      "component": "voice",
+      "affected_users": "40808"
     },
     "created_at": "2025-12-04T00:00:00+00:00",
-    "updated_at": "2025-12-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2025-12-07T00:00:00+00:00"
   },
   {
     "id": "mock:bug:034",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "034",
     "title": "Voice mode disconnects mid-call",
-    "body": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
-    "metadata": {
+    "fields": {
+      "description": "Advanced Voice Mode drops connection after 10-15 minutes. Mobile and desktop. Network stack under review.",
       "severity": "medium",
-      "affected_users": 14069,
-      "component": "voice",
       "status": "investigating",
-      "url": "https://openai.com/issue/34"
+      "priority": "medium",
+      "component": "voice",
+      "affected_users": "14069"
     },
     "created_at": "2025-12-29T00:00:00+00:00",
-    "updated_at": "2026-01-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-03T00:00:00+00:00"
   },
   {
     "id": "mock:bug:035",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "035",
     "title": "Mobile app crash on file upload",
-    "body": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
-    "metadata": {
+    "fields": {
+      "description": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
       "severity": "high",
-      "affected_users": 4608,
-      "component": "mobile",
       "status": "open",
-      "url": "https://openai.com/issue/35"
+      "priority": "high",
+      "component": "mobile",
+      "affected_users": "4608"
     },
     "created_at": "2026-01-06T00:00:00+00:00",
-    "updated_at": "2026-01-18T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-01-18T00:00:00+00:00"
   },
   {
     "id": "mock:bug:036",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "036",
     "title": "Mobile app crash on file upload",
-    "body": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
-    "metadata": {
+    "fields": {
+      "description": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
       "severity": "high",
-      "affected_users": 10438,
-      "component": "mobile",
       "status": "resolved",
-      "url": "https://openai.com/issue/36"
+      "priority": "high",
+      "component": "mobile",
+      "affected_users": "10438"
     },
     "created_at": "2026-01-22T00:00:00+00:00",
-    "updated_at": "2026-02-09T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-02-09T00:00:00+00:00"
   },
   {
     "id": "mock:bug:037",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "037",
     "title": "Mobile app crash on file upload",
-    "body": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
-    "metadata": {
+    "fields": {
+      "description": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
       "severity": "high",
-      "affected_users": 19925,
-      "component": "mobile",
       "status": "open",
-      "url": "https://openai.com/issue/37"
+      "priority": "high",
+      "component": "mobile",
+      "affected_users": "19925"
     },
     "created_at": "2026-03-10T00:00:00+00:00",
-    "updated_at": "2026-03-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-03-28T00:00:00+00:00"
   },
   {
     "id": "mock:bug:038",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "038",
     "title": "Mobile app crash on file upload",
-    "body": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
-    "metadata": {
+    "fields": {
+      "description": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
       "severity": "high",
-      "affected_users": 43575,
-      "component": "mobile",
       "status": "open",
-      "url": "https://openai.com/issue/38"
+      "priority": "high",
+      "component": "mobile",
+      "affected_users": "43575"
     },
     "created_at": "2026-03-04T00:00:00+00:00",
-    "updated_at": "2026-03-09T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-03-09T00:00:00+00:00"
   },
   {
     "id": "mock:bug:039",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "039",
     "title": "Mobile app crash on file upload",
-    "body": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
-    "metadata": {
+    "fields": {
+      "description": "iOS app crashes when uploading certain file types or large files. Reproduced in 3.2.1. Fix in progress.",
       "severity": "high",
-      "affected_users": 7664,
-      "component": "mobile",
       "status": "open",
-      "url": "https://openai.com/issue/39"
+      "priority": "high",
+      "component": "mobile",
+      "affected_users": "7664"
     },
     "created_at": "2026-03-21T00:00:00+00:00",
-    "updated_at": "2026-04-08T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-04-08T00:00:00+00:00"
   },
   {
     "id": "mock:bug:040",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "040",
     "title": "Image generation false positive content policy",
-    "body": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
-    "metadata": {
+    "fields": {
+      "description": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
       "severity": "medium",
-      "affected_users": 17948,
-      "component": "content_policy",
       "status": "investigating",
-      "url": "https://openai.com/issue/40"
+      "priority": "medium",
+      "component": "content_policy",
+      "affected_users": "17948"
     },
     "created_at": "2026-04-03T00:00:00+00:00",
-    "updated_at": "2026-04-23T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-04-23T00:00:00+00:00"
   },
   {
     "id": "mock:bug:041",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "041",
     "title": "Image generation false positive content policy",
-    "body": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
-    "metadata": {
+    "fields": {
+      "description": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
       "severity": "medium",
-      "affected_users": 47129,
-      "component": "content_policy",
       "status": "investigating",
-      "url": "https://openai.com/issue/41"
+      "priority": "medium",
+      "component": "content_policy",
+      "affected_users": "47129"
     },
     "created_at": "2026-04-27T00:00:00+00:00",
-    "updated_at": "2026-05-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-05-04T00:00:00+00:00"
   },
   {
     "id": "mock:bug:042",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "042",
     "title": "Image generation false positive content policy",
-    "body": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
-    "metadata": {
+    "fields": {
+      "description": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
       "severity": "medium",
-      "affected_users": 41665,
-      "component": "content_policy",
       "status": "investigating",
-      "url": "https://openai.com/issue/42"
+      "priority": "medium",
+      "component": "content_policy",
+      "affected_users": "41665"
     },
     "created_at": "2026-06-16T00:00:00+00:00",
-    "updated_at": "2026-07-03T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-07-03T00:00:00+00:00"
   },
   {
     "id": "mock:bug:043",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "043",
     "title": "Image generation false positive content policy",
-    "body": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
-    "metadata": {
+    "fields": {
+      "description": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
       "severity": "medium",
-      "affected_users": 16557,
-      "component": "content_policy",
       "status": "open",
-      "url": "https://openai.com/issue/43"
+      "priority": "medium",
+      "component": "content_policy",
+      "affected_users": "16557"
     },
     "created_at": "2026-06-24T00:00:00+00:00",
-    "updated_at": "2026-06-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-06-27T00:00:00+00:00"
   },
   {
     "id": "mock:bug:044",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "044",
     "title": "Image generation false positive content policy",
-    "body": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
-    "metadata": {
+    "fields": {
+      "description": "DALL-E rejects safe prompts (e.g. medical diagrams, historical figures). Users frustrated. Policy model being retuned.",
       "severity": "medium",
-      "affected_users": 27859,
-      "component": "content_policy",
       "status": "investigating",
-      "url": "https://openai.com/issue/44"
+      "priority": "medium",
+      "component": "content_policy",
+      "affected_users": "27859"
     },
     "created_at": "2026-07-23T00:00:00+00:00",
-    "updated_at": "2026-07-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-07-25T00:00:00+00:00"
   },
   {
     "id": "mock:bug:045",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "045",
     "title": "Search not finding old conversations",
-    "body": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
-    "metadata": {
+    "fields": {
+      "description": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
       "severity": "high",
-      "affected_users": 21959,
-      "component": "search",
       "status": "open",
-      "url": "https://openai.com/issue/45"
+      "priority": "high",
+      "component": "search",
+      "affected_users": "21959"
     },
     "created_at": "2026-07-03T00:00:00+00:00",
-    "updated_at": "2026-07-12T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-07-12T00:00:00+00:00"
   },
   {
     "id": "mock:bug:046",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "046",
     "title": "Search not finding old conversations",
-    "body": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
-    "metadata": {
+    "fields": {
+      "description": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
       "severity": "high",
-      "affected_users": 48677,
-      "component": "search",
       "status": "resolved",
-      "url": "https://openai.com/issue/46"
+      "priority": "high",
+      "component": "search",
+      "affected_users": "48677"
     },
     "created_at": "2026-08-02T00:00:00+00:00",
-    "updated_at": "2026-08-20T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-08-20T00:00:00+00:00"
   },
   {
     "id": "mock:bug:047",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "047",
     "title": "Search not finding old conversations",
-    "body": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
-    "metadata": {
+    "fields": {
+      "description": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
       "severity": "high",
-      "affected_users": 28128,
-      "component": "search",
       "status": "open",
-      "url": "https://openai.com/issue/47"
+      "priority": "high",
+      "component": "search",
+      "affected_users": "28128"
     },
     "created_at": "2026-09-26T00:00:00+00:00",
-    "updated_at": "2026-09-30T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-09-30T00:00:00+00:00"
   },
   {
     "id": "mock:bug:048",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "048",
     "title": "Search not finding old conversations",
-    "body": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
-    "metadata": {
+    "fields": {
+      "description": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
       "severity": "high",
-      "affected_users": 45386,
-      "component": "search",
       "status": "open",
-      "url": "https://openai.com/issue/48"
+      "priority": "high",
+      "component": "search",
+      "affected_users": "45386"
     },
     "created_at": "2026-09-05T00:00:00+00:00",
-    "updated_at": "2026-09-23T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-09-23T00:00:00+00:00"
   },
   {
     "id": "mock:bug:049",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "049",
     "title": "Search not finding old conversations",
-    "body": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
-    "metadata": {
+    "fields": {
+      "description": "In-app search misses clearly relevant past conversations. Embedding index and ranking need improvement. Top support complaint.",
       "severity": "high",
-      "affected_users": 24296,
-      "component": "search",
       "status": "open",
-      "url": "https://openai.com/issue/49"
+      "priority": "high",
+      "component": "search",
+      "affected_users": "24296"
     },
     "created_at": "2026-09-23T00:00:00+00:00",
-    "updated_at": "2026-10-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-10-07T00:00:00+00:00"
   },
   {
     "id": "mock:bug:050",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "050",
     "title": "Context window forgotten mid-conversation",
-    "body": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
-    "metadata": {
+    "fields": {
+      "description": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
       "severity": "high",
-      "affected_users": 2841,
-      "component": "context",
       "status": "investigating",
-      "url": "https://openai.com/issue/50"
+      "priority": "high",
+      "component": "context",
+      "affected_users": "2841"
     },
     "created_at": "2026-10-19T00:00:00+00:00",
-    "updated_at": "2026-10-31T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-10-31T00:00:00+00:00"
   },
   {
     "id": "mock:bug:051",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "051",
     "title": "Context window forgotten mid-conversation",
-    "body": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
-    "metadata": {
+    "fields": {
+      "description": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
       "severity": "high",
-      "affected_users": 23549,
-      "component": "context",
       "status": "open",
-      "url": "https://openai.com/issue/51"
+      "priority": "high",
+      "component": "context",
+      "affected_users": "23549"
     },
     "created_at": "2026-11-02T00:00:00+00:00",
-    "updated_at": "2026-11-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2026-11-10T00:00:00+00:00"
   },
   {
     "id": "mock:bug:052",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "052",
     "title": "Context window forgotten mid-conversation",
-    "body": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
-    "metadata": {
+    "fields": {
+      "description": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
       "severity": "high",
-      "affected_users": 6836,
-      "component": "context",
       "status": "investigating",
-      "url": "https://openai.com/issue/52"
+      "priority": "high",
+      "component": "context",
+      "affected_users": "6836"
     },
     "created_at": "2027-01-01T00:00:00+00:00",
-    "updated_at": "2027-01-19T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-01-19T00:00:00+00:00"
   },
   {
     "id": "mock:bug:053",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "053",
     "title": "Context window forgotten mid-conversation",
-    "body": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
-    "metadata": {
+    "fields": {
+      "description": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
       "severity": "high",
-      "affected_users": 40775,
-      "component": "context",
       "status": "open",
-      "url": "https://openai.com/issue/53"
+      "priority": "high",
+      "component": "context",
+      "affected_users": "40775"
     },
     "created_at": "2027-01-05T00:00:00+00:00",
-    "updated_at": "2027-01-13T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-01-13T00:00:00+00:00"
   },
   {
     "id": "mock:bug:054",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "054",
     "title": "Context window forgotten mid-conversation",
-    "body": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
-    "metadata": {
+    "fields": {
+      "description": "In long conversations model loses track of earlier context. No clear truncation warning. Affects complex debugging and writing tasks.",
       "severity": "high",
-      "affected_users": 11703,
-      "component": "context",
       "status": "resolved",
-      "url": "https://openai.com/issue/54"
+      "priority": "high",
+      "component": "context",
+      "affected_users": "11703"
     },
     "created_at": "2027-01-09T00:00:00+00:00",
-    "updated_at": "2027-01-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-01-10T00:00:00+00:00"
   },
   {
     "id": "mock:bug:055",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "055",
     "title": "Code block formatting broken",
-    "body": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
-    "metadata": {
+    "fields": {
+      "description": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
       "severity": "medium",
-      "affected_users": 48371,
-      "component": "ux",
       "status": "investigating",
-      "url": "https://openai.com/issue/55"
+      "priority": "medium",
+      "component": "ux",
+      "affected_users": "48371"
     },
     "created_at": "2027-01-30T00:00:00+00:00",
-    "updated_at": "2027-02-13T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-02-13T00:00:00+00:00"
   },
   {
     "id": "mock:bug:056",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "056",
     "title": "Code block formatting broken",
-    "body": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
-    "metadata": {
+    "fields": {
+      "description": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
       "severity": "medium",
-      "affected_users": 48272,
-      "component": "ux",
       "status": "open",
-      "url": "https://openai.com/issue/56"
+      "priority": "medium",
+      "component": "ux",
+      "affected_users": "48272"
     },
     "created_at": "2027-03-22T00:00:00+00:00",
-    "updated_at": "2027-03-31T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-03-31T00:00:00+00:00"
   },
   {
     "id": "mock:bug:057",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "057",
     "title": "Code block formatting broken",
-    "body": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
-    "metadata": {
+    "fields": {
+      "description": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
       "severity": "medium",
-      "affected_users": 46058,
-      "component": "ux",
       "status": "open",
-      "url": "https://openai.com/issue/57"
+      "priority": "medium",
+      "component": "ux",
+      "affected_users": "46058"
     },
     "created_at": "2027-03-10T00:00:00+00:00",
-    "updated_at": "2027-03-23T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-03-23T00:00:00+00:00"
   },
   {
     "id": "mock:bug:058",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "058",
     "title": "Code block formatting broken",
-    "body": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
-    "metadata": {
+    "fields": {
+      "description": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
       "severity": "medium",
-      "affected_users": 30947,
-      "component": "ux",
       "status": "open",
-      "url": "https://openai.com/issue/58"
+      "priority": "medium",
+      "component": "ux",
+      "affected_users": "30947"
     },
     "created_at": "2027-03-22T00:00:00+00:00",
-    "updated_at": "2027-03-29T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-03-29T00:00:00+00:00"
   },
   {
     "id": "mock:bug:059",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "059",
     "title": "Code block formatting broken",
-    "body": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
-    "metadata": {
+    "fields": {
+      "description": "Pasted code loses indentation or markdown code fences. Especially in shared links. Rendering bug in web and mobile.",
       "severity": "medium",
-      "affected_users": 23015,
-      "component": "ux",
       "status": "investigating",
-      "url": "https://openai.com/issue/59"
+      "priority": "medium",
+      "component": "ux",
+      "affected_users": "23015"
     },
     "created_at": "2027-05-08T00:00:00+00:00",
-    "updated_at": "2027-05-16T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-05-16T00:00:00+00:00"
   },
   {
     "id": "mock:bug:060",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "060",
     "title": "File upload fails silently",
-    "body": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
-    "metadata": {
+    "fields": {
+      "description": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
       "severity": "medium",
-      "affected_users": 1650,
-      "component": "upload",
       "status": "open",
-      "url": "https://openai.com/issue/60"
+      "priority": "medium",
+      "component": "upload",
+      "affected_users": "1650"
     },
     "created_at": "2027-05-13T00:00:00+00:00",
-    "updated_at": "2027-05-26T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-05-26T00:00:00+00:00"
   },
   {
     "id": "mock:bug:061",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "061",
     "title": "File upload fails silently",
-    "body": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
-    "metadata": {
+    "fields": {
+      "description": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
       "severity": "medium",
-      "affected_users": 18358,
-      "component": "upload",
       "status": "open",
-      "url": "https://openai.com/issue/61"
+      "priority": "medium",
+      "component": "upload",
+      "affected_users": "18358"
     },
     "created_at": "2027-06-09T00:00:00+00:00",
-    "updated_at": "2027-06-18T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-06-18T00:00:00+00:00"
   },
   {
     "id": "mock:bug:062",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "062",
     "title": "File upload fails silently",
-    "body": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
-    "metadata": {
+    "fields": {
+      "description": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
       "severity": "medium",
-      "affected_users": 42140,
-      "component": "upload",
       "status": "resolved",
-      "url": "https://openai.com/issue/62"
+      "priority": "medium",
+      "component": "upload",
+      "affected_users": "42140"
     },
     "created_at": "2027-06-30T00:00:00+00:00",
-    "updated_at": "2027-07-18T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-07-18T00:00:00+00:00"
   },
   {
     "id": "mock:bug:063",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "063",
     "title": "File upload fails silently",
-    "body": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
-    "metadata": {
+    "fields": {
+      "description": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
       "severity": "medium",
-      "affected_users": 1908,
-      "component": "upload",
       "status": "open",
-      "url": "https://openai.com/issue/63"
+      "priority": "medium",
+      "component": "upload",
+      "affected_users": "1908"
     },
     "created_at": "2027-07-19T00:00:00+00:00",
-    "updated_at": "2027-07-28T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-07-28T00:00:00+00:00"
   },
   {
     "id": "mock:bug:064",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "064",
     "title": "File upload fails silently",
-    "body": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
-    "metadata": {
+    "fields": {
+      "description": "Some PDFs and images fail to upload with no error message. Size and type limits not clearly communicated. Affects Canvas and analysis flows.",
       "severity": "medium",
-      "affected_users": 38149,
-      "component": "upload",
       "status": "investigating",
-      "url": "https://openai.com/issue/64"
+      "priority": "medium",
+      "component": "upload",
+      "affected_users": "38149"
     },
     "created_at": "2027-07-29T00:00:00+00:00",
-    "updated_at": "2027-07-31T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-07-31T00:00:00+00:00"
   },
   {
     "id": "mock:bug:065",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "065",
     "title": "Shared links expire unexpectedly",
-    "body": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
-    "metadata": {
+    "fields": {
+      "description": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
       "severity": "low",
-      "affected_users": 39196,
-      "component": "sharing",
       "status": "resolved",
-      "url": "https://openai.com/issue/65"
+      "priority": "low",
+      "component": "sharing",
+      "affected_users": "39196"
     },
     "created_at": "2027-08-13T00:00:00+00:00",
-    "updated_at": "2027-08-25T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-08-25T00:00:00+00:00"
   },
   {
     "id": "mock:bug:066",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "066",
     "title": "Shared links expire unexpectedly",
-    "body": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
-    "metadata": {
+    "fields": {
+      "description": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
       "severity": "low",
-      "affected_users": 28699,
-      "component": "sharing",
       "status": "open",
-      "url": "https://openai.com/issue/66"
+      "priority": "low",
+      "component": "sharing",
+      "affected_users": "28699"
     },
     "created_at": "2027-09-16T00:00:00+00:00",
-    "updated_at": "2027-09-29T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-09-29T00:00:00+00:00"
   },
   {
     "id": "mock:bug:067",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "067",
     "title": "Shared links expire unexpectedly",
-    "body": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
-    "metadata": {
+    "fields": {
+      "description": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
       "severity": "low",
-      "affected_users": 12557,
-      "component": "sharing",
       "status": "investigating",
-      "url": "https://openai.com/issue/67"
+      "priority": "low",
+      "component": "sharing",
+      "affected_users": "12557"
     },
     "created_at": "2027-10-22T00:00:00+00:00",
-    "updated_at": "2027-10-24T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-10-24T00:00:00+00:00"
   },
   {
     "id": "mock:bug:068",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "068",
     "title": "Shared links expire unexpectedly",
-    "body": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
-    "metadata": {
+    "fields": {
+      "description": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
       "severity": "low",
-      "affected_users": 28677,
-      "component": "sharing",
       "status": "open",
-      "url": "https://openai.com/issue/68"
+      "priority": "low",
+      "component": "sharing",
+      "affected_users": "28677"
     },
     "created_at": "2027-11-20T00:00:00+00:00",
-    "updated_at": "2027-12-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-12-07T00:00:00+00:00"
   },
   {
     "id": "mock:bug:069",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "069",
     "title": "Shared links expire unexpectedly",
-    "body": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
-    "metadata": {
+    "fields": {
+      "description": "Users report shared conversation links returning 404 before stated expiry. CDN and permission logic bug.",
       "severity": "low",
-      "affected_users": 45113,
-      "component": "sharing",
       "status": "open",
-      "url": "https://openai.com/issue/69"
+      "priority": "low",
+      "component": "sharing",
+      "affected_users": "45113"
     },
     "created_at": "2027-11-29T00:00:00+00:00",
-    "updated_at": "2027-12-11T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2027-12-11T00:00:00+00:00"
   },
   {
     "id": "mock:bug:070",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "070",
     "title": "Response truncation with no continuation",
-    "body": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
-    "metadata": {
+    "fields": {
+      "description": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
       "severity": "medium",
-      "affected_users": 4685,
-      "component": "model",
       "status": "investigating",
-      "url": "https://openai.com/issue/70"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "4685"
     },
     "created_at": "2027-12-12T00:00:00+00:00",
-    "updated_at": "2028-01-01T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-01-01T00:00:00+00:00"
   },
   {
     "id": "mock:bug:071",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "071",
     "title": "Response truncation with no continuation",
-    "body": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
-    "metadata": {
+    "fields": {
+      "description": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
       "severity": "medium",
-      "affected_users": 43575,
-      "component": "model",
       "status": "open",
-      "url": "https://openai.com/issue/71"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "43575"
     },
     "created_at": "2027-12-25T00:00:00+00:00",
-    "updated_at": "2028-01-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-01-04T00:00:00+00:00"
   },
   {
     "id": "mock:bug:072",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "072",
     "title": "Response truncation with no continuation",
-    "body": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
-    "metadata": {
+    "fields": {
+      "description": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
       "severity": "medium",
-      "affected_users": 20369,
-      "component": "model",
       "status": "resolved",
-      "url": "https://openai.com/issue/72"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "20369"
     },
     "created_at": "2028-01-26T00:00:00+00:00",
-    "updated_at": "2028-02-06T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-02-06T00:00:00+00:00"
   },
   {
     "id": "mock:bug:073",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "073",
     "title": "Response truncation with no continuation",
-    "body": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
-    "metadata": {
+    "fields": {
+      "description": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
       "severity": "medium",
-      "affected_users": 45792,
-      "component": "model",
       "status": "investigating",
-      "url": "https://openai.com/issue/73"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "45792"
     },
     "created_at": "2028-02-08T00:00:00+00:00",
-    "updated_at": "2028-02-26T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-02-26T00:00:00+00:00"
   },
   {
     "id": "mock:bug:074",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "074",
     "title": "Response truncation with no continuation",
-    "body": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
-    "metadata": {
+    "fields": {
+      "description": "Long responses get cut off with no 'continue' option. Confuses users. Related to token limits and streaming.",
       "severity": "medium",
-      "affected_users": 12672,
-      "component": "model",
       "status": "resolved",
-      "url": "https://openai.com/issue/74"
+      "priority": "medium",
+      "component": "model",
+      "affected_users": "12672"
     },
     "created_at": "2028-02-11T00:00:00+00:00",
-    "updated_at": "2028-02-24T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-02-24T00:00:00+00:00"
   },
   {
     "id": "mock:bug:075",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "075",
     "title": "Slow response times during peak",
-    "body": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
-    "metadata": {
+    "fields": {
+      "description": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
       "severity": "high",
-      "affected_users": 49129,
-      "component": "infrastructure",
       "status": "open",
-      "url": "https://openai.com/issue/75"
+      "priority": "high",
+      "component": "infrastructure",
+      "affected_users": "49129"
     },
     "created_at": "2028-04-06T00:00:00+00:00",
-    "updated_at": "2028-04-26T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-04-26T00:00:00+00:00"
   },
   {
     "id": "mock:bug:076",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "076",
     "title": "Slow response times during peak",
-    "body": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
-    "metadata": {
+    "fields": {
+      "description": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
       "severity": "high",
-      "affected_users": 19823,
-      "component": "infrastructure",
       "status": "resolved",
-      "url": "https://openai.com/issue/76"
+      "priority": "high",
+      "component": "infrastructure",
+      "affected_users": "19823"
     },
     "created_at": "2028-04-19T00:00:00+00:00",
-    "updated_at": "2028-05-07T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-05-07T00:00:00+00:00"
   },
   {
     "id": "mock:bug:077",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "077",
     "title": "Slow response times during peak",
-    "body": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
-    "metadata": {
+    "fields": {
+      "description": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
       "severity": "high",
-      "affected_users": 20014,
-      "component": "infrastructure",
       "status": "investigating",
-      "url": "https://openai.com/issue/77"
+      "priority": "high",
+      "component": "infrastructure",
+      "affected_users": "20014"
     },
     "created_at": "2028-04-03T00:00:00+00:00",
-    "updated_at": "2028-04-10T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-04-10T00:00:00+00:00"
   },
   {
     "id": "mock:bug:078",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "078",
     "title": "Slow response times during peak",
-    "body": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
-    "metadata": {
+    "fields": {
+      "description": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
       "severity": "high",
-      "affected_users": 38109,
-      "component": "infrastructure",
       "status": "investigating",
-      "url": "https://openai.com/issue/78"
+      "priority": "high",
+      "component": "infrastructure",
+      "affected_users": "38109"
     },
     "created_at": "2028-05-20T00:00:00+00:00",
-    "updated_at": "2028-06-04T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-06-04T00:00:00+00:00"
   },
   {
     "id": "mock:bug:079",
     "source": "mock",
-    "type": "bug",
+    "entity_type": "bug",
+    "source_id": "079",
     "title": "Slow response times during peak",
-    "body": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
-    "metadata": {
+    "fields": {
+      "description": "Latency spikes to 30+ seconds during US evening peak. Load balancing and capacity being addressed. Status page updated.",
       "severity": "high",
-      "affected_users": 29077,
-      "component": "infrastructure",
       "status": "open",
-      "url": "https://openai.com/issue/79"
+      "priority": "high",
+      "component": "infrastructure",
+      "affected_users": "29077"
     },
     "created_at": "2028-06-10T00:00:00+00:00",
-    "updated_at": "2028-06-27T00:00:00+00:00",
-    "is_deleted": false
+    "updated_at": "2028-06-27T00:00:00+00:00"
   }
 ]

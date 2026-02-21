@@ -12,6 +12,7 @@ from qdrant_client.models import (
     Distance,
     FieldCondition,
     Filter,
+    MatchAny,
     MatchValue,
     PointStruct,
     Range,
@@ -87,6 +88,9 @@ class QdrantStore:
         top_k: int = 10,
         source: str | None = None,
         item_type: str | None = None,
+        entity_type: str | None = None,
+        entity_types: list[str] | None = None,
+        field_names: list[str] | None = None,
         date_from: str | None = None,
         date_to: str | None = None,
         tags: list[str] | None = None,
@@ -95,7 +99,17 @@ class QdrantStore:
         if source:
             conditions.append(FieldCondition(key="source", match=MatchValue(value=source)))
         if item_type:
-            conditions.append(FieldCondition(key="type", match=MatchValue(value=item_type)))
+            conditions.append(FieldCondition(key="entity_type", match=MatchValue(value=item_type)))
+        if entity_type:
+            conditions.append(FieldCondition(key="entity_type", match=MatchValue(value=entity_type)))
+        if entity_types:
+            conditions.append(
+                FieldCondition(key="entity_type", match=MatchAny(any=entity_types))
+            )
+        if field_names:
+            conditions.append(
+                FieldCondition(key="field_name", match=MatchAny(any=field_names))
+            )
         if date_from or date_to:
             range_params: dict[str, Any] = {}
             if date_from:

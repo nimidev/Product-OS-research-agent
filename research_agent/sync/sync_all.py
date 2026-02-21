@@ -1,4 +1,4 @@
-"""Sync engine — orchestrates all connectors to keep data fresh.
+"""Sync engine — orchestrates connectors to keep data fresh.
 
 Handles:
 - Batch processing (100 items per batch) for large initial syncs
@@ -6,6 +6,7 @@ Handles:
 - Auth error diagnostics (401/403 → clear message per source)
 - Malformed item skip + log (never crash sync)
 - Progress resumable on interruption via sync_state
+- Writes to canonical schema (Entity + entity_fields + chunks).
 """
 
 from __future__ import annotations
@@ -15,16 +16,31 @@ import time
 from datetime import datetime, timezone
 from typing import Any
 
-from research_agent.connectors.base import BaseConnector, NormalizedItem
+from research_agent.connectors.base import BaseConnector
+from research_agent.embedding.chunker import chunk_text as chunk_text_embedding
 from research_agent.embedding.base import EmbeddingProvider
-from research_agent.embedding.chunker import chunk_text
 from research_agent.storage.db import Database
-from research_agent.storage.models import Item, ItemSource, ItemType, compute_content_hash
+from research_agent.storage.models import (
+    Chunk as StorageChunk,
+    Entity,
+    EntityType,
+    SourceSystem,
+)
 from research_agent.vector.qdrant_client import QdrantStore
 
 logger = logging.getLogger(__name__)
 
 BATCH_SIZE = 100
+
+# Fields we chunk and embed (long text)
+SEARCHABLE_FIELDS = {
+    "description",
+    "transcript",
+    "overview",
+    "summary",
+    "requirements",
+    "success_metrics",
+}
 
 
 class ConnectorAuthError(Exception):
@@ -37,6 +53,25 @@ class ConnectorAuthError(Exception):
             f"Authentication failed for {source} (HTTP {status_code}). "
             f"Check API key/token for the '{source}' connector."
         )
+
+
+def _build_chunks_for_entity(entity: Entity) -> list[StorageChunk]:
+    """Build storage chunks from entity's searchable text fields."""
+    chunks: list[StorageChunk] = []
+    for f in entity.fields:
+        if f.field_name not in SEARCHABLE_FIELDS or not f.field_value or not f.field_value.strip():
+            continue
+        embedding_chunks = chunk_text_embedding(f.field_value, parent_id=entity.id)
+        for c in embedding_chunks:
+            chunks.append(
+                StorageChunk(
+                    id=f"{entity.id}:{f.field_name}:{c.index}",
+                    field_name=f.field_name,
+                    chunk_index=c.index,
+                    text=c.text,
+                )
+            )
+    return chunks
 
 
 class SyncEngine:
@@ -116,18 +151,20 @@ class SyncEngine:
         if is_first_sync:
             logger.info("First sync for %s — processing all items in batches", source)
 
-        items = await connector.list_updated_items(since=last_synced)
-        stats["fetched"] = len(items)
+        entities = await connector.list_updated_items(since=last_synced)
+        stats["fetched"] = len(entities)
 
-        for batch_start in range(0, len(items), BATCH_SIZE):
-            batch = items[batch_start : batch_start + BATCH_SIZE]
+        for batch_start in range(0, len(entities), BATCH_SIZE):
+            batch = entities[batch_start : batch_start + BATCH_SIZE]
             batch_num = batch_start // BATCH_SIZE + 1
-            total_batches = (len(items) + BATCH_SIZE - 1) // BATCH_SIZE
+            total_batches = (len(entities) + BATCH_SIZE - 1) // BATCH_SIZE
 
-            for normalized in batch:
+            for entity in batch:
                 try:
-                    self._validate_item(normalized)
-                    changed = await self._process_item(normalized)
+                    self._validate_entity(entity)
+                    # Attach chunks from searchable fields before persisting
+                    entity.chunks = _build_chunks_for_entity(entity)
+                    changed = await self._process_entity(entity)
                     if changed:
                         stats["changed"] += 1
                         stats["embedded"] += 1
@@ -136,10 +173,12 @@ class SyncEngine:
                 except ValueError as e:
                     stats["malformed"] += 1
                     logger.warning(
-                        "Malformed item skipped: %s from %s — %s",
-                        normalized.id, source, str(e),
+                        "Malformed entity skipped: %s from %s — %s",
+                        entity.id,
+                        source,
+                        str(e),
                         extra={
-                            "item_id": normalized.id,
+                            "item_id": entity.id,
                             "source": source,
                             "error_type": "malformed_item",
                         },
@@ -147,10 +186,10 @@ class SyncEngine:
                 except Exception:
                     stats["errors"] += 1
                     logger.exception(
-                        "Failed to process item %s from %s",
-                        normalized.id,
+                        "Failed to process entity %s from %s",
+                        entity.id,
                         source,
-                        extra={"item_id": normalized.id, "source": source},
+                        extra={"item_id": entity.id, "source": source},
                     )
 
             logger.info(
@@ -158,8 +197,8 @@ class SyncEngine:
                 source,
                 batch_num,
                 total_batches,
-                min(batch_start + BATCH_SIZE, len(items)),
-                len(items),
+                min(batch_start + BATCH_SIZE, len(entities)),
+                len(entities),
                 extra={"source": source},
             )
 
@@ -168,85 +207,44 @@ class SyncEngine:
         return stats
 
     @staticmethod
-    def _validate_item(item: NormalizedItem) -> None:
-        """Raise ValueError if item is malformed."""
-        if not item.id:
-            raise ValueError("Item missing id")
-        if not item.title and not item.body:
-            raise ValueError(f"Item {item.id} has no title or body")
+    def _validate_entity(entity: Entity) -> None:
+        if not entity.id:
+            raise ValueError("Entity missing id")
+        if not entity.title and not entity.fields:
+            raise ValueError(f"Entity {entity.id} has no title or fields")
 
-    async def _process_item(self, normalized: NormalizedItem) -> bool:
-        """Convert normalized item to canonical Item, upsert to DB + Qdrant."""
-        content_hash = compute_content_hash(normalized.title, normalized.body)
-
-        existing = await self._db.get_item(normalized.id)
-        if existing and existing.content_hash == content_hash and not normalized.is_deleted:
+    async def _process_entity(self, entity: Entity) -> bool:
+        """Upsert entity to DB and Qdrant (with chunks). Returns True if new or changed."""
+        changed = await self._db.upsert_entity(entity)
+        if not changed:
             return False
 
-        try:
-            source_enum = ItemSource(normalized.source)
-        except ValueError:
-            source_enum = ItemSource.MOCK
+        await self._vector.delete_by_parent(entity.id)
 
-        try:
-            type_enum = ItemType(normalized.type)
-        except ValueError:
-            type_enum = ItemType.FEATURE_REQUEST
+        if entity.is_deleted:
+            return True
 
-        item = Item(
-            id=normalized.id,
-            source=source_enum,
-            type=type_enum,
-            title=normalized.title,
-            body=normalized.body,
-            metadata=normalized.metadata,
-            created_at=normalized.created_at or datetime.now(timezone.utc),
-            updated_at=normalized.updated_at or datetime.now(timezone.utc),
-            is_deleted=normalized.is_deleted,
-        )
-
-        await self._db.upsert_item(item)
-
-        if item.is_deleted:
-            await self._vector.delete_by_parent(item.id)
-        else:
-            await self._embed_and_upsert(item)
-
-        return True
-
-    async def _embed_and_upsert(self, item: Item) -> None:
-        embed_text = f"{item.title}\n\n{item.body}"
-        chunks = chunk_text(embed_text, parent_id=item.id)
-
-        await self._vector.delete_by_parent(item.id)
-
-        if len(chunks) == 1:
-            vector = await self._embedder.embed(chunks[0].text)
-            await self._vector.upsert(
-                point_id=item.id,
-                vector=vector,
-                payload=self._build_payload(item, 0),
-            )
-        else:
-            texts = [c.text for c in chunks]
+        if entity.chunks:
+            texts = [c.text for c in entity.chunks]
             vectors = await self._embedder.embed_batch(texts)
-            points: list[tuple[str, list[float], dict[str, Any]]] = []
-            for chunk, vector in zip(chunks, vectors):
-                chunk_id = f"{item.id}:chunk:{chunk.index}"
-                points.append((chunk_id, vector, self._build_payload(item, chunk.index)))
+            points = [
+                (
+                    c.id,
+                    vec,
+                    {
+                        "parent_id": entity.id,
+                        "entity_type": entity.entity_type.value,
+                        "field_name": c.field_name,
+                        "title": entity.title,
+                        "source": entity.source_system.value,
+                        "body": c.text[:2000],
+                        "chunk_index": c.chunk_index,
+                        "created_at": entity.created_at.isoformat() if entity.created_at else "",
+                        "updated_at": entity.updated_at.isoformat() if entity.updated_at else "",
+                    },
+                )
+                for c, vec in zip(entity.chunks, vectors, strict=True)
+            ]
             await self._vector.upsert_batch(points)
 
-    @staticmethod
-    def _build_payload(item: Item, chunk_index: int) -> dict[str, Any]:
-        return {
-            "parent_id": item.id,
-            "chunk_index": chunk_index,
-            "title": item.title,
-            "body": item.body[:2000],
-            "source": item.source.value,
-            "type": item.type.value,
-            "metadata": item.metadata,
-            "tags": item.metadata.get("tags", []),
-            "created_at": item.created_at.isoformat(),
-            "updated_at": item.updated_at.isoformat(),
-        }
+        return True

@@ -1,0 +1,51 @@
+# Field mappings: source system column IDs → canonical entity fields
+# Copy to mappings.yaml and set your board/database IDs.
+# Connectors use this to map Monday/Notion columns to canonical fields.
+
+monday:
+  feature_request:
+    board_id: "your-monday-board-id"
+    entity_type: feature_request
+    field_mappings:
+      name: title
+      text0: description
+      text1: pain_points    # org-specific column → canonical (or custom) field
+      people0: customer
+      status: status
+      # votes, priority: map if your board has these columns
+
+  roadmap_item:
+    board_id: "your-roadmap-board-id"
+    entity_type: roadmap_item
+    field_mappings:
+      name: title
+      text0: description
+      date0: target_start
+      date1: target_end
+      status: status
+
+  bug:
+    board_id: "your-bugs-board-id"
+    entity_type: bug
+    field_mappings:
+      name: title
+      text0: description
+      status: status
+      # severity, affected_version: map your column names
+
+notion:
+  meeting_note:
+    database_id: "your-notion-database-id"
+    entity_type: meeting_note
+    field_mappings:
+      Title: title
+      # Blocks content is typically extracted as one blob; map to transcript or summary
+      content: transcript
+
+  prd:
+    database_id: "your-prd-database-id"
+    entity_type: prd
+    field_mappings:
+      Title: title
+      content: overview
+      Status: status
