@@ -1,0 +1,5 @@
+{
+  "name": "Product OS Research Agent",
+  "description": "A research and management agent for product managers to track features, epics, and decisions across Jira, Monday, Google Docs, and Zoom.",
+  "requestFramePermissions": []
+}
