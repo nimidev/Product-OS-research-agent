@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+import json
+from datetime import UTC, datetime
 
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -13,6 +14,7 @@ from research_agent.storage.models import (
     Entity,
     EntityFieldRow,
     EntityRow,
+    IntegrationConfigRow,
     SyncStateRow,
     entity_to_rows,
     rows_to_entity,
@@ -65,7 +67,7 @@ class Database:
             existing.source_system = entity.source_system.value
             existing.source_id = entity.source_id
             existing.title = entity.title
-            existing.updated_at = datetime.now(timezone.utc)
+            existing.updated_at = datetime.now(UTC)
             existing.content_hash = entity.content_hash
             existing.is_deleted = entity.is_deleted
 
@@ -131,7 +133,7 @@ class Database:
             if row is None:
                 return False
             row.is_deleted = True
-            row.updated_at = datetime.now(timezone.utc)
+            row.updated_at = datetime.now(UTC)
             await session.commit()
             return True
 
@@ -162,3 +164,60 @@ class Database:
             else:
                 row.last_synced_at = synced_at
             await session.commit()
+
+    # ------------------------------------------------------------------
+    # Integration config
+    # ------------------------------------------------------------------
+
+    async def get_integration_config(self, source: str) -> dict | None:
+        async with self.session() as session:
+            row = await session.get(IntegrationConfigRow, source)
+            if row is None:
+                return None
+            return {
+                "source": row.source,
+                "enabled": row.enabled,
+                "api_key": row.api_key,
+                "board_ids": json.loads(row.board_ids_json or "[]"),
+                "entity_mappings": json.loads(row.entity_mappings_json or "{}"),
+                "sync_interval_seconds": row.sync_interval_seconds,
+                "updated_at": row.updated_at,
+            }
+
+    async def upsert_integration_config(
+        self,
+        source: str,
+        enabled: bool,
+        board_ids: list[str],
+        entity_mappings: dict[str, str],
+        sync_interval_seconds: int,
+        api_key: str | None = None,
+    ) -> dict:
+        async with self.session() as session:
+            row = await session.get(IntegrationConfigRow, source)
+            now = datetime.now(UTC)
+            if row is None:
+                row = IntegrationConfigRow(
+                    source=source,
+                    enabled=enabled,
+                    api_key=api_key or "",
+                    board_ids_json=json.dumps(board_ids),
+                    entity_mappings_json=json.dumps(entity_mappings),
+                    sync_interval_seconds=sync_interval_seconds,
+                    updated_at=now,
+                )
+                session.add(row)
+            else:
+                row.enabled = enabled
+                if api_key is not None:
+                    row.api_key = api_key
+                row.board_ids_json = json.dumps(board_ids)
+                row.entity_mappings_json = json.dumps(entity_mappings)
+                row.sync_interval_seconds = sync_interval_seconds
+                row.updated_at = now
+
+            await session.commit()
+
+        config = await self.get_integration_config(source)
+        assert config is not None
+        return config

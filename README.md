@@ -196,3 +196,32 @@ docker-compose run --rm api python -m research_agent seed
 - API endpoints, MCP tools, synthesis with mocked LLM
 - Connector normalization, sync engine with failure isolation
 - Search quality evaluation framework (20+ curated test queries)
+
+### US-003 Checkpoint (before chat UI)
+
+Run this gate after Monday integration wiring and before chat UI implementation:
+
+```bash
+./scripts/checkpoint_us003.sh
+```
+
+What it verifies:
+- REST API checkpoint: `GET /sources` includes `monday`, and `POST /search_memories`
+  returns Monday-sourced results.
+- MCP checkpoint: `list_sources` includes `monday`, and `search_memories` returns
+  Monday-sourced results.
+
+### US-003 E2E Flow (Monday -> Sync -> Chat)
+
+Runbook command:
+
+```bash
+./scripts/us003_e2e_runbook.sh
+```
+
+Operational sequence:
+- Configure Monday integration via `PUT /integrations/monday` (board IDs, entity mapping, 2h sync default).
+- Optional connectivity check via `POST /integrations/monday/test`.
+- Run `python -m research_agent sync`.
+- Run `./scripts/checkpoint_us003.sh`.
+- Start `ui/` and verify chat answers/references are Monday-backed.

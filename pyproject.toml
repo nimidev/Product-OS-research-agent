@@ -17,6 +17,7 @@ dependencies = [
     "openai",
     "tiktoken",
     "mcp",
+    "pyyaml",
 ]
 
 [project.optional-dependencies]

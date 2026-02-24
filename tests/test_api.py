@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -40,14 +41,34 @@ def mock_memory_service():
 
 
 @pytest.fixture
-async def client(mock_memory_service):
+def mock_db():
+    db = AsyncMock()
+    db.get_integration_config = AsyncMock(return_value=None)
+    db.upsert_integration_config = AsyncMock(
+        return_value={
+            "source": "monday",
+            "enabled": True,
+            "api_key": "token",
+            "board_ids": ["123"],
+            "entity_mappings": {"123": "feature_request"},
+            "sync_interval_seconds": 7200,
+            "updated_at": datetime.now(UTC),
+        }
+    )
+    return db
+
+
+@pytest.fixture
+async def client(mock_memory_service, mock_db):
     import research_agent.api.server as api_module
 
     api_module._memory_service = mock_memory_service
+    api_module._db = mock_db
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as c:
         yield c
     api_module._memory_service = None
+    api_module._db = None
 
 
 class TestHealthEndpoint:
@@ -104,3 +125,51 @@ class TestSearchEndpoint:
             json={"query": "follow up", "context": "previous findings about auth"},
         )
         assert resp.status_code == 200
+
+
+class TestMondayIntegrationConfigEndpoints:
+    @pytest.mark.asyncio
+    async def test_get_default_monday_config(self, client):
+        resp = await client.get("/integrations/monday")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["source"] == "monday"
+        assert data["enabled"] is False
+        assert data["api_key_set"] is False
+        assert data["sync_interval_seconds"] == 7200
+
+    @pytest.mark.asyncio
+    async def test_put_monday_config(self, client, mock_db):
+        resp = await client.put(
+            "/integrations/monday",
+            json={
+                "enabled": True,
+                "api_key": "monday-token",
+                "board_ids": ["123"],
+                "entity_mappings": {"123": "feature_request"},
+                "sync_interval_seconds": 7200,
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["enabled"] is True
+        assert data["api_key_set"] is True
+        mock_db.upsert_integration_config.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_test_monday_connection_requires_key(self, client):
+        resp = await client.post("/integrations/monday/test", json={})
+        assert resp.status_code == 400
+
+    @pytest.mark.asyncio
+    async def test_test_monday_connection_success(self, client):
+        with patch(
+            "research_agent.api.server.MondayConnector.health_check",
+            new=AsyncMock(return_value=True),
+        ):
+            resp = await client.post(
+                "/integrations/monday/test",
+                json={"api_key": "monday-token"},
+            )
+        assert resp.status_code == 200
+        assert resp.json()["ok"] is True
