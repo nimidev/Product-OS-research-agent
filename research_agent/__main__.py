@@ -26,6 +26,7 @@ def main() -> None:
         )
     elif command == "mcp":
         import asyncio
+
         from research_agent.mcp.server import main as mcp_main
         asyncio.run(mcp_main())
     elif command == "sync":
@@ -38,14 +39,10 @@ def main() -> None:
 
 
 async def _run_sync() -> None:
-    """Run sync with all configured connectors (from config/mappings.yaml)."""
+    """Run sync with connectors from integration config + mappings.yaml fallback."""
     import logging
-    import os
 
     from research_agent.config.loader import get_settings
-    from research_agent.config.mappings import load_mappings
-    from research_agent.connectors.monday_connector import MondayConnector
-    from research_agent.connectors.notion_connector import NotionConnector
     from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
     from research_agent.logging_config import configure_logging
     from research_agent.storage.db import Database
@@ -65,7 +62,7 @@ async def _run_sync() -> None:
     )
     await vector_store.ensure_collection(embedder.dimension())
 
-    connectors = _build_connectors_from_mappings()
+    connectors = await _build_connectors(db)
     logger.info("Starting sync with %d connectors", len(connectors))
 
     engine = SyncEngine(
@@ -81,35 +78,84 @@ async def _run_sync() -> None:
     await db.close()
 
 
-def _build_connectors_from_mappings() -> list:
-    """Build connector instances from config/mappings.yaml (and env API keys)."""
+def _resolve_monday_field_mappings(entity_type: str, mappings: dict) -> dict[str, str]:
+    monday_cfg = mappings.get("monday", {})
+    # Prefer explicit entity_type match in mapping config.
+    for entity_key, cfg in monday_cfg.items():
+        if not isinstance(cfg, dict):
+            continue
+        mapped_type = str(cfg.get("entity_type", entity_key))
+        if mapped_type == entity_type:
+            field_mappings = cfg.get("field_mappings", {})
+            if isinstance(field_mappings, dict) and field_mappings:
+                return {str(k): str(v) for k, v in field_mappings.items()}
+
+    # Safe fallback for minimal ingestion.
+    return {"name": "title"}
+
+
+async def _build_connectors(db) -> list:
+    """Build connectors from DB integration config; fallback to mappings.yaml + env."""
     import os
 
+    from research_agent.config.mappings import load_mappings
     from research_agent.connectors.base import BaseConnector
     from research_agent.connectors.monday_connector import MondayConnector
     from research_agent.connectors.notion_connector import NotionConnector
 
     connectors: list[BaseConnector] = []
     mappings = load_mappings()
-    if not mappings:
-        return connectors
 
-    monday_key = os.environ.get("MONDAY_API_KEY", "")
-    for entity_key, cfg in mappings.get("monday", {}).items():
-        if not isinstance(cfg, dict) or not monday_key:
-            continue
-        board_id = cfg.get("board_id")
-        entity_type = cfg.get("entity_type", entity_key)
-        field_mappings = cfg.get("field_mappings", {})
-        if board_id and field_mappings:
+    monday_cfg = await db.get_integration_config("monday")
+    monday_added = False
+    if monday_cfg and bool(monday_cfg.get("enabled")):
+        monday_key = str(monday_cfg.get("api_key", "")).strip() or os.environ.get(
+            "MONDAY_API_KEY", ""
+        )
+        board_ids = [
+            str(board_id).strip()
+            for board_id in list(monday_cfg.get("board_ids", []))
+            if str(board_id).strip()
+        ]
+        entity_mappings = {
+            str(k): str(v) for k, v in dict(monday_cfg.get("entity_mappings", {})).items()
+        }
+        if not board_ids and entity_mappings:
+            board_ids = list(entity_mappings.keys())
+
+        for board_id in board_ids:
+            entity_type = entity_mappings.get(str(board_id))
+            if not entity_type or not monday_key:
+                continue
+            field_mappings = _resolve_monday_field_mappings(entity_type, mappings)
             connectors.append(
                 MondayConnector(
                     api_key=monday_key,
-                    board_id=str(board_id),
+                    board_id=board_id,
                     entity_type=entity_type,
                     field_mappings=field_mappings,
                 )
             )
+            monday_added = True
+
+    # Backward-compatible fallback: mappings.yaml + MONDAY_API_KEY
+    if not monday_added:
+        monday_key = os.environ.get("MONDAY_API_KEY", "")
+        for entity_key, cfg in mappings.get("monday", {}).items():
+            if not isinstance(cfg, dict) or not monday_key:
+                continue
+            board_id = cfg.get("board_id")
+            entity_type = cfg.get("entity_type", entity_key)
+            field_mappings = cfg.get("field_mappings", {})
+            if board_id and field_mappings:
+                connectors.append(
+                    MondayConnector(
+                        api_key=monday_key,
+                        board_id=str(board_id),
+                        entity_type=entity_type,
+                        field_mappings=field_mappings,
+                    )
+                )
 
     notion_key = os.environ.get("NOTION_API_KEY", "")
     for entity_key, cfg in mappings.get("notion", {}).items():

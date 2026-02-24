@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import hashlib
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import StrEnum
-from typing import Any
 
 from pydantic import BaseModel, Field
 from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, Text
@@ -72,10 +71,10 @@ class EntityRow(Base):
     source_id: Mapped[str] = mapped_column(String, nullable=False)
     title: Mapped[str] = mapped_column(Text, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc),
+        DateTime(timezone=True), nullable=False, default=lambda: datetime.now(UTC),
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc),
+        DateTime(timezone=True), nullable=False, default=lambda: datetime.now(UTC),
     )
     content_hash: Mapped[str] = mapped_column(String(64), nullable=False)
     is_deleted: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
@@ -123,6 +122,22 @@ class SyncStateRow(Base):
     last_synced_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
 
+class IntegrationConfigRow(Base):
+    __tablename__ = "integration_configs"
+
+    source: Mapped[str] = mapped_column(String, primary_key=True)
+    enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    api_key: Mapped[str] = mapped_column(Text, nullable=False, default="")
+    board_ids_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
+    entity_mappings_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+    sync_interval_seconds: Mapped[int] = mapped_column(Integer, nullable=False, default=7200)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        default=lambda: datetime.now(UTC),
+    )
+
+
 # ---------------------------------------------------------------------------
 # Pydantic DTOs
 # ---------------------------------------------------------------------------
@@ -148,8 +163,8 @@ class Entity(BaseModel):
     title: str
     fields: list[EntityField] = Field(default_factory=list)
     chunks: list[Chunk] = Field(default_factory=list)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     is_deleted: bool = False
 
     @property

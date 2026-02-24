@@ -10,11 +10,17 @@ View your app in AI Studio: https://ai.studio/apps/07e7ef18-9448-487b-80cc-cf76e
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+2. Configure `.env.local`:
+   - `VITE_RESEARCH_API_URL=http://localhost:8000`
 3. Run the app:
    `npm run dev`
+
+## US-003 Notes
+
+- Chat uses Research Agent REST API `POST /search_memories`.
+- Integration setup is Monday-first for Phase 1.
+- Non-Monday providers are visible as "Coming Soon".

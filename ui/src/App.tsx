@@ -25,12 +25,11 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
-import { GoogleGenAI } from "@google/genai";
 import { AppConfig, ContextItem, AgentResponse, ChatSession } from './types';
 
 const INITIAL_CONFIG: AppConfig = {
   integrations: {
-    jira: true,
+    jira: false,
     monday: false,
     docs: false,
     zoom: false,
@@ -70,7 +69,7 @@ const INITIAL_CONFIG: AppConfig = {
 };
 
 const INTEGRATION_PROVIDERS = [
-  { id: 'jira', name: 'Jira', tagline: 'Sync issues & epics', icon: Trello, color: 'text-blue-600', bg: 'bg-blue-50', enabled: true },
+  { id: 'jira', name: 'Jira', tagline: 'Sync issues & epics', icon: Trello, color: 'text-blue-600', bg: 'bg-blue-50', enabled: false },
   { id: 'monday', name: 'Monday.com', tagline: 'Sync boards & items', icon: CheckCircle2, color: 'text-indigo-600', bg: 'bg-indigo-50', enabled: true },
   { id: 'docs', name: 'Google Docs', tagline: 'Sync PRDs & specs', icon: FileText, color: 'text-amber-600', bg: 'bg-amber-50', enabled: false },
   { id: 'zoom', name: 'Zoom', tagline: 'Sync meeting transcripts', icon: Video, color: 'text-orange-600', bg: 'bg-orange-50', enabled: false },
@@ -255,6 +254,15 @@ const TARGET_ENTITIES = [
   "Decision.title", "Decision.rationale", "Decision.date"
 ];
 
+const RESEARCH_API_URL = import.meta.env.VITE_RESEARCH_API_URL || 'http://localhost:8000';
+
+interface MondayIntegrationState {
+  enabled: boolean;
+  api_key_set: boolean;
+  board_ids: string[];
+  updated_at: string | null;
+}
+
 export default function App() {
   const [mode, setMode] = useState<'admin' | 'pm'>('pm');
   const [config, setConfig] = useState<AppConfig | null>(INITIAL_CONFIG);
@@ -274,8 +282,30 @@ export default function App() {
   const [selectedProviderForWizard, setSelectedProviderForWizard] = useState<string | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [mondayApiKey, setMondayApiKey] = useState('');
+  const [mondayTestStatus, setMondayTestStatus] = useState<'idle' | 'testing' | 'ok' | 'error'>('idle');
+  const [mondayConnectError, setMondayConnectError] = useState<string | null>(null);
   const mappingsRef = useRef<HTMLDivElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const prevActiveChatIdRef = useRef<string | null>(activeChatId);
+
+  // Load Monday integration state from backend so UI reflects real connectivity
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`${RESEARCH_API_URL}/integrations/monday`);
+        if (!res.ok || cancelled) return;
+        const data: MondayIntegrationState = await res.json();
+        const mondayConnected = Boolean(data.enabled && data.api_key_set);
+        setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected } } : null);
+        if (mondayConnected) setContextItems([]);
+      } catch {
+        if (!cancelled) setConfig(prev => prev ?? null);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   const lastAssistantMessage = [...messages].reverse().find(m => m.role === 'assistant')?.content as AgentResponse | undefined;
 
@@ -302,10 +332,14 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // Sync active chat messages to messages state
-    const activeChat = chats.find(c => c.id === activeChatId);
-    if (activeChat) {
-      setMessages(activeChat.messages);
+    // Sync active chat messages to messages state only when user switches chat.
+    // When chats updates from the messages effect (new reply), we must NOT overwrite messages
+    // or the sidebar briefly shows empty state and flickers.
+    const switchedChat = prevActiveChatIdRef.current !== activeChatId;
+    prevActiveChatIdRef.current = activeChatId;
+    if (switchedChat) {
+      const activeChat = chats.find(c => c.id === activeChatId);
+      if (activeChat) setMessages(activeChat.messages);
     }
   }, [activeChatId, chats]);
 
@@ -379,10 +413,8 @@ export default function App() {
     setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
     setLoading(true);
 
-    const limitedContext = contextItems.slice(0, 5);
-    
-    // Fallback response for offline/missing key
-    let mockResponse: AgentResponse = {
+    // Fallback response when API is unavailable.
+    const fallbackResponse: AgentResponse = {
       mode: 'pm',
       answer: `I've analyzed the top items in your Product OS. You have a high-priority feature "Real-time Collaboration Engine" (JIRA-101) currently in progress, but there is a critical bug regarding latency in APAC (BUG-1) that needs attention.`,
       entities: [
@@ -396,124 +428,56 @@ export default function App() {
       suggestions: ["Related features?", "Update status?"]
     };
 
-    // Specific mock responses for example buttons
-    const lowerQuery = userMsg.toLowerCase();
-    if (lowerQuery.includes('bug') || (lowerQuery.includes('more') && lowerQuery.includes('bug'))) {
-      mockResponse = {
-        mode: 'pm',
-        answer: "The 'APAC Latency Spike' (BUG-1) is currently Open and owned by Sarah Chen. It's impacting our APAC users with potential 500ms+ delays. We also have a high-severity bug for GDPR export failures (BUG-2).",
-        entities: [
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'JIRA-BUG-1') },
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'JIRA-BUG-2') }
-        ],
-        references: [
-          { source_type: 'jira', source_id: 'BUG-1', title: 'APAC Latency Spike', url: 'https://jira.mock.com/browse/BUG-1' },
-          { source_type: 'jira', source_id: 'BUG-2', title: 'GDPR Export Failure', url: 'https://jira.mock.com/browse/BUG-2' }
-        ],
-        suggestions: ["Mitigation plan?", "Sarah's workload?"]
-      };
-    } else if (lowerQuery.includes('decision') || lowerQuery.includes('meeting')) {
-      mockResponse = {
-        mode: 'pm',
-        answer: "Recent meetings have yielded two key decisions: We've committed to a WebSocket-based architecture for real-time sync, and we've decided to launch the initial beta in the EU region.",
-        entities: [
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'ZOOM-1') },
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'ZOOM-2') }
-        ],
-        references: [
-          { source_type: 'zoom', source_id: 'MEET-992', title: 'Architecture Review', url: 'https://zoom.mock.com/rec/992' },
-          { source_type: 'zoom', source_id: 'MEET-995', title: 'GTM Strategy Sync', url: 'https://zoom.mock.com/rec/995' }
-        ],
-        suggestions: ["EU Beta timeline?", "WebSocket spec?"]
-      };
-    } else if (lowerQuery.includes('sarah')) {
-      mockResponse = {
-        mode: 'pm',
-        answer: "Sarah Chen is currently leading the 'Real-time Collaboration Engine' feature. She is also the primary owner for investigating the APAC latency spike bug.",
-        entities: [
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'JIRA-101') },
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'JIRA-BUG-1') }
-        ],
-        references: [
-          { source_type: 'jira', source_id: 'PROJ-101', title: 'Real-time Collaboration Engine', url: 'https://jira.mock.com/browse/PROJ-101' },
-          { source_type: 'jira', source_id: 'BUG-1', title: 'APAC Latency Spike', url: 'https://jira.mock.com/browse/BUG-1' }
-        ],
-        suggestions: ["Sarah's other tasks?", "Team capacity?"]
-      };
-    } else if (lowerQuery.includes('prd') || lowerQuery.includes('document')) {
-      mockResponse = {
-        mode: 'pm',
-        answer: "The latest PRD (DOC-PRD-001) details the AI Search Integration requirements. It specifies that the system must support semantic search across all connected services like Jira and Monday.",
-        entities: [
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'DOC-1') }
-        ],
-        references: [
-          { source_type: 'doc', source_id: 'DOC-PRD-001', title: 'PRD: AI Search Integration', url: 'https://docs.mock.com/d/PRD-001' }
-        ],
-        suggestions: ["Search tech spec?", "Jira integration?"]
-      };
-    } else if (lowerQuery.includes('status')) {
-      mockResponse = {
-        mode: 'pm',
-        answer: "Currently, 'Real-time Collaboration Engine' is In Progress (Sarah Chen). 'Mobile Offline Mode' is in the Backlog (Mike Ross). 'User Growth Strategy' is In Progress.",
-        entities: [
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'JIRA-101') },
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'JIRA-102') },
-          { ...MOCK_CONTEXT_ITEMS.find(i => i.id === 'MONDAY-2') }
-        ],
-        references: [
-          { source_type: 'jira', source_id: 'PROJ-101', title: 'Real-time Collaboration Engine', url: 'https://jira.mock.com/browse/PROJ-101' },
-          { source_type: 'monday', source_id: 'ITEM-2', title: 'User Growth Strategy', url: 'https://monday.mock.com/boards/1/item/2' }
-        ],
-        suggestions: ["Roadmap overview?", "Sarah's workload?"]
-      };
-    }
-
-    // Check if API key is valid (not placeholder)
-    const hasValidKey = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'MY_GEMINI_API_KEY';
-
-    if (!hasValidKey) {
-      setTimeout(() => {
-        setMessages(prev => [...prev, { role: 'assistant', content: mockResponse }]);
-        setLoading(false);
-      }, 800);
-      return;
-    }
-
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
-      const response = await ai.models.generateContent({
-        model: "gemini-3.1-pro-preview",
-        contents: [{
-          parts: [{ text: `
-            Context Items (Limited): ${JSON.stringify(limitedContext)}
-            Current Config: ${JSON.stringify(config)}
-            Conversation History: ${JSON.stringify(messages.slice(-4))}
-            User Query: ${userMsg}
-            
-            You are Product OS Research Agent. 
-            Always respond in structured JSON format ONLY for the assistant message content:
-            {
-              "mode": "admin" | "pm",
-              "answer": "Natural language response",
-              "entities": [{type: "Feature", id: "FEAT-1", title: "...", ...}],
-              "references": [{source_type: "jira"|"monday"|"doc"|"zoom", source_id: "JIRA-123", title: "...", url: "..."}],
-              "suggestions": ["Followup 1?", "Followup 2?"]
-            }
-          ` }]
-        }],
-        config: {
-          responseMimeType: "application/json"
-        }
+      const response = await fetch(`${RESEARCH_API_URL}/search_memories`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: userMsg,
+          top_k: 10
+        }),
       });
 
-      const text = response.text;
-      if (!text) throw new Error("No response text");
-      const parsed: AgentResponse = JSON.parse(text);
-      setMessages(prev => [...prev, { role: 'assistant', content: parsed }]);
+      if (!response.ok) {
+        throw new Error(`Search request failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const mappedResponse: AgentResponse = {
+        mode: 'pm',
+        answer: data.summary || 'No summary available.',
+        entities: (data.raw_results || []).map((result: any) => ({
+          id: result.id,
+          source_type: result.source,
+          source_id: result.id,
+          title: result.title || result.body || 'Untitled',
+          type: result.entity_type || result.type || 'Entity',
+          url: '#',
+          status: result.metadata?.status
+        })),
+        references: (data.references || []).map((ref: any) => ({
+          source_type: ref.source || 'monday',
+          source_id: ref.title || 'source',
+          title: ref.title || 'Reference',
+          url: ref.url || '#'
+        })),
+        suggestions: ['Show more details', 'What changed recently?']
+      };
+
+      setMessages(prev => [...prev, { role: 'assistant', content: mappedResponse }]);
     } catch (error) {
-      console.error("Gemini API Error, using fallback:", error);
-      setMessages(prev => [...prev, { role: 'assistant', content: mockResponse }]);
+      console.error('Research Agent API error:', error);
+      const useMock = !config?.integrations?.monday;
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: useMock ? fallbackResponse : {
+          mode: 'pm',
+          answer: 'Search is unavailable. Check that the Research Agent API is running and your Monday integration is connected.',
+          entities: [],
+          references: [],
+          suggestions: ['Retry', 'Check Integration Setup']
+        }
+      }]);
     } finally {
       setLoading(false);
     }
@@ -626,7 +590,9 @@ export default function App() {
                   >
                     <h1 className="text-4xl font-bold tracking-tight mb-4">Ask product questions across your tools</h1>
                     <p className="text-[#737373] mb-8">
-                      Connected to {config ? Object.entries(config.integrations).filter(([_, v]) => v).map(([k]) => k.charAt(0).toUpperCase() + k.slice(1)).join(', ') : 'Jira'}.
+                      {config && Object.values(config.integrations).some(Boolean)
+                      ? `Connected to ${Object.entries(config.integrations).filter(([_, v]) => v).map(([k]) => k.charAt(0).toUpperCase() + k.slice(1)).join(', ')}.`
+                      : 'No integrations connected. Connect Monday.com below to sync data.'}
                     </p>
                     <div className="grid grid-cols-2 gap-4">
                       {[
@@ -757,11 +723,12 @@ export default function App() {
           {/* Right Sidebar: Product Context */}
           <AnimatePresence>
             {showSidebar && (
-              <motion.div 
-                initial={{ x: 300, opacity: 0 }}
+              <motion.div
+                key="product-context"
+                initial={false}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 300, opacity: 0 }}
-                className="w-80 border-l border-[#E5E5E5] bg-white flex flex-col hidden lg:flex"
+                className="w-80 min-w-[20rem] flex-shrink-0 border-l border-[#E5E5E5] bg-white flex flex-col hidden lg:flex"
               >
                 <div className="p-6 border-b border-[#E5E5E5] flex items-center justify-between">
                   <h2 className="font-bold text-sm uppercase tracking-widest flex items-center gap-2">
@@ -801,8 +768,8 @@ export default function App() {
                         <h3 className="text-[10px] font-black uppercase tracking-widest text-[#737373]">Extracted Entities</h3>
                         <div className="space-y-3">
                           {lastAssistantMessage.entities.map((entity, ei) => (
-                            <a 
-                              key={ei} 
+                            <a
+                              key={entity.id ?? entity.source_id ?? `entity-${ei}`} 
                               href={entity.url}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -911,20 +878,20 @@ export default function App() {
                       </button>
                     ))}
 
-                    {/* Placeholder for not connected */}
-                    {config && INTEGRATION_PROVIDERS.filter(p => !config.integrations[p.id]).slice(0, 1).map((provider) => (
-                      <div key={provider.id} className="p-5 rounded-2xl border border-dashed border-[#E5E5E5] bg-white opacity-60">
+                    {/* Coming soon providers (phase 1 excludes non-Monday integrations) */}
+                    {INTEGRATION_PROVIDERS.filter(p => p.id !== 'monday').map((provider) => (
+                      <div key={provider.id} className="p-5 rounded-2xl border border-dashed border-[#E5E5E5] bg-white opacity-80">
                         <div className="flex items-center justify-between mb-4">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-gray-50 text-gray-400`}>
                             <provider.icon className="w-5 h-5" />
                           </div>
                           <div className="flex items-center gap-1 text-gray-400">
                             <div className="w-2 h-2 rounded-full bg-gray-300" />
-                            <span className="text-[10px] font-bold uppercase tracking-wider">Not Connected</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wider">Coming Soon</span>
                           </div>
                         </div>
                         <h3 className="font-bold text-lg mb-1 text-gray-400">{provider.name}</h3>
-                        <p className="text-xs text-gray-400">Sync inactive</p>
+                        <p className="text-xs text-gray-400">Available in a future phase</p>
                       </div>
                     ))}
                   </div>
@@ -1473,67 +1440,129 @@ export default function App() {
                               </div>
 
                               <div className="space-y-4">
-                                <button 
-                                  onClick={() => {
-                                    setIsConnecting(true);
-                                    setTimeout(() => {
-                                      setIsConnecting(false);
-                                      confetti({
-                                        particleCount: 150,
-                                        spread: 70,
-                                        origin: { y: 0.6 },
-                                        colors: ['#2563eb', '#10b981', '#f59e0b']
-                                      });
-                                      if (config) {
-                                        const newConfig = { ...config };
-                                        newConfig.integrations[selectedProviderForWizard!] = true;
-                                        setConfig(newConfig);
-                                        setSelectedServiceForMapping(selectedProviderForWizard!);
-                                        setIsWizardOpen(false);
-                                        
-                                        // Scroll to mappings after a short delay to allow UI to update
-                                        setTimeout(() => {
-                                          mappingsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                        }, 100);
-                                      }
-                                    }, 2000);
-                                  }}
-                                  disabled={isConnecting}
-                                  className="w-full py-4 bg-[#1A1A1A] text-white rounded-2xl font-bold text-lg hover:bg-black transition-all flex items-center justify-center gap-3 shadow-xl"
-                                >
-                                  {isConnecting ? (
-                                    <>
-                                      <Loader2 className="w-6 h-6 animate-spin" />
-                                      Connecting...
-                                    </>
-                                  ) : (
-                                    <>
-                                      Connect with {INTEGRATION_PROVIDERS.find(p => p.id === selectedProviderForWizard)?.name}
-                                    </>
-                                  )}
-                                </button>
-                                <div className="flex items-center gap-4">
-                                  <div className="flex-1 h-px bg-[#E5E5E5]" />
-                                  <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">or use API key</span>
-                                  <div className="flex-1 h-px bg-[#E5E5E5]" />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                  <div className="flex gap-2">
-                                    <input 
-                                      type="password" 
-                                      placeholder="Enter API Key..."
-                                      className="flex-1 px-4 py-3 bg-white border border-[#E5E5E5] rounded-xl text-sm"
-                                      defaultValue="sk_test_51Mz..."
-                                    />
-                                    <button className="px-4 py-3 bg-[#F5F5F4] text-[#1A1A1A] rounded-xl text-xs font-bold hover:bg-[#E5E5E5] transition-all flex items-center gap-2">
-                                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                                      Test
+                                {selectedProviderForWizard === 'monday' && (
+                                  <>
+                                    <div className="flex flex-col gap-2 text-left">
+                                      <label className="text-[10px] font-bold text-[#737373] uppercase">Monday.com API token (required)</label>
+                                      <div className="flex gap-2">
+                                        <input
+                                          type="password"
+                                          placeholder="Paste your API token from Monday.com..."
+                                          value={mondayApiKey}
+                                          onChange={(e) => { setMondayApiKey(e.target.value); setMondayTestStatus('idle'); setMondayConnectError(null); }}
+                                          className="flex-1 px-4 py-3 bg-white border border-[#E5E5E5] rounded-xl text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+                                        />
+                                        <button
+                                          type="button"
+                                          onClick={async () => {
+                                            const key = mondayApiKey.trim();
+                                            if (!key) return;
+                                            setMondayTestStatus('testing');
+                                            setMondayConnectError(null);
+                                            try {
+                                              const res = await fetch(`${RESEARCH_API_URL}/integrations/monday/test`, {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ api_key: key })
+                                              });
+                                              const data = await res.json().catch(() => ({}));
+                                              if (res.ok && data.ok) setMondayTestStatus('ok');
+                                              else setMondayTestStatus('error');
+                                            } catch (e) {
+                                              setMondayTestStatus('error');
+                                              setMondayConnectError(
+                                                (e as Error)?.message?.includes('Failed to fetch') || (e as Error)?.message?.includes('Connection refused')
+                                                  ? 'Cannot reach the Research Agent API. Start it with: python -m research_agent serve'
+                                                  : null
+                                              );
+                                            }
+                                          }}
+                                          disabled={!mondayApiKey.trim() || mondayTestStatus === 'testing'}
+                                          className="px-4 py-3 bg-[#F5F5F4] text-[#1A1A1A] rounded-xl text-xs font-bold hover:bg-[#E5E5E5] transition-all flex items-center gap-2 shrink-0"
+                                        >
+                                          {mondayTestStatus === 'testing' ? <Loader2 className="w-3 h-3 animate-spin" /> : mondayTestStatus === 'ok' ? <CheckCircle2 className="w-3 h-3 text-emerald-600" /> : null}
+                                          Test
+                                        </button>
+                                      </div>
+                                      {mondayTestStatus === 'ok' && <p className="text-xs text-emerald-600 font-medium">Connection successful.</p>}
+                                      {mondayTestStatus === 'error' && !mondayConnectError && <p className="text-xs text-red-600 font-medium">Connection failed. Check token and permissions.</p>}
+                                      <a href="https://support.monday.com/hc/en-us/articles/360005562273-How-do-I-get-my-API-token-" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-blue-600 hover:underline">
+                                        Get your API token in Monday.com →
+                                      </a>
+                                    </div>
+                                    {mondayConnectError && <p className="text-sm text-red-600 font-medium">{mondayConnectError}</p>}
+                                    <button
+                                      onClick={async () => {
+                                        const key = mondayApiKey.trim();
+                                        if (!key) {
+                                          setMondayConnectError('Enter your Monday.com API token above.');
+                                          return;
+                                        }
+                                        setIsConnecting(true);
+                                        setMondayConnectError(null);
+                                        try {
+                                          const testRes = await fetch(`${RESEARCH_API_URL}/integrations/monday/test`, {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({ api_key: key })
+                                          });
+                                          if (!testRes.ok) {
+                                            const err = await testRes.json().catch(() => ({}));
+                                            throw new Error(err.detail || 'Connection test failed.');
+                                          }
+                                          const putRes = await fetch(`${RESEARCH_API_URL}/integrations/monday`, {
+                                            method: 'PUT',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({ enabled: true, api_key: key, board_ids: [] })
+                                          });
+                                          if (!putRes.ok) {
+                                            const err = await putRes.json().catch(() => ({}));
+                                            throw new Error(err.detail || 'Failed to save integration.');
+                                          }
+                                          confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2563eb', '#10b981', '#f59e0b'] });
+                                          setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: true } } : null);
+                                          setContextItems([]);
+                                          setSelectedServiceForMapping('monday');
+                                          setIsWizardOpen(false);
+                                          setMondayApiKey('');
+                                          setMondayTestStatus('idle');
+                                          setTimeout(() => mappingsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                                        } catch (e) {
+                                          setMondayConnectError(e instanceof Error ? e.message : 'Connection failed.');
+                                        } finally {
+                                          setIsConnecting(false);
+                                        }
+                                      }}
+                                      disabled={isConnecting}
+                                      className="w-full py-4 bg-[#1A1A1A] text-white rounded-2xl font-bold text-lg hover:bg-black transition-all flex items-center justify-center gap-3 shadow-xl"
+                                    >
+                                      {isConnecting ? <><Loader2 className="w-6 h-6 animate-spin" /> Connecting...</> : <>Connect with Monday.com</>}
                                     </button>
-                                  </div>
-                                  <button className="text-[10px] font-bold text-blue-600 hover:underline text-left px-1">
-                                    Generate new API Key in {INTEGRATION_PROVIDERS.find(p => p.id === selectedProviderForWizard)?.name} dashboard →
+                                  </>
+                                )}
+                                {selectedProviderForWizard !== 'monday' && (
+                                  <button
+                                    onClick={() => {
+                                      setIsConnecting(true);
+                                      setTimeout(() => {
+                                        setIsConnecting(false);
+                                        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#2563eb', '#10b981', '#f59e0b'] });
+                                        if (config) {
+                                          const newConfig = { ...config };
+                                          newConfig.integrations[selectedProviderForWizard!] = true;
+                                          setConfig(newConfig);
+                                          setSelectedServiceForMapping(selectedProviderForWizard!);
+                                          setIsWizardOpen(false);
+                                          setTimeout(() => mappingsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                                        }
+                                      }, 2000);
+                                    }}
+                                    disabled={isConnecting}
+                                    className="w-full py-4 bg-[#1A1A1A] text-white rounded-2xl font-bold text-lg hover:bg-black transition-all flex items-center justify-center gap-3 shadow-xl"
+                                  >
+                                    {isConnecting ? <><Loader2 className="w-6 h-6 animate-spin" /> Connecting...</> : <>Connect with {INTEGRATION_PROVIDERS.find(p => p.id === selectedProviderForWizard)?.name}</>}
                                   </button>
-                                </div>
+                                )}
                               </div>
                             </div>
 
