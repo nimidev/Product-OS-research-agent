@@ -30,7 +30,7 @@ class QdrantConfig(BaseModel):
 
 class LLMConfig(BaseModel):
     provider: str = "openai"
-    model: str = "gpt-4o-mini"
+    model: str = "gpt-4o"
     temperature: float = 0.3
     max_tokens: int = 1500
 
@@ -91,7 +91,7 @@ class Settings(BaseSettings):
     openai_api_key: str = Field(default="")
     qdrant_host: str = Field(default="localhost")
     qdrant_port: int = Field(default=6333)
-    llm_model: str = Field(default="gpt-4o-mini")
+    llm_model: str = Field(default="gpt-4o")
     embedding_model: str = Field(default="text-embedding-3-small")
     database_path: str = Field(default="research_agent.db")
     log_level: str = Field(default="INFO")

@@ -85,6 +85,40 @@ export interface AppConfig {
   mappings: Record<string, Record<string, string>>;
 }
 
+export type MondayDirection = 'two_way' | 'monday_to_os';
+
+export interface MondayEntityMappingConfig {
+  entity_type: string;
+  board_ids: string[];
+  direction: MondayDirection;
+  field_mappings: Record<string, string>;
+}
+
+export interface MondayBoardColumn {
+  id: string;
+  title: string;
+  type?: string;
+}
+
+export interface MondayBoardSchema {
+  id: string;
+  name: string;
+  columns: MondayBoardColumn[];
+}
+
+export interface MondayIntegrationConfigResponse {
+  source: 'monday';
+  enabled: boolean;
+  api_key_set: boolean;
+  board_ids: string[];
+  entity_mappings: Record<string, string>;
+  entity_configs: Record<string, MondayEntityMappingConfig>;
+  sync_interval_seconds: number;
+  /** Tenant subdomain for item URLs, e.g. "my-team" → https://my-team.monday.com */
+  subdomain: string | null;
+  updated_at: string | null;
+}
+
 export interface AgentResponse {
   mode: 'admin' | 'pm';
   answer: string;

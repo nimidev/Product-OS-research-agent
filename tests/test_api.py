@@ -173,3 +173,56 @@ class TestMondayIntegrationConfigEndpoints:
             )
         assert resp.status_code == 200
         assert resp.json()["ok"] is True
+
+
+class TestMondaySchemaEndpoint:
+    @pytest.mark.asyncio
+    async def test_get_monday_schema_requires_key(self, client, mock_db):
+        # No api_key in config -> 400
+        mock_db.get_integration_config.return_value = {
+            "enabled": True,
+            "api_key": "",
+            "board_ids": [],
+            "entity_mappings": {},
+            "entity_configs": {},
+            "sync_interval_seconds": 7200,
+            "updated_at": datetime.now(UTC),
+        }
+        resp = await client.get("/integrations/monday/schema")
+        assert resp.status_code == 400
+
+    @pytest.mark.asyncio
+    async def test_get_monday_schema_happy_path(self, client, mock_db, monkeypatch):
+        mock_db.get_integration_config.return_value = {
+            "enabled": True,
+            "api_key": "monday-token",
+            "board_ids": [],
+            "entity_mappings": {},
+            "entity_configs": {},
+            "sync_interval_seconds": 7200,
+            "updated_at": datetime.now(UTC),
+        }
+
+        async def fake_fetch_schema(api_key: str):
+            assert api_key == "monday-token"
+            return [
+                {
+                    "id": "123",
+                    "name": "Product Epics",
+                    "columns": [
+                        {"id": "name", "title": "Name", "type": "name"},
+                        {"id": "status", "title": "Status", "type": "status"},
+                    ],
+                }
+            ]
+
+        monkeypatch.setattr(
+            "research_agent.api.server._fetch_monday_boards_schema", fake_fetch_schema
+        )
+
+        resp = await client.get("/integrations/monday/schema")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert len(data["boards"]) == 1
+        assert data["boards"][0]["id"] == "123"
+        assert data["boards"][0]["name"] == "Product Epics"

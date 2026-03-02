@@ -28,7 +28,26 @@ class Database:
 
     async def init(self) -> None:
         async with self._engine.begin() as conn:
+            # Ensure all tables exist
             await conn.run_sync(Base.metadata.create_all)
+            # Lightweight, backwards-compatible migration: add entity_configs_json column
+            # to integration_configs if it doesn't exist yet.
+            try:
+                result = await conn.exec_driver_sql("PRAGMA table_info('integration_configs')")
+                cols = [row[1] for row in result.fetchall()]
+                if "entity_configs_json" not in cols:
+                    await conn.exec_driver_sql(
+                        "ALTER TABLE integration_configs "
+                        "ADD COLUMN entity_configs_json TEXT NOT NULL DEFAULT '{}'"
+                    )
+                if "subdomain" not in cols:
+                    await conn.exec_driver_sql(
+                        "ALTER TABLE integration_configs ADD COLUMN subdomain TEXT"
+                    )
+            except Exception:
+                # If anything goes wrong here, ignore and let normal operations surface errors;
+                # tests use fresh DBs where the column is created from metadata.
+                pass
 
     async def close(self) -> None:
         await self._engine.dispose()
@@ -137,13 +156,25 @@ class Database:
             await session.commit()
             return True
 
-    async def count_entities(self, include_deleted: bool = False) -> int:
+    async def count_entities(
+        self,
+        include_deleted: bool = False,
+        entity_type: str | None = None,
+        source_system: str | None = None,
+        source_systems: list[str] | None = None,
+    ) -> int:
         async with self.session() as session:
             from sqlalchemy import func
 
             stmt = select(func.count()).select_from(EntityRow)
             if not include_deleted:
                 stmt = stmt.where(EntityRow.is_deleted == False)  # noqa: E712
+            if entity_type is not None:
+                stmt = stmt.where(EntityRow.entity_type == entity_type)
+            if source_systems:
+                stmt = stmt.where(EntityRow.source_system.in_(source_systems))
+            elif source_system is not None:
+                stmt = stmt.where(EntityRow.source_system == source_system)
             result = await session.execute(stmt)
             return result.scalar_one()
 
@@ -180,7 +211,9 @@ class Database:
                 "api_key": row.api_key,
                 "board_ids": json.loads(row.board_ids_json or "[]"),
                 "entity_mappings": json.loads(row.entity_mappings_json or "{}"),
+                "entity_configs": json.loads(row.entity_configs_json or "{}"),
                 "sync_interval_seconds": row.sync_interval_seconds,
+                "subdomain": getattr(row, "subdomain", None),
                 "updated_at": row.updated_at,
             }
 
@@ -192,6 +225,8 @@ class Database:
         entity_mappings: dict[str, str],
         sync_interval_seconds: int,
         api_key: str | None = None,
+        entity_configs: dict[str, dict] | None = None,
+        subdomain: str | None = None,
     ) -> dict:
         async with self.session() as session:
             row = await session.get(IntegrationConfigRow, source)
@@ -203,7 +238,9 @@ class Database:
                     api_key=api_key or "",
                     board_ids_json=json.dumps(board_ids),
                     entity_mappings_json=json.dumps(entity_mappings),
+                    entity_configs_json=json.dumps(entity_configs or {}),
                     sync_interval_seconds=sync_interval_seconds,
+                    subdomain=subdomain,
                     updated_at=now,
                 )
                 session.add(row)
@@ -213,7 +250,10 @@ class Database:
                     row.api_key = api_key
                 row.board_ids_json = json.dumps(board_ids)
                 row.entity_mappings_json = json.dumps(entity_mappings)
+                row.entity_configs_json = json.dumps(entity_configs or {})
                 row.sync_interval_seconds = sync_interval_seconds
+                if subdomain is not None:
+                    row.subdomain = subdomain
                 row.updated_at = now
 
             await session.commit()

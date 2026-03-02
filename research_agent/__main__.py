@@ -112,31 +112,64 @@ async def _build_connectors(db) -> list:
         monday_key = str(monday_cfg.get("api_key", "")).strip() or os.environ.get(
             "MONDAY_API_KEY", ""
         )
-        board_ids = [
-            str(board_id).strip()
-            for board_id in list(monday_cfg.get("board_ids", []))
-            if str(board_id).strip()
-        ]
+        entity_configs = dict(monday_cfg.get("entity_configs", {}))
         entity_mappings = {
             str(k): str(v) for k, v in dict(monday_cfg.get("entity_mappings", {})).items()
         }
-        if not board_ids and entity_mappings:
-            board_ids = list(entity_mappings.keys())
 
-        for board_id in board_ids:
-            entity_type = entity_mappings.get(str(board_id))
-            if not entity_type or not monday_key:
-                continue
-            field_mappings = _resolve_monday_field_mappings(entity_type, mappings)
-            connectors.append(
-                MondayConnector(
-                    api_key=monday_key,
-                    board_id=board_id,
-                    entity_type=entity_type,
-                    field_mappings=field_mappings,
+        if entity_configs:
+            # New path: use rich per-entity configs (board_ids + field_mappings + direction).
+            for _, cfg in entity_configs.items():
+                boards = [
+                    str(b).strip()
+                    for b in list(cfg.get("board_ids", []))
+                    if str(b).strip()
+                ]
+                entity_type = str(cfg.get("entity_type") or "").strip()
+                # Fall back to legacy mapping if entity_type not set but we can infer from board_ids.
+                if not entity_type and boards and entity_mappings:
+                    entity_type = entity_mappings.get(str(boards[0]), "")
+                if not entity_type or not monday_key:
+                    continue
+
+                field_mappings = dict(cfg.get("field_mappings") or {})
+                if not field_mappings:
+                    field_mappings = _resolve_monday_field_mappings(entity_type, mappings)
+
+                for board_id in boards:
+                    connectors.append(
+                        MondayConnector(
+                            api_key=monday_key,
+                            board_id=board_id,
+                            entity_type=entity_type,
+                            field_mappings=field_mappings,
+                        )
+                    )
+                    monday_added = True
+        else:
+            # Legacy path: entity_mappings + board_ids from config.
+            board_ids = [
+                str(board_id).strip()
+                for board_id in list(monday_cfg.get("board_ids", []))
+                if str(board_id).strip()
+            ]
+            if not board_ids and entity_mappings:
+                board_ids = list(entity_mappings.keys())
+
+            for board_id in board_ids:
+                entity_type = entity_mappings.get(str(board_id))
+                if not entity_type or not monday_key:
+                    continue
+                field_mappings = _resolve_monday_field_mappings(entity_type, mappings)
+                connectors.append(
+                    MondayConnector(
+                        api_key=monday_key,
+                        board_id=board_id,
+                        entity_type=entity_type,
+                        field_mappings=field_mappings,
+                    )
                 )
-            )
-            monday_added = True
+                monday_added = True
 
     # Backward-compatible fallback: mappings.yaml + MONDAY_API_KEY
     if not monday_added:

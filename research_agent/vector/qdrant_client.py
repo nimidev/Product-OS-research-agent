@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import uuid
+import json
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -87,6 +88,7 @@ class QdrantStore:
         query_vector: list[float],
         top_k: int = 10,
         source: str | None = None,
+        sources: list[str] | None = None,
         item_type: str | None = None,
         entity_type: str | None = None,
         entity_types: list[str] | None = None,
@@ -96,7 +98,9 @@ class QdrantStore:
         tags: list[str] | None = None,
     ) -> list[SearchResult]:
         conditions: list[Any] = []
-        if source:
+        if sources:
+            conditions.append(FieldCondition(key="source", match=MatchAny(any=sources)))
+        elif source:
             conditions.append(FieldCondition(key="source", match=MatchValue(value=source)))
         if item_type:
             conditions.append(FieldCondition(key="entity_type", match=MatchValue(value=item_type)))

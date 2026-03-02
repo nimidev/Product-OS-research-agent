@@ -130,7 +130,10 @@ class IntegrationConfigRow(Base):
     api_key: Mapped[str] = mapped_column(Text, nullable=False, default="")
     board_ids_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
     entity_mappings_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+    entity_configs_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
     sync_interval_seconds: Mapped[int] = mapped_column(Integer, nullable=False, default=7200)
+    # Optional tenant/subdomain for source-specific URLs (e.g. Monday: {subdomain}.monday.com)
+    subdomain: Mapped[str | None] = mapped_column(String, nullable=True, default=None)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
