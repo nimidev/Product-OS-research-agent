@@ -75,3 +75,49 @@ async def test_build_connectors_falls_back_to_yaml_and_env(monkeypatch: pytest.M
     monday_connectors = [c for c in connectors if c.source_name == "monday"]
     assert len(monday_connectors) == 1
     assert monday_connectors[0].entity_type == "feature_request"
+
+
+@pytest.mark.asyncio
+async def test_build_connectors_uses_entity_configs_when_present(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("MONDAY_API_KEY", raising=False)
+
+    db = AsyncMock()
+    db.get_integration_config = AsyncMock(
+        return_value={
+            "enabled": True,
+            "api_key": "db-token",
+            "board_ids": ["legacy-should-be-ignored"],
+            "entity_mappings": {"legacy-should-be-ignored": "feature_request"},
+            "entity_configs": {
+                "epic": {
+                    "entity_type": "feature_request",
+                    "board_ids": ["123"],
+                    "direction": "two_way",
+                    "field_mappings": {"name": "title"},
+                }
+            },
+            "sync_interval_seconds": 7200,
+        }
+    )
+
+    monkeypatch.setattr(
+        "research_agent.config.mappings.load_mappings",
+        lambda: {
+            "monday": {
+                "feature_request": {
+                    "entity_type": "feature_request",
+                    "field_mappings": {"name": "title"},
+                }
+            },
+            "notion": {},
+        },
+    )
+
+    connectors = await _build_connectors(db)
+    monday_connectors = [c for c in connectors if c.source_name == "monday"]
+    assert len(monday_connectors) == 1
+    # Ensure entity_type and board_id come from entity_configs, not the legacy mapping.
+    assert monday_connectors[0].entity_type == "feature_request"
+    assert getattr(monday_connectors[0], "_board_id") == 123

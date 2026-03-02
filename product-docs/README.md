@@ -10,7 +10,7 @@ Product documentation workspace for the Research Agent service.
 
 ## Story ID Registry
 
-**Next Available ID: US-008**
+**Next Available ID: US-009**
 
 When creating a new story, use the next available ID.
 

@@ -74,8 +74,16 @@ class MondayConnector(BaseConnector):
             for raw in raw_items:
                 try:
                     entity = self.normalize_item(raw)
-                    if since and entity.updated_at and entity.updated_at < since:
-                        continue
+                    if since and entity.updated_at:
+                        # Normalize timezone info to avoid offset-naive/aware comparison errors
+                        ent_ts = entity.updated_at
+                        if ent_ts.tzinfo is None:
+                            ent_ts = ent_ts.replace(tzinfo=timezone.utc)
+                        since_ts = since
+                        if since_ts.tzinfo is None:
+                            since_ts = since_ts.replace(tzinfo=timezone.utc)
+                        if ent_ts < since_ts:
+                            continue
                     entities.append(entity)
                 except Exception:
                     logger.exception(

@@ -15,6 +15,7 @@ import logging
 import time
 from datetime import datetime, timezone
 from typing import Any
+import json
 
 from research_agent.connectors.base import BaseConnector
 from research_agent.embedding.chunker import chunk_text as chunk_text_embedding
@@ -32,8 +33,9 @@ logger = logging.getLogger(__name__)
 
 BATCH_SIZE = 100
 
-# Fields we chunk and embed (long text)
+# Fields we chunk and embed
 SEARCHABLE_FIELDS = {
+    "title",          # include titles so items with no long description still become searchable
     "description",
     "transcript",
     "overview",
