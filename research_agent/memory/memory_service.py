@@ -359,6 +359,10 @@ class MemoryService:
                         "url": ref.url,
                         "source": ref.source,
                         "type": ref.type,
+                        "index": ref.index,
+                        "typed_id": ref.typed_id,
+                        "entity_type": ref.entity_type,
+                        "entity_id": ref.entity_id,
                     }
                     for ref in synthesis.references
                 ],

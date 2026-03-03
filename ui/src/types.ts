@@ -128,6 +128,10 @@ export interface AgentResponse {
     source_id: string;
     title: string;
     url: string;
+    typed_id?: string;
+    index?: number;
+    entity_type?: string;
+    entity_id?: string;
   }[];
   config?: AppConfig;
   suggestions?: string[];

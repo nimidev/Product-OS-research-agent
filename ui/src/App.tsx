@@ -41,6 +41,233 @@ const ANSWER_MARKDOWN_COMPONENTS = {
   hr: (props: any) => <hr className="my-4 border-[#E5E5E5]" {...props} />,
 };
 
+// Matches [1], [2, 3], [4, 7, 10], etc.
+const CITATION_MARKER_REGEX = /\[([0-9,\s]+)\]/g;
+
+type AgentReference = AgentResponse['references'][number];
+
+function renderChildrenWithCitations(
+  children: React.ReactNode,
+  renderText: (text: string) => React.ReactNode,
+) {
+  return React.Children.map(children, (child) => {
+    if (typeof child === 'string') {
+      return renderText(child);
+    }
+    return child;
+  });
+}
+
+function renderTextWithCitations(
+  text: string,
+  refsByIndex: Map<number, AgentReference>,
+  entities: any[],
+): React.ReactNode {
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  const regex = new RegExp(CITATION_MARKER_REGEX.source, 'g');
+
+  while ((match = regex.exec(text)) !== null) {
+    const start = match.index;
+    const end = start + match[0].length;
+    if (start > lastIndex) {
+      nodes.push(text.slice(lastIndex, start));
+    }
+    const group = match[1] || '';
+    const indices = group
+      .split(',')
+      .map((s) => Number(s.trim()))
+      .filter((n) => Number.isFinite(n));
+
+    if (indices.length === 0) {
+      nodes.push(text.slice(start, end));
+    } else {
+      nodes.push(' ');
+      indices.forEach((idx, idxPos) => {
+        const ref = refsByIndex.get(idx);
+        if (ref) {
+          nodes.push(
+            <CitationChip
+              key={`cit-${idx}-${start}-${idxPos}`}
+              refData={ref}
+              entities={entities}
+            />,
+          );
+        }
+      });
+    }
+    lastIndex = end;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
+  return nodes;
+}
+
+function buildAnswerComponentsWithCitations(
+  references: AgentResponse['references'],
+  entities: any[],
+) {
+  const refsByIndex = new Map<number, AgentReference>();
+  for (const ref of references) {
+    if (typeof ref.index === 'number') {
+      refsByIndex.set(ref.index, ref);
+    }
+  }
+
+  const renderText = (text: string) =>
+    renderTextWithCitations(text, refsByIndex, entities);
+
+  return {
+    ...ANSWER_MARKDOWN_COMPONENTS,
+    p: ({ children, ...props }: any) => (
+      <p className="mb-4 last:mb-0" {...props}>
+        {renderChildrenWithCitations(children, renderText)}
+      </p>
+    ),
+    li: ({ children, ...props }: any) => (
+      <li className="leading-snug" {...props}>
+        {renderChildrenWithCitations(children, renderText)}
+      </li>
+    ),
+    h3: ({ children, ...props }: any) => (
+      <h3 className="text-base font-semibold mt-5 mb-2 first:mt-0" {...props}>
+        {renderChildrenWithCitations(children, renderText)}
+      </h3>
+    ),
+    h4: ({ children, ...props }: any) => (
+      <h4 className="text-sm font-semibold mt-4 mb-1.5" {...props}>
+        {renderChildrenWithCitations(children, renderText)}
+      </h4>
+    ),
+  };
+}
+
+type CitationChipProps = {
+  refData: AgentReference;
+  entities: any[];
+};
+
+const CitationChip: React.FC<CitationChipProps> = ({ refData, entities }) => {
+  const [open, setOpen] = useState(false);
+
+  const label =
+    refData.typed_id ??
+    (typeof refData.index === 'number' ? `REF-${refData.index}` : refData.title);
+
+  const integrationLabelMap: Record<string, string> = {
+    monday: 'Monday.com',
+    jira: 'Jira',
+    notion: 'Notion',
+    slack: 'Slack',
+    zoom: 'Zoom',
+    github: 'GitHub',
+    stripe: 'Stripe',
+    hubspot: 'HubSpot',
+  };
+
+  const integrationLabel =
+    (refData.source_type && integrationLabelMap[refData.source_type]) ||
+    (refData.source_type
+      ? refData.source_type.charAt(0).toUpperCase() + refData.source_type.slice(1)
+      : '');
+
+  const matchingEntity =
+    (refData.entity_id &&
+      entities.find((e: any) => e.id === refData.entity_id)) ||
+    entities.find(
+      (e: any) => refData.url && e.url === refData.url,
+    ) ||
+    entities.find(
+      (e: any) =>
+        refData.title &&
+        (e.title === refData.title || e.description === refData.title),
+    ) ||
+    null;
+
+  let snippet =
+    (matchingEntity &&
+      (matchingEntity.description ||
+        matchingEntity.body ||
+        matchingEntity.title)) ||
+    '';
+
+  // Avoid repeating the exact same string as the title in the body snippet.
+  if (
+    snippet &&
+    refData.title &&
+    snippet.trim().toLowerCase() === refData.title.trim().toLowerCase()
+  ) {
+    snippet = '';
+  }
+
+  const onClick = () => {
+    if (refData.url) {
+      window.open(refData.url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  return (
+    <span
+      className="inline-flex items-center mx-0.5 align-baseline relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={onClick}
+        className="inline-flex items-center rounded-full border border-slate-300 bg-slate-50 px-1.5 py-0.5 text-[10px] font-medium text-slate-700 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-sky-500"
+      >
+        {label}
+      </button>
+      {open && (
+        <div className="absolute z-50 mt-2 w-80 rounded-md border border-slate-200 bg-white p-3 shadow-lg text-left text-xs">
+          <div className="mb-2 flex items-start justify-between gap-2">
+            <div className="font-semibold text-xs text-slate-900">
+              {refData.title || 'Untitled'}
+            </div>
+            <div className="flex flex-col items-end gap-0.5">
+              {refData.entity_type && (
+                <span className="rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-slate-600">
+                  {refData.entity_type}
+                </span>
+              )}
+              {integrationLabel && (
+                <span className="text-[10px] text-slate-500">
+                  {integrationLabel}
+                </span>
+              )}
+            </div>
+          </div>
+          {snippet && (
+            <div className="mb-2 text-slate-700">
+              <span className="text-slate-400">“</span>
+              {snippet.slice(0, 240)}
+              {snippet.length > 240 && '…'}
+              <span className="text-slate-400">”</span>
+            </div>
+          )}
+          {refData.url && (
+            <div className="mt-1 flex items-center justify-end">
+              <button
+                type="button"
+                className="inline-flex items-center rounded-md bg-sky-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-sky-500"
+                onClick={onClick}
+              >
+                <ExternalLink className="mr-1 h-3 w-3" />
+                Open in {integrationLabel || 'source'}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </span>
+  );
+};
+
 function splitAnswerSections(answer: string): { tldr: string | null; rest: string } {
   // Look for a TL;DR line like "**TL;DR:** ..." at the top of the answer.
   const regex = /\*\*TL;DR\*\*:?([\s\S]*?)(\n{2,}|$)/i;
@@ -623,7 +850,11 @@ export default function App() {
           // Prefer URL as stable source_id; fall back to title.
           source_id: ref.url || ref.title || 'source',
           title: ref.title || 'Reference',
-          url: ref.url || '#'
+          url: ref.url || '#',
+          typed_id: ref.typed_id,
+          index: typeof ref.index === 'number' ? ref.index : undefined,
+          entity_type: ref.entity_type,
+          entity_id: ref.entity_id,
         }))
         .filter((r: { source_type: string }) => r.source_type !== 'mock');
       const mappedResponse: AgentResponse = {
@@ -801,18 +1032,23 @@ export default function App() {
                           <div className="bg-white border border-[#E5E5E5] p-6 rounded-2xl shadow-sm">
                             <div className="chat-prose text-sm text-[#1A1A1A] leading-relaxed">
                               {(() => {
-                                const { answer } = msg.content as AgentResponse;
+                                const agent = msg.content as AgentResponse;
+                                const { answer, references, entities } = agent;
                                 const { tldr, rest } = splitAnswerSections(answer);
+                                const markdownComponents = buildAnswerComponentsWithCitations(
+                                  references,
+                                  entities,
+                                );
                                 return (
                                   <>
                                     {tldr && (
                                       <div className="mb-4 rounded-xl bg-[#F9FAFB] border border-[#E5E5E5] px-4 py-3">
-                                        <ReactMarkdown components={ANSWER_MARKDOWN_COMPONENTS}>
+                                        <ReactMarkdown components={markdownComponents}>
                                           {tldr}
                                         </ReactMarkdown>
                                       </div>
                                     )}
-                                    <ReactMarkdown components={ANSWER_MARKDOWN_COMPONENTS}>
+                                    <ReactMarkdown components={markdownComponents}>
                                       {rest || (!tldr ? answer : '')}
                                     </ReactMarkdown>
                                   </>

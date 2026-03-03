@@ -99,6 +99,11 @@ class TestSearchEndpoint:
         assert "summary" in data
         assert "references" in data
         assert "raw_results" in data
+        # References should carry richer citation metadata when available.
+        if data["references"]:
+            ref = data["references"][0]
+            assert "typed_id" in ref
+            assert "index" in ref
         mock_memory_service.search_memories.assert_called_once()
 
     @pytest.mark.asyncio

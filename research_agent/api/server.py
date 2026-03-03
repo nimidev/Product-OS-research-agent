@@ -102,6 +102,23 @@ class ReferenceResponse(BaseModel):
     url: str
     source: str
     type: str
+    # Optional richer citation metadata for UI and evaluation (US-010).
+    index: int | None = Field(
+        default=None,
+        description="1-based index matching [n] markers in the summary, when available.",
+    )
+    typed_id: str | None = Field(
+        default=None,
+        description="Short, answer-local typed ID such as BUG-8 or FR-3.",
+    )
+    entity_type: str | None = Field(
+        default=None,
+        description="Canonical entity type for the cited item (e.g. feature_request, bug).",
+    )
+    entity_id: str | None = Field(
+        default=None,
+        description="Canonical entity id in the underlying store, when available.",
+    )
 
 
 class SearchResponse(BaseModel):
