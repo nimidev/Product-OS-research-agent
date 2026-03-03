@@ -11,7 +11,7 @@
 | [US-007](./US-007.md) | Entity and Field Mapping for Integrations (Connect → Map → Sync) | create | P0 | planning |
 | [US-008](./US-008.md) | Research Agent – Pro Product Researcher Chat Experience | done | P1 | deployed |
 | [US-009](./US-009.md) | Integrations Page – View vs Edit UX Redesign | done | P1 | deployed |
-| [US-010](./US-010.md) | Research Agent – Clickable Evidence References in Chat | create | P1 | planning |
+| [US-010](./US-010.md) | Research Agent – Clickable Evidence References in Chat | done | P1 | deployed |
 
 ### US-007: Entity and Field Mapping for Integrations (Connect → Map → Sync)
 - **Status**: `create`
@@ -32,9 +32,9 @@
 - **Branch**: `feature/US-009-integrations-view-edit-ux` (merged to main)
 
 ### US-010: Research Agent – Clickable Evidence References in Chat
-- **Status**: `create`
+- **Status**: `done`
 - **Description**: Update the Research Agent chat experience so that every evidence reference (e.g. “[8, 17]” after “Bugs: Highlight reliability problems with the API”) is rendered as a clear, clickable citation that maps to specific entities or documents, with an obvious way to inspect what each reference points to.
 - **See**: [US-010.md](./US-010.md)
-- **Branch**: (not yet created)
+- **Branch**: `feature/US-010-clickable-evidence-refs` (merged to main)
 
 <!-- Stories are added automatically by the /create command in Cursor -->
