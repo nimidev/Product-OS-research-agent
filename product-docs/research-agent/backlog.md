@@ -10,7 +10,8 @@
 | [US-006](./US-006.md) | Suggested Next Question (Future) | backlog | P2 | planning |
 | [US-007](./US-007.md) | Entity and Field Mapping for Integrations (Connect → Map → Sync) | create | P0 | planning |
 | [US-008](./US-008.md) | Research Agent – Pro Product Researcher Chat Experience | done | P1 | deployed |
-| [US-009](./US-009.md) | Integrations Page – View vs Edit UX Redesign | create | P1 | planning |
+| [US-009](./US-009.md) | Integrations Page – View vs Edit UX Redesign | done | P1 | deployed |
+| [US-010](./US-010.md) | Research Agent – Clickable Evidence References in Chat | create | P1 | planning |
 
 ### US-007: Entity and Field Mapping for Integrations (Connect → Map → Sync)
 - **Status**: `create`
@@ -25,9 +26,15 @@
 - **Branch**: `feature/US-008-pro-researcher-chat` (merged to main)
 
 ### US-009: Integrations Page – View vs Edit UX Redesign
-- **Status**: `create`
+- **Status**: `done`
 - **Description**: Redesign the Integrations page to clearly show which integrations and entities are active (e.g. Support, Bugs, Feature Requests) and separate read-only “View” mode from a guided “Edit” mode for configuring entities and field mappings.
 - **See**: [US-009.md](./US-009.md)
+- **Branch**: `feature/US-009-integrations-view-edit-ux` (merged to main)
+
+### US-010: Research Agent – Clickable Evidence References in Chat
+- **Status**: `create`
+- **Description**: Update the Research Agent chat experience so that every evidence reference (e.g. “[8, 17]” after “Bugs: Highlight reliability problems with the API”) is rendered as a clear, clickable citation that maps to specific entities or documents, with an obvious way to inspect what each reference points to.
+- **See**: [US-010.md](./US-010.md)
 - **Branch**: (not yet created)
 
 <!-- Stories are added automatically by the /create command in Cursor -->

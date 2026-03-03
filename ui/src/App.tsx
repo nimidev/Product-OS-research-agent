@@ -301,6 +301,9 @@ const formatEntityTypeLabel = (entityType: string) =>
 
 const RESEARCH_API_URL = import.meta.env.VITE_RESEARCH_API_URL || 'http://localhost:8000';
 
+const isSubitemsBoardName = (name: string | undefined | null): boolean =>
+  typeof name === 'string' && /^subitems of /i.test(name.trim());
+
 export default function App() {
   const [mode, setMode] = useState<'admin' | 'pm'>('pm');
   const [config, setConfig] = useState<AppConfig | null>(INITIAL_CONFIG);
@@ -312,6 +315,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [editingService, setEditingService] = useState<string | null>(null);
   const [selectedServiceForMapping, setSelectedServiceForMapping] = useState<string | null>(null);
+  const [integrationMode, setIntegrationMode] = useState<'view' | 'edit'>('view');
+  const [viewEntityType, setViewEntityType] = useState<string | null>(null);
   const [activeTargetEntity, setActiveTargetEntity] = useState<string | null>(null);
   const [activeSourceField, setActiveSourceField] = useState<string | null>(null);
   const [showSidebar, setShowSidebar] = useState(true);
@@ -340,6 +345,27 @@ export default function App() {
   const [entityModal, setEntityModal] = useState<{ entities: any[] } | null>(null);
   const prevActiveChatIdRef = useRef<string | null>(activeChatId);
 
+  const handleRemoveEntityConfig = (entityType: string) => {
+    const label = formatEntityTypeLabel(entityType);
+    const confirmed = window.confirm(
+      `Remove configuration for ${label}? This will stop syncing this entity from Monday.`,
+    );
+    if (!confirmed) return;
+    setSelectedOsEntityTypes(prev => prev.filter(e => e !== entityType));
+    setMondayEntityConfigs(prev => {
+      const next = { ...prev };
+      delete next[entityType];
+      return next;
+    });
+    if (activeMondayEntityTypeForFields === entityType) {
+      setActiveMondayEntityTypeForFields(null);
+      setActiveTargetEntity(null);
+      setActiveSourceField(null);
+    }
+  };
+
+  const visibleMondayBoards = mondayBoards.filter(board => !isSubitemsBoardName(board.name));
+
   // Load Monday integration state from backend so UI reflects real connectivity
   useEffect(() => {
     let cancelled = false;
@@ -352,6 +378,12 @@ export default function App() {
         setMondaySubdomain(data.subdomain ?? '');
         if (data.entity_configs) {
           setMondayEntityConfigs(data.entity_configs);
+          const preselected = Object.entries(data.entity_configs)
+            .filter(([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0)
+            .map(([entityType]) => entityType);
+          if (preselected.length > 0) {
+            setSelectedOsEntityTypes(preselected);
+          }
         }
         const mondayConnected = Boolean(data.enabled && data.api_key_set);
         setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected } } : null);
@@ -1128,71 +1160,229 @@ export default function App() {
                         Field Mappings: <span className="capitalize text-blue-600">{selectedServiceForMapping}</span>
                       </h2>
                       <div className="flex items-center gap-4">
-                        <span className="text-xs text-[#737373] font-medium">Auto-sync enabled</span>
-                        <button 
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                          Mode: <span className="text-[#111827] capitalize">{integrationMode}</span>
+                        </span>
+                        <button
                           onClick={async () => {
-                            const currentService = selectedServiceForMapping as string;
-                            const next = editingService === currentService ? null : currentService;
-                            setEditingService(next);
-                            setActiveTargetEntity(null);
-                            setActiveSourceField(null);
-                            if (next === 'monday' && mondayBoards.length === 0) {
-                              setMondaySchemaLoading(true);
-                              setMondaySchemaError(null);
-                              try {
-                                const res = await fetch(`${RESEARCH_API_URL}/integrations/monday/schema`);
-                                if (!res.ok) {
-                                  throw new Error(`Schema request failed: ${res.status}`);
+                            if (!selectedServiceForMapping) return;
+                            if (integrationMode === 'view') {
+                              setIntegrationMode('edit');
+                              setEditingService(selectedServiceForMapping);
+                              setActiveTargetEntity(null);
+                              setActiveSourceField(null);
+                              if (selectedServiceForMapping === 'monday' && mondayBoards.length === 0) {
+                                setMondaySchemaLoading(true);
+                                setMondaySchemaError(null);
+                                try {
+                                  const res = await fetch(`${RESEARCH_API_URL}/integrations/monday/schema`);
+                                  if (!res.ok) {
+                                    throw new Error(`Schema request failed: ${res.status}`);
+                                  }
+                                  const data = await res.json();
+                                  setMondayBoards(data.boards || []);
+                                } catch (e) {
+                                  console.error('Failed to load Monday schema', e);
+                                  setMondaySchemaError('Failed to load Monday boards. Check Monday API key and integration config.');
+                                } finally {
+                                  setMondaySchemaLoading(false);
                                 }
-                                const data = await res.json();
-                                setMondayBoards(data.boards || []);
-                              } catch (e) {
-                                console.error('Failed to load Monday schema', e);
-                                setMondaySchemaError('Failed to load Monday boards. Check Monday API key and integration config.');
-                              } finally {
-                                setMondaySchemaLoading(false);
                               }
+                            } else {
+                              setIntegrationMode('view');
+                              setEditingService(null);
+                              setActiveTargetEntity(null);
+                              setActiveSourceField(null);
+                              setViewEntityType(null);
                             }
                           }}
                           className="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#1A1A1A] text-white hover:bg-opacity-90"
                         >
-                          {editingService === selectedServiceForMapping ? 'Close Editor' : 'Edit Mappings'}
+                          {integrationMode === 'view' ? 'Edit integration' : 'Back to overview'}
                         </button>
                       </div>
                     </div>
                     
                     <div className="p-6">
-                      {editingService === selectedServiceForMapping ? (
+                      {integrationMode === 'view' ? (
+                        <div className="space-y-6">
+                          <div className="border border-[#E5E5E5] rounded-2xl p-4 bg-[#FBFBFA]">
+                            <div className="flex items-center justify-between mb-3">
+                              <h3 className="text-sm font-bold">Entities for Monday</h3>
+                              <span className="text-[10px] text-[#737373]">
+                                Edit configuration to change enabled entities and mappings.
+                              </span>
+                            </div>
+                            {(() => {
+                              const allEntityTypes = Array.from(
+                                new Set([
+                                  ...osEntityTypes,
+                                  ...Object.keys(mondayEntityConfigs || {}),
+                                ]),
+                              );
+                              if (!allEntityTypes.length) {
+                                return (
+                                  <p className="text-xs text-[#737373]">
+                                    No Product OS entities found yet for Monday. Click &quot;Edit integration&quot; to configure.
+                                  </p>
+                                );
+                              }
+                              return (
+                                <div className="divide-y divide-[#E5E5E5] rounded-xl border border-[#E5E5E5] bg-white">
+                                  <div className="grid grid-cols-3 text-[10px] font-bold uppercase tracking-widest text-[#A3A3A3] px-4 py-2">
+                                    <span>Entity</span>
+                                    <span>Status</span>
+                                    <span className="text-right">Fields mapped</span>
+                                  </div>
+                                  {allEntityTypes.map(entityType => {
+                                    const cfg = mondayEntityConfigs[entityType];
+                                    const hasBoards =
+                                      cfg &&
+                                      Array.isArray(cfg.board_ids) &&
+                                      cfg.board_ids.length > 0;
+                                    const mappedCount = cfg ? Object.keys(cfg.field_mappings || {}).length : 0;
+                                    const statusLabel = hasBoards
+                                      ? mappedCount > 0
+                                        ? 'Enabled'
+                                        : 'Needs attention'
+                                      : 'Not configured';
+                                    return (
+                                      <button
+                                        key={entityType}
+                                        type="button"
+                                        onClick={() => setViewEntityType(entityType)}
+                                        className="w-full grid grid-cols-3 items-center px-4 py-2 text-xs hover:bg-[#F5F5F4] text-left"
+                                      >
+                                        <span className="font-medium text-[#111827]">
+                                          {formatEntityTypeLabel(entityType)}
+                                        </span>
+                                        <span
+                                          className={`inline-flex items-center justify-start text-[10px] font-bold ${
+                                            statusLabel === 'Enabled'
+                                              ? 'text-emerald-600'
+                                              : statusLabel === 'Needs attention'
+                                              ? 'text-amber-600'
+                                              : 'text-[#737373]'
+                                          }`}
+                                        >
+                                          {statusLabel}
+                                        </span>
+                                        <span className="text-right text-[#111827] font-mono">
+                                          {mappedCount}
+                                        </span>
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              );
+                            })()}
+                          </div>
+
+                          {viewEntityType && mondayEntityConfigs[viewEntityType] && (
+                            <div className="border border-[#E5E5E5] rounded-2xl p-4 bg-white">
+                              <div className="flex items-center justify-between mb-3">
+                                <h3 className="text-sm font-bold">
+                                  {formatEntityTypeLabel(viewEntityType)} – field mappings
+                                </h3>
+                                <button
+                                  type="button"
+                                  onClick={() => setViewEntityType(null)}
+                                  className="text-[10px] font-bold text-[#737373] hover:text-[#111827]"
+                                >
+                                  Close
+                                </button>
+                              </div>
+                              {(() => {
+                                const cfg = mondayEntityConfigs[viewEntityType];
+                                const fields = Object.entries(cfg.field_mappings || {});
+                                if (!fields.length) {
+                                  return (
+                                    <p className="text-xs text-[#737373]">
+                                      No fields mapped yet for this entity.
+                                    </p>
+                                  );
+                                }
+                                return (
+                                  <div className="grid grid-cols-2 gap-2 text-xs">
+                                    {fields.map(([sourceId, targetField]) => (
+                                      <div
+                                        key={sourceId}
+                                        className="flex items-center justify-between px-3 py-2 rounded-lg border border-[#E5E5E5] bg-[#FBFBFA]"
+                                      >
+                                        <span className="font-mono text-[11px] text-[#4B5563]">
+                                          {targetField}
+                                        </span>
+                                        <span className="font-mono text-[11px] text-[#9CA3AF]">
+                                          {sourceId}
+                                        </span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                );
+                              })()}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 bg-[#FBFBFA] rounded-2xl border border-[#E5E5E5]">
                           {selectedServiceForMapping === 'monday' && (
                             <div className="lg:col-span-3 mb-4 space-y-4">
                               <h4 className="text-[10px] font-black uppercase tracking-widest text-[#737373]">1. Select Product OS entities</h4>
-                              <div className="flex flex-wrap gap-2">
+                              <div className="space-y-1">
                                 {osEntityTypes.map(entityType => {
-                                  const label = entityType
-                                    .split('_')
-                                    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-                                    .join(' ');
-                                  const checked = selectedOsEntityTypes.includes(entityType);
+                                  const label = formatEntityTypeLabel(entityType);
+                                  const cfg = mondayEntityConfigs[entityType];
+                                  const hasConfig =
+                                    cfg && Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0;
+                                  const checked =
+                                    selectedOsEntityTypes.includes(entityType) || Boolean(hasConfig);
+                                  const isActive = activeMondayEntityTypeForFields === entityType;
                                   return (
-                                    <button
+                                    <label
                                       key={entityType}
-                                      type="button"
-                                      onClick={() => {
-                                        setSelectedOsEntityTypes(prev =>
-                                          checked
-                                            ? prev.filter(e => e !== entityType)
-                                            : [...prev, entityType]
-                                        );
-                                      }}
-                                      className={`px-3 py-1 rounded-full text-[10px] font-bold border ${
-                                        checked
-                                          ? 'bg-indigo-600 text-white border-indigo-600'
-                                          : 'bg-white text-[#737373] border-[#E5E5E5]'
+                                      className={`flex items-center justify-between gap-3 px-3 py-1.5 rounded-lg border text-[11px] ${
+                                        isActive ? 'border-indigo-500 bg-indigo-50' : 'border-[#E5E5E5] bg-white'
                                       }`}
+                                      onClick={() => {
+                                        if (hasConfig || checked) {
+                                          setActiveMondayEntityTypeForFields(entityType);
+                                        }
+                                      }}
                                     >
-                                      {label}
-                                    </button>
+                                      <div className="flex items-center gap-2">
+                                        <input
+                                          type="checkbox"
+                                          className="w-3 h-3 rounded border-[#D4D4D4] text-indigo-600"
+                                          checked={checked}
+                                          disabled={hasConfig}
+                                          onChange={e => {
+                                            e.stopPropagation();
+                                            if (hasConfig) return;
+                                            setSelectedOsEntityTypes(prev =>
+                                              checked ? prev.filter(e => e !== entityType) : [...prev, entityType],
+                                            );
+                                            setActiveMondayEntityTypeForFields(entityType);
+                                          }}
+                                        />
+                                        <span className="font-medium text-[#1A1A1A]">{label}</span>
+                                      </div>
+                                      <div className="flex items-center gap-3">
+                                        {hasConfig && (
+                                          <button
+                                            type="button"
+                                            onClick={e => {
+                                              e.preventDefault();
+                                              e.stopPropagation();
+                                              handleRemoveEntityConfig(entityType);
+                                            }}
+                                            className="text-[10px] font-bold text-red-500 hover:text-red-600"
+                                          >
+                                            Remove configuration
+                                          </button>
+                                        )}
+                                        <span className="text-[10px] font-mono text-[#A3A3A3]">{entityType}</span>
+                                      </div>
+                                    </label>
                                   );
                                 })}
                                 {osEntityTypes.length === 0 && (
@@ -1208,9 +1398,9 @@ export default function App() {
                               {mondaySchemaError && (
                                 <p className="text-xs text-red-600">{mondaySchemaError}</p>
                               )}
-                              {!mondaySchemaLoading && !mondaySchemaError && mondayBoards.length > 0 && (
+                              {!mondaySchemaLoading && !mondaySchemaError && visibleMondayBoards.length > 0 && (
                                 <div className="flex flex-wrap gap-2">
-                                  {mondayBoards.map(board => (
+                                  {visibleMondayBoards.map(board => (
                                     <span
                                       key={board.id}
                                       className="px-2 py-1 bg-white border border-[#E5E5E5] rounded text-[10px] font-medium"
@@ -1220,7 +1410,7 @@ export default function App() {
                                   ))}
                                 </div>
                               )}
-                              {!mondaySchemaLoading && !mondaySchemaError && mondayBoards.length === 0 && (
+                              {!mondaySchemaLoading && !mondaySchemaError && visibleMondayBoards.length === 0 && (
                                 <p className="text-xs text-[#737373]">
                                   No boards found for your Monday account, or the token does not have access.
                                 </p>
@@ -1242,7 +1432,11 @@ export default function App() {
                               </div>
                               <h4 className="text-[10px] font-black uppercase tracking-widest text-[#737373]">3. Entity ↔ Board mappings</h4>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                {selectedOsEntityTypes.map(entityType => {
+                                {(() => {
+                                  const activeEntity =
+                                    activeMondayEntityTypeForFields || selectedOsEntityTypes[0] || null;
+                                  if (!activeEntity) return null;
+                                  const entityType = activeEntity;
                                   const label = entityType
                                     .split('_')
                                     .map(part => part.charAt(0).toUpperCase() + part.slice(1))
@@ -1288,7 +1482,7 @@ export default function App() {
                                           className="w-full px-3 py-2 border border-[#E5E5E5] rounded-lg text-xs bg-white"
                                         >
                                           <option value="">Select a board…</option>
-                                          {mondayBoards.map(board => (
+                                          {visibleMondayBoards.map(board => (
                                             <option key={board.id} value={board.id}>{board.name}</option>
                                           ))}
                                         </select>
@@ -1342,7 +1536,7 @@ export default function App() {
                                       </div>
                                     </div>
                                   );
-                                })}
+                                })()}
                               </div>
                               <div className="flex justify-end">
                                 <button
@@ -1602,105 +1796,69 @@ export default function App() {
                             </div>
                           </div>
 
-                          {/* Step 2: Select Source Field */}
+                          {/* Step 2: Map to service field */}
                           <div className="space-y-3">
-                            <div className="flex items-center justify-between mb-4">
-                              <h4 className="text-[10px] font-black uppercase tracking-widest text-[#737373]">2. Select {selectedServiceForMapping} Field</h4>
-                              {activeTargetEntity && activeSourceField && (
-                                <button 
-                                  onClick={() => {
-                                    if (selectedServiceForMapping === 'monday') {
-                                      const entityType = activeMondayEntityTypeForFields;
-                                      if (!entityType) return;
-                                      setMondayEntityConfigs(prev => {
-                                        const current = prev[entityType] || {
-                                          entity_type: entityType,
-                                          board_ids: [],
-                                          direction: 'two_way' as MondayDirection,
-                                          field_mappings: {},
-                                        };
-                                        const nextFieldMappings = { ...(current.field_mappings || {}) };
-                                        const sourceToClear = Object.entries(nextFieldMappings).find(
-                                          ([, target]) => target === activeTargetEntity,
-                                        )?.[0];
-                                        if (sourceToClear) {
-                                          delete nextFieldMappings[sourceToClear];
-                                        }
-                                        return {
-                                          ...prev,
-                                          [entityType]: {
-                                            ...current,
-                                            field_mappings: nextFieldMappings,
-                                          },
-                                        };
-                                      });
-                                      setActiveSourceField(null);
-                                    } else if (config) {
-                                      const newConfig = { ...config };
-                                      const currentMaps = {
-                                        ...newConfig.mappings[selectedServiceForMapping],
-                                      };
-                                      const sourceToClear = Object.entries(currentMaps).find(
-                                        ([, target]) => target === activeTargetEntity,
-                                      )?.[0];
-                                      if (sourceToClear) {
-                                        delete currentMaps[sourceToClear];
-                                        newConfig.mappings[selectedServiceForMapping] = currentMaps;
-                                        setConfig(newConfig);
-                                        setActiveSourceField(null);
-                                      }
-                                    }
-                                  }}
-                                  className="flex items-center gap-1 text-[10px] font-bold text-red-500 hover:text-red-600 transition-colors"
-                                >
-                                  <X className="w-3 h-3" />
-                                  Remove
-                                </button>
-                              )}
-                            </div>
-                            <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 scrollbar-hide">
-                              {selectedServiceForMapping === 'monday'
-                                ? (() => {
-                                    const entityType = activeMondayEntityTypeForFields;
-                                    const current =
-                                      entityType && mondayEntityConfigs[entityType]
-                                        ? mondayEntityConfigs[entityType]
-                                        : null;
-                                    const selectedBoardId = current?.board_ids?.[0] || '';
-                                    const selectedBoard = selectedBoardId
-                                      ? mondayBoards.find(b => b.id === selectedBoardId)
-                                      : undefined;
-                                    if (!entityType || !activeTargetEntity) {
-                                      return (
-                                        <p className="text-xs text-[#B0B0B0]">
-                                          Select a Product OS field on the left to map it to a Monday column.
-                                        </p>
-                                      );
-                                    }
-                                    if (!selectedBoard) {
-                                      return (
-                                        <p className="text-xs text-[#B0B0B0]">
-                                          Select a Monday board for this entity in step 3 above.
-                                        </p>
-                                      );
-                                    }
-                                    if (!selectedBoard.columns.length) {
-                                      return (
-                                        <p className="text-xs text-[#B0B0B0]">
-                                          This board does not expose any columns for mapping.
-                                        </p>
-                                      );
-                                    }
-                                    return selectedBoard.columns.map(column => {
-                                      const fieldId = column.id;
-                                      const isSelected = activeSourceField === fieldId;
-                                      return (
-                                        <motion.button
-                                          key={fieldId}
-                                          disabled={!activeTargetEntity}
-                                          whileHover={activeTargetEntity ? { scale: 1.02 } : {}}
-                                          onClick={() => {
-                                            if (!activeTargetEntity) return;
+                            <h4 className="text-[10px] font-black uppercase tracking-widest text-[#737373] mb-4">
+                              2. Map to {selectedServiceForMapping} field
+                            </h4>
+                            {selectedServiceForMapping === 'monday'
+                              ? (() => {
+                                  const entityType = activeMondayEntityTypeForFields;
+                                  if (!entityType) {
+                                    return (
+                                      <p className="text-xs text-[#B0B0B0]">
+                                        Select a Product OS entity in step 1 above.
+                                      </p>
+                                    );
+                                  }
+                                  const current =
+                                    entityType && mondayEntityConfigs[entityType]
+                                      ? mondayEntityConfigs[entityType]
+                                      : null;
+                                  const selectedBoardId = current?.board_ids?.[0] || '';
+                                  const selectedBoard = selectedBoardId
+                                    ? mondayBoards.find(b => b.id === selectedBoardId)
+                                    : undefined;
+                                  if (!selectedBoard) {
+                                    return (
+                                      <p className="text-xs text-[#B0B0B0]">
+                                        Select a Monday board for this entity in step 3 above.
+                                      </p>
+                                    );
+                                  }
+                                  const canonicalFields = PRODUCT_OS_ENTITY_FIELDS[entityType] || [];
+                                  if (!canonicalFields.length) {
+                                    return (
+                                      <p className="text-xs text-[#B0B0B0]">
+                                        No canonical fields defined for this entity type.
+                                      </p>
+                                    );
+                                  }
+                                  if (!activeTargetEntity) {
+                                    return (
+                                      <p className="text-xs text-[#B0B0B0]">
+                                        Select a Product OS field on the left to map it to a Monday column.
+                                      </p>
+                                    );
+                                  }
+                                  const fieldIdMapped =
+                                    current?.field_mappings &&
+                                    Object.entries(current.field_mappings).find(
+                                      ([, target]) => target === activeTargetEntity,
+                                    )?.[0];
+                                  return (
+                                    <div className="space-y-2 max-w-md">
+                                      <div className="text-xs text-[#737373]">
+                                        Mapping for{' '}
+                                        <span className="font-mono font-bold text-[#111827]">
+                                          {formatEntityTypeLabel(entityType)}.{activeTargetEntity}
+                                        </span>
+                                      </div>
+                                      <div className="flex items-center gap-2">
+                                        <select
+                                          value={fieldIdMapped || ''}
+                                          onChange={e => {
+                                            const value = e.target.value;
                                             setMondayEntityConfigs(prev => {
                                               const currentCfg = prev[entityType] || {
                                                 entity_type: entityType,
@@ -1711,14 +1869,15 @@ export default function App() {
                                               const nextFieldMappings = {
                                                 ...(currentCfg.field_mappings || {}),
                                               };
-                                              // Ensure one-to-one: remove any existing mapping for this target field.
                                               const existingSource = Object.entries(nextFieldMappings).find(
                                                 ([, target]) => target === activeTargetEntity,
                                               )?.[0];
                                               if (existingSource) {
                                                 delete nextFieldMappings[existingSource];
                                               }
-                                              nextFieldMappings[fieldId] = activeTargetEntity;
+                                              if (value) {
+                                                nextFieldMappings[value] = activeTargetEntity;
+                                              }
                                               return {
                                                 ...prev,
                                                 [entityType]: {
@@ -1727,65 +1886,92 @@ export default function App() {
                                                 },
                                               };
                                             });
-                                            setActiveSourceField(fieldId);
+                                            setActiveSourceField(value || null);
                                           }}
-                                          className={`w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ${
-                                            isSelected
-                                              ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
-                                              : 'bg-white border-[#E5E5E5]'
-                                          } ${
-                                            !activeTargetEntity
-                                              ? 'opacity-50 cursor-not-allowed'
-                                              : 'hover:border-emerald-400'
-                                          }`}
+                                          className="text-xs border rounded-md px-3 py-2 bg-white"
                                         >
-                                          <span className="text-sm font-bold">{column.title || fieldId}</span>
-                                          {isSelected && (
-                                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                                          )}
-                                        </motion.button>
-                                      );
-                                    });
-                                  })()
-                                : (SERVICE_FIELDS[selectedServiceForMapping] || []).map(field => {
-                                    const isSelected = activeSourceField === field;
-                                    return (
-                                      <motion.button
-                                        key={field}
-                                        disabled={!activeTargetEntity}
-                                        whileHover={activeTargetEntity ? { scale: 1.02 } : {}}
-                                        onClick={() => {
-                                          if (config && activeTargetEntity) {
-                                            const newConfig = { ...config };
-                                            const currentMaps = {
-                                              ...(newConfig.mappings[selectedServiceForMapping] || {}),
-                                            };
-                                            const oldSource = Object.entries(currentMaps).find(
-                                              ([, target]) => target === activeTargetEntity,
-                                            )?.[0];
-                                            if (oldSource) delete currentMaps[oldSource];
-                                            currentMaps[field] = activeTargetEntity;
-                                            newConfig.mappings[selectedServiceForMapping] = currentMaps;
-                                            setConfig(newConfig);
-                                            setActiveSourceField(field);
-                                          }
-                                        }}
-                                        className={`w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ${
-                                          isSelected
-                                            ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
-                                            : 'bg-white border-[#E5E5E5]'
-                                        } ${
-                                          !activeTargetEntity
-                                            ? 'opacity-50 cursor-not-allowed'
-                                            : 'hover:border-emerald-400'
-                                        }`}
-                                      >
-                                        <span className="text-sm font-bold">{field}</span>
-                                        {isSelected && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
-                                      </motion.button>
-                                    );
-                                  })}
-                            </div>
+                                          <option value="">Not mapped</option>
+                                          {selectedBoard.columns.map(column => (
+                                            <option key={column.id} value={column.id}>
+                                              {column.title || column.id}
+                                            </option>
+                                          ))}
+                                        </select>
+                                        {fieldIdMapped && (
+                                          <button
+                                            type="button"
+                                            onClick={() => {
+                                              const confirmed = window.confirm(
+                                                'Remove this field mapping? This will stop syncing this field between Monday and Product OS.',
+                                              );
+                                              if (!confirmed) return;
+                                              setMondayEntityConfigs(prev => {
+                                                const currentCfg = prev[entityType];
+                                                if (!currentCfg) return prev;
+                                                const nextFieldMappings = { ...(currentCfg.field_mappings || {}) };
+                                                const sourceToClear = Object.entries(nextFieldMappings).find(
+                                                  ([, target]) => target === activeTargetEntity,
+                                                )?.[0];
+                                                if (sourceToClear) {
+                                                  delete nextFieldMappings[sourceToClear];
+                                                }
+                                                return {
+                                                  ...prev,
+                                                  [entityType]: {
+                                                    ...currentCfg,
+                                                    field_mappings: nextFieldMappings,
+                                                  },
+                                                };
+                                              });
+                                              setActiveSourceField(null);
+                                            }}
+                                            className="text-[10px] font-bold text-red-500 hover:text-red-600"
+                                          >
+                                            Clear
+                                          </button>
+                                        )}
+                                      </div>
+                                    </div>
+                                  );
+                                })()
+                              : (SERVICE_FIELDS[selectedServiceForMapping] || []).map(field => {
+                                  const isSelected = activeSourceField === field;
+                                  return (
+                                    <motion.button
+                                      key={field}
+                                      disabled={!activeTargetEntity}
+                                      whileHover={activeTargetEntity ? { scale: 1.02 } : {}}
+                                      onClick={() => {
+                                        if (config && activeTargetEntity) {
+                                          const newConfig = { ...config };
+                                          const currentMaps = {
+                                            ...(newConfig.mappings[selectedServiceForMapping] || {}),
+                                          };
+                                          const oldSource = Object.entries(currentMaps).find(
+                                            ([, target]) => target === activeTargetEntity,
+                                          )?.[0];
+                                          if (oldSource) delete currentMaps[oldSource];
+                                          currentMaps[field] = activeTargetEntity;
+                                          newConfig.mappings[selectedServiceForMapping] = currentMaps;
+                                          setConfig(newConfig);
+                                          setActiveSourceField(field);
+                                        }
+                                      }}
+                                      className={`w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ${
+                                        isSelected
+                                          ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
+                                          : 'bg-white border-[#E5E5E5]'
+                                      } ${
+                                        !activeTargetEntity
+                                          ? 'opacity-50 cursor-not-allowed'
+                                          : 'hover:border-emerald-400'
+                                      }`}
+                                    >
+                                      <span className="text-sm font-bold">{field}</span>
+                                      {isSelected && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
+                                    </motion.button>
+                                  );
+                                })}
                           </div>
 
                           {/* Step 3: Preview */}
@@ -1839,94 +2025,6 @@ export default function App() {
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {selectedServiceForMapping === 'monday'
-                            ? (() => {
-                                const enabledEntities = Object.entries(mondayEntityConfigs).filter(
-                                  ([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0,
-                                );
-                                if (enabledEntities.length === 0) {
-                                  return (
-                                    <div className="col-span-2 py-12 text-center bg-[#FBFBFA] rounded-2xl border border-dashed border-[#E5E5E5]">
-                                      <p className="text-sm text-[#737373]">
-                                        No Product OS entities are mapped yet for Monday.com.
-                                      </p>
-                                      <p className="text-xs text-[#737373] mt-1">
-                                        Click &ldquo;Edit Mappings&rdquo; to choose entities and boards.
-                                      </p>
-                                    </div>
-                                  );
-                                }
-                                return enabledEntities.map(([entityType, cfg]) => {
-                                  const label = formatEntityTypeLabel(entityType);
-                                  const boards = (cfg.board_ids || []).map(id => {
-                                    const board = mondayBoards.find(b => b.id === id);
-                                    return board?.name || id;
-                                  });
-                                  const directionLabel =
-                                    cfg.direction === 'monday_to_os'
-                                      ? 'Monday → Product OS'
-                                      : 'Two-way';
-                                  return (
-                                    <div key={entityType} className="group">
-                                      <div className="flex flex-col gap-2 p-4 bg-white border border-[#E5E5E5] rounded-xl">
-                                        <div className="flex items-center justify-between">
-                                          <span className="text-sm font-bold">{label}</span>
-                                          <span className="text-[10px] font-mono text-[#737373]">
-                                            {entityType}
-                                          </span>
-                                        </div>
-                                        <div className="flex items-center justify-between text-xs text-[#737373]">
-                                          <span>
-                                            Boards:{' '}
-                                            {boards.length > 0 ? boards.join(', ') : 'Not selected'}
-                                          </span>
-                                          <span className="font-semibold">{directionLabel}</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  );
-                                });
-                              })()
-                            : config &&
-                              Object.entries(config.mappings[selectedServiceForMapping as string] || {}).map(
-                                ([source, target]) => (
-                                  <div key={source} className="group">
-                                    <div className="flex items-center justify-between p-4 bg-white border border-[#E5E5E5] rounded-xl hover:border-blue-600 transition-colors">
-                                      <div className="flex items-center gap-3">
-                                        <span className="text-sm font-medium">{source}</span>
-                                        <ChevronRight className="w-4 h-4 text-[#737373]" />
-                                        <span className="text-sm font-mono text-indigo-600 font-semibold">
-                                          {target}
-                                        </span>
-                                      </div>
-                                      <div className="flex items-center gap-2 text-[10px] text-[#737373] opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <Database className="text-blue-600 w-3 h-3" />
-                                        Active
-                                      </div>
-                                    </div>
-                                  </div>
-                                ),
-                              )}
-                          {selectedServiceForMapping !== 'monday' &&
-                            (!config ||
-                              Object.keys(
-                                config.mappings[selectedServiceForMapping as string] || {},
-                              ).length === 0) && (
-                              <div className="col-span-2 py-12 text-center bg-[#FBFBFA] rounded-2xl border border-dashed border-[#E5E5E5]">
-                                <p className="text-sm text-[#737373]">
-                                  No field mappings defined for this service.
-                                </p>
-                                <button
-                                  onClick={() => setEditingService(selectedServiceForMapping)}
-                                  className="mt-4 text-sm font-bold text-blue-600 hover:underline"
-                                >
-                                  Start Mapping Fields
-                                </button>
-                              </div>
-                            )}
                         </div>
                       )}
                     </div>
