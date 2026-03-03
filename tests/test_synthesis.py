@@ -87,4 +87,9 @@ class TestSummarizer:
         assert len(result.references) == 2
         assert result.references[0].title == "Perf issue"
         assert result.references[1].title == "Dark mode"
+        # Typed citation metadata should be populated for downstream UI/eval.
+        assert result.references[0].index == 1
+        assert result.references[1].index == 2
+        assert result.references[0].typed_id is not None
+        assert result.references[1].typed_id is not None
         assert result.degraded is False

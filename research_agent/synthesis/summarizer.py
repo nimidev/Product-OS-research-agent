@@ -18,6 +18,14 @@ class Reference:
     url: str
     source: str
     type: str
+    # 1-based index in the synthesized results list, matching [n] markers in the summary.
+    index: int | None = None
+    # Short, answer-local typed ID (e.g. BUG-8, FR-3) derived from entity_type + index.
+    typed_id: str | None = None
+    # Canonical entity type (e.g. feature_request, bug, support_ticket).
+    entity_type: str | None = None
+    # Canonical entity id in the underlying store, when available.
+    entity_id: str | None = None
 
 
 @dataclass
@@ -124,10 +132,17 @@ def _build_results_context(results: list[dict[str, Any]]) -> str:
 
 
 def _extract_cited_indices(summary: str) -> set[int]:
-    """Parse [n] citation markers from the summary text."""
+    """Parse [n] or [n, m] style citation markers from the summary text."""
     import re
 
-    return {int(m) for m in re.findall(r"\[(\d+)\]", summary)}
+    indices: set[int] = set()
+    # Matches [1], [2, 3], [4, 7, 10], etc.
+    for group in re.findall(r"\[([0-9,\s]+)\]", summary):
+        for part in group.split(","):
+            part = part.strip()
+            if part.isdigit():
+                indices.add(int(part))
+    return indices
 
 
 def _looks_like_no_results(summary: str) -> bool:
@@ -330,12 +345,30 @@ class Summarizer:
             if 1 <= idx <= len(results):
                 r = results[idx - 1]
                 metadata = r.get("metadata", {})
+                entity_type = (r.get("entity_type") or r.get("type") or "entity").lower()
+
+                # Map canonical entity types to short prefixes for typed IDs.
+                prefix_map = {
+                    "feature_request": "FR",
+                    "bug": "BUG",
+                    "support_ticket": "SUP",
+                    "prd": "PRD",
+                    "roadmap_item": "RD",
+                    "meeting_note": "MTG",
+                }
+                prefix = prefix_map.get(entity_type, (entity_type or "entity").upper())
+                typed_id = f"{prefix}-{idx}"
+
                 references.append(
                     Reference(
                         title=r.get("title", "Untitled"),
                         url=r.get("url") or metadata.get("url", ""),
                         source=r.get("source", "unknown"),
                         type=r.get("type", "unknown"),
+                        index=idx,
+                        typed_id=typed_id,
+                        entity_type=entity_type,
+                        entity_id=str(r.get("id") or ""),
                     )
                 )
 
