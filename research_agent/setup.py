@@ -21,7 +21,7 @@ VENV_DIR = PROJECT_ROOT / ".venv"
 
 # Minimum versions
 MIN_PYTHON = (3, 11)
-MIN_NODE_MAJOR = 18
+MIN_NODE_MAJOR = 20
 
 # Colors
 GREEN = "\033[92m"
@@ -388,9 +388,12 @@ def step_start_services(env: dict) -> None:
         print(f"\n  Opening browser → http://localhost:3000")
         webbrowser.open("http://localhost:3000")
     else:
-        print(f"\n  {YELLOW}UI not available — Node.js {MIN_NODE_MAJOR}+ is needed.{RESET}")
-        print(f"  Install from: https://nodejs.org/")
-        print(f"  Then re-run: python -m research_agent setup")
+        print(f"\n  {YELLOW}⚠  UI not available — Node.js {MIN_NODE_MAJOR}+ is required{RESET}")
+        print(f"     (Tailwind CSS v4 needs Node 20+ native bindings)")
+        print(f"\n  To fix:")
+        print(f"    1. Install Node.js 20+ from {BOLD}https://nodejs.org/{RESET}")
+        print(f"       or: {BOLD}nvm install 20 && nvm use 20{RESET}")
+        print(f"    2. Re-run: {BOLD}python -m research_agent setup{RESET}")
         print(f"\n  API is running at http://localhost:8000/health")
 
     print(f"\n{GREEN}{BOLD}✅ Setup complete!{RESET}")
