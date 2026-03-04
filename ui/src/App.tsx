@@ -27,6 +27,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import ReactMarkdown from 'react-markdown';
 import { AppConfig, ContextItem, AgentResponse, ChatSession, MondayBoardSchema, MondayIntegrationConfigResponse, MondayEntityMappingConfig, MondayDirection } from './types';
+import OnboardingWizard from './OnboardingWizard';
 
 const ANSWER_MARKDOWN_COMPONENTS = {
   p: ({ children, ...props }: any) => <p className="mb-4 last:mb-0" {...props}>{children}</p>,
@@ -571,6 +572,8 @@ export default function App() {
   const chatEndRef = useRef<HTMLDivElement>(null);
   const [entityModal, setEntityModal] = useState<{ entities: any[] } | null>(null);
   const prevActiveChatIdRef = useRef<string | null>(activeChatId);
+  const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
+  const [initialLoadDone, setInitialLoadDone] = useState(false);
 
   const handleRemoveEntityConfig = (entityType: string) => {
     const label = formatEntityTypeLabel(entityType);
@@ -617,8 +620,16 @@ export default function App() {
         const anyIntegrationActive = mondayConnected; // extend when more integrations exist
         if (anyIntegrationActive) setContextItems([]);
         else setContextItems(MOCK_CONTEXT_ITEMS);
+        if (!cancelled) {
+          setShowOnboarding(!anyIntegrationActive);
+          setInitialLoadDone(true);
+        }
       } catch {
-        if (!cancelled) setConfig(prev => prev ?? null);
+        if (!cancelled) {
+          setConfig(prev => prev ?? null);
+          setShowOnboarding(true);
+          setInitialLoadDone(true);
+        }
       }
     })();
     return () => { cancelled = true; };
@@ -882,6 +893,48 @@ export default function App() {
       setLoading(false);
     }
   };
+
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+    // If the onboarding stored a first query, send it
+    const pendingQuery = localStorage.getItem('onboarding_first_query');
+    if (pendingQuery) {
+      localStorage.removeItem('onboarding_first_query');
+      setTimeout(() => handleSendMessage(pendingQuery), 500);
+    }
+    // Reload Monday config so integration state is fresh
+    (async () => {
+      try {
+        const res = await fetch(`${RESEARCH_API_URL}/integrations/monday`);
+        if (!res.ok) return;
+        const data: MondayIntegrationConfigResponse = await res.json();
+        setMondayConfig(data);
+        setMondaySubdomain(data.subdomain ?? '');
+        if (data.entity_configs) {
+          setMondayEntityConfigs(data.entity_configs);
+          const preselected = Object.entries(data.entity_configs)
+            .filter(([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0)
+            .map(([entityType]) => entityType);
+          if (preselected.length > 0) setSelectedOsEntityTypes(preselected);
+        }
+        const mondayConnected = Boolean(data.enabled && data.api_key_set);
+        setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected } } : null);
+        if (mondayConnected) setContextItems([]);
+      } catch { /* ignore */ }
+    })();
+  };
+
+  if (!initialLoadDone) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-[#FBFBFA]">
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+      </div>
+    );
+  }
+
+  if (showOnboarding) {
+    return <OnboardingWizard onComplete={handleOnboardingComplete} />;
+  }
 
   return (
     <div className="flex h-screen bg-[#F5F5F4] text-[#1A1A1A] font-sans">
