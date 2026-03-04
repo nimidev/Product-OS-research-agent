@@ -8,12 +8,15 @@ import sys
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: python -m research_agent <command>")
-        print("Commands: seed, serve, mcp, sync")
+        print("Commands: setup, serve, seed, sync, mcp, doctor")
         sys.exit(1)
 
     command = sys.argv[1]
 
-    if command == "seed":
+    if command == "setup":
+        from research_agent.setup import run_setup
+        run_setup()
+    elif command == "seed":
         from research_agent.seed import main as seed_main
         seed_main()
     elif command == "serve":
@@ -34,7 +37,7 @@ def main() -> None:
         asyncio.run(_run_sync())
     else:
         print(f"Unknown command: {command}")
-        print("Commands: seed, serve, mcp, sync")
+        print("Commands: setup, serve, seed, sync, mcp, doctor")
         sys.exit(1)
 
 
