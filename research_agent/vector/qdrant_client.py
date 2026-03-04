@@ -42,8 +42,22 @@ class SearchResult:
 
 
 class QdrantStore:
-    def __init__(self, host: str = "localhost", port: int = 6333) -> None:
-        self._client = AsyncQdrantClient(host=host, port=port)
+    def __init__(
+        self,
+        host: str = "localhost",
+        port: int = 6333,
+        path: str | None = None,
+    ) -> None:
+        if path is not None:
+            self._client = AsyncQdrantClient(path=path)
+            self._mode = "local"
+        else:
+            self._client = AsyncQdrantClient(host=host, port=port)
+            self._mode = "server"
+
+    @property
+    def mode(self) -> str:
+        return self._mode
 
     async def ensure_collection(self, dimension: int) -> None:
         collections = await self._client.get_collections()

@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from research_agent.config.loader import get_settings
+from research_agent.config.loader import create_vector_store, get_settings
 from research_agent.connectors.monday_connector import MONDAY_API_URL, MondayConnector
 from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
 from research_agent.logging_config import configure_logging
@@ -42,7 +42,7 @@ async def lifespan(app: FastAPI):  # type: ignore[no-untyped-def]
     await db.init()
     _db = db
 
-    vector_store = QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)
+    vector_store = create_vector_store(settings)
     embedding = OpenAIEmbeddingProvider(
         api_key=settings.openai_api_key, model=settings.embedding_model
     )
@@ -425,7 +425,7 @@ async def prepare_monday_search() -> MondayPrepareResponse:
             detail="Monday integration is not configured or enabled. Save mappings first.",
         )
 
-    vector_store = QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)
+    vector_store = create_vector_store(settings)
     embedder = OpenAIEmbeddingProvider(
         api_key=settings.openai_api_key,
         model=settings.embedding_model,

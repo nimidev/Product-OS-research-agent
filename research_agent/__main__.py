@@ -42,12 +42,11 @@ async def _run_sync() -> None:
     """Run sync with connectors from integration config + mappings.yaml fallback."""
     import logging
 
-    from research_agent.config.loader import get_settings
+    from research_agent.config.loader import create_vector_store, get_settings
     from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
     from research_agent.logging_config import configure_logging
     from research_agent.storage.db import Database
     from research_agent.sync.sync_all import SyncEngine
-    from research_agent.vector.qdrant_client import QdrantStore
 
     settings = get_settings()
     configure_logging(settings.log_level)
@@ -56,7 +55,7 @@ async def _run_sync() -> None:
     db = Database(db_path=settings.database_path)
     await db.init()
 
-    vector_store = QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)
+    vector_store = create_vector_store(settings)
     embedder = OpenAIEmbeddingProvider(
         api_key=settings.openai_api_key, model=settings.embedding_model
     )
