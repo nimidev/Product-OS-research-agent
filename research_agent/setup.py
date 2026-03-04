@@ -21,7 +21,7 @@ VENV_DIR = PROJECT_ROOT / ".venv"
 
 # Minimum versions
 MIN_PYTHON = (3, 11)
-MIN_NODE_MAJOR = 20
+MIN_NODE_MAJOR = 18
 
 # Colors
 GREEN = "\033[92m"
@@ -281,11 +281,13 @@ def step_openai_key() -> str:
 
     max_attempts = 3
     for attempt in range(1, max_attempts + 1):
-        key = getpass.getpass(f"  Paste your API key: ")
+        print("  Paste your API key (input is hidden): ", end="", flush=True)
+        key = getpass.getpass("")
         if not key.strip():
             _warn("No key entered")
             continue
 
+        print(f"  Received key: {_mask_key(key.strip())}")
         print("  Validating...", end=" ", flush=True)
         if _validate_openai_key(key.strip()):
             print()
@@ -328,6 +330,24 @@ def step_storage() -> None:
 # ── Step 5: Start services ───────────────────────────────────────────────────
 
 
+def _wait_for_url(url: str, timeout: int = 15) -> bool:
+    """Poll a URL until it returns 200 or timeout expires."""
+    import time
+    import urllib.request
+
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        try:
+            req = urllib.request.Request(url, method="GET")
+            with urllib.request.urlopen(req, timeout=2) as resp:
+                if resp.status == 200:
+                    return True
+        except Exception:
+            pass
+        time.sleep(1)
+    return False
+
+
 def step_start_services(env: dict) -> None:
     """Step 5: Start API (and UI if Node.js available), open browser."""
     _step(5, "Starting services...")
@@ -342,33 +362,40 @@ def step_start_services(env: dict) -> None:
     _ok(f"API starting at http://localhost:8000 (pid {api_proc.pid})")
 
     ui_proc = None
-    ui_url = "http://localhost:8000"
-    if env.get("node_ok") and _ui_deps_installed():
+    has_ui = env.get("node_ok") and _ui_deps_installed()
+    if has_ui:
         ui_proc = subprocess.Popen(
             ["npm", "run", "dev"],
             cwd=str(UI_DIR),
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
-        ui_url = "http://localhost:3000"
-        _ok(f"UI starting at {ui_url} (pid {ui_proc.pid})")
+        _ok(f"UI starting at http://localhost:3000 (pid {ui_proc.pid})")
 
-    import time
-    print("\n  Waiting for services to start...", end="", flush=True)
-    time.sleep(3)
-    print(" done.")
+    print("\n  Waiting for API...", end="", flush=True)
+    if _wait_for_url("http://localhost:8000/health", timeout=20):
+        print(f" {GREEN}ready{RESET}")
+    else:
+        print(f" {YELLOW}slow to start (may still be loading){RESET}")
 
-    print(f"\n  Opening browser → {ui_url}")
-    webbrowser.open(ui_url)
+    if has_ui:
+        print("  Waiting for UI...", end="", flush=True)
+        if _wait_for_url("http://localhost:3000", timeout=20):
+            print(f" {GREEN}ready{RESET}")
+        else:
+            print(f" {YELLOW}slow to start (may still be loading){RESET}")
+
+        print(f"\n  Opening browser → http://localhost:3000")
+        webbrowser.open("http://localhost:3000")
+    else:
+        print(f"\n  {YELLOW}UI not available — Node.js {MIN_NODE_MAJOR}+ is needed.{RESET}")
+        print(f"  Install from: https://nodejs.org/")
+        print(f"  Then re-run: python -m research_agent setup")
+        print(f"\n  API is running at http://localhost:8000/health")
 
     print(f"\n{GREEN}{BOLD}✅ Setup complete!{RESET}")
     print(f"\n  {BOLD}Tip:{RESET} Run '{BOLD}python -m research_agent doctor{RESET}' anytime")
     print("  to check your setup health.\n")
-
-    if not env.get("node_ok"):
-        print(f"  {YELLOW}Note:{RESET} Install Node.js {MIN_NODE_MAJOR}+ for the web interface:")
-        print(f"  → https://nodejs.org/")
-        print(f"  Then re-run: python -m research_agent setup\n")
 
     print("  Press Ctrl+C to stop the services.\n")
 
