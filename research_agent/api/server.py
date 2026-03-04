@@ -29,12 +29,14 @@ logger = logging.getLogger(__name__)
 
 _memory_service: MemoryService | None = None
 _db: Database | None = None
+_vector_store: QdrantStore | None = None
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):  # type: ignore[no-untyped-def]
     global _memory_service
     global _db
+    global _vector_store
     settings = get_settings()
     configure_logging(settings.log_level)
 
@@ -43,6 +45,7 @@ async def lifespan(app: FastAPI):  # type: ignore[no-untyped-def]
     _db = db
 
     vector_store = create_vector_store(settings)
+    _vector_store = vector_store
     embedding = OpenAIEmbeddingProvider(
         api_key=settings.openai_api_key, model=settings.embedding_model
     )
@@ -199,9 +202,36 @@ class MondayPrepareResponse(BaseModel):
     total_entities: int = 0
 
 
+VECTOR_LIMIT_LOCAL = 20_000
+VECTOR_WARN_THRESHOLD = 0.8
+
+
 @app.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/system/vectors")
+async def system_vectors() -> dict:
+    """Return vector count, storage mode, and limit status."""
+    settings = get_settings()
+    mode = settings.qdrant_mode
+    limit = VECTOR_LIMIT_LOCAL if mode == "local" else None
+
+    count = 0
+    if _vector_store:
+        try:
+            count = await _vector_store.count()
+        except Exception:
+            pass
+
+    result: dict = {"count": count, "mode": mode}
+    if limit is not None:
+        result["limit"] = limit
+        result["usage_pct"] = round(count / limit * 100, 1) if limit > 0 else 0
+        result["warning"] = count >= int(limit * VECTOR_WARN_THRESHOLD)
+        result["blocked"] = count >= limit
+    return result
 
 
 @app.get("/sources")
@@ -410,6 +440,23 @@ async def prepare_monday_search() -> MondayPrepareResponse:
         raise HTTPException(status_code=503, detail="Service not initialized")
 
     settings = get_settings()
+
+    if settings.qdrant_mode == "local" and _vector_store:
+        try:
+            current_count = await _vector_store.count()
+            if current_count >= VECTOR_LIMIT_LOCAL:
+                raise HTTPException(
+                    status_code=429,
+                    detail=(
+                        f"Vector limit reached ({current_count:,}/{VECTOR_LIMIT_LOCAL:,}). "
+                        "Upgrade to Docker or Qdrant Cloud mode to continue adding data."
+                    ),
+                )
+        except HTTPException:
+            raise
+        except Exception:
+            pass
+
     if not settings.openai_api_key:
         raise HTTPException(
             status_code=400,

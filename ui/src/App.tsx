@@ -574,6 +574,22 @@ export default function App() {
   const prevActiveChatIdRef = useRef<string | null>(activeChatId);
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
   const [initialLoadDone, setInitialLoadDone] = useState(false);
+  const [vectorInfo, setVectorInfo] = useState<{ count: number; limit?: number; warning?: boolean; blocked?: boolean; mode: string } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const poll = async () => {
+      try {
+        const res = await fetch(`${RESEARCH_API_URL}/system/vectors`);
+        if (res.ok && !cancelled) {
+          setVectorInfo(await res.json());
+        }
+      } catch { /* ignore */ }
+    };
+    poll();
+    const interval = setInterval(poll, 30_000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, []);
 
   const handleRemoveEntityConfig = (entityType: string) => {
     const label = formatEntityTypeLabel(entityType);
@@ -1012,6 +1028,14 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden">
+        {vectorInfo && vectorInfo.limit && vectorInfo.warning && (
+          <div className={`px-4 py-2 text-xs font-medium flex items-center justify-center gap-2 ${vectorInfo.blocked ? 'bg-red-50 text-red-700 border-b border-red-200' : 'bg-amber-50 text-amber-700 border-b border-amber-200'}`}>
+            <AlertCircle className="w-3.5 h-3.5" />
+            {vectorInfo.blocked
+              ? `Vector limit reached (${vectorInfo.count.toLocaleString()} / ${vectorInfo.limit.toLocaleString()}). Upgrade to Docker or Cloud mode to continue adding data.`
+              : `Using ${vectorInfo.count.toLocaleString()} / ${vectorInfo.limit.toLocaleString()} vectors (${vectorInfo.usage_pct}%). Consider upgrading to Docker or Cloud mode.`}
+          </div>
+        )}
         {mode === 'pm' ? (
           <div className="flex-1 flex overflow-hidden relative">
             {/* Chat Area */}
