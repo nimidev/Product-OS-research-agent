@@ -35,6 +35,9 @@ def main() -> None:
     elif command == "sync":
         import asyncio
         asyncio.run(_run_sync())
+    elif command == "doctor":
+        from research_agent.doctor import run_doctor
+        run_doctor()
     else:
         print(f"Unknown command: {command}")
         print("Commands: setup, serve, seed, sync, mcp, doctor")
