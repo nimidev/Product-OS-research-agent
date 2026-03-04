@@ -8,7 +8,7 @@ import sys
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: python -m research_agent <command>")
-        print("Commands: setup, serve, seed, sync, mcp, doctor")
+        print("Commands: setup, serve, seed, sync, mcp, doctor, reindex")
         sys.exit(1)
 
     command = sys.argv[1]
@@ -38,9 +38,12 @@ def main() -> None:
     elif command == "doctor":
         from research_agent.doctor import run_doctor
         run_doctor()
+    elif command == "reindex":
+        from research_agent.reindex import run_reindex
+        run_reindex()
     else:
         print(f"Unknown command: {command}")
-        print("Commands: setup, serve, seed, sync, mcp, doctor")
+        print("Commands: setup, serve, seed, sync, mcp, doctor, reindex")
         sys.exit(1)
 
 
