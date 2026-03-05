@@ -12,7 +12,7 @@
 | [US-008](./US-008.md) | Research Agent – Pro Product Researcher Chat Experience | done | P1 | deployed |
 | [US-009](./US-009.md) | Integrations Page – View vs Edit UX Redesign | done | P1 | deployed |
 | [US-010](./US-010.md) | Research Agent – Clickable Evidence References in Chat | done | P1 | deployed |
-| [US-011](./US-011.md) | Seamless Onboarding & Setup Experience for New Users | approved | P0 | planning |
+| [US-011](./US-011.md) | Seamless Onboarding & Setup Experience for New Users | done | P0 | deployed |
 | [US-012](./US-012.md) | Backlog Integration – Jira & Confluence (Atlassian) | create | P1 | planning |
 | [US-013](./US-013.md) | Backlog Integration – Mixpanel (Product Analytics) | create | P1 | planning |
 | [US-014](./US-014.md) | Backlog Integration – Gong (Revenue Intelligence / Calls) | create | P1 | planning |
@@ -44,10 +44,12 @@
 - **Branch**: `feature/US-010-clickable-evidence-refs` (merged to main)
 
 ### US-011: Seamless Onboarding & Setup Experience for New Users
-- **Status**: `approved`
+- **Status**: `done`
 - **Description**: Define and build a frictionless onboarding/setup/configuration flow for new users cloning the repo, covering dependency handling (Docker/Qdrant), environment configuration, health checks, and guided setup wizard to achieve high completion rates.
 - **See**: [US-011.md](./US-011.md)
-- **Branch**: (not yet created)
+- **Branch**: `feature/US-011-seamless-onboarding` (merged to main)
+- **PR**: #6 (merged)
+- **Testing**: ✅ All tests passed
 
 ### US-012: Backlog Integration – Jira & Confluence (Atlassian)
 - **Status**: `create`
