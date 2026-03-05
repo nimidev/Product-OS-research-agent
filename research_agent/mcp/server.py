@@ -11,13 +11,12 @@ from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.types import TextContent, Tool
 
-from research_agent.config.loader import get_settings
+from research_agent.config.loader import create_vector_store, get_settings
 from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
 from research_agent.memory.memory_service import MemoryService
 from research_agent.storage.db import Database
 from research_agent.storage.models import EntityType, SourceSystem
 from research_agent.synthesis.summarizer import Summarizer
-from research_agent.vector.qdrant_client import QdrantStore
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +34,7 @@ async def _get_memory_service() -> MemoryService:
     db = Database(db_path=settings.database_path)
     await db.init()
 
-    vector_store = QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)
+    vector_store = create_vector_store(settings)
     embedding = OpenAIEmbeddingProvider(
         api_key=settings.openai_api_key, model=settings.embedding_model
     )

@@ -9,6 +9,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 
 from research_agent.vector.qdrant_client import COLLECTION_NAME, QdrantStore, SearchResult
+from research_agent.config.loader import create_vector_store, Settings
 
 
 @dataclass
@@ -145,3 +146,33 @@ class TestQdrantStore:
         ]
         await store.upsert_batch(points)
         client.upsert.assert_called_once()
+
+
+class TestQdrantStoreInit:
+    """Test QdrantStore constructor modes and create_vector_store factory."""
+
+    @patch("research_agent.vector.qdrant_client.AsyncQdrantClient")
+    def test_server_mode(self, mock_client_cls):
+        store = QdrantStore(host="myhost", port=1234)
+        mock_client_cls.assert_called_once_with(host="myhost", port=1234)
+        assert store.mode == "server"
+
+    @patch("research_agent.vector.qdrant_client.AsyncQdrantClient")
+    def test_local_mode(self, mock_client_cls):
+        store = QdrantStore(path="./test_data")
+        mock_client_cls.assert_called_once_with(path="./test_data")
+        assert store.mode == "local"
+
+    @patch("research_agent.vector.qdrant_client.AsyncQdrantClient")
+    def test_factory_local(self, mock_client_cls):
+        settings = Settings(qdrant_mode="local", qdrant_local_path="./my_data")
+        store = create_vector_store(settings)
+        mock_client_cls.assert_called_once_with(path="./my_data")
+        assert store.mode == "local"
+
+    @patch("research_agent.vector.qdrant_client.AsyncQdrantClient")
+    def test_factory_server(self, mock_client_cls):
+        settings = Settings(qdrant_mode="server", qdrant_host="qdrant.local", qdrant_port=9999)
+        store = create_vector_store(settings)
+        mock_client_cls.assert_called_once_with(host="qdrant.local", port=9999)
+        assert store.mode == "server"

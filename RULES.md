@@ -1,5 +1,10 @@
 # Research Agent — Technical Standards
 
+> **Product OS:** The canonical technical context for this project lives in product-docs:  
+> `product-docs/research-agent/context/TECH_CONTEXT.md`. Keep this file in sync with that for non–Product-OS use (e.g. local dev, IDE).
+
+---
+
 ## Language & Runtime
 
 - Python 3.11+

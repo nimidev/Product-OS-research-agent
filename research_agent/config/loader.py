@@ -26,6 +26,8 @@ class QdrantConfig(BaseModel):
     host: str = "localhost"
     port: int = 6333
     collection: str = "research_items"
+    mode: str = "local"  # "local" (file-based, no Docker) or "server"
+    local_path: str = "./qdrant_data"
 
 
 class LLMConfig(BaseModel):
@@ -91,6 +93,8 @@ class Settings(BaseSettings):
     openai_api_key: str = Field(default="")
     qdrant_host: str = Field(default="localhost")
     qdrant_port: int = Field(default=6333)
+    qdrant_mode: str = Field(default="local")
+    qdrant_local_path: str = Field(default="./qdrant_data")
     llm_model: str = Field(default="gpt-4o")
     embedding_model: str = Field(default="text-embedding-3-small")
     database_path: str = Field(default="research_agent.db")
@@ -101,3 +105,14 @@ class Settings(BaseSettings):
 
 def get_settings() -> Settings:
     return Settings()
+
+
+def create_vector_store(settings: Settings | None = None) -> "QdrantStore":
+    """Create a QdrantStore using the correct backend based on settings."""
+    from research_agent.vector.qdrant_client import QdrantStore
+
+    if settings is None:
+        settings = get_settings()
+    if settings.qdrant_mode == "local":
+        return QdrantStore(path=settings.qdrant_local_path)
+    return QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)

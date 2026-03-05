@@ -14,11 +14,10 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from research_agent.config.loader import get_settings
+from research_agent.config.loader import create_vector_store, get_settings
 from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
 from research_agent.memory.memory_service import MemoryService
 from research_agent.storage.db import Database
-from research_agent.vector.qdrant_client import QdrantStore
 
 QUERIES_PATH = Path(__file__).parent / "test_queries.json"
 
@@ -55,7 +54,7 @@ async def run_evaluation() -> dict[str, Any]:
     db = Database(db_path=settings.database_path)
     await db.init()
 
-    vector_store = QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)
+    vector_store = create_vector_store(settings)
     embedder = OpenAIEmbeddingProvider(
         api_key=settings.openai_api_key, model=settings.embedding_model
     )

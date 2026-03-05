@@ -47,6 +47,31 @@ CANONICAL_FIELDS: dict[EntityType, list[str]] = {
     ],
 }
 
+# Short descriptions for semantic LLM matching (e.g. Monday "Account" -> customer, "resolution" -> verdict).
+# Keys are canonical field names; descriptions help the LLM match board columns by meaning.
+CANONICAL_FIELD_DESCRIPTIONS: dict[str, str] = {
+    "title": "Display name or title of the item (e.g. Name, Subject, Summary)",
+    "description": "Main body text, details, or info (e.g. Description, Details, Info, Notes, Body)",
+    "customer": "Account, customer, or company associated with the item (e.g. Account, Customer, Company)",
+    "priority": "Priority level (e.g. Priority, Importance)",
+    "status": "Current state or stage (e.g. Status, State, Stage)",
+    "votes": "Vote count or popularity (e.g. Votes, Upvotes)",
+    "resolution": "Outcome, verdict, or how the item was resolved (e.g. Resolution, Verdict, Outcome, Result)",
+    "severity": "Severity level (e.g. Severity, Criticality)",
+    "affected_version": "Product or app version affected (e.g. Affected Version, Version)",
+    "target_start": "Planned or actual start date",
+    "target_end": "Planned or actual end date",
+    "overview": "High-level overview or summary",
+    "target_users": "Who the item is for (e.g. Target Users, Audience)",
+    "requirements": "Requirements or acceptance criteria",
+    "success_metrics": "How success is measured",
+    "transcript": "Full transcript or notes text",
+    "summary": "Short summary or abstract",
+    "attendees": "People who attended or are involved",
+    "date": "Date of the item",
+    "tags": "Tags or labels",
+}
+
 
 def compute_content_hash(fields: dict[str, str]) -> str:
     """Hash all field values for change detection."""

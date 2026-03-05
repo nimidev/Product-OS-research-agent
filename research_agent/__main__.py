@@ -8,12 +8,15 @@ import sys
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: python -m research_agent <command>")
-        print("Commands: seed, serve, mcp, sync")
+        print("Commands: setup, serve, seed, sync, mcp, doctor, reindex")
         sys.exit(1)
 
     command = sys.argv[1]
 
-    if command == "seed":
+    if command == "setup":
+        from research_agent.setup import run_setup
+        run_setup()
+    elif command == "seed":
         from research_agent.seed import main as seed_main
         seed_main()
     elif command == "serve":
@@ -32,9 +35,15 @@ def main() -> None:
     elif command == "sync":
         import asyncio
         asyncio.run(_run_sync())
+    elif command == "doctor":
+        from research_agent.doctor import run_doctor
+        run_doctor()
+    elif command == "reindex":
+        from research_agent.reindex import run_reindex
+        run_reindex()
     else:
         print(f"Unknown command: {command}")
-        print("Commands: seed, serve, mcp, sync")
+        print("Commands: setup, serve, seed, sync, mcp, doctor, reindex")
         sys.exit(1)
 
 
@@ -42,12 +51,11 @@ async def _run_sync() -> None:
     """Run sync with connectors from integration config + mappings.yaml fallback."""
     import logging
 
-    from research_agent.config.loader import get_settings
+    from research_agent.config.loader import create_vector_store, get_settings
     from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
     from research_agent.logging_config import configure_logging
     from research_agent.storage.db import Database
     from research_agent.sync.sync_all import SyncEngine
-    from research_agent.vector.qdrant_client import QdrantStore
 
     settings = get_settings()
     configure_logging(settings.log_level)
@@ -56,7 +64,7 @@ async def _run_sync() -> None:
     db = Database(db_path=settings.database_path)
     await db.init()
 
-    vector_store = QdrantStore(host=settings.qdrant_host, port=settings.qdrant_port)
+    vector_store = create_vector_store(settings)
     embedder = OpenAIEmbeddingProvider(
         api_key=settings.openai_api_key, model=settings.embedding_model
     )

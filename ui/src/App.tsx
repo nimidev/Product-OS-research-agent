@@ -27,6 +27,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import ReactMarkdown from 'react-markdown';
 import { AppConfig, ContextItem, AgentResponse, ChatSession, MondayBoardSchema, MondayIntegrationConfigResponse, MondayEntityMappingConfig, MondayDirection } from './types';
+import OnboardingWizard from './OnboardingWizard';
 
 const ANSWER_MARKDOWN_COMPONENTS = {
   p: ({ children, ...props }: any) => <p className="mb-4 last:mb-0" {...props}>{children}</p>,
@@ -571,6 +572,24 @@ export default function App() {
   const chatEndRef = useRef<HTMLDivElement>(null);
   const [entityModal, setEntityModal] = useState<{ entities: any[] } | null>(null);
   const prevActiveChatIdRef = useRef<string | null>(activeChatId);
+  const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
+  const [initialLoadDone, setInitialLoadDone] = useState(false);
+  const [vectorInfo, setVectorInfo] = useState<{ count: number; limit?: number; warning?: boolean; blocked?: boolean; mode: string } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const poll = async () => {
+      try {
+        const res = await fetch(`${RESEARCH_API_URL}/system/vectors`);
+        if (res.ok && !cancelled) {
+          setVectorInfo(await res.json());
+        }
+      } catch { /* ignore */ }
+    };
+    poll();
+    const interval = setInterval(poll, 30_000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, []);
 
   const handleRemoveEntityConfig = (entityType: string) => {
     const label = formatEntityTypeLabel(entityType);
@@ -593,9 +612,18 @@ export default function App() {
 
   const visibleMondayBoards = mondayBoards.filter(board => !isSubitemsBoardName(board.name));
 
-  // Load Monday integration state from backend so UI reflects real connectivity
+  // Ref: user requested onboarding via ?onboarding=1 this session (survives effect re-runs after we strip the param)
+  const forceOnboardingViaUrlRef = React.useRef(false);
+
+  // Load Monday integration state from backend so UI reflects real connectivity.
+  // ?onboarding=1 in URL forces onboarding; we remember it in a ref so it still wins after replaceState / effect re-run.
   useEffect(() => {
     let cancelled = false;
+    const forceOnboarding = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('onboarding') === '1';
+    if (forceOnboarding) {
+      forceOnboardingViaUrlRef.current = true;
+      window.history.replaceState({}, '', window.location.pathname);
+    }
     (async () => {
       try {
         const res = await fetch(`${RESEARCH_API_URL}/integrations/monday`);
@@ -617,8 +645,16 @@ export default function App() {
         const anyIntegrationActive = mondayConnected; // extend when more integrations exist
         if (anyIntegrationActive) setContextItems([]);
         else setContextItems(MOCK_CONTEXT_ITEMS);
+        if (!cancelled) {
+          setShowOnboarding(forceOnboardingViaUrlRef.current || !anyIntegrationActive);
+          setInitialLoadDone(true);
+        }
       } catch {
-        if (!cancelled) setConfig(prev => prev ?? null);
+        if (!cancelled) {
+          setConfig(prev => prev ?? null);
+          setShowOnboarding(forceOnboardingViaUrlRef.current || true);
+          setInitialLoadDone(true);
+        }
       }
     })();
     return () => { cancelled = true; };
@@ -883,6 +919,48 @@ export default function App() {
     }
   };
 
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+    // If the onboarding stored a first query, send it
+    const pendingQuery = localStorage.getItem('onboarding_first_query');
+    if (pendingQuery) {
+      localStorage.removeItem('onboarding_first_query');
+      setTimeout(() => handleSendMessage(pendingQuery), 500);
+    }
+    // Reload Monday config so integration state is fresh
+    (async () => {
+      try {
+        const res = await fetch(`${RESEARCH_API_URL}/integrations/monday`);
+        if (!res.ok) return;
+        const data: MondayIntegrationConfigResponse = await res.json();
+        setMondayConfig(data);
+        setMondaySubdomain(data.subdomain ?? '');
+        if (data.entity_configs) {
+          setMondayEntityConfigs(data.entity_configs);
+          const preselected = Object.entries(data.entity_configs)
+            .filter(([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0)
+            .map(([entityType]) => entityType);
+          if (preselected.length > 0) setSelectedOsEntityTypes(preselected);
+        }
+        const mondayConnected = Boolean(data.enabled && data.api_key_set);
+        setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected } } : null);
+        if (mondayConnected) setContextItems([]);
+      } catch { /* ignore */ }
+    })();
+  };
+
+  if (!initialLoadDone) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-[#FBFBFA]">
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+      </div>
+    );
+  }
+
+  if (showOnboarding) {
+    return <OnboardingWizard onComplete={handleOnboardingComplete} />;
+  }
+
   return (
     <div className="flex h-screen bg-[#F5F5F4] text-[#1A1A1A] font-sans">
       {/* Sidebar */}
@@ -959,6 +1037,14 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden">
+        {vectorInfo && vectorInfo.limit && vectorInfo.warning && (
+          <div className={`px-4 py-2 text-xs font-medium flex items-center justify-center gap-2 ${vectorInfo.blocked ? 'bg-red-50 text-red-700 border-b border-red-200' : 'bg-amber-50 text-amber-700 border-b border-amber-200'}`}>
+            <AlertCircle className="w-3.5 h-3.5" />
+            {vectorInfo.blocked
+              ? `Vector limit reached (${vectorInfo.count.toLocaleString()} / ${vectorInfo.limit.toLocaleString()}). Upgrade to Docker or Cloud mode to continue adding data.`
+              : `Using ${vectorInfo.count.toLocaleString()} / ${vectorInfo.limit.toLocaleString()} vectors (${vectorInfo.usage_pct}%). Consider upgrading to Docker or Cloud mode.`}
+          </div>
+        )}
         {mode === 'pm' ? (
           <div className="flex-1 flex overflow-hidden relative">
             {/* Chat Area */}

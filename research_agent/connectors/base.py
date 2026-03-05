@@ -23,6 +23,11 @@ class BaseConnector(ABC):
         """Unique identifier for this data source (e.g. 'monday', 'notion')."""
 
     @property
+    def sync_state_key(self) -> str:
+        """Key for sync_state (per-connector). Defaults to source_name; override for multiple connectors per source (e.g. monday:board_id)."""
+        return self.source_name
+
+    @property
     @abstractmethod
     def entity_type(self) -> str:
         """Canonical entity type this connector produces (e.g. 'feature_request')."""

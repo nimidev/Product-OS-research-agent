@@ -47,6 +47,10 @@ class MondayConnector(BaseConnector):
         return "monday"
 
     @property
+    def sync_state_key(self) -> str:
+        return f"monday:{self._board_id}"
+
+    @property
     def entity_type(self) -> str:
         return self._entity_type
 
