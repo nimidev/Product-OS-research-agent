@@ -43,13 +43,35 @@ const DEFAULT_FIELD_MAPPINGS: Record<string, Record<string, string>> = {
   meeting_note: { name: 'title', text0: 'transcript' },
 };
 
+// Canonical Product OS fields per entity type (for field mapping step)
+const PRODUCT_OS_ENTITY_FIELDS: Record<string, string[]> = {
+  feature_request: ['title', 'description', 'customer', 'priority', 'status', 'votes'],
+  roadmap_item: ['title', 'description', 'target_start', 'target_end', 'status', 'priority'],
+  support_ticket: ['title', 'description', 'customer', 'priority', 'status', 'resolution'],
+  bug: ['title', 'description', 'severity', 'status', 'affected_version', 'priority'],
+  prd: ['title', 'overview', 'target_users', 'requirements', 'success_metrics', 'status'],
+  meeting_note: ['title', 'transcript', 'summary', 'attendees', 'date', 'tags'],
+};
+
+const formatEntityTypeLabel = (entityType: string) =>
+  entityType.split('_').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+
 interface OnboardingWizardProps {
   onComplete: () => void;
 }
 
+// Step indices: 1=entity tool, 2=API, 3=boards, 4..(4+N-1)=field mapping per entity, 4+N=sync, 5+N=first query
+function getStepIndices(mondayCount: number) {
+  const firstFieldStep = 4;
+  const lastFieldStep = 4 + Math.max(0, mondayCount - 1);
+  const syncStep = 4 + mondayCount;
+  const completeStep = 5 + mondayCount;
+  const total = mondayCount > 0 ? 5 + mondayCount : 2;
+  return { firstFieldStep, lastFieldStep, syncStep, completeStep, total };
+}
+
 export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
   const [step, setStep] = useState(1);
-  const totalSteps = 5;
 
   // Step 1: entity → tool mapping
   const [entityToolMap, setEntityToolMap] = useState<EntityToolMapping>(() =>
@@ -72,8 +94,9 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
   const [syncStats, setSyncStats] = useState<{ fetched: number; embedded: number } | null>(null);
   const [syncError, setSyncError] = useState('');
 
-  // Step 5: First query
+  // Step 5: Sync, Step 6: First query
   const [firstQuery, setFirstQuery] = useState('');
+  const [loadingSuggestionsForEntityIds, setLoadingSuggestionsForEntityIds] = useState<Set<string>>(() => new Set());
 
   const mondayEntities = Object.entries(entityToolMap)
     .filter(([, tool]) => tool === 'monday')
@@ -81,6 +104,8 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
 
   const hasAnyToolSelected = Object.values(entityToolMap).some(v => v && v !== 'none' && v !== '');
   const needsMonday = mondayEntities.length > 0;
+  const stepIndices = getStepIndices(mondayEntities.length);
+  const totalSteps = needsMonday ? stepIndices.total : 2;
 
   const isSubitemsBoard = (name: string) => /^subitems of /i.test(name.trim());
   const visibleBoards = boards.filter(b => !isSubitemsBoard(b.name));
@@ -106,6 +131,58 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
     }
   }, [step]);
 
+  // Per-entity ref: which entity IDs have had suggestions applied (prevents re-fetch)
+  const suggestionsAppliedForEntityRef = React.useRef<Set<string>>(new Set());
+
+  // Preload suggestions for all entities with a board when we're in field-mapping steps (avoids lag on "Continue")
+  useEffect(() => {
+    const { firstFieldStep, lastFieldStep } = getStepIndices(mondayEntities.length);
+    if (!needsMonday || step < firstFieldStep || step > lastFieldStep || boards.length === 0) return;
+
+    const toFetch: { entityId: string; board: MondayBoardSchema }[] = [];
+    for (const entityId of mondayEntities) {
+      if (suggestionsAppliedForEntityRef.current.has(entityId)) continue;
+      const cfg = entityConfigs[entityId];
+      const boardId = cfg?.board_ids?.[0];
+      const board = boardId ? visibleBoards.find((b) => b.id === boardId) : null;
+      if (board?.columns?.length) toFetch.push({ entityId, board });
+    }
+    if (toFetch.length === 0) return;
+
+    for (const { entityId, board } of toFetch) {
+      suggestionsAppliedForEntityRef.current.add(entityId);
+      setLoadingSuggestionsForEntityIds((prev) => new Set(prev).add(entityId));
+      (async () => {
+        try {
+          const res = await fetch(`${RESEARCH_API_URL}/integrations/monday/suggest-field-mapping`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              entity_type: entityId,
+              source_columns: board.columns.map((c) => ({ id: c.id, title: (c.title ?? c.id) || c.id })),
+            }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            const field_mappings = data.field_mappings || {};
+            if (Object.keys(field_mappings).length > 0) {
+              setEntityConfigs((prev) => {
+                const cur = prev[entityId] || { entity_type: entityId, board_ids: [], direction: 'monday_to_os' as MondayDirection, field_mappings: {} };
+                return { ...prev, [entityId]: { ...cur, field_mappings: { ...field_mappings } } };
+              });
+            }
+          }
+        } finally {
+          setLoadingSuggestionsForEntityIds((prev) => {
+            const next = new Set(prev);
+            next.delete(entityId);
+            return next;
+          });
+        }
+      })();
+    }
+  }, [step, needsMonday, boards.length, mondayEntities, entityConfigs, visibleBoards]);
+
   async function testApiKey() {
     setKeyTestStatus('testing');
     setKeyError('');
@@ -130,6 +207,21 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
   async function loadBoards() {
     setBoardsLoading(true);
     try {
+      // Save key/subdomain first so GET /schema can read from config (avoids custom headers/CORS)
+      if (mondayApiKey?.trim()) {
+        await fetch(`${RESEARCH_API_URL}/integrations/monday`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            enabled: true,
+            api_key: mondayApiKey.trim(),
+            subdomain: mondaySubdomain?.trim() || undefined,
+            board_ids: [],
+            entity_mappings: {},
+            entity_configs: entityConfigs,
+          }),
+        });
+      }
       const res = await fetch(`${RESEARCH_API_URL}/integrations/monday/schema`);
       if (res.ok) {
         const data = await res.json();
@@ -279,8 +371,7 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
                 <button
                   onClick={() => {
                     if (!needsMonday) {
-                      // No supported tool selected, skip to completion
-                      setStep(5);
+                      setStep(2); // totalSteps=2; step 2 is the Complete screen
                     } else {
                       setStep(2);
                     }
@@ -294,8 +385,8 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
             </motion.div>
           )}
 
-          {/* ─── Step 2: Connect Tool ─── */}
-          {step === 2 && (
+          {/* ─── Step 2: Connect Tool (only when Monday selected) ─── */}
+          {needsMonday && step === 2 && (
             <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="text-center mb-8">
                 <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-4">
@@ -430,19 +521,117 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
                   <ArrowLeft className="w-4 h-4" /> Back
                 </button>
                 <button
-                  onClick={() => { setStep(4); saveConfigAndSync(); }}
+                  onClick={() => setStep(4)}
                   disabled={!canProceedStep3}
                   className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-indigo-700 transition-colors"
                 >
-                  Sync & Index <ChevronRight className="w-4 h-4" />
+                  Continue <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             </motion.div>
           )}
 
-          {/* ─── Step 4: Sync & Index ─── */}
-          {step === 4 && (
-            <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+          {/* ─── Steps 4..(4+N-1): Field mapping (one step per entity) ─── */}
+          {needsMonday && step >= stepIndices.firstFieldStep && step <= stepIndices.lastFieldStep && (() => {
+            const entityIndex = step - stepIndices.firstFieldStep;
+            const entityId = mondayEntities[entityIndex];
+            const entity = ENTITY_TYPES.find(e => e.id === entityId);
+            const cfg = entityConfigs[entityId];
+            const boardId = cfg?.board_ids?.[0];
+            const board = boardId ? visibleBoards.find(b => b.id === boardId) : null;
+            const canonicalFields = PRODUCT_OS_ENTITY_FIELDS[entityId] || [];
+            const fieldMappings = cfg?.field_mappings || {};
+            const isLastFieldStep = step === stepIndices.lastFieldStep;
+            return (
+            <motion.div key={`step4-${entityId}`} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+              <div className="text-center mb-6">
+                <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-6 h-6 text-indigo-600" />
+                </div>
+                <h1 className="text-2xl font-bold tracking-tight mb-2">Map fields: {entity?.label}</h1>
+                <p className="text-[#737373]">Map Monday.com columns to Product OS fields for better search. Suggestions are applied automatically.</p>
+              </div>
+
+              <div className="space-y-6">
+                <div className="bg-white border border-[#E5E5E5] rounded-xl p-4 relative min-h-[200px]">
+                  {loadingSuggestionsForEntityIds.has(entityId) && (
+                    <div className="absolute inset-0 rounded-xl bg-white/95 flex flex-col items-center justify-center gap-3 z-10">
+                      <Loader2 className="w-8 h-8 text-indigo-600 animate-spin" />
+                      <p className="text-sm font-medium text-[#1A1A1A]">Matching your board columns</p>
+                      <p className="text-xs text-[#737373]">This usually takes a moment</p>
+                    </div>
+                  )}
+                  <div className="mb-3">
+                    <div className="font-medium text-sm">{entity?.label}</div>
+                    {board && <div className="text-xs text-[#737373]">Board: {board.name}</div>}
+                  </div>
+                  {board?.columns?.length ? (
+                    <div className="space-y-2">
+                      {canonicalFields.map(canonicalName => {
+                        const mappedColumnId = Object.entries(fieldMappings).find(([, t]) => t === canonicalName)?.[0];
+                        const mappedColumn = mappedColumnId && board.columns.find(c => c.id === mappedColumnId);
+                        return (
+                          <div key={canonicalName} className="flex items-center gap-2 text-sm">
+                            <span className="w-32 font-mono text-xs text-[#737373] shrink-0">{formatEntityTypeLabel(entityId)}.{canonicalName}</span>
+                            <span className="text-[#737373]">→</span>
+                            <select
+                              value={mappedColumnId || ''}
+                              onChange={e => {
+                                const colId = e.target.value;
+                                setEntityConfigs(prev => {
+                                  const cur = prev[entityId] || { entity_type: entityId, board_ids: [], direction: 'monday_to_os' as MondayDirection, field_mappings: {} };
+                                  const next = { ...(cur.field_mappings || {}) };
+                                  Object.keys(next).forEach(k => { if (next[k] === canonicalName) delete next[k]; });
+                                  if (colId) next[colId] = canonicalName;
+                                  return { ...prev, [entityId]: { ...cur, field_mappings: next } };
+                                });
+                              }}
+                              className="flex-1 text-xs border border-[#E5E5E5] rounded-md px-2 py-1.5 bg-white"
+                            >
+                              <option value="">Not mapped</option>
+                              {board.columns.map(col => (
+                                <option key={col.id} value={col.id}>{col.title || col.id}</option>
+                              ))}
+                            </select>
+                            {mappedColumn && <span className="text-xs text-[#737373] truncate max-w-[120px]">{mappedColumn.title || mappedColumn.id}</span>}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-[#737373]">Select a board in the previous step to map fields.</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-8 flex justify-between">
+                <button
+                  onClick={() => setStep(step === stepIndices.firstFieldStep ? 3 : step - 1)}
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#737373] hover:text-[#1A1A1A] transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" /> Back
+                </button>
+                <button
+                  onClick={() => {
+                    if (isLastFieldStep) {
+                      setStep(stepIndices.syncStep);
+                      saveConfigAndSync();
+                    } else {
+                      setStep(step + 1);
+                    }
+                  }}
+                  className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors"
+                >
+                  {isLastFieldStep ? <>Sync & Index <ChevronRight className="w-4 h-4" /></> : <>Continue <ChevronRight className="w-4 h-4" /></>}
+                </button>
+              </div>
+            </motion.div>
+            );
+          })()}
+
+          {/* ─── Sync & Index ─── */}
+          {needsMonday && step === stepIndices.syncStep && (
+            <motion.div key="step5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="text-center mb-8">
                 <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   {syncStatus === 'done' ? (
@@ -481,7 +670,7 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
               <div className="mt-8 flex justify-end">
                 {syncStatus === 'done' && (
                   <button
-                    onClick={() => setStep(5)}
+                    onClick={() => setStep(stepIndices.completeStep)}
                     className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors"
                   >
                     Continue <ChevronRight className="w-4 h-4" />
@@ -490,7 +679,7 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
                 {syncStatus === 'error' && (
                   <div className="flex gap-3">
                     <button
-                      onClick={() => setStep(3)}
+                      onClick={() => setStep(stepIndices.lastFieldStep)}
                       className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#737373] hover:text-[#1A1A1A] transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" /> Back
@@ -507,9 +696,9 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
             </motion.div>
           )}
 
-          {/* ─── Step 5: Complete ─── */}
-          {step === 5 && (
-            <motion.div key="step5" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
+          {/* ─── Complete (step 2 when !needsMonday, else step 5+N) ─── */}
+          {((!needsMonday && step === 2) || (needsMonday && step === stepIndices.completeStep)) && (
+            <motion.div key="step6" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
               <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="w-8 h-8 text-green-600" />

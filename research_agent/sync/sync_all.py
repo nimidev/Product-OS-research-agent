@@ -89,6 +89,17 @@ class SyncEngine:
         self._embedder = embedding_provider
         self._connectors = connectors
 
+    def _merge_connector_stats(self, existing: dict[str, Any], new: dict[str, Any]) -> dict[str, Any]:
+        """Merge stats from a connector into existing (same source, e.g. multiple boards)."""
+        out = dict(existing) if existing else {}
+        for key in ("fetched", "changed", "embedded", "errors", "skipped", "malformed"):
+            out[key] = out.get(key, 0) + new.get(key, 0)
+        out["duration_ms"] = out.get("duration_ms", 0) + new.get("duration_ms", 0)
+        if new.get("error"):
+            out["error"] = True
+            out["message"] = out.get("message") or new.get("message", "Connector failed")
+        return out
+
     async def sync_all(self) -> dict[str, Any]:
         """Run sync for all registered connectors. Failures are isolated per connector."""
         overall_start = time.time()
@@ -98,7 +109,7 @@ class SyncEngine:
             source = connector.source_name
             try:
                 result = await self._sync_connector(connector)
-                results[source] = result
+                results[source] = self._merge_connector_stats(results.get(source), result)
                 logger.info(
                     "Sync complete for %s",
                     source,
@@ -147,11 +158,12 @@ class SyncEngine:
             "malformed": 0,
         }
 
-        last_synced = await self._db.get_sync_state(source)
+        sync_key = getattr(connector, "sync_state_key", source)
+        last_synced = await self._db.get_sync_state(sync_key)
         is_first_sync = last_synced is None
 
         if is_first_sync:
-            logger.info("First sync for %s — processing all items in batches", source)
+            logger.info("First sync for %s — processing all items in batches", sync_key)
 
         entities = await connector.list_updated_items(since=last_synced)
         stats["fetched"] = len(entities)
@@ -204,7 +216,7 @@ class SyncEngine:
                 extra={"source": source},
             )
 
-        await self._db.set_sync_state(source, datetime.now(timezone.utc))
+        await self._db.set_sync_state(sync_key, datetime.now(timezone.utc))
         stats["duration_ms"] = int((time.time() - start) * 1000)
         return stats
 

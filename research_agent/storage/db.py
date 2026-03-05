@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
+from pathlib import Path
 
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -20,10 +21,23 @@ from research_agent.storage.models import (
     rows_to_entity,
 )
 
+# Project root (research_agent/storage -> research_agent -> project root)
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
+
+def _resolve_db_path(db_path: str) -> str:
+    """Resolve to absolute path so the DB is always in the same place (project root), avoiding readonly errors from wrong cwd."""
+    p = Path(db_path)
+    if not p.is_absolute():
+        p = (_PROJECT_ROOT / db_path).resolve()
+    return p.as_posix()
+
 
 class Database:
     def __init__(self, db_path: str = "research_agent.db") -> None:
-        self._engine = create_async_engine(f"sqlite+aiosqlite:///{db_path}", echo=False)
+        path = _resolve_db_path(db_path)
+        # Use three slashes; as_posix() gives /abs/path (Unix) or C:/path (Windows)
+        self._engine = create_async_engine(f"sqlite+aiosqlite:///{path}", echo=False)
         self._session_factory = async_sessionmaker(self._engine, expire_on_commit=False)
 
     async def init(self) -> None:

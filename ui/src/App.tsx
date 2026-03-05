@@ -612,9 +612,18 @@ export default function App() {
 
   const visibleMondayBoards = mondayBoards.filter(board => !isSubitemsBoardName(board.name));
 
-  // Load Monday integration state from backend so UI reflects real connectivity
+  // Ref: user requested onboarding via ?onboarding=1 this session (survives effect re-runs after we strip the param)
+  const forceOnboardingViaUrlRef = React.useRef(false);
+
+  // Load Monday integration state from backend so UI reflects real connectivity.
+  // ?onboarding=1 in URL forces onboarding; we remember it in a ref so it still wins after replaceState / effect re-run.
   useEffect(() => {
     let cancelled = false;
+    const forceOnboarding = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('onboarding') === '1';
+    if (forceOnboarding) {
+      forceOnboardingViaUrlRef.current = true;
+      window.history.replaceState({}, '', window.location.pathname);
+    }
     (async () => {
       try {
         const res = await fetch(`${RESEARCH_API_URL}/integrations/monday`);
@@ -637,13 +646,13 @@ export default function App() {
         if (anyIntegrationActive) setContextItems([]);
         else setContextItems(MOCK_CONTEXT_ITEMS);
         if (!cancelled) {
-          setShowOnboarding(!anyIntegrationActive);
+          setShowOnboarding(forceOnboardingViaUrlRef.current || !anyIntegrationActive);
           setInitialLoadDone(true);
         }
       } catch {
         if (!cancelled) {
           setConfig(prev => prev ?? null);
-          setShowOnboarding(true);
+          setShowOnboarding(forceOnboardingViaUrlRef.current || true);
           setInitialLoadDone(true);
         }
       }

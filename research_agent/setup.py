@@ -134,6 +134,12 @@ def _ui_deps_installed() -> bool:
     return (UI_DIR / "node_modules").is_dir()
 
 
+def _vite_works() -> bool:
+    """Check if Vite (and Tailwind native bindings) actually run with current Node."""
+    result = _run(["npx", "vite", "--version"], cwd=str(UI_DIR))
+    return result.returncode == 0
+
+
 def step_dependencies(env: dict) -> None:
     """Step 2: Install Python (and optionally Node.js) dependencies."""
     _step(2, "Installing dependencies...")
@@ -170,12 +176,27 @@ def step_dependencies(env: dict) -> None:
 
     if env.get("node_ok"):
         if _ui_deps_installed():
-            _ok("UI packages already installed")
+            if _vite_works():
+                _ok("UI packages already installed")
+            else:
+                _warn("UI node_modules were built with a different Node version; reinstalling...")
+                lock = UI_DIR / "package-lock.json"
+                if lock.exists():
+                    lock.unlink()
+                shutil.rmtree(UI_DIR / "node_modules", ignore_errors=True)
+                result = _run(["npm", "install"], cwd=str(UI_DIR))
+                if result.returncode == 0 and _vite_works():
+                    _ok("UI packages reinstalled")
+                else:
+                    _warn("UI reinstall failed — you can set up the UI later (run: cd ui && rm -rf node_modules package-lock.json && npm install)")
         else:
             print("  Installing UI packages (npm install)...")
             result = _run(["npm", "install"], cwd=str(UI_DIR))
             if result.returncode == 0:
-                _ok("UI packages installed")
+                if _vite_works():
+                    _ok("UI packages installed")
+                else:
+                    _warn("UI install completed but Vite failed to run (native bindings). Try: cd ui && rm -rf node_modules package-lock.json && npm install")
             else:
                 _warn("npm install failed — you can set up the UI later")
     elif not env.get("node_ok"):
@@ -248,16 +269,25 @@ def _mask_key(key: str) -> str:
     return key[:4] + "•" * (len(key) - 8) + key[-4:]
 
 
-def _validate_openai_key(api_key: str) -> bool:
-    """Validate the OpenAI API key with a minimal embedding call."""
+def _validate_openai_key(api_key: str) -> tuple[bool, str | None]:
+    """Validate the OpenAI API key with a minimal embedding call. Returns (ok, error_message)."""
     try:
         import openai
 
-        client = openai.OpenAI(api_key=api_key)
+        client = openai.OpenAI(api_key=api_key.strip())
         client.embeddings.create(input="test", model="text-embedding-3-small")
-        return True
-    except Exception:
-        return False
+        return True, None
+    except openai.AuthenticationError as e:
+        return False, "Invalid or revoked API key."
+    except openai.RateLimitError as e:
+        return False, "Rate limited — try again in a moment."
+    except openai.APIConnectionError as e:
+        return False, "Cannot reach OpenAI (network or firewall)."
+    except Exception as e:
+        msg = getattr(e, "message", str(e))
+        if "api_key" in msg.lower() or "auth" in msg.lower() or "401" in msg or "403" in msg:
+            return False, "Invalid or expired API key."
+        return False, msg or "Validation failed."
 
 
 def step_openai_key() -> str:
@@ -271,13 +301,14 @@ def step_openai_key() -> str:
     if existing_key and existing_key != "sk-your-key-here":
         print(f"  Existing key found: {_mask_key(existing_key)}")
         print("  Validating...", end=" ", flush=True)
-        if _validate_openai_key(existing_key):
+        ok, err = _validate_openai_key(existing_key)
+        if ok:
             print()
             _ok("Key validated (embedding test passed)")
             return existing_key
         else:
             print()
-            _warn("Existing key is invalid or expired")
+            _warn(f"Existing key failed: {err or 'invalid or expired'}")
 
     max_attempts = 3
     for attempt in range(1, max_attempts + 1):
@@ -289,16 +320,19 @@ def step_openai_key() -> str:
 
         print(f"  Received key: {_mask_key(key.strip())}")
         print("  Validating...", end=" ", flush=True)
-        if _validate_openai_key(key.strip()):
+        ok, err = _validate_openai_key(key.strip())
+        if ok:
             print()
             _ok("Key validated (embedding test passed)")
             _write_env_file({"OPENAI_API_KEY": key.strip()})
             return key.strip()
         else:
             print()
-            _fail(f"Invalid key (attempt {attempt}/{max_attempts})")
+            _fail(f"Validation failed (attempt {attempt}/{max_attempts})")
+            if err:
+                print(f"  {YELLOW}{err}{RESET}")
             if attempt < max_attempts:
-                print("  Check that your key is correct and billing is active.")
+                print("  Check key, billing, and network; then try again.")
 
     print(f"\n{RED}Could not validate API key after {max_attempts} attempts.{RESET}")
     print("  You can manually set OPENAI_API_KEY in .env and re-run setup.")
@@ -362,7 +396,7 @@ def step_start_services(env: dict) -> None:
     _ok(f"API starting at http://localhost:8000 (pid {api_proc.pid})")
 
     ui_proc = None
-    has_ui = env.get("node_ok") and _ui_deps_installed()
+    has_ui = env.get("node_ok") and _ui_deps_installed() and _vite_works()
     if has_ui:
         ui_proc = subprocess.Popen(
             ["npm", "run", "dev"],
@@ -385,15 +419,20 @@ def step_start_services(env: dict) -> None:
         else:
             print(f" {YELLOW}slow to start (may still be loading){RESET}")
 
-        print(f"\n  Opening browser → http://localhost:3000")
-        webbrowser.open("http://localhost:3000")
+        print(f"\n  Opening browser → http://localhost:3000?onboarding=1")
+        webbrowser.open("http://localhost:3000?onboarding=1")
     else:
-        print(f"\n  {YELLOW}⚠  UI not available — Node.js {MIN_NODE_MAJOR}+ is required{RESET}")
-        print(f"     (Tailwind CSS v4 needs Node 20+ native bindings)")
-        print(f"\n  To fix:")
-        print(f"    1. Install Node.js 20+ from {BOLD}https://nodejs.org/{RESET}")
-        print(f"       or: {BOLD}nvm install 20 && nvm use 20{RESET}")
-        print(f"    2. Re-run: {BOLD}python -m research_agent setup{RESET}")
+        if env.get("node_ok") and _ui_deps_installed() and not _vite_works():
+            print(f"\n  {YELLOW}⚠  UI not started — dependencies were built with a different Node version{RESET}")
+            print(f"\n  To fix, reinstall UI deps then re-run setup:")
+            print(f"    {BOLD}cd ui && rm -rf node_modules package-lock.json && npm install{RESET}")
+            print(f"    {BOLD}python -m research_agent setup{RESET}")
+        else:
+            print(f"\n  {YELLOW}⚠  UI not available — Node.js {MIN_NODE_MAJOR}+ is required{RESET}")
+            print(f"     (Tailwind CSS v4 needs Node 20+ native bindings)")
+            print(f"\n  To fix:")
+            print(f"    1. Install Node.js 20+ from {BOLD}https://nodejs.org/{RESET}")
+            print(f"    2. Re-run: {BOLD}python -m research_agent setup{RESET}")
         print(f"\n  API is running at http://localhost:8000/health")
 
     print(f"\n{GREEN}{BOLD}✅ Setup complete!{RESET}")
