@@ -8,7 +8,7 @@ from typing import Any
 
 import yaml
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings
 
 load_dotenv()
@@ -100,7 +100,32 @@ class Settings(BaseSettings):
     database_path: str = Field(default="research_agent.db")
     log_level: str = Field(default="INFO")
 
-    model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
+    # Jira OAuth 2.0 (3LO) — required for "Connect with Jira" flow
+    jira_oauth_client_id: str = Field(default="")
+    jira_oauth_client_secret: str = Field(default="")
+    # Callback URL as registered in Atlassian app (e.g. http://localhost:8000/integrations/jira/oauth/callback)
+    jira_oauth_redirect_uri: str = Field(default="http://localhost:8000/integrations/jira/oauth/callback")
+    # Where to send user after successful OAuth (UI origin, e.g. http://localhost:3000)
+    jira_oauth_frontend_origin: str = Field(default="http://localhost:3000")
+    # Debug: use env credentials for token exchange when both DB and env have creds (proves DB vs env)
+    jira_debug_use_env_for_token: bool = Field(default=False)
+
+    model_config = {
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "extra": "ignore",  # ignore JIRA_CLIENT_ID / JIRA_SECRET etc.; validator reads them from os.environ
+    }
+
+    @model_validator(mode="after")
+    def _jira_env_aliases(self) -> "Settings":
+        """Allow JIRA_CLIENT_ID / JIRA_SECRET as aliases if JIRA_OAUTH_* are not set."""
+        if not (self.jira_oauth_client_id or "").strip():
+            self.jira_oauth_client_id = (os.environ.get("JIRA_CLIENT_ID") or "").strip()
+        if not (self.jira_oauth_client_secret or "").strip():
+            self.jira_oauth_client_secret = (os.environ.get("JIRA_SECRET") or "").strip()
+        if not self.jira_debug_use_env_for_token and os.environ.get("JIRA_DEBUG_USE_ENV") in ("1", "true", "yes"):
+            self.jira_debug_use_env_for_token = True
+        return self
 
 
 def get_settings() -> Settings:

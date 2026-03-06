@@ -186,3 +186,39 @@ class TestSyncState:
         result = await db.get_sync_state("notion")
         assert result is not None
         assert result.replace(tzinfo=None) == ts2.replace(tzinfo=None)
+
+
+class TestIntegrationConfig:
+    @pytest.mark.asyncio
+    async def test_upsert_and_get_jira_config_with_site_url(self, db):
+        await db.upsert_integration_config(
+            source="jira",
+            enabled=True,
+            board_ids=[],
+            entity_mappings={},
+            sync_interval_seconds=7200,
+            api_key="token",
+            subdomain="cloud-123",
+            site_url="https://my.atlassian.net",
+        )
+        config = await db.get_integration_config("jira")
+        assert config is not None
+        assert config["source"] == "jira"
+        assert config["subdomain"] == "cloud-123"
+        assert config.get("site_url") == "https://my.atlassian.net"
+
+    @pytest.mark.asyncio
+    async def test_upsert_jira_config_site_url_optional(self, db):
+        await db.upsert_integration_config(
+            source="jira",
+            enabled=True,
+            board_ids=[],
+            entity_mappings={},
+            sync_interval_seconds=7200,
+            api_key="token",
+            subdomain="cloud-1",
+            # site_url not passed
+        )
+        config = await db.get_integration_config("jira")
+        assert config is not None
+        assert config.get("site_url") is None

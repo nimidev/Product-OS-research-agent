@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 from typing import Any
 import json
 
-from research_agent.connectors.base import BaseConnector
+from research_agent.connectors.base import BaseConnector, ConnectorError
 from research_agent.embedding.chunker import chunk_text as chunk_text_embedding
 from research_agent.embedding.base import EmbeddingProvider
 from research_agent.storage.db import Database
@@ -131,6 +131,14 @@ class SyncEngine:
                     "error_type": "auth",
                     "message": str(e),
                 }
+            except ConnectorError as e:
+                logger.error(
+                    "Connector %s: %s",
+                    source,
+                    str(e),
+                    extra={"source": source, "error_type": "connector_error"},
+                )
+                results[source] = {"error": True, "message": str(e)}
             except Exception:
                 logger.exception(
                     "Connector %s failed — isolated, continuing with others",

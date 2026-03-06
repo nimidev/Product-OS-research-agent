@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import time
 from contextlib import asynccontextmanager
@@ -11,10 +12,11 @@ import httpx
 from fastapi import FastAPI, HTTPException, Request
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel, Field
 
 from research_agent.config.loader import create_vector_store, get_settings
+from research_agent.connectors.jira_connector import JiraConnector
 from research_agent.connectors.monday_connector import MONDAY_API_URL, MondayConnector
 from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
 from research_agent.logging_config import configure_logging
@@ -295,7 +297,7 @@ async def search_memories(request: SearchRequest) -> SearchResponse:
     allowed_sources: list[str] | None = None
     if _db:
         enabled: list[str] = []
-        for name in ("monday", "notion"):
+        for name in ("monday", "notion", "jira"):
             cfg = await _db.get_integration_config(name)
             if cfg and cfg.get("enabled"):
                 enabled.append(name)
@@ -832,3 +834,826 @@ async def suggest_monday_field_mapping(request: MondaySuggestFieldMappingRequest
             if col_id not in suggested:
                 suggested[col_id] = canon
     return MondaySuggestFieldMappingResponse(field_mappings=suggested)
+
+
+# ---------------------------------------------------------------------------
+# Jira integration endpoints (mirrors Monday flow)
+# ---------------------------------------------------------------------------
+
+class JiraEntityMappingConfig(BaseModel):
+    """Per-entity mapping config for Jira, mirroring MondayEntityMappingConfig."""
+
+    entity_type: str
+    project_key: str = ""
+    issue_type_names: list[str] = Field(default_factory=list)
+    board_id: int | None = None
+    sprint_id: int | None = None
+    backlog_only: bool = False
+    direction: Literal["two_way", "jira_to_os"] = "jira_to_os"
+    field_mappings: dict[str, str] = Field(default_factory=dict)
+
+
+class JiraIntegrationConfigRequest(BaseModel):
+    enabled: bool = True
+    access_token: str | None = None
+    cloud_id: str | None = None
+    site_url: str | None = None
+    client_id: str | None = None
+    client_secret: str | None = None
+    entity_configs: dict[str, JiraEntityMappingConfig] = Field(default_factory=dict)
+    sync_interval_seconds: int = Field(default=7200, ge=300, le=86400)
+
+
+class JiraIntegrationConfigResponse(BaseModel):
+    source: str = "jira"
+    enabled: bool
+    access_token_set: bool
+    cloud_id: str | None = None
+    site_url: str | None = None
+    client_id: str | None = None
+    client_secret_set: bool = False
+    entity_configs: dict[str, JiraEntityMappingConfig] = Field(default_factory=dict)
+    sync_interval_seconds: int
+    updated_at: str | None = None
+
+
+class JiraTestConnectionRequest(BaseModel):
+    access_token: str | None = None
+    cloud_id: str | None = None
+
+
+class JiraTestConnectionResponse(BaseModel):
+    ok: bool
+    detail: str
+
+
+class JiraFieldInfo(BaseModel):
+    id: str
+    name: str
+    custom: bool = False
+    schema_type: str | None = None
+
+
+class JiraIssueTypeInfo(BaseModel):
+    id: str | None = None
+    name: str
+
+
+class JiraProjectInfo(BaseModel):
+    id: str
+    key: str
+    name: str
+
+
+class JiraBoardInfo(BaseModel):
+    id: int
+    name: str
+    type: str | None = None
+
+
+class JiraSchemaResponse(BaseModel):
+    projects: list[JiraProjectInfo] = Field(default_factory=list)
+    boards: list[JiraBoardInfo] = Field(default_factory=list)
+    issue_types: list[JiraIssueTypeInfo] = Field(default_factory=list)
+    fields: list[JiraFieldInfo] = Field(default_factory=list)
+
+
+class JiraSuggestFieldMappingRequest(BaseModel):
+    entity_type: str
+    source_fields: list[JiraFieldInfo] = Field(default_factory=list)
+
+
+class JiraSuggestFieldMappingResponse(BaseModel):
+    field_mappings: dict[str, str] = Field(default_factory=dict)
+
+
+class JiraPrepareResponse(BaseModel):
+    ok: bool
+    detail: str
+    fetched: int = 0
+    embedded: int = 0
+    errors: int = 0
+    total_entities: int = 0
+
+
+def _get_jira_connector_for_admin(access_token: str, cloud_id: str) -> JiraConnector:
+    """Create a temporary JiraConnector for admin/schema operations (not sync)."""
+    return JiraConnector(
+        access_token=access_token,
+        cloud_id=cloud_id,
+        project_key="",
+        issue_type_names=[],
+        entity_type="feature_request",
+        field_mappings={"summary": "title"},
+    )
+
+
+async def _resolve_jira_credentials(
+    request_token: str | None, request_cloud_id: str | None
+) -> tuple[str, str]:
+    """Resolve access_token and cloud_id from request or stored config."""
+    config = await _db.get_integration_config("jira") if _db else None  # type: ignore[union-attr]
+    access_token = request_token or (str(config.get("api_key", "")) if config else "")
+    cloud_id = request_cloud_id
+    if not cloud_id and config:
+        cloud_id = config.get("subdomain") or ""
+    if not access_token:
+        raise HTTPException(status_code=400, detail="Jira access token is required")
+    if not cloud_id:
+        raise HTTPException(status_code=400, detail="Jira cloud ID is required")
+    return access_token, cloud_id
+
+
+def _jira_probe_search_url(cloud_id: str, project_key: str | None) -> str:
+    """Build search probe URL; if project_key given, probe that project (410 can be project-specific)."""
+    from urllib.parse import quote
+    if project_key:
+        jql = quote(f"project = {project_key} ORDER BY created DESC")
+    else:
+        jql = quote("order by created DESC")
+    return f"https://api.atlassian.com/ex/jira/{cloud_id}/rest/api/3/search/jql?jql={jql}&maxResults=1&fields=key"
+
+
+async def _jira_find_working_cloud_id(access_token: str, project_key: str | None = None) -> str | None:
+    """Probe accessible-resources and return the first cloud_id for which the search API returns 200 (not 410)."""
+    try:
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            resources_resp = await client.get(
+                "https://api.atlassian.com/oauth/token/accessible-resources",
+                headers={"Authorization": f"Bearer {access_token}", "Accept": "application/json"},
+            )
+            if resources_resp.status_code != 200:
+                return None
+            resources = resources_resp.json()
+            if not resources or not isinstance(resources, list):
+                return None
+            for r in resources:
+                rid = (r.get("id") or "").strip()
+                if not rid:
+                    continue
+                probe_url = _jira_probe_search_url(rid, project_key)
+                probe = await client.get(
+                    probe_url,
+                    headers={"Authorization": f"Bearer {access_token}", "Accept": "application/json"},
+                )
+                if probe.status_code == 200:
+                    logger.info(
+                        "Jira 410 repair: using cloud_id %s (url=%s)",
+                        rid,
+                        r.get("url", ""),
+                    )
+                    return rid
+    except Exception as e:
+        logger.warning("Jira find working cloud_id failed: %s", e)
+    return None
+
+
+# Scopes needed for Jira REST + Agile (read-only)
+JIRA_OAUTH_SCOPES = "read:jira-work read:jira-user read:me offline_access"
+
+
+async def _get_jira_oauth_client_credentials() -> tuple[str, str]:
+    """Return (client_id, client_secret). DB first (from wizard), then env fallback. Env is for debugging only."""
+    creds, _ = await _get_jira_oauth_client_credentials_with_source()
+    return creds
+
+
+async def _get_jira_oauth_client_credentials_with_source() -> tuple[tuple[str, str], str]:
+    """Return ((client_id, client_secret), source). source is 'db' or 'env'."""
+    config = None
+    if _db:
+        try:
+            config = await _db.get_integration_config("jira")  # type: ignore[union-attr]
+        except Exception:
+            pass
+    client_id = (config.get("oauth_client_id") or "").strip() if config else ""
+    client_secret = (config.get("oauth_client_secret") or "").strip() if config else ""
+    source = "db" if (client_id and client_secret) else "env"
+    if not client_id or not client_secret:
+        settings = get_settings()
+        client_id = client_id or (settings.jira_oauth_client_id or "").strip()
+        client_secret = client_secret or (settings.jira_oauth_client_secret or "").strip()
+    if not client_id or not client_secret:
+        raise HTTPException(
+            status_code=400,
+            detail="Enter your Jira app Client ID and Client Secret in the Connect Jira step (from Atlassian Developer Console → your app → Settings), then click Connect with Jira (OAuth).",
+        )
+    return (client_id, client_secret), source
+
+
+@app.get("/integrations/jira/oauth/ready")
+async def jira_oauth_ready() -> dict:
+    """
+    Return whether OAuth can be started (credentials available from env or DB).
+    Used by the wizard to show "Connect with Jira" without requiring form fields.
+    """
+    try:
+        await _get_jira_oauth_client_credentials_with_source()
+        return {"ready": True}
+    except HTTPException as e:
+        return {"ready": False, "message": (e.detail or "Jira OAuth is not configured.")}
+
+
+@app.get("/integrations/jira/oauth/authorize")
+async def jira_oauth_authorize(return_to: str | None = None) -> RedirectResponse:
+    """
+    Start OAuth 2.0 (3LO) flow: redirect user to Atlassian consent page.
+    Uses Client ID and Secret from the integration config (UI) or from env.
+    return_to: optional 'integrations' or 'onboarding'; encoded in state and passed back to frontend so redirect lands on the right view.
+    """
+    (client_id, client_secret), _ = await _get_jira_oauth_client_credentials_with_source()
+    settings = get_settings()
+    from urllib.parse import urlencode
+
+    state = "jira_os_research"
+    if return_to and return_to.strip() in ("integrations", "onboarding"):
+        state = f"jira_os_research:{return_to.strip()}"
+
+    params = {
+        "audience": "api.atlassian.com",
+        "client_id": client_id,
+        "scope": JIRA_OAUTH_SCOPES,
+        "redirect_uri": settings.jira_oauth_redirect_uri,
+        "state": state,
+        "response_type": "code",
+        "prompt": "consent",
+    }
+    url = "https://auth.atlassian.com/authorize?" + urlencode(params)
+    return RedirectResponse(url=url, status_code=302)
+
+
+class DebugTokenRequest(BaseModel):
+    code: str
+
+
+@app.post("/integrations/jira/oauth/debug-token")
+async def jira_oauth_debug_token(req: DebugTokenRequest) -> dict:
+    """
+    Test token exchange with a real code from the callback URL.
+    POST {"code": "eyJ..."} - paste the code from ?code=XXX in the callback URL.
+    Returns the raw Atlassian response (no redirect).
+    """
+    settings = get_settings()
+    try:
+        client_id, client_secret = await _get_jira_oauth_client_credentials()
+    except HTTPException as e:
+        return {"error": e.detail}
+    async with httpx.AsyncClient() as client:
+        resp = await client.post(
+            "https://auth.atlassian.com/oauth/token",
+            json={
+                "grant_type": "authorization_code",
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "code": req.code.strip(),
+                "redirect_uri": settings.jira_oauth_redirect_uri,
+            },
+            headers={"Content-Type": "application/json"},
+        )
+    try:
+        body = resp.json()
+    except Exception:
+        body = {"_raw": resp.text[:500]}
+    return {"status": resp.status_code, "body": body, "redirect_uri_used": settings.jira_oauth_redirect_uri}
+
+
+@app.get("/integrations/jira/oauth/debug")
+async def jira_oauth_debug():
+    """
+    Debug OAuth: run a fake token exchange and return credentials state + Atlassian response.
+    Use to verify JIRA_OAUTH_* (or JIRA_CLIENT_ID / JIRA_SECRET) and redirect_uri.
+    """
+    settings = get_settings()
+    try:
+        client_id, client_secret = await _get_jira_oauth_client_credentials()
+    except HTTPException as e:
+        return {
+            "credentials_loaded": False,
+            "error": e.detail,
+            "redirect_uri": settings.jira_oauth_redirect_uri,
+            "env_client_id_set": bool((settings.jira_oauth_client_id or "").strip()),
+            "env_client_secret_set": bool((settings.jira_oauth_client_secret or "").strip()),
+        }
+    credentials_source = "env" if (settings.jira_oauth_client_id or "").strip() else "db"
+    async with httpx.AsyncClient() as client:
+        token_resp = await client.post(
+            "https://auth.atlassian.com/oauth/token",
+            json={
+                "grant_type": "authorization_code",
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "code": "debug_fake_code_do_not_use",
+                "redirect_uri": settings.jira_oauth_redirect_uri,
+            },
+            headers={"Content-Type": "application/json"},
+        )
+        try:
+            atlassian_body = token_resp.json()
+        except Exception:
+            atlassian_body = {"_raw": token_resp.text}
+    return {
+        "credentials_loaded": True,
+        "credentials_source": credentials_source,
+        "client_id_prefix": (client_id or "")[:8] + "..." if client_id else "",
+        "redirect_uri": settings.jira_oauth_redirect_uri,
+        "atlassian_status": token_resp.status_code,
+        "atlassian_body": atlassian_body,
+        "hint": "401/access_denied = wrong Client ID/Secret or redirect_uri mismatch with Atlassian app Callback URL. 400/invalid_grant = credentials OK, code invalid (expected for this debug call).",
+    }
+
+
+@app.get("/integrations/jira/oauth/callback")
+async def jira_oauth_callback(code: str | None = None, state: str | None = None) -> RedirectResponse:
+    """
+    OAuth callback: exchange authorization code for access token, then redirect to UI
+    with token and cloud_id in the URL fragment (so they are not sent to server logs).
+    """
+    settings = get_settings()
+    code = (code or "").strip() if code else None
+    if not code:
+        error_url = (
+            settings.jira_oauth_frontend_origin
+            + "/#jira_oauth_error=missing_code"
+        )
+        return RedirectResponse(url=error_url, status_code=302)
+    try:
+        (client_id, client_secret), _ = await _get_jira_oauth_client_credentials_with_source()
+    except HTTPException:
+        error_url = (
+            settings.jira_oauth_frontend_origin
+            + "/#jira_oauth_error=oauth_not_configured"
+        )
+        return RedirectResponse(url=error_url, status_code=302)
+
+    # Use same credentials as authorize flow; env_debug_override caused "mismatched aud"
+    # when authorize used DB creds but callback used env.
+
+    token_payload = {
+        "grant_type": "authorization_code",
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "code": code,
+        "redirect_uri": settings.jira_oauth_redirect_uri,
+    }
+    async with httpx.AsyncClient() as client:
+        token_resp = await client.post(
+            "https://auth.atlassian.com/oauth/token",
+            json=token_payload,
+            headers={"Content-Type": "application/json"},
+        )
+        if token_resp.status_code != 200:
+            logger.warning("Jira OAuth token exchange failed: %s", token_resp.text)
+            try:
+                err_body = token_resp.json()
+                err_desc = err_body.get("error_description") or err_body.get("error") or token_resp.text
+            except Exception:
+                err_desc = token_resp.text or "token_exchange_failed"
+            from urllib.parse import quote
+
+            error_fragment = "jira_oauth_error=token_exchange_failed&message=" + quote(
+                (err_desc or "Unknown error")[:200]
+            )
+            error_url = (
+                settings.jira_oauth_frontend_origin + "/#" + error_fragment
+            )
+            return RedirectResponse(url=error_url, status_code=302)
+
+        data = token_resp.json()
+        access_token = data.get("access_token")
+        if not access_token:
+            error_url = (
+                settings.jira_oauth_frontend_origin
+                + "/#jira_oauth_error=no_access_token"
+            )
+            return RedirectResponse(url=error_url, status_code=302)
+
+        # Resolve cloud_id and site_url: pick a resource for which the search API returns 200 (not 410).
+        # serverInfo can return 200 while search returns 410; probe search so sync works.
+        cloud_id = ""
+        site_url = ""
+        try:
+            resources_resp = await client.get(
+                "https://api.atlassian.com/oauth/token/accessible-resources",
+                headers={"Authorization": f"Bearer {access_token}"},
+            )
+            if resources_resp.status_code == 200:
+                resources = resources_resp.json()
+                if resources and isinstance(resources, list):
+                    for r in resources:
+                        rid = (r.get("id") or "").strip()
+                        if not rid:
+                            continue
+                        probe = await client.get(
+                            _jira_probe_search_url(rid, None),
+                            headers={"Authorization": f"Bearer {access_token}", "Accept": "application/json"},
+                        )
+                        if probe.status_code == 200:
+                            cloud_id = rid
+                            site_url = (r.get("url") or "").strip()
+                            logger.info(
+                                "Jira OAuth: using cloud_id %s (url=%s)",
+                                rid,
+                                site_url or r.get("url", ""),
+                            )
+                            break
+                    if not cloud_id and resources:
+                        first = resources[0]
+                        cloud_id = first.get("id", "") or ""
+                        site_url = (first.get("url") or "").strip()
+        except Exception as e:
+            logger.warning("Failed to fetch Jira accessible resources: %s", e)
+
+    # Redirect to frontend with token, cloud_id, and site_url in fragment (client-only, not logged)
+    from urllib.parse import urlencode
+
+    fragment_params: dict[str, str] = {"access_token": access_token, "cloud_id": cloud_id}
+    if site_url:
+        fragment_params["site_url"] = site_url
+    if state and ":" in state:
+        _return_to = state.split(":", 1)[1].strip()
+        if _return_to in ("integrations", "onboarding"):
+            fragment_params["return_to"] = _return_to
+    fragment = "jira_oauth_connected&" + urlencode(fragment_params)
+    redirect_url = settings.jira_oauth_frontend_origin + "/#" + fragment
+    return RedirectResponse(url=redirect_url, status_code=302)
+
+
+@app.get("/integrations/jira", response_model=JiraIntegrationConfigResponse)
+async def get_jira_integration_config() -> JiraIntegrationConfigResponse:
+    if _db is None:
+        raise HTTPException(status_code=503, detail="Service not initialized")
+
+    config = await _db.get_integration_config("jira")
+    if config is None:
+        return JiraIntegrationConfigResponse(
+            enabled=False,
+            access_token_set=False,
+            cloud_id=None,
+            site_url=None,
+            client_id=None,
+            client_secret_set=False,
+            entity_configs={},
+            sync_interval_seconds=7200,
+            updated_at=None,
+        )
+
+    return JiraIntegrationConfigResponse(
+        enabled=bool(config["enabled"]),
+        access_token_set=bool(config.get("api_key")),
+        cloud_id=config.get("subdomain"),
+        site_url=config.get("site_url"),
+        client_id=config.get("oauth_client_id"),
+        client_secret_set=bool(config.get("oauth_client_secret")),
+        entity_configs={
+            key: JiraEntityMappingConfig(**value)
+            for key, value in dict(config.get("entity_configs", {})).items()
+        },
+        sync_interval_seconds=int(config.get("sync_interval_seconds", 7200)),
+        updated_at=config["updated_at"].isoformat() if config.get("updated_at") else None,
+    )
+
+
+@app.put("/integrations/jira", response_model=JiraIntegrationConfigResponse)
+async def upsert_jira_integration_config(
+    request: JiraIntegrationConfigRequest,
+) -> JiraIntegrationConfigResponse:
+    if _db is None:
+        raise HTTPException(status_code=503, detail="Service not initialized")
+
+    existing = await _db.get_integration_config("jira")
+    access_token = request.access_token
+    if access_token is None and existing is not None:
+        access_token = str(existing.get("api_key", ""))
+    cloud_id = request.cloud_id
+    if cloud_id is None and existing is not None:
+        cloud_id = existing.get("subdomain")
+    site_url = request.site_url
+    if site_url is None and existing is not None:
+        site_url = existing.get("site_url")
+    oauth_client_id = request.client_id
+    if oauth_client_id is None and existing is not None:
+        oauth_client_id = existing.get("oauth_client_id")
+    oauth_client_secret = request.client_secret
+    if oauth_client_secret is None and existing is not None:
+        oauth_client_secret = existing.get("oauth_client_secret")
+    if oauth_client_id is not None and isinstance(oauth_client_id, str):
+        oauth_client_id = oauth_client_id.strip()
+    if oauth_client_secret is not None and isinstance(oauth_client_secret, str):
+        oauth_client_secret = oauth_client_secret.strip()
+
+    config = await _db.upsert_integration_config(
+        source="jira",
+        enabled=request.enabled,
+        api_key=access_token,
+        board_ids=[],
+        entity_mappings={},
+        entity_configs={
+            key: value.model_dump()
+            for key, value in request.entity_configs.items()
+        },
+        sync_interval_seconds=request.sync_interval_seconds,
+        subdomain=cloud_id,
+        site_url=site_url,
+        oauth_client_id=oauth_client_id,
+        oauth_client_secret=oauth_client_secret,
+    )
+
+    return JiraIntegrationConfigResponse(
+        enabled=bool(config["enabled"]),
+        access_token_set=bool(config.get("api_key")),
+        cloud_id=config.get("subdomain"),
+        site_url=config.get("site_url"),
+        client_id=config.get("oauth_client_id"),
+        client_secret_set=bool(config.get("oauth_client_secret")),
+        entity_configs={
+            key: JiraEntityMappingConfig(**value)
+            for key, value in dict(config.get("entity_configs", {})).items()
+        },
+        sync_interval_seconds=int(config.get("sync_interval_seconds", 7200)),
+        updated_at=config["updated_at"].isoformat() if config.get("updated_at") else None,
+    )
+
+
+@app.post("/integrations/jira/test", response_model=JiraTestConnectionResponse)
+async def test_jira_connection(
+    request: JiraTestConnectionRequest,
+) -> JiraTestConnectionResponse:
+    if _db is None:
+        raise HTTPException(status_code=503, detail="Service not initialized")
+
+    access_token, cloud_id = await _resolve_jira_credentials(
+        request.access_token, request.cloud_id
+    )
+
+    connector = _get_jira_connector_for_admin(access_token, cloud_id)
+    try:
+        ok = await connector.health_check()
+    finally:
+        await connector.close()
+
+    if not ok:
+        raise HTTPException(
+            status_code=502,
+            detail="Failed to connect to Jira. Check OAuth token and cloud ID.",
+        )
+
+    return JiraTestConnectionResponse(ok=True, detail="Jira connection successful")
+
+
+@app.get("/integrations/jira/schema", response_model=JiraSchemaResponse)
+async def get_jira_schema(project_key: str | None = None) -> JiraSchemaResponse:
+    """Return Jira projects, boards, issue types, and fields for mapping UI."""
+    if _db is None:
+        raise HTTPException(status_code=503, detail="Service not initialized")
+
+    access_token, cloud_id = await _resolve_jira_credentials(None, None)
+    connector = _get_jira_connector_for_admin(access_token, cloud_id)
+
+    try:
+        projects_raw = await connector.fetch_projects()
+        projects = [
+            JiraProjectInfo(
+                id=str(p.get("id", "")),
+                key=str(p.get("key", "")),
+                name=str(p.get("name", "")),
+            )
+            for p in projects_raw
+        ]
+
+        boards: list[JiraBoardInfo] = []
+        boards_raw = await connector.fetch_boards(project_key)
+        for b in boards_raw:
+            boards.append(JiraBoardInfo(
+                id=int(b.get("id", 0)),
+                name=str(b.get("name", "")),
+                type=b.get("type"),
+            ))
+
+        issue_types: list[JiraIssueTypeInfo] = []
+        if project_key:
+            it_raw = await connector.fetch_issue_types(project_key)
+            issue_types = [
+                JiraIssueTypeInfo(id=str(it.get("id", "")), name=str(it.get("name", "")))
+                for it in it_raw
+            ]
+
+        fields_raw = await connector.fetch_fields()
+        fields = [
+            JiraFieldInfo(
+                id=str(f.get("id", "")),
+                name=str(f.get("name", "")),
+                custom=bool(f.get("custom", False)),
+                schema_type=(f.get("schema", {}) or {}).get("type"),
+            )
+            for f in fields_raw
+        ]
+    finally:
+        await connector.close()
+
+    return JiraSchemaResponse(
+        projects=projects, boards=boards, issue_types=issue_types, fields=fields
+    )
+
+
+@app.post(
+    "/integrations/jira/suggest-field-mapping",
+    response_model=JiraSuggestFieldMappingResponse,
+)
+async def suggest_jira_field_mapping(
+    request: JiraSuggestFieldMappingRequest,
+) -> JiraSuggestFieldMappingResponse:
+    """Suggest Jira field -> canonical field mapping using deterministic + LLM."""
+    settings = get_settings()
+
+    try:
+        et = EntityType(request.entity_type)
+    except ValueError:
+        raise HTTPException(
+            status_code=400, detail=f"Unknown entity_type: {request.entity_type}"
+        )
+
+    canonical = list(CANONICAL_FIELDS.get(et, []))
+    if not canonical:
+        return JiraSuggestFieldMappingResponse(field_mappings={})
+
+    source_columns = [
+        {"id": f.id, "title": f.name or f.id} for f in request.source_fields
+    ]
+
+    suggested = _deterministic_field_mapping(source_columns, canonical)
+
+    if settings.openai_api_key:
+        llm_map = _suggest_field_mapping_via_llm(
+            request.entity_type, source_columns, canonical, settings.openai_api_key
+        )
+        for col_id, canon in llm_map.items():
+            if col_id not in suggested:
+                suggested[col_id] = canon
+
+    return JiraSuggestFieldMappingResponse(field_mappings=suggested)
+
+
+@app.post("/integrations/jira/prepare", response_model=JiraPrepareResponse)
+async def prepare_jira_search() -> JiraPrepareResponse:
+    """Run a Jira-only sync so newly configured mappings are ingested and indexed."""
+    if _db is None:
+        raise HTTPException(status_code=503, detail="Service not initialized")
+
+    settings = get_settings()
+
+    if settings.qdrant_mode == "local" and _vector_store:
+        try:
+            current_count = await _vector_store.count()
+            if current_count >= VECTOR_LIMIT_LOCAL:
+                raise HTTPException(
+                    status_code=429,
+                    detail=(
+                        f"Vector limit reached ({current_count:,}/{VECTOR_LIMIT_LOCAL:,}). "
+                        "Upgrade to Docker or Qdrant Cloud mode to continue adding data."
+                    ),
+                )
+        except HTTPException:
+            raise
+        except Exception:
+            pass
+
+    if not settings.openai_api_key:
+        raise HTTPException(
+            status_code=400,
+            detail="OpenAI API key is required to embed Jira data for search.",
+        )
+
+    try:
+        connectors = await _build_connectors(_db)
+    except Exception as e:
+        logger.exception("Failed to build connectors for Jira prepare")
+        raise HTTPException(
+            status_code=500, detail="Failed to load Jira integration config."
+        ) from e
+
+    jira_connectors = [
+        c for c in connectors if getattr(c, "source_name", "") == "jira"
+    ]
+    if not jira_connectors:
+        raise HTTPException(
+            status_code=400,
+            detail="Jira integration is not configured or enabled. Save mappings first.",
+        )
+
+    vector_store: QdrantStore
+    own_store = False
+    if _vector_store is not None:
+        vector_store = _vector_store
+    else:
+        vector_store = create_vector_store(settings)
+        own_store = True
+
+    embedder = OpenAIEmbeddingProvider(
+        api_key=settings.openai_api_key,
+        model=settings.embedding_model,
+    )
+
+    try:
+        await vector_store.ensure_collection(embedder.dimension())
+        engine = SyncEngine(
+            db=_db,
+            vector_store=vector_store,
+            embedding_provider=embedder,
+            connectors=jira_connectors,
+        )
+        result = await engine.sync_all()
+    except Exception as e:
+        logger.exception("Jira prepare sync failed")
+        raise HTTPException(
+            status_code=500,
+            detail="Sync failed. Check server logs for details.",
+        ) from e
+    finally:
+        if own_store:
+            await vector_store.close()
+
+    stats = (
+        result.get("connectors", {}).get("jira", {})
+        if isinstance(result, dict)
+        else {}
+    )
+    # If we got 410 (stale/deprecated cloud_id), try to repair: find a working cloud and retry once
+    if stats.get("error") and "410" in (stats.get("message") or ""):
+        jira_config = await _db.get_integration_config("jira")
+        if jira_config:
+            token = (jira_config.get("api_key") or "").strip()
+            current_cloud = (jira_config.get("subdomain") or "").strip()
+            if token:
+                entity_configs = jira_config.get("entity_configs") or {}
+                first_project = next(
+                    (str(c.get("project_key", "")).strip() for c in entity_configs.values() if isinstance(c, dict) and c.get("project_key")),
+                    None,
+                )
+                working_cloud = await _jira_find_working_cloud_id(token, first_project)
+                if working_cloud and working_cloud != current_cloud:
+                    await _db.upsert_integration_config(
+                        source="jira",
+                        enabled=jira_config.get("enabled", True),
+                        api_key=token,
+                        board_ids=jira_config.get("board_ids", []),
+                        entity_mappings=jira_config.get("entity_mappings", {}),
+                        entity_configs=jira_config.get("entity_configs"),
+                        sync_interval_seconds=int(jira_config.get("sync_interval_seconds", 7200)),
+                        subdomain=working_cloud,
+                        oauth_client_id=jira_config.get("oauth_client_id"),
+                        oauth_client_secret=jira_config.get("oauth_client_secret"),
+                    )
+                    try:
+                        connectors_retry = await _build_connectors(_db)
+                        jira_connectors_retry = [
+                            c for c in connectors_retry if getattr(c, "source_name", "") == "jira"
+                        ]
+                        if jira_connectors_retry:
+                            engine_retry = SyncEngine(
+                                db=_db,
+                                vector_store=vector_store,
+                                embedding_provider=embedder,
+                                connectors=jira_connectors_retry,
+                            )
+                            result = await engine_retry.sync_all()
+                            stats = (
+                                result.get("connectors", {}).get("jira", {})
+                                if isinstance(result, dict)
+                                else {}
+                            )
+                    except Exception as retry_e:
+                        logger.warning("Jira 410 repair retry failed: %s", retry_e)
+
+    fetched = int(stats.get("fetched", 0) or 0)
+    embedded = int(stats.get("embedded", 0) or 0)
+    errors = int(stats.get("errors", 0) or 0)
+
+    total_entities = 0
+    try:
+        async with _db.session() as session:
+            from sqlalchemy import func, select as sa_select
+
+            result_count = await session.execute(
+                sa_select(func.count())
+                .select_from(EntityRow)
+                .where(EntityRow.source_system == SourceSystem.JIRA.value)
+            )
+            total_entities = int(result_count.scalar_one() or 0)
+    except Exception as e:
+        logger.warning("Failed to count Jira entities for prepare response: %s", e)
+
+    ok = not bool(stats.get("error")) and errors == 0
+    detail = (
+        "Jira data synced and indexed for search."
+        if ok
+        else (stats.get("message") or "Jira sync completed with errors. Check server logs for details.")
+    )
+
+    return JiraPrepareResponse(
+        ok=ok,
+        detail=detail,
+        fetched=fetched,
+        embedded=embedded,
+        errors=errors,
+        total_entities=total_entities,
+    )

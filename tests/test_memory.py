@@ -8,6 +8,7 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 
 from research_agent.memory.memory_service import MemoryService, MemorySearchResult
+from research_agent.storage.models import EntityType, SourceSystem
 from research_agent.vector.qdrant_client import SearchResult
 from tests.conftest import MockEmbeddingProvider, make_entity
 
@@ -141,3 +142,109 @@ class TestMemoryServiceAddUpdate:
         changed = await memory_service.add_or_update_entity(deleted_entity)
         assert changed is True
         mock_vector_store.delete_by_parent.assert_called()
+
+
+class TestEnrichRawResultsJiraUrl:
+    """Jira search results get browse URL when site_url is in config."""
+
+    @pytest.mark.asyncio
+    async def test_jira_result_gets_browse_url_when_site_url_configured(self, db):
+        db.get_integration_config = AsyncMock(
+            side_effect=lambda s: (
+                {
+                    "source": "jira",
+                    "enabled": True,
+                    "api_key": "x",
+                    "board_ids": [],
+                    "entity_mappings": {},
+                    "entity_configs": {},
+                    "sync_interval_seconds": 7200,
+                    "subdomain": "c1",
+                    "site_url": "https://my.atlassian.net",
+                }
+                if s == "jira"
+                else None
+            )
+        )
+        jira_entity = make_entity(
+            id="jira:KAN-42",
+            title="Add SSO",
+            entity_type=EntityType.ROADMAP_ITEM,
+            source=SourceSystem.JIRA,
+        )
+        jira_entity.source_id = "KAN-42"
+        db.get_entity = AsyncMock(return_value=jira_entity)
+
+        store = AsyncMock()
+        store.search = AsyncMock(return_value=[])
+        svc = MemoryService(
+            db=db,
+            vector_store=store,
+            embedding_provider=MockEmbeddingProvider(),
+            summarizer=None,
+        )
+        raw = [
+            {
+                "id": "jira:KAN-42",
+                "score": 0.9,
+                "source": "jira",
+                "title": "Add SSO",
+                "body": "Desc",
+                "entity_type": "roadmap_item",
+                "field_name": "description",
+                "metadata": {},
+                "created_at": "",
+            }
+        ]
+        enriched = await svc._enrich_raw_results(raw)
+        assert len(enriched) == 1
+        assert enriched[0].get("url") == "https://my.atlassian.net/browse/KAN-42"
+
+    @pytest.mark.asyncio
+    async def test_jira_result_no_url_when_site_url_missing(self, db):
+        db.get_integration_config = AsyncMock(
+            return_value={
+                "source": "jira",
+                "enabled": True,
+                "api_key": "x",
+                "subdomain": "c1",
+                "site_url": None,
+                "board_ids": [],
+                "entity_mappings": {},
+                "entity_configs": {},
+                "sync_interval_seconds": 7200,
+            }
+        )
+        jira_entity = make_entity(
+            id="jira:KAN-1",
+            title="Bug",
+            entity_type=EntityType.BUG,
+            source=SourceSystem.JIRA,
+        )
+        jira_entity.source_id = "KAN-1"
+        db.get_entity = AsyncMock(return_value=jira_entity)
+
+        store = AsyncMock()
+        store.search = AsyncMock(return_value=[])
+        svc = MemoryService(
+            db=db,
+            vector_store=store,
+            embedding_provider=MockEmbeddingProvider(),
+            summarizer=None,
+        )
+        raw = [
+            {
+                "id": "jira:KAN-1",
+                "score": 0.8,
+                "source": "jira",
+                "title": "Bug",
+                "body": "Desc",
+                "entity_type": "bug",
+                "field_name": "description",
+                "metadata": {},
+                "created_at": "",
+            }
+        ]
+        enriched = await svc._enrich_raw_results(raw)
+        assert len(enriched) == 1
+        assert enriched[0].get("url") == ""

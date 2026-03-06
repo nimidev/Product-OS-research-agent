@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from httpx import ASGITransport, AsyncClient
@@ -231,3 +231,97 @@ class TestMondaySchemaEndpoint:
         assert len(data["boards"]) == 1
         assert data["boards"][0]["id"] == "123"
         assert data["boards"][0]["name"] == "Product Epics"
+
+
+class TestJiraIntegrationEndpoints:
+    @pytest.mark.asyncio
+    async def test_get_jira_config_empty(self, client):
+        resp = await client.get("/integrations/jira")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["source"] == "jira"
+        assert data["enabled"] is False
+        assert data["access_token_set"] is False
+        assert data["cloud_id"] is None
+        assert data["site_url"] is None
+
+    @pytest.mark.asyncio
+    async def test_get_jira_config_with_site_url(self, client, mock_db):
+        mock_db.get_integration_config.return_value = {
+            "source": "jira",
+            "enabled": True,
+            "api_key": "token",
+            "board_ids": [],
+            "entity_mappings": {},
+            "entity_configs": {},
+            "sync_interval_seconds": 7200,
+            "subdomain": "cloud-123",
+            "site_url": "https://my.atlassian.net",
+            "updated_at": datetime.now(UTC),
+        }
+        resp = await client.get("/integrations/jira")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["enabled"] is True
+        assert data["cloud_id"] == "cloud-123"
+        assert data["site_url"] == "https://my.atlassian.net"
+
+    @pytest.mark.asyncio
+    async def test_put_jira_config_persists_site_url(self, client, mock_db):
+        mock_db.get_integration_config.return_value = None
+        mock_db.upsert_integration_config.return_value = {
+            "source": "jira",
+            "enabled": True,
+            "api_key": "token",
+            "board_ids": [],
+            "entity_mappings": {},
+            "entity_configs": {},
+            "sync_interval_seconds": 7200,
+            "subdomain": "cloud-123",
+            "site_url": "https://my.atlassian.net",
+            "updated_at": datetime.now(UTC),
+        }
+        resp = await client.put(
+            "/integrations/jira",
+            json={
+                "enabled": True,
+                "access_token": "token",
+                "cloud_id": "cloud-123",
+                "site_url": "https://my.atlassian.net",
+                "entity_configs": {},
+            },
+        )
+        assert resp.status_code == 200
+        call_kw = mock_db.upsert_integration_config.call_args[1]
+        assert call_kw.get("site_url") == "https://my.atlassian.net"
+        assert call_kw.get("subdomain") == "cloud-123"
+
+    @pytest.mark.asyncio
+    async def test_jira_oauth_ready_when_configured(self, client, mock_db):
+        mock_db.get_integration_config.return_value = {
+            "source": "jira",
+            "api_key": "token",
+            "subdomain": "cloud-1",
+            "oauth_client_id": "cid",
+            "oauth_client_secret": "csec",
+        }
+        resp = await client.get("/integrations/jira/oauth/ready")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["ready"] is True
+
+    @pytest.mark.asyncio
+    async def test_jira_oauth_ready_when_not_configured(self, client, mock_db):
+        mock_db.get_integration_config.return_value = None
+        with patch(
+            "research_agent.api.server.get_settings",
+            return_value=MagicMock(
+                jira_oauth_client_id="",
+                jira_oauth_client_secret="",
+            ),
+        ):
+            resp = await client.get("/integrations/jira/oauth/ready")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["ready"] is False
+        assert "message" in data

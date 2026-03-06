@@ -58,6 +58,18 @@ class Database:
                     await conn.exec_driver_sql(
                         "ALTER TABLE integration_configs ADD COLUMN subdomain TEXT"
                     )
+                if "oauth_client_id" not in cols:
+                    await conn.exec_driver_sql(
+                        "ALTER TABLE integration_configs ADD COLUMN oauth_client_id TEXT"
+                    )
+                if "oauth_client_secret" not in cols:
+                    await conn.exec_driver_sql(
+                        "ALTER TABLE integration_configs ADD COLUMN oauth_client_secret TEXT"
+                    )
+                if "site_url" not in cols:
+                    await conn.exec_driver_sql(
+                        "ALTER TABLE integration_configs ADD COLUMN site_url TEXT"
+                    )
             except Exception:
                 # If anything goes wrong here, ignore and let normal operations surface errors;
                 # tests use fresh DBs where the column is created from metadata.
@@ -219,7 +231,7 @@ class Database:
             row = await session.get(IntegrationConfigRow, source)
             if row is None:
                 return None
-            return {
+            out = {
                 "source": row.source,
                 "enabled": row.enabled,
                 "api_key": row.api_key,
@@ -230,6 +242,13 @@ class Database:
                 "subdomain": getattr(row, "subdomain", None),
                 "updated_at": row.updated_at,
             }
+            if hasattr(row, "oauth_client_id"):
+                out["oauth_client_id"] = getattr(row, "oauth_client_id", None)
+            if hasattr(row, "oauth_client_secret"):
+                out["oauth_client_secret"] = getattr(row, "oauth_client_secret", None)
+            if hasattr(row, "site_url"):
+                out["site_url"] = getattr(row, "site_url", None)
+            return out
 
     async def upsert_integration_config(
         self,
@@ -241,6 +260,9 @@ class Database:
         api_key: str | None = None,
         entity_configs: dict[str, dict] | None = None,
         subdomain: str | None = None,
+        oauth_client_id: str | None = None,
+        oauth_client_secret: str | None = None,
+        site_url: str | None = None,
     ) -> dict:
         async with self.session() as session:
             row = await session.get(IntegrationConfigRow, source)
@@ -255,6 +277,9 @@ class Database:
                     entity_configs_json=json.dumps(entity_configs or {}),
                     sync_interval_seconds=sync_interval_seconds,
                     subdomain=subdomain,
+                    oauth_client_id=oauth_client_id,
+                    oauth_client_secret=oauth_client_secret,
+                    site_url=site_url,
                     updated_at=now,
                 )
                 session.add(row)
@@ -268,6 +293,12 @@ class Database:
                 row.sync_interval_seconds = sync_interval_seconds
                 if subdomain is not None:
                     row.subdomain = subdomain
+                if oauth_client_id is not None:
+                    row.oauth_client_id = oauth_client_id
+                if oauth_client_secret is not None:
+                    row.oauth_client_secret = oauth_client_secret
+                if site_url is not None:
+                    row.site_url = site_url
                 row.updated_at = now
 
             await session.commit()

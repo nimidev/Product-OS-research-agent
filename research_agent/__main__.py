@@ -198,6 +198,40 @@ async def _build_connectors(db) -> list:
                     )
                 )
 
+    # --- Jira connectors from DB integration config ---
+    jira_cfg = await db.get_integration_config("jira")
+    if jira_cfg and bool(jira_cfg.get("enabled")):
+        from research_agent.connectors.jira_connector import JiraConnector
+
+        jira_token = str(jira_cfg.get("api_key", "")).strip()
+        jira_cloud_id = str(jira_cfg.get("subdomain", "")).strip()
+        entity_configs = dict(jira_cfg.get("entity_configs", {}))
+
+        if jira_token and jira_cloud_id and entity_configs:
+            for _, cfg in entity_configs.items():
+                entity_type = str(cfg.get("entity_type", "")).strip()
+                project_key = str(cfg.get("project_key", "")).strip()
+                if not entity_type or not project_key:
+                    continue
+
+                field_mappings = dict(cfg.get("field_mappings") or {})
+                if not field_mappings:
+                    field_mappings = {"summary": "title"}
+
+                connectors.append(
+                    JiraConnector(
+                        access_token=jira_token,
+                        cloud_id=jira_cloud_id,
+                        project_key=project_key,
+                        issue_type_names=list(cfg.get("issue_type_names", [])),
+                        entity_type=entity_type,
+                        field_mappings=field_mappings,
+                        board_id=cfg.get("board_id"),
+                        sprint_id=cfg.get("sprint_id"),
+                        backlog_only=bool(cfg.get("backlog_only", False)),
+                    )
+                )
+
     notion_key = os.environ.get("NOTION_API_KEY", "")
     for entity_key, cfg in mappings.get("notion", {}).items():
         if not isinstance(cfg, dict) or not notion_key:

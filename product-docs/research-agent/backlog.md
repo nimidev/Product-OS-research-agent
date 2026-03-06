@@ -13,7 +13,7 @@
 | [US-009](./US-009.md) | Integrations Page – View vs Edit UX Redesign | done | P1 | deployed |
 | [US-010](./US-010.md) | Research Agent – Clickable Evidence References in Chat | done | P1 | deployed |
 | [US-011](./US-011.md) | Seamless Onboarding & Setup Experience for New Users | done | P0 | deployed |
-| [US-012](./US-012.md) | Backlog Integration – Jira & Confluence (Atlassian) | create | P1 | planning |
+| [US-012](./US-012.md) | Backlog Integration – Jira (Atlassian) | dev | P1 | development |
 | [US-013](./US-013.md) | Backlog Integration – Mixpanel (Product Analytics) | create | P1 | planning |
 | [US-014](./US-014.md) | Backlog Integration – Gong (Revenue Intelligence / Calls) | create | P1 | planning |
 | [US-015](./US-015.md) | Backlog Integration – SharePoint (Microsoft 365) | create | P1 | planning |
@@ -51,11 +51,11 @@
 - **PR**: #6 (merged)
 - **Testing**: ✅ All tests passed
 
-### US-012: Backlog Integration – Jira & Confluence (Atlassian)
-- **Status**: `create`
-- **Description**: Dedicated integration for Atlassian Cloud: OAuth 2.0, map Jira projects/issue types and Confluence spaces to Product OS entities (epic, task, bug, feature_request, support_ticket, document/PRD), sync and search with citations.
+### US-012: Backlog Integration – Jira (Atlassian)
+- **Status**: `dev`
+- **Description**: Dedicated Jira integration with onboarding and entity mapping flow aligned to Monday.com: connect → choose entities → link project/board → map Jira issue types and Jira fields to Product OS (roadmap_item, feature_request, bug, task, support_ticket), test and activate. Jira only; Confluence deferred to future PRD.
 - **See**: [US-012.md](./US-012.md)
-- **Branch**: (not yet created)
+- **Branch**: `feature/US-012-jira-integration`
 
 ### US-013: Backlog Integration – Mixpanel (Product Analytics)
 - **Status**: `create`
