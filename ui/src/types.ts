@@ -86,6 +86,62 @@ export interface AppConfig {
 }
 
 export type MondayDirection = 'two_way' | 'monday_to_os';
+export type JiraDirection = 'two_way' | 'jira_to_os';
+
+export interface JiraEntityMappingConfig {
+  entity_type: string;
+  project_key: string;
+  issue_type_names: string[];
+  board_id?: number | null;
+  sprint_id?: number | null;
+  backlog_only?: boolean;
+  direction: JiraDirection;
+  field_mappings: Record<string, string>;
+}
+
+export interface JiraFieldInfo {
+  id: string;
+  name: string;
+  custom?: boolean;
+  schema_type?: string | null;
+}
+
+export interface JiraIssueTypeInfo {
+  id?: string | null;
+  name: string;
+}
+
+export interface JiraProjectInfo {
+  id: string;
+  key: string;
+  name: string;
+}
+
+export interface JiraBoardInfo {
+  id: number;
+  name: string;
+  type?: string | null;
+}
+
+export interface JiraSchemaResponse {
+  projects: JiraProjectInfo[];
+  boards: JiraBoardInfo[];
+  issue_types: JiraIssueTypeInfo[];
+  fields: JiraFieldInfo[];
+}
+
+export interface JiraIntegrationConfigResponse {
+  source: 'jira';
+  enabled: boolean;
+  access_token_set: boolean;
+  cloud_id: string | null;
+  site_url: string | null;
+  client_id: string | null;
+  client_secret_set: boolean;
+  entity_configs: Record<string, JiraEntityMappingConfig>;
+  sync_interval_seconds: number;
+  updated_at: string | null;
+}
 
 export interface MondayEntityMappingConfig {
   entity_type: string;

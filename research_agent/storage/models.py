@@ -15,6 +15,7 @@ class SourceSystem(StrEnum):
     MOCK = "mock"
     MONDAY = "monday"
     NOTION = "notion"
+    JIRA = "jira"
 
 
 class EntityType(StrEnum):
@@ -159,6 +160,11 @@ class IntegrationConfigRow(Base):
     sync_interval_seconds: Mapped[int] = mapped_column(Integer, nullable=False, default=7200)
     # Optional tenant/subdomain for source-specific URLs (e.g. Monday: {subdomain}.monday.com)
     subdomain: Mapped[str | None] = mapped_column(String, nullable=True, default=None)
+    # Jira OAuth app credentials (from Atlassian app Settings); stored so end users can complete setup in UI
+    oauth_client_id: Mapped[str | None] = mapped_column(String, nullable=True, default=None)
+    oauth_client_secret: Mapped[str | None] = mapped_column(String, nullable=True, default=None)
+    # Jira site base URL (e.g. https://your-site.atlassian.net) for browse links in search results
+    site_url: Mapped[str | None] = mapped_column(String, nullable=True, default=None)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,

@@ -9,6 +9,14 @@ from typing import Any
 from research_agent.storage.models import Entity
 
 
+class ConnectorError(Exception):
+    """Raised when a connector hits a non-retryable error (e.g. 410 Gone). Message is shown to the user."""
+
+    def __init__(self, message: str) -> None:
+        self.message = message
+        super().__init__(message)
+
+
 class BaseConnector(ABC):
     """Contract for data source connectors.
 

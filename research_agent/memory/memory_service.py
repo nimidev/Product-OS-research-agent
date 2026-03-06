@@ -6,6 +6,8 @@ import logging
 from dataclasses import dataclass
 from typing import Any
 
+import httpx
+
 from research_agent.embedding.base import EmbeddingProvider
 from research_agent.embedding.chunker import chunk_text
 from research_agent.storage.db import Database
@@ -259,6 +261,50 @@ class MemoryService:
                 sub = (cfg.get("subdomain") or "").strip()
                 if sub:
                     monday_subdomain = sub
+        # Jira site base URL for browse links (https://your-site.atlassian.net/browse/KEY)
+        jira_site_base: str | None = None
+        if any(r.get("source") == "jira" for r in by_id.values()):
+            jira_cfg = await self._db.get_integration_config("jira")
+            if jira_cfg:
+                base = (jira_cfg.get("site_url") or "").strip().rstrip("/")
+                if base:
+                    jira_site_base = base
+                elif (jira_cfg.get("api_key") or "").strip() and (jira_cfg.get("subdomain") or "").strip():
+                    # Backfill: resolve site URL from Atlassian accessible-resources (e.g. config from before site_url was stored)
+                    try:
+                        async with httpx.AsyncClient(timeout=10.0) as client:
+                            resp = await client.get(
+                                "https://api.atlassian.com/oauth/token/accessible-resources",
+                                headers={
+                                    "Authorization": f"Bearer {jira_cfg['api_key'].strip()}",
+                                    "Accept": "application/json",
+                                },
+                            )
+                            if resp.status_code == 200:
+                                resources = resp.json()
+                                cloud_id = (jira_cfg.get("subdomain") or "").strip()
+                                for r in (resources or []):
+                                    if (r.get("id") or "").strip() == cloud_id:
+                                        base = (r.get("url") or "").strip().rstrip("/")
+                                        if base:
+                                            jira_site_base = base
+                                            # Persist so future requests don't need to call the API
+                                            await self._db.upsert_integration_config(
+                                                source="jira",
+                                                enabled=bool(jira_cfg.get("enabled")),
+                                                board_ids=jira_cfg.get("board_ids") or [],
+                                                entity_mappings=jira_cfg.get("entity_mappings") or {},
+                                                sync_interval_seconds=int(jira_cfg.get("sync_interval_seconds", 7200)),
+                                                api_key=jira_cfg.get("api_key"),
+                                                entity_configs=jira_cfg.get("entity_configs"),
+                                                subdomain=jira_cfg.get("subdomain"),
+                                                oauth_client_id=jira_cfg.get("oauth_client_id"),
+                                                oauth_client_secret=jira_cfg.get("oauth_client_secret"),
+                                                site_url=base,
+                                            )
+                                        break
+                    except Exception as e:
+                        logger.warning("Jira site_url backfill from accessible-resources failed: %s", e)
         enriched: list[dict[str, Any]] = []
         for eid, base in by_id.items():
             entity = await self._db.get_entity(eid)
@@ -266,6 +312,10 @@ class MemoryService:
             if base.get("source") == "monday" and monday_board_id and eid.startswith("monday:"):
                 pulse_id = eid.split(":", 1)[1]
                 url = f"https://{monday_subdomain}.monday.com/boards/{monday_board_id}/pulses/{pulse_id}"
+            elif base.get("source") == "jira" and jira_site_base and eid.startswith("jira:"):
+                issue_key = eid.split(":", 1)[1] if ":" in eid else (entity.source_id if entity else "")
+                if issue_key:
+                    url = f"{jira_site_base}/browse/{issue_key}"
             if entity:
                 enriched.append(_entity_to_enriched_dict(entity, base, url))
             else:

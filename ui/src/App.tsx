@@ -26,7 +26,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import ReactMarkdown from 'react-markdown';
-import { AppConfig, ContextItem, AgentResponse, ChatSession, MondayBoardSchema, MondayIntegrationConfigResponse, MondayEntityMappingConfig, MondayDirection } from './types';
+import { AppConfig, ContextItem, AgentResponse, ChatSession, MondayBoardSchema, MondayIntegrationConfigResponse, MondayEntityMappingConfig, MondayDirection, JiraIntegrationConfigResponse } from './types';
 import OnboardingWizard from './OnboardingWizard';
 
 const ANSWER_MARKDOWN_COMPONENTS = {
@@ -326,7 +326,7 @@ const INITIAL_CONFIG: AppConfig = {
 };
 
 const INTEGRATION_PROVIDERS = [
-  { id: 'jira', name: 'Jira', tagline: 'Sync issues & epics', icon: Trello, color: 'text-blue-600', bg: 'bg-blue-50', enabled: false },
+  { id: 'jira', name: 'Jira', tagline: 'Sync issues & epics', icon: Trello, color: 'text-blue-600', bg: 'bg-blue-50', enabled: true },
   { id: 'monday', name: 'Monday.com', tagline: 'Sync boards & items', icon: CheckCircle2, color: 'text-indigo-600', bg: 'bg-indigo-50', enabled: true },
   { id: 'docs', name: 'Google Docs', tagline: 'Sync PRDs & specs', icon: FileText, color: 'text-amber-600', bg: 'bg-amber-50', enabled: false },
   { id: 'zoom', name: 'Zoom', tagline: 'Sync meeting transcripts', icon: Video, color: 'text-orange-600', bg: 'bg-orange-50', enabled: false },
@@ -564,6 +564,7 @@ export default function App() {
   const [mondayPrepareMessage, setMondayPrepareMessage] = useState<string | null>(null);
   const [mondayPrepareStats, setMondayPrepareStats] = useState<{ fetched: number; embedded: number; totalEntities: number } | null>(null);
   const [mondayConfig, setMondayConfig] = useState<MondayIntegrationConfigResponse | null>(null);
+  const [jiraConfig, setJiraConfig] = useState<JiraIntegrationConfigResponse | null>(null);
   const [mondaySubdomain, setMondaySubdomain] = useState<string>('');
   const [mondayBoards, setMondayBoards] = useState<MondayBoardSchema[]>([]);
   const [mondaySchemaLoading, setMondaySchemaLoading] = useState(false);
@@ -591,6 +592,84 @@ export default function App() {
     return () => { cancelled = true; clearInterval(interval); };
   }, []);
 
+  // Opener: receive OAuth result from popup via localStorage storage event (works without window.opener)
+  useEffect(() => {
+    const handler = (e: StorageEvent) => {
+      if (e.key !== 'jira_oauth_result' && e.key !== 'jira_oauth_error') return;
+      if (e.newValue) {
+        try {
+          const data = JSON.parse(e.newValue);
+          if (data.token) {
+            sessionStorage.setItem('jira_oauth_token', data.token);
+            if (data.cloudId) sessionStorage.setItem('jira_oauth_cloud_id', data.cloudId);
+            if (data.siteUrl) sessionStorage.setItem('jira_oauth_site_url', data.siteUrl);
+            localStorage.removeItem('jira_oauth_result');
+          } else if (data.message) {
+            sessionStorage.setItem('jira_oauth_error_message', data.message);
+            localStorage.removeItem('jira_oauth_error');
+          }
+          window.dispatchEvent(new CustomEvent('jira_oauth_result'));
+        } catch { /* ignore */ }
+      }
+    };
+    window.addEventListener('storage', handler);
+    return () => window.removeEventListener('storage', handler);
+  }, []);
+
+  // Popup: when user returns from Jira OAuth with hash, write to localStorage (opener gets storage event) and close
+  useEffect(() => {
+    const hash = window.location.hash?.replace(/^#/, '') || '';
+    const isSuccess = hash.startsWith('jira_oauth_connected');
+    const isError = hash.startsWith('jira_oauth_error=');
+    if (!isSuccess && !isError) return;
+
+    const returnTo = isSuccess
+        ? new URLSearchParams(hash.replace('jira_oauth_connected&', '')).get('return_to')
+        : null;
+
+    const returnToWizard = () => {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      if (window.opener) {
+        window.opener.focus();
+        window.close();
+      } else {
+        const base = window.location.pathname + window.location.search;
+        const separator = base.includes('?') ? '&' : '?';
+        if (returnTo === 'integrations') {
+          window.location.replace(base + separator + 'jira_oauth_return=integrations');
+        } else {
+          window.location.replace(base + separator + 'onboarding=1');
+        }
+      }
+    };
+
+    if (isSuccess) {
+      const params = new URLSearchParams(hash.replace('jira_oauth_connected&', ''));
+      const token = params.get('access_token');
+      const cloudId = params.get('cloud_id');
+      const siteUrl = params.get('site_url') ?? '';
+      if (token) {
+        const data = { token, cloudId: cloudId ?? '', siteUrl };
+        localStorage.setItem('jira_oauth_result', JSON.stringify(data));
+        if (!window.opener) {
+          sessionStorage.setItem('jira_oauth_token', token);
+          if (cloudId) sessionStorage.setItem('jira_oauth_cloud_id', cloudId);
+          if (siteUrl) sessionStorage.setItem('jira_oauth_site_url', siteUrl);
+        }
+        returnToWizard();
+      }
+      return;
+    }
+
+    if (isError) {
+      const params = new URLSearchParams(hash);
+      const message = params.get('message') || 'Token exchange failed. Check Client ID, Client Secret, and that the Callback URL in Atlassian exactly matches your server (e.g. http://localhost:8000/integrations/jira/oauth/callback).';
+      localStorage.setItem('jira_oauth_error', JSON.stringify({ message }));
+      if (!window.opener) sessionStorage.setItem('jira_oauth_error_message', message);
+      returnToWizard();
+    }
+  }, []);
+
   const handleRemoveEntityConfig = (entityType: string) => {
     const label = formatEntityTypeLabel(entityType);
     const confirmed = window.confirm(
@@ -614,6 +693,20 @@ export default function App() {
 
   // Ref: user requested onboarding via ?onboarding=1 this session (survives effect re-runs after we strip the param)
   const forceOnboardingViaUrlRef = React.useRef(false);
+  // Ref: Jira OAuth returned to integrations page (same-tab redirect); we show Integration Setup and Jira edit instead of onboarding
+  const jiraOAuthReturnIntegrationsRef = React.useRef(false);
+
+  // Handle ?jira_oauth_return=integrations: show Integration Setup and Jira edit (token is in sessionStorage; wizard will persist it)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('jira_oauth_return') !== 'integrations') return;
+    jiraOAuthReturnIntegrationsRef.current = true;
+    window.history.replaceState({}, '', window.location.pathname);
+    setMode('admin');
+    setSelectedServiceForMapping('jira');
+    setIntegrationMode('edit');
+  }, []);
 
   // Load Monday integration state from backend so UI reflects real connectivity.
   // ?onboarding=1 in URL forces onboarding; we remember it in a ref so it still wins after replaceState / effect re-run.
@@ -626,33 +719,50 @@ export default function App() {
     }
     (async () => {
       try {
-        const res = await fetch(`${RESEARCH_API_URL}/integrations/monday`);
-        if (!res.ok || cancelled) return;
-        const data: MondayIntegrationConfigResponse = await res.json();
-        setMondayConfig(data);
-        setMondaySubdomain(data.subdomain ?? '');
-        if (data.entity_configs) {
-          setMondayEntityConfigs(data.entity_configs);
-          const preselected = Object.entries(data.entity_configs)
-            .filter(([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0)
-            .map(([entityType]) => entityType);
-          if (preselected.length > 0) {
-            setSelectedOsEntityTypes(preselected);
+        const [mondayRes, jiraRes] = await Promise.all([
+          fetch(`${RESEARCH_API_URL}/integrations/monday`),
+          fetch(`${RESEARCH_API_URL}/integrations/jira`),
+        ]);
+        if (cancelled) return;
+        const [mondayData, jiraData] = await Promise.all([
+          mondayRes.ok ? (mondayRes.json() as Promise<MondayIntegrationConfigResponse>) : null,
+          jiraRes.ok ? (jiraRes.json() as Promise<JiraIntegrationConfigResponse>) : null,
+        ]);
+        if (cancelled) return;
+        let mondayConnected = false;
+        if (mondayData) {
+          setMondayConfig(mondayData);
+          setMondaySubdomain(mondayData.subdomain ?? '');
+          if (mondayData.entity_configs) {
+            setMondayEntityConfigs(mondayData.entity_configs);
+            const preselected = Object.entries(mondayData.entity_configs)
+              .filter(([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0)
+              .map(([entityType]) => entityType);
+            if (preselected.length > 0) setSelectedOsEntityTypes(preselected);
           }
+          mondayConnected = Boolean(mondayData.enabled && mondayData.api_key_set);
         }
-        const mondayConnected = Boolean(data.enabled && data.api_key_set);
-        setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected } } : null);
-        const anyIntegrationActive = mondayConnected; // extend when more integrations exist
+        let jiraConnected = false;
+        if (jiraData) {
+          setJiraConfig(jiraData);
+          jiraConnected = Boolean(jiraData.enabled && jiraData.access_token_set);
+        }
+        setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected, jira: jiraConnected } } : null);
+        const anyIntegrationActive = mondayConnected || jiraConnected;
         if (anyIntegrationActive) setContextItems([]);
         else setContextItems(MOCK_CONTEXT_ITEMS);
         if (!cancelled) {
-          setShowOnboarding(forceOnboardingViaUrlRef.current || !anyIntegrationActive);
+          setShowOnboarding(
+            jiraOAuthReturnIntegrationsRef.current ? false : (forceOnboardingViaUrlRef.current || !anyIntegrationActive)
+          );
           setInitialLoadDone(true);
         }
       } catch {
-        if (!cancelled) {
-          setConfig(prev => prev ?? null);
-          setShowOnboarding(forceOnboardingViaUrlRef.current || true);
+if (!cancelled) {
+        setConfig(prev => prev ?? null);
+          setShowOnboarding(
+            jiraOAuthReturnIntegrationsRef.current ? false : (forceOnboardingViaUrlRef.current || true)
+          );
           setInitialLoadDone(true);
         }
       }
@@ -927,24 +1037,35 @@ export default function App() {
       localStorage.removeItem('onboarding_first_query');
       setTimeout(() => handleSendMessage(pendingQuery), 500);
     }
-    // Reload Monday config so integration state is fresh
+    // Reload Monday and Jira config so integration state is fresh
     (async () => {
       try {
-        const res = await fetch(`${RESEARCH_API_URL}/integrations/monday`);
-        if (!res.ok) return;
-        const data: MondayIntegrationConfigResponse = await res.json();
-        setMondayConfig(data);
-        setMondaySubdomain(data.subdomain ?? '');
-        if (data.entity_configs) {
-          setMondayEntityConfigs(data.entity_configs);
-          const preselected = Object.entries(data.entity_configs)
-            .filter(([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0)
-            .map(([entityType]) => entityType);
-          if (preselected.length > 0) setSelectedOsEntityTypes(preselected);
+        const [mondayRes, jiraRes] = await Promise.all([
+          fetch(`${RESEARCH_API_URL}/integrations/monday`),
+          fetch(`${RESEARCH_API_URL}/integrations/jira`),
+        ]);
+        let mondayConnected = false;
+        if (mondayRes.ok) {
+          const data: MondayIntegrationConfigResponse = await mondayRes.json();
+          setMondayConfig(data);
+          setMondaySubdomain(data.subdomain ?? '');
+          if (data.entity_configs) {
+            setMondayEntityConfigs(data.entity_configs);
+            const preselected = Object.entries(data.entity_configs)
+              .filter(([, cfg]) => Array.isArray(cfg.board_ids) && cfg.board_ids.length > 0)
+              .map(([entityType]) => entityType);
+            if (preselected.length > 0) setSelectedOsEntityTypes(preselected);
+          }
+          mondayConnected = Boolean(data.enabled && data.api_key_set);
         }
-        const mondayConnected = Boolean(data.enabled && data.api_key_set);
-        setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected } } : null);
-        if (mondayConnected) setContextItems([]);
+        let jiraConnected = false;
+        if (jiraRes.ok) {
+          const jiraData: JiraIntegrationConfigResponse = await jiraRes.json();
+          setJiraConfig(jiraData);
+          jiraConnected = Boolean(jiraData.enabled && jiraData.access_token_set);
+        }
+        setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, monday: mondayConnected, jira: jiraConnected } } : null);
+        if (mondayConnected || jiraConnected) setContextItems([]);
       } catch { /* ignore */ }
     })();
   };
@@ -1454,11 +1575,29 @@ export default function App() {
                       </button>
                     ))}
 
-                    {/* Coming soon providers (phase 1 excludes non-Monday integrations) */}
-                    {INTEGRATION_PROVIDERS.filter(p => p.id !== 'monday').map((provider) => (
+                    {/* Available to connect (enabled but not connected) */}
+                    {config && INTEGRATION_PROVIDERS.filter(p => p.enabled && !config.integrations[p.id]).map((provider) => (
+                      <button
+                        key={provider.id}
+                        type="button"
+                        onClick={() => setShowOnboarding(true)}
+                        className="p-5 rounded-2xl border border-dashed border-[#E5E5E5] bg-white hover:border-blue-300 hover:bg-blue-50/50 transition-all text-left"
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${provider.bg} ${provider.color}`}>
+                            <provider.icon className="w-5 h-5" />
+                          </div>
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600">Connect</span>
+                        </div>
+                        <h3 className="font-bold text-lg mb-1">{provider.name}</h3>
+                        <p className="text-xs text-[#737373]">{provider.tagline}</p>
+                      </button>
+                    ))}
+                    {/* Coming soon (not yet enabled) */}
+                    {INTEGRATION_PROVIDERS.filter(p => !p.enabled).map((provider) => (
                       <div key={provider.id} className="p-5 rounded-2xl border border-dashed border-[#E5E5E5] bg-white opacity-80">
                         <div className="flex items-center justify-between mb-4">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-gray-50 text-gray-400`}>
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gray-50 text-gray-400">
                             <provider.icon className="w-5 h-5" />
                           </div>
                           <div className="flex items-center gap-1 text-gray-400">
@@ -1527,6 +1666,53 @@ export default function App() {
                     
                     <div className="p-6">
                       {integrationMode === 'view' ? (
+                        selectedServiceForMapping === 'jira' ? (
+                          <div className="space-y-6">
+                            <div className="border border-[#E5E5E5] rounded-2xl p-4 bg-[#FBFBFA]">
+                              <h3 className="text-sm font-bold mb-3">Jira integration</h3>
+                              {jiraConfig?.site_url && (
+                                <p className="text-xs text-[#737373] mb-3">
+                                  Site: <a href={jiraConfig.site_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{jiraConfig.site_url}</a>
+                                </p>
+                              )}
+                              <p className="text-[10px] text-[#737373] mb-3">
+                                Edit configuration in onboarding to change entities and field mappings.
+                              </p>
+                              {(() => {
+                                const configs = jiraConfig?.entity_configs ?? {};
+                                const entries = Object.entries(configs);
+                                if (!entries.length) {
+                                  return (
+                                    <p className="text-xs text-[#737373]">
+                                      No entity mappings yet. Click &quot;Edit integration&quot; to configure in onboarding.
+                                    </p>
+                                  );
+                                }
+                                return (
+                                  <div className="divide-y divide-[#E5E5E5] rounded-xl border border-[#E5E5E5] bg-white">
+                                    <div className="grid grid-cols-4 text-[10px] font-bold uppercase tracking-widest text-[#A3A3A3] px-4 py-2">
+                                      <span>Entity</span>
+                                      <span>Project</span>
+                                      <span>Issue types</span>
+                                      <span className="text-right">Fields mapped</span>
+                                    </div>
+                                    {entries.map(([entityType, cfg]) => (
+                                      <div
+                                        key={entityType}
+                                        className="grid grid-cols-4 items-center px-4 py-2 text-xs text-left"
+                                      >
+                                        <span className="font-medium text-[#111827]">{formatEntityTypeLabel(entityType)}</span>
+                                        <span className="font-mono text-[#4B5563]">{cfg.project_key || '—'}</span>
+                                        <span className="text-[#737373]">{(cfg.issue_type_names ?? []).join(', ') || '—'}</span>
+                                        <span className="text-right text-[#111827] font-mono">{Object.keys(cfg.field_mappings || {}).length}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                );
+                              })()}
+                            </div>
+                          </div>
+                        ) : (
                         <div className="space-y-6">
                           <div className="border border-[#E5E5E5] rounded-2xl p-4 bg-[#FBFBFA]">
                             <div className="flex items-center justify-between mb-3">
@@ -1644,6 +1830,27 @@ export default function App() {
                               })()}
                             </div>
                           )}
+                        </div>
+                        )
+                      ) : selectedServiceForMapping === 'jira' ? (
+                        <div className="p-6">
+                          <OnboardingWizard
+                            onComplete={() => {}}
+                            embeddedJira
+                            initialJiraConfig={jiraConfig}
+                            onJiraEditComplete={async () => {
+                              try {
+                                const res = await fetch(`${RESEARCH_API_URL}/integrations/jira`);
+                                if (res.ok) {
+                                  const data = await res.json();
+                                  setJiraConfig(data);
+                                  setConfig(prev => prev ? { ...prev, integrations: { ...prev.integrations, jira: Boolean(data.enabled && data.access_token_set) } } : null);
+                                }
+                              } catch { /* ignore */ }
+                              setIntegrationMode('view');
+                            }}
+                            onJiraEditCancel={() => setIntegrationMode('view')}
+                          />
                         </div>
                       ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 bg-[#FBFBFA] rounded-2xl border border-[#E5E5E5]">
