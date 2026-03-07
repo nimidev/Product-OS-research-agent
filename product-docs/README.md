@@ -15,7 +15,7 @@ Each project may have a **`context/`** folder. All Product OS commands (`/create
 
 ## Story ID Registry
 
-**Next Available ID: US-017**
+**Next Available ID: US-018**
 
 When creating a new story, use the next available ID.
 

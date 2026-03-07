@@ -13,11 +13,12 @@
 | [US-009](./US-009.md) | Integrations Page – View vs Edit UX Redesign | done | P1 | deployed |
 | [US-010](./US-010.md) | Research Agent – Clickable Evidence References in Chat | done | P1 | deployed |
 | [US-011](./US-011.md) | Seamless Onboarding & Setup Experience for New Users | done | P0 | deployed |
-| [US-012](./US-012.md) | Backlog Integration – Jira (Atlassian) | dev | P1 | development |
+| [US-012](./US-012.md) | Backlog Integration – Jira (Atlassian) | done | P1 | deployed |
 | [US-013](./US-013.md) | Backlog Integration – Mixpanel (Product Analytics) | create | P1 | planning |
 | [US-014](./US-014.md) | Backlog Integration – Gong (Revenue Intelligence / Calls) | create | P1 | planning |
 | [US-015](./US-015.md) | Backlog Integration – SharePoint (Microsoft 365) | create | P1 | planning |
 | [US-016](./US-016.md) | Backlog Integration – Productboard (Product Management) | create | P1 | planning |
+| [US-017](./US-017.md) | Integration Framework – Unified Onboarding and Integration Settings | create | P0 | planning |
 
 ### US-007: Entity and Field Mapping for Integrations (Connect → Map → Sync)
 - **Status**: `create`
@@ -52,10 +53,12 @@
 - **Testing**: ✅ All tests passed
 
 ### US-012: Backlog Integration – Jira (Atlassian)
-- **Status**: `dev`
+- **Status**: `done`
 - **Description**: Dedicated Jira integration with onboarding and entity mapping flow aligned to Monday.com: connect → choose entities → link project/board → map Jira issue types and Jira fields to Product OS (roadmap_item, feature_request, bug, task, support_ticket), test and activate. Jira only; Confluence deferred to future PRD.
 - **See**: [US-012.md](./US-012.md)
-- **Branch**: `feature/US-012-jira-integration`
+- **Branch**: `feature/US-012-jira-integration` (merged to main)
+- **PR**: Merged
+- **Testing**: ✅ All tests passed
 
 ### US-013: Backlog Integration – Mixpanel (Product Analytics)
 - **Status**: `create`
@@ -79,6 +82,12 @@
 - **Status**: `create`
 - **Description**: Dedicated integration for Productboard: API token or OAuth2, map features, ideas, notes, roadmap to Product OS entity types (feature_request, roadmap_item, prd, etc.), sync and search with citations to Productboard.
 - **See**: [US-016.md](./US-016.md)
+- **Branch**: (not yet created)
+
+### US-017: Integration Framework – Unified Onboarding and Integration Settings
+- **Status**: `create`
+- **Description**: Single integration framework (backend adapter interface + shared UX) so every integration follows the same 5-step flow (select entities → authenticate → select source types → field mapping → sync) in onboarding and integration settings; new integrations easy to add and test.
+- **See**: [US-017.md](./US-017.md)
 - **Branch**: (not yet created)
 
 <!-- Stories are added automatically by the /create command in Cursor -->
