@@ -1,15 +1,20 @@
-"""Tests for integration framework: adapter interface and registry (US-017)."""
+"""Tests for integration framework: adapter interface, registry, and models (US-017)."""
 
 from __future__ import annotations
 
-import pytest
+from datetime import UTC, datetime
 
 from research_agent.integrations import (
+    EntityMappingConfig,
     IntegrationAdapter,
     IntegrationAdapterRegistry,
+    IntegrationConfigRequest,
     PrepareSyncResponse,
     TestConnectionResponse,
+    entity_config_from_dict,
+    entity_config_to_dict,
     get_integration_registry,
+    response_from_db_dict,
 )
 
 
@@ -83,3 +88,73 @@ def test_get_integration_registry_singleton() -> None:
     r1 = get_integration_registry()
     r2 = get_integration_registry()
     assert r1 is r2
+
+
+# ---------------------------------------------------------------------------
+# Unified config/mapping models
+# ---------------------------------------------------------------------------
+
+
+def test_entity_mapping_config_source_payload() -> None:
+    c = EntityMappingConfig(
+        entity_type="feature_request",
+        field_mappings={"summary": "title"},
+        direction="source_to_os",
+        source_payload={"board_ids": ["123"], "project_key": "PROJ"},
+    )
+    assert c.entity_type == "feature_request"
+    assert c.source_payload["board_ids"] == ["123"]
+    d = entity_config_to_dict(c)
+    assert d["entity_type"] == "feature_request"
+    assert d["board_ids"] == ["123"]
+    c2 = entity_config_from_dict(d)
+    assert c2.entity_type == c.entity_type
+    assert c2.source_payload.get("board_ids") == ["123"]
+
+
+def test_response_from_db_dict_monday() -> None:
+    db_dict = {
+        "source": "monday",
+        "enabled": True,
+        "api_key": "secret",
+        "board_ids": ["1", "2"],
+        "entity_mappings": {"feature_request": "1"},
+        "entity_configs": {
+            "feature_request": {
+                "entity_type": "feature_request",
+                "field_mappings": {"name": "title"},
+                "direction": "two_way",
+                "board_ids": ["1"],
+            },
+        },
+        "sync_interval_seconds": 3600,
+        "subdomain": "my-team",
+        "updated_at": datetime.now(UTC),
+    }
+    r = response_from_db_dict("monday", db_dict)
+    assert r.source == "monday"
+    assert r.enabled is True
+    assert r.credentials_set is True
+    assert r.entity_mappings == {"feature_request": "1"}
+    assert "feature_request" in r.entity_configs
+    assert r.entity_configs["feature_request"].field_mappings == {"name": "title"}
+    assert r.source_payload.get("board_ids") == ["1", "2"]
+    assert r.source_payload.get("subdomain") == "my-team"
+
+
+def test_integration_config_request_response_roundtrip() -> None:
+    req = IntegrationConfigRequest(
+        enabled=True,
+        entity_mappings={"bug": "2"},
+        entity_configs={
+            "bug": EntityMappingConfig(
+                entity_type="bug",
+                field_mappings={"summary": "title"},
+                source_payload={"project_key": "PROJ"},
+            ),
+        },
+        sync_interval_seconds=7200,
+        source_payload={"board_ids": ["1"]},
+    )
+    assert req.enabled is True
+    assert req.entity_configs["bug"].source_payload["project_key"] == "PROJ"
