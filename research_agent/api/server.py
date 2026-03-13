@@ -19,6 +19,7 @@ from research_agent.config.loader import create_vector_store, get_settings
 from research_agent.connectors.jira_connector import JiraConnector
 from research_agent.connectors.monday_connector import MONDAY_API_URL, MondayConnector
 from research_agent.embedding.openai_provider import OpenAIEmbeddingProvider
+from research_agent.integrations import get_integration_registry
 from research_agent.logging_config import configure_logging
 from research_agent.memory.memory_service import MemoryService
 from research_agent.storage.db import Database
@@ -342,6 +343,23 @@ async def search_memories(request: SearchRequest) -> SearchResponse:
         raw_results=result.raw_results,
         degraded=result.degraded,
     )
+
+
+class IntegrationListItem(BaseModel):
+    source_id: str
+    auth_type: str
+
+
+class IntegrationsListResponse(BaseModel):
+    integrations: list[IntegrationListItem] = Field(default_factory=list)
+
+
+@app.get("/integrations", response_model=IntegrationsListResponse)
+async def list_integrations() -> IntegrationsListResponse:
+    """List registered integrations (source_id and auth_type) for UI discoverability (US-017)."""
+    registry = get_integration_registry()
+    items = [IntegrationListItem(**x) for x in registry.list_integrations()]
+    return IntegrationsListResponse(integrations=items)
 
 
 @app.get("/integrations/monday", response_model=MondayIntegrationConfigResponse)
